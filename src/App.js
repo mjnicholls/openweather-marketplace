@@ -1,10 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
+import HeaderMarket from './components/Header';
+import FooterMarket from './components/Footer';
+import { Container } from 'reactstrap'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <HeaderMarket />
+      <Container fluid="xxl" className="app-content">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -17,7 +21,8 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </Container>
+      <FooterMarket />
     </div>
   );
 }
