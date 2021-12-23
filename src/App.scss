@@ -37,9 +37,73 @@ $default-line-height: 20pt;
   h4,
   h5,
   h6 {
-    font-family: $default-font-family;
+    font-family: $highlight-font-family;
     text-align: left
     
+  }
+}
+
+h1 {
+  color: $brand-black;
+  font-family: $highlight-font-family;
+  font-weight: bold;
+}
+
+.container {
+
+  padding-bottom: 40px;
+
+  p {
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.2;
+  }
+
+  
+
+  .home-row {
+    justify-content: center;
+    padding-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    
+
+.card {
+  border: none!important;
+  border-radius: 0px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+
+
+  .home {
+    text-align: left;
+    background-color: $brand-grey;
+    justify-content: center;
+
+    
+
+    h4 {
+      color: $brand-orange;
+      text-align: center
+    }
+
+    ul {
+  list-style: none;
+}
+
+ul li:before {
+  content: '✓    ';
+}
+
+    p {
+      text-align: center;
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+  
+  }
+}
   }
 }
 
@@ -374,7 +438,7 @@ p {
 
 // buttons
 @mixin button-round {
-  padding: 6pt 8pt;
+  padding: 5pt 7pt;
   border-radius: 16pt;
   text-decoration: none;
   white-space: nowrap;
