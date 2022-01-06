@@ -1,0 +1,1 @@
+export const noBlankErrorMessage = 'Cannot be blank'

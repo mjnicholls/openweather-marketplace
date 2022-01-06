@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import '../App.scss'
+import { Dropdown, DropdownToggle, DropdownMenu } from 'reactstrap'
 
 
 const HeaderMarket = () => {
+  const userName = 'mjnicholls'
+  const [isDropDown, setIsDropDown] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-    const userName = 'mjnicholls@gmail.com'
-  
-    return (
-      <nav className="navbar navbar-expand-xxl page-header">
-        <div
-          className="container-xxl"
-          style={{ marginTop: '5px', marginBottom: '5px' }}
-        >
+
+  return (
+    <nav className={`page-header ${isMenuOpen ? 'open' : ''}`}>
+      <div className="container-xxl">
+        <div className="page-header-content">
           <a href="https://openweathermap.org/">
             <img
               src="https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png"
@@ -21,102 +21,81 @@ const HeaderMarket = () => {
               width="93.33px"
             />
           </a>
-  
+
+
           <button
-            className="navbar-toggler"
-            data-toggle="collapse"
-            data-target="#navbarNav"
+            className="remove-default-button-style d-xxl-none"
             type="button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <img
               src="https://openweathermap.org/themes/openweathermap/assets/img/owm_icons/icon_hamburger.svg"
               alt="Open menu"
             />
           </button>
-          <div className="input-group search d-none d-xxl-flex">
-            <div className="input-group-append">
-              <button className="btn btn-secondary" type="button">
-                <img
-                  src="https://openweathermap.org/themes/openweathermap/assets/img/owm_icons/icon_search.svg"
-                  alt="search bar logo"
-                />
-              </button>
-            </div>
-            <form
-              className="input"
-              action="https://openweathermap.org/find"
-              acceptCharset="UTF-8"
-              method="get"
-            >
-              <input name="utf8" type="hidden" value="&#x2713;" />
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Weather in your city"
-                name="q"
-              />
-            </form>
-          </div>
-  
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="d-xxl-none">
-                <div className="input-group search ms-auto">
-                  <div className="input-group-append">
-                    <button className="btn btn-secondary" type="button">
-                      <img
-                        src="https://home.openweathermap.org/assets/icon_search.svg"
-                        alt="search bar logo"
-                      />
-                    </button>
-                  </div>
-                  <form
-                    className="input"
-                    action="https://openweathermap.org/find"
-                    acceptCharset="UTF-8"
-                    method="get"
-                  >
-                    <input name="utf8" type="hidden" value="&#x2713;" />
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Weather in your city"
-                      name="q"
+
+          <div className="break d-xxl-none"></div>
+
+          <ul className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
+            <li className="d-xxl-none">
+              <div className="input-group search ms-auto">
+                <div className="input-group-append">
+                  <button className="btn btn-secondary" type="button">
+                    <img
+                      src="https://home.openweathermap.org/assets/icon_search.svg"
+                      alt="search bar logo"
                     />
-                    <input style={{ display: 'none' }} type="submit" />
-                  </form>
+                  </button>
                 </div>
-              </li>
-              <li>
+                <form
+                  className="input"
+                  action="https://openweathermap.org/find"
+                  acceptCharset="UTF-8"
+                  method="get"
+                >
+                  <input name="utf8" type="hidden" value="&#x2713;" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Weather in your city"
+                    name="q"
+                  />
+                  <input style={{ display: 'none' }} type="submit" />
+                </form>
+              </div>
+            </li>
+            <li>
                 <a href="https://home.openweathermap.org/history_bulks/new">History Bulk</a>
               </li>
               <li>
                 <a href="https://home.openweathermap.org/history_forecast_bulks/new">History Forecast Bulk</a>
               </li>
-              <li>
+
+            <li>
                 <a href="https://home.openweathermap.org/zip_code_data/new">Data by US State</a>
               </li>
-  
-              <li>
+
+
+            <li>
                 <a className="marketplace" href="https://home.openweathermap.org/marketplace">
                   Marketplace
                 </a>
               </li>
-              {userName ? (
-                <li className="nav-item dropdown d-none d-lg-block">
-                  <a
-                    href="/"
-                    className="dropdown-toggle header-link username"
-                    data-toggle="dropdown"
-                  >
+
+            {userName ? (
+              <li className="d-none d-lg-block">
+                <Dropdown
+                  isOpen={isDropDown}
+                  toggle={() => setIsDropDown(!isDropDown)}
+                >
+                  <DropdownToggle className="remove-default-button-style d-flex align-items-center justify-content-center pt-0 pb-0">
+                    <div className="inner-user-container">{userName}</div>
                     <img
-                      src="https://home.openweathermap.org/assets/icon_user.png"
-                      alt="user icon"
-                      className="d-flex d-xl-none"
-                    ></img>
-                    {userName.slice(0, 6)}...
-                  </a>
-                  <div className="dropdown-menu">
+                      src="https://openweathermap.org/themes/openweathermap/assets/img/owm_icons/icon_down_white.svg"
+                      alt="Caret"
+                    />
+                  </DropdownToggle>
+                  <DropdownMenu>
                     <a
                       href="https://home.openweathermap.org/myservices"
                       target="_blank"
@@ -147,26 +126,27 @@ const HeaderMarket = () => {
                     >
                       Logout
                     </a>
-                  </div>
-                </li>
-              ) : (
-                <li>
-                  <a
-                    href="https://home.openweathermap.org/users/sign_in"
-                    target="_blank"
-                  >
-                    Sign In
-                  </a>
-                </li>
-              )}
-              <li>
-                <a href="https://home.openweathermap.org/questions">Support</a>
+                  </DropdownMenu>
+                </Dropdown>
               </li>
-            </ul>
-          </div>
+            ) : (
+              <li>
+                <a
+                  href="https://home.openweathermap.org/users/sign_in"
+                  target="_blank"
+                >
+                  Sign In
+                </a>
+              </li>
+            )}
+            <li>
+              <a href="https://home.openweathermap.org/questions">Support</a>
+            </li>
+          </ul>
         </div>
-      </nav>
-    )
-  }
+      </div>
+    </nav>
+  )
+}
 
 export default HeaderMarket
