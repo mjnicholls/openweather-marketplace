@@ -991,3 +991,23 @@ input.input-marketplace, input.marketplace-input__input {
     padding-right: 0;
   }
 }
+
+
+.location {
+  ul {
+    margin-top: 20px;
+  }
+
+  .trigger-item {
+    text-align: left;
+    border-bottom: 1px solid $brand-grey !important;
+    font-size: 16px;
+    padding-top: 8pt;
+    padding-bottom: 8pt;
+    &:hover {
+      background-color: #f2f2f2;
+  }
+  
+}
+  
+}

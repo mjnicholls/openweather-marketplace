@@ -9,10 +9,10 @@ const InfoWindow = ({ location, setLocation, showButton }) => {
   }
 
   return location.lat && location.lon ? (
-    <div className="mapPop">
+    <div className="mapPop text-start">
       <h5>{location.name}</h5>
       <hr />
-      <div className="main">
+      <div className="main text-start">
         <div>
           <p>
             <b>Latitude: </b>

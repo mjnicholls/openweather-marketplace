@@ -4,7 +4,7 @@ import './App.css';
 import HeaderMarket from './components/Header';
 import FooterMarket from './components/Footer';
 import { Container } from 'reactstrap'
-//import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import HomeMarket from './components/Home';
 import NewHistoryBulk from './components/NewHistoryBulk';
 //import store from './store'
@@ -15,6 +15,7 @@ function App() {
     <div className="App">
       <HeaderMarket />
       <Container fluid="xxl" className="app-content">
+       
         <NewHistoryBulk />
         {/*}
       <BrowserRouter>

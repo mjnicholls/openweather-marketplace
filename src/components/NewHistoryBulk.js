@@ -125,8 +125,8 @@ const NewHistoryBulk = () => {
                 isDropDown={isDropDown}
                 setIsDropDown={setIsDropDown}
                 setIsLocationNameEdited={setIsLocationNameEdited}
-              
               />
+
 
       </Col>
 
