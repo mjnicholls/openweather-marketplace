@@ -12,6 +12,8 @@ const AutoComplete = ({
   error,
   setError,
   setIsDropDown,
+  fixedLocation,
+ setFixedLocation
 }) => {
   const onPlaceSelected = (place) => {
     if (
@@ -60,6 +62,8 @@ const AutoComplete = ({
       onFocus={onFocus}
       onChange={onStartTyping}
       placeholder="Enter location"
+      fixedLocation={fixedLocation}
+      setFixedLocation={setFixedLocation}
     />
   )
 }

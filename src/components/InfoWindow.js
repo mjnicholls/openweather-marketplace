@@ -2,11 +2,12 @@ import React from 'react'
 
 import PropTypes from 'prop-types'
 
-const InfoWindow = ({ location, setLocation, showButton }) => {
+const InfoWindow = ({ location, showButton, setLocations, locations }) => {
   const onSetLocationClick = (e) => {
-    setLocation(location)
+    setLocations([...locations, location])
     e.stopPropagation()
   }
+  
 
   return location.lat && location.lon ? (
     <div className="mapPop text-start">

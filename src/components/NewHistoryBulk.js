@@ -20,11 +20,15 @@ const NewHistoryBulk = () => {
         lon: '',
       })
 
+      const [locations, setLocations] = useState([])
+
       const [isDropDown, setIsDropDown] = useState(false)
 
       const [isLocationNameEdited, setIsLocationNameEdited] = useState(false)
 
       const [tempLocation, setTempLocation] = useState({ ...location })
+
+      const [recipients, setRecipients] = useState([])
 
       useEffect(() => {
         setTempLocation({
@@ -116,6 +120,8 @@ const NewHistoryBulk = () => {
                 location={location}
                 setLocation={setLocation}
                 tempLocation={tempLocation}
+               locations={locations}
+               setLocations={setLocations}
                 setTempLocation={setTempLocation}
                 onChange={(e) => handleChange('location', e.target.value)}
                 error={error}
@@ -134,6 +140,8 @@ const NewHistoryBulk = () => {
       <Map
             mapRef={mapRef}
             mapLocation={tempLocation}
+            locations={locations}
+            setLocations={setLocations}
             setLocation={setLocationNameAware}
             onClickMap={onClickMap}
             isButtonInfoWindow={
