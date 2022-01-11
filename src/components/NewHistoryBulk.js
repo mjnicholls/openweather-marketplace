@@ -20,6 +20,8 @@ const NewHistoryBulk = () => {
         lon: '',
       })
 
+      const [parameters, setParameters] = useState()
+
       const [locations, setLocations] = useState([])
 
       const [isDropDown, setIsDropDown] = useState(false)
@@ -131,6 +133,8 @@ const NewHistoryBulk = () => {
                 isDropDown={isDropDown}
                 setIsDropDown={setIsDropDown}
                 setIsLocationNameEdited={setIsLocationNameEdited}
+                parameters={parameters}
+                setParameters={setParameters}
               />
 
 

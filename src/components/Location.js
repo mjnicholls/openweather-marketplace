@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-
 import PropTypes from "prop-types";
-
 import { coordinatesError } from "../utils/validation";
 import AutoCompleteForm from "./LocationAutoComplete";
 import CoordinatesSearch from "./LocationCoordinates";
-import { Button, Col, Input, Row } from "reactstrap";
-import { CSVReader } from "react-papaparse";
+import { Button, Col, Input, Row, FormGroup, Label } from "reactstrap";
+import Papa from "papaparse";
 import Parameters from "./Parameters";
-import { Edit, Delete, Ok} from "react-ikonate";
+import ReactBSAlert from 'react-bootstrap-sweetalert'
+import DatePicker from "react-datepicker";
+
+import { Edit, Delete, Ok } from "react-ikonate";
 
 const Location = ({
   mapRef,
@@ -24,12 +25,20 @@ const Location = ({
   setIsLocationNameEdited,
   locations,
   setLocations,
+  parameters,
+  setParameters
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
   const [isImport, setIsImport] = useState(false);
 
+  const [time, setTime] = useState(new Date());
+  const handleCalendarClose = () => console.log("Calendar closed");
+  const handleCalendarOpen = () => console.log("Calendar opened");
+
   const [isEdit, setisEdit] = useState(false);
+
+  const [importJson, setImportJson] = useState([]);
 
   const setCoordinates = () => {
     setError({});
@@ -77,10 +86,8 @@ const Location = ({
     if (e.key === "Enter") {
       setLocations(location);
     }
-    setisEdit(false)
+    setisEdit(false);
   };
-
-
 
   const editLocation = (name, index) => {
     const newLocations = locations.map((el, i) => {
@@ -103,10 +110,68 @@ const Location = ({
     setLocations(locationsCopy);
   };
 
+  const getJson = (e) => {
+    const files = e.target.files;
+    console.log(files);
+    if (files) {
+      console.log(files[0]);
+      Papa.parse(files[0], {
+        complete: function (results) {
+          console.log("Finished:", results.data);
+          jsonAlert(setImportJson(results.data))
+        },
+      });
+    }
+  };
 
+
+  const [alert, setAlert] = React.useState(null)
+
+  const hideAlert = () => {
+    setAlert(null)
+  }
+
+  const jsonAlert = () => {
+    setAlert(
+      <ReactBSAlert
+        title="Import"
+        onConfirm={() => hideAlert()}
+        onCancel={() => hideAlert()}
+        showConfirm={false}
+        showCloseButton
+        customClass="bs-alerts"
+      >
+                     <Row className="trigger-item">
+             <Col md="1">#</Col>
+             <Col>Location</Col>
+             <Col>Latitide</Col>
+             <Col>Longitude</Col>
+           </Row>
+        {importJson.map((jsonData, index) => 
+        <>
+             <Row className="trigger-item" key={index}>
+             <Col md="1">{index + 1}</Col>
+             <Col>{jsonData[0]}</Col>
+             <Col>{jsonData[1]}</Col>
+             <Col>{jsonData[2]}</Col>
+           </Row>
+           </>
+        )}
+        <input
+                        type="button"
+                        type="file"
+                        accept=".csv,.xlsx,.xls"
+                        aria-pressed="true"
+                        //onChange={getJson2}
+                        onClick={getJson}
+                      />
+      </ReactBSAlert>,
+    )
+  }
 
   return (
     <div className="location">
+         {alert}
       <div
         className="flex-grow-1"
         style={{ position: "relative" }}
@@ -115,6 +180,8 @@ const Location = ({
         <div className="d-flex align-items-baseline">
           <h5>Location</h5>
         </div>
+        <Row>
+          <Col md="7">
         {isSearchByName ? (
           <AutoCompleteForm
             mapRef={mapRef}
@@ -134,6 +201,21 @@ const Location = ({
             setError={setError}
           />
         )}
+        </Col>
+        <Col md="1">
+     <img src="../time.png" alt="time" width="40px" height="40px"/>
+        </Col>
+        <Col md="2">
+        <FormGroup>
+          <Input type="date" name="date" id="exampleDate" placeholder="date placeholder" />
+        </FormGroup>
+        </Col>
+        <Col md="2">
+        <FormGroup>
+          <Input type="date" name="date" id="exampleDate" placeholder="date placeholder" />
+        </FormGroup>
+        </Col>
+        </Row>
         {isDropDown && (
           <div className="padded search-pop-up d-flex justify-content-between">
             <div>
@@ -212,7 +294,8 @@ const Location = ({
                     </Col>
                   </Row>
                   <Row>
-                    <Col className="text-end mt-4">
+                    <Col className="text-end mt-4 text-end">
+                      {/*}
                       <Button
                         type="button"
                         className="padded-button-active"
@@ -221,6 +304,15 @@ const Location = ({
                       >
                         Import CSV
                       </Button>
+              */}
+                      <input
+                        type="button"
+                        type="file"
+                        accept=".csv,.xlsx,.xls"
+                        aria-pressed="true"
+                        onChange={getJson}
+                      />
+                 
                     </Col>
                   </Row>
                 </>
@@ -244,9 +336,9 @@ const Location = ({
       </div>
 
       <div>
-        <Parameters />
+        <Parameters   parameters={parameters}
+                setParameters={setParameters} />
       </div>
- 
 
       <div className="my-3">
         <Row className="w-100 mx-0">
@@ -288,9 +380,7 @@ const Location = ({
               ))
             ) : (
               <Row className="trigger-item text-start">
-                <Col className="text-start">
-                No selected locations.
-                </Col>
+                <Col className="text-start">No selected locations.</Col>
               </Row>
             )}
           </Col>
