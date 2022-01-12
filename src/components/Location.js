@@ -6,7 +6,7 @@ import CoordinatesSearch from "./LocationCoordinates";
 import { Button, Col, Input, Row, FormGroup, Label } from "reactstrap";
 import Papa from "papaparse";
 import Parameters from "./Parameters";
-import ReactBSAlert from 'react-bootstrap-sweetalert'
+import ReactBSAlert from "react-bootstrap-sweetalert";
 import DatePicker from "react-datepicker";
 
 import { Edit, Delete, Ok } from "react-ikonate";
@@ -26,7 +26,7 @@ const Location = ({
   locations,
   setLocations,
   parameters,
-  setParameters
+  setParameters,
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -112,26 +112,94 @@ const Location = ({
 
   const getJson = (e) => {
     const files = e.target.files;
-    console.log(files);
     if (files) {
       console.log(files[0]);
       Papa.parse(files[0], {
         complete: function (results) {
+          let importedLocations = [];
+          let errors = [];
+
+          let newError = {};
+
+          for (let i = 0; i < results.data.length; i++) {
+            const row = results.data[i];
+            if (row.length < 3) {
+              break;
+            }
+            console.log("log", row);
+
+            const tmp = locationConstructor(row[0], row[1], row[2]);
+            console.log("tmp", tmp);
+            let error = {};
+
+            if (tmp.error) {
+              let keys = Object.keys(tmp.error);
+              newError = {
+                line: i + 1,
+                comment: tmp.error[keys[0]],
+                value: [keys[0]],
+              };
+            } else {
+              for (let j = 0; j < importedLocations.length; j++) {
+                if (
+                  importedLocations[j].lat === tmp.location.lat &&
+                  importedLocations[j].location.lon === tmp.lon
+                ) {
+                  error = {
+                    line: i + 1,
+                    comment: "Duplicated value.",
+                    value: row[1] + ", " + row[2],
+                  };
+                  console.log("temp", importedLocations);
+                  break;
+                }
+              }
+
+              let check = checkCoordinates(tmp.location.lat, tmp.location.lon);
+              if (!check) {
+                error = {
+                  line: i + 1,
+                  comment: "Duplicated value.",
+                  value: row[1] + ", " + row[2],
+                };
+              }
+            }
+
+            if (Object.keys(error).length) {
+              errors.push(error);
+            } else if (tmp.location) {
+              importedLocations.push(tmp.location);
+            }
+          }
+
+          if (errors.length) {
+            addImportErrors(errors);
+            if (importedLocations.length) {
+              freezeLocations(importedLocations);
+            }
+
+            console.log("errors", errors);
+          } else console.log("imported", importedLocations);
+          if (importedLocations.length) {
+            addLocations(importedLocations);
+          }
+
           console.log("Finished:", results.data);
-          jsonAlert(setImportJson(results.data))
+          console.log("test", results.data);
+          setImportJson(results.data);
+          jsonAlert(results.data);
         },
       });
     }
   };
 
-
-  const [alert, setAlert] = React.useState(null)
+  const [alert, setAlert] = React.useState(null);
 
   const hideAlert = () => {
-    setAlert(null)
-  }
+    setAlert(null);
+  };
 
-  const jsonAlert = () => {
+  const jsonAlert = (locations) => {
     setAlert(
       <ReactBSAlert
         title="Import"
@@ -141,37 +209,148 @@ const Location = ({
         showCloseButton
         customClass="bs-alerts"
       >
-                     <Row className="trigger-item">
-             <Col md="1">#</Col>
-             <Col>Location</Col>
-             <Col>Latitide</Col>
-             <Col>Longitude</Col>
-           </Row>
-        {importJson.map((jsonData, index) => 
-        <>
-             <Row className="trigger-item" key={index}>
-             <Col md="1">{index + 1}</Col>
-             <Col>{jsonData[0]}</Col>
-             <Col>{jsonData[1]}</Col>
-             <Col>{jsonData[2]}</Col>
-           </Row>
-           </>
-        )}
+        <Row className="trigger-item">
+          <Col md="1">#</Col>
+          <Col>Location</Col>
+          <Col>Latitide</Col>
+          <Col>Longitude</Col>
+        </Row>
+        {locations.map((jsonData, index) => (
+          <>
+            <Row className="trigger-item" key={index}>
+              <Col md="1">{index + 1}</Col>
+              <Col>{jsonData[0]}</Col>
+              <Col>{jsonData[1]}</Col>
+              <Col>{jsonData[2]}</Col>
+            </Row>
+          </>
+        ))}
         <input
-                        type="button"
-                        type="file"
-                        accept=".csv,.xlsx,.xls"
-                        aria-pressed="true"
-                        //onChange={getJson2}
-                        onClick={getJson}
-                      />
-      </ReactBSAlert>,
-    )
+          type="button"
+          type="file"
+          accept=".csv,.xlsx,.xls"
+          aria-pressed="true"
+          onClick={getJson}
+        />
+      </ReactBSAlert>
+    );
+  };
+
+  const jsonError = (importErrors, close) => {
+
+  <ReactBSAlert
+  title="Error!"
+  onCancel={close}
+  onConfirm={close}
+  showConfirm={false}
+  showCloseButton
+  customClass="bs-alerts"
+>
+  <br />
+  <p>
+   .
+  </p>
+
+  <br />
+  <Col className="text-end">
+
+  </Col>
+</ReactBSAlert>
+
   }
+
+  const locationConstructor = (name, lat, lon) => {
+    let newError = {};
+
+    const coordPrecision = 6;
+    name = name ? name : "Custom location";
+
+    // validate Latitude
+    if (!lat) {
+      newError = {
+        lat: "No value was found for latitude.",
+      };
+    }
+    if (isNaN(parseFloat(lat))) {
+      newError = {
+        lat: "Latitude value should be a number.",
+      };
+    }
+
+    lat = parseFloat(lat);
+
+    if (lat < -90 || lat > 90) {
+      newError = {
+        lat: "Latitude should be a number in a range between -90 and 90.",
+      };
+    }
+
+    lat = parseFloat(lat).toFixed(coordPrecision);
+
+    // validate Longitude
+    if (!lon) {
+      newError = {
+        error: "No value was found for longitude.",
+      };
+    }
+    if (isNaN(parseFloat(lon))) {
+      newError = {
+        error: "Longitude value should be a number.",
+      };
+    }
+
+    lon = parseFloat(lon);
+
+    if (lon < -180 || lon > 180) {
+      newError = {
+        error: "Longitude should be a number in a range between -180 and 180.",
+      };
+    }
+
+    lon = parseFloat(lon).toFixed(coordPrecision);
+
+    if (Object.keys(newError).length) {
+      //setError(newError)
+      return { error: newError };
+    }
+    return {
+      location: {
+        name,
+        lat,
+        lon,
+      },
+    };
+  };
+
+  const checkCoordinates = (lat, lon) => {
+    for (let i = 0; i < locations.length; i++) {
+      if (locations[i].lat === lat && locations[i].lon === lon) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const addLocations = (data) => {
+    const newLocations = [...locations, ...data];
+    setLocations(newLocations);
+  };
+  
+
+  const freezeLocations = (payload) => {
+    this.state.frozenLocations = payload;
+  };
+
+  const addImportErrors = (payload) => {
+    if (payload.length) {
+      this.state.importErrors = payload;
+      this.state.showImportDialog = true;
+    }
+  };
 
   return (
     <div className="location">
-         {alert}
+      {alert}
       <div
         className="flex-grow-1"
         style={{ position: "relative" }}
@@ -182,39 +361,49 @@ const Location = ({
         </div>
         <Row>
           <Col md="7">
-        {isSearchByName ? (
-          <AutoCompleteForm
-            mapRef={mapRef}
-            setTempLocation={setTempLocation}
-            error={error}
-            setError={setError}
-            setIsDropDown={setIsDropDown}
-          />
-        ) : (
-          <CoordinatesSearch
-            mapRef={mapRef}
-            coordsLocation={coordsTempLocation}
-            setCoordsLocation={setCoordsTempLocation}
-            setIsDropDown={setIsDropDown}
-            setCoordinates={setCoordinates}
-            error={error}
-            setError={setError}
-          />
-        )}
-        </Col>
-        <Col md="1">
-     <img src="../time.png" alt="time" width="40px" height="40px"/>
-        </Col>
-        <Col md="2">
-        <FormGroup>
-          <Input type="date" name="date" id="exampleDate" placeholder="date placeholder" />
-        </FormGroup>
-        </Col>
-        <Col md="2">
-        <FormGroup>
-          <Input type="date" name="date" id="exampleDate" placeholder="date placeholder" />
-        </FormGroup>
-        </Col>
+            {isSearchByName ? (
+              <AutoCompleteForm
+                mapRef={mapRef}
+                setTempLocation={setTempLocation}
+                error={error}
+                setError={setError}
+                setIsDropDown={setIsDropDown}
+              />
+            ) : (
+              <CoordinatesSearch
+                mapRef={mapRef}
+                coordsLocation={coordsTempLocation}
+                setCoordsLocation={setCoordsTempLocation}
+                setIsDropDown={setIsDropDown}
+                setCoordinates={setCoordinates}
+                error={error}
+                setError={setError}
+              />
+            )}
+          </Col>
+          <Col md="1">
+            <img src="../time.png" alt="time" width="40px" height="40px" />
+          </Col>
+          <Col md="2">
+            <FormGroup>
+              <Input
+                type="date"
+                name="date"
+                id="exampleDate"
+                placeholder="date placeholder"
+              />
+            </FormGroup>
+          </Col>
+          <Col md="2">
+            <FormGroup>
+              <Input
+                type="date"
+                name="date"
+                id="exampleDate"
+                placeholder="date placeholder"
+              />
+            </FormGroup>
+          </Col>
         </Row>
         {isDropDown && (
           <div className="padded search-pop-up d-flex justify-content-between">
@@ -299,12 +488,15 @@ const Location = ({
                       <Button
                         type="button"
                         className="padded-button-active"
-                        //onClick={() => setSearchNameandImport()}
+                        onClick={importFileUpload}
                         aria-pressed="true"
+                        id="importCSV"
                       >
                         Import CSV
                       </Button>
-              */}
+            
+     */}
+
                       <input
                         type="button"
                         type="file"
@@ -312,7 +504,6 @@ const Location = ({
                         aria-pressed="true"
                         onChange={getJson}
                       />
-                 
                     </Col>
                   </Row>
                 </>
@@ -336,8 +527,7 @@ const Location = ({
       </div>
 
       <div>
-        <Parameters   parameters={parameters}
-                setParameters={setParameters} />
+        <Parameters parameters={parameters} setParameters={setParameters} />
       </div>
 
       <div className="my-3">
@@ -368,8 +558,8 @@ const Location = ({
                     <Col md="3">{location.name}</Col>
                   )}
 
-                  <Col md="3">{location.lat.toFixed(6)}</Col>
-                  <Col md="3">{location.lon.toFixed(6)}</Col>
+                  <Col md="3">{location.lat}</Col>
+                  <Col md="3">{location.lon}</Col>
                   <Col>
                     <Delete onClick={() => deleteLocation(index)}></Delete>
                   </Col>
