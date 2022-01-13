@@ -25,25 +25,26 @@ console.log('test', fileValue)
         showCloseButton
         customClass="bs-alerts"
       >
-            <Row className='text-start mt-4'>
-    <Form className="checkbox-radios ml-5">
-        {file.map(option => (
+        <Row className="text-start mt-4">
+          <Form className="checkbox-radios ml-5">
+            {file.map((option) => (
               <FormGroup check className="form-check-radio">
                 <Label check>
-              {option.label}
-              <Input
-                id="individualRadioButton"
-                name="file"
-                checked={option.value === fileValue}
-                onChange={() => setFileValue(option.value)}
-                type="checkbox"
-                value={fileValue}
-              />
-            </Label>
-            </FormGroup>
-        ))}
-    </Form>
-    </Row>
+                  {option.label}
+                  <Input
+                    // id="individualRadioButton"
+                    id={option.value}
+                    name="file"
+                    // checked={option.value === fileValue}
+                    onChange={() => setFileValue(option.value)}
+                    type="checkbox"
+                    value={option.value}
+                  />
+                </Label>
+              </FormGroup>
+            ))}
+          </Form>
+        </Row>
         {/*}
               <ParamCategories
         key={"channel.key"}
@@ -52,9 +53,8 @@ console.log('test', fileValue)
         checked={checked}
       />
     */}
-
-      </ReactBSAlert>,
-    )
+      </ReactBSAlert>
+    );
   }
 
 return (

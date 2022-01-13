@@ -3,62 +3,57 @@ import { Button, Label, Form, FormGroup, Input, Row } from 'reactstrap'
 import { units } from '../config'
 import ReactBSAlert from 'react-bootstrap-sweetalert'
 
-const ParamCategories = props => {
-  return (
-    
-    <Row className='text-start mt-4'>
-    <Form className="checkbox-radios ml-5">
-        {props.options.map(option => (
-              <FormGroup check key={props.key}>
-                <Label check>
-              {option.label}
-              <Input
-                className={props.className}
-                name="test"
-                checked={option.value === props.checked}
-                onChange={() => props.onChange(option.value)}
-                type="checkbox"
-              />
-            </Label>
-            </FormGroup>
-        ))}
-    </Form>
-    </Row>
-  );
-};
+const UnitsParams = () => {
 
+const [alert, setAlert] = useState(null)
 
-const UnitsParams = ({parameters, setParameters}) => {
+const [fileValue, setFileValue] = useState()
 
-  const [alert, setAlert] = useState(null)
-
-  const [checked, setCheckBoxChecked] = useState(false);
-
-  const onAddCategory = value => {
-    setCheckBoxChecked(value);
-    setParameters(value)
-  };
+console.log('test', fileValue)
 
   const hideAlert = () => {
     setAlert(null)
   }
 
-  const unitsAlert = () => {
+  const unitAlert = () => {
     setAlert(
       <ReactBSAlert
-        title="Units"
+        title="Units:"
         onConfirm={() => hideAlert()}
         onCancel={() => hideAlert()}
         showConfirm={false}
         showCloseButton
         customClass="bs-alerts"
       >
+            <Row className='text-start mt-4'>
+    <Form className="checkbox-radios ml-5">
+        {units.map(option => (
+              <FormGroup check className="form-check-radio">
+                <Label check>
+              {option.label}
+              <Input
+                    // id="individualRadioButton"
+                    id={option.value}
+                    name="file"
+                    // checked={option.value === fileValue}
+                    onChange={() => setFileValue(option.value)}
+                    type="radio"
+                    value={option.value}
+                  />
+            </Label>
+            </FormGroup>
+        ))}
+    </Form>
+    </Row>
+        {/*}
               <ParamCategories
         key={"channel.key"}
-        options={units}
+        options={file}
         onChange={value => onAddCategory(value)}
         checked={checked}
       />
+    */}
+
       </ReactBSAlert>,
     )
   }
@@ -67,9 +62,9 @@ return (
   <>
   {alert}
         <Button className='button-neutral'
-        onClick={unitsAlert}>
+        onClick={unitAlert}>
           Units:{' '}
-          {checked ? parameters : 'Metric'}
+          {fileValue ? fileValue : 'Metric'}
           {' '}
       <img src="https://home.openweathermap.org/assets/icon_down_black.svg" alt="icon down" />
         </Button>

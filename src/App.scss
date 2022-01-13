@@ -1016,3 +1016,15 @@ input.input-marketplace, input.marketplace-input__input {
   
 }
 
+.checkbox-radios {
+
+  input {
+    padding: 13px;
+    margin-right: 10px;
+  }
+  input:checked {
+    background-color: $brand-black;
+    border-color: $brand-black;
+  }
+}
+

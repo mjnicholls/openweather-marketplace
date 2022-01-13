@@ -382,7 +382,7 @@ const Location = ({
             )}
           </Col>
           <Col md="1">
-            <img src="../time.png" alt="time" width="40px" height="40px" />
+            <img src="../time.png" alt="time" />
           </Col>
           <Col md="2">
             <FormGroup>
