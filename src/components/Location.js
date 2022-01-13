@@ -62,10 +62,13 @@ const Location = ({
     tempLocation.lat !== coordsTempLocation.lat ||
     tempLocation.lon !== coordsTempLocation.lon;
 
+  /*
   const setLocationName = (val) => {
     setLocation({ ...location, name: val });
     setIsLocationNameEdited(true);
   };
+
+  */
 
   const setSearchandImportImport = () => {
     setIsSearchByName(true);
@@ -115,12 +118,10 @@ const Location = ({
     if (files) {
       console.log(files[0]);
       Papa.parse(files[0], {
-        // skipEmptyLines: true,
+        skipEmptyLines: true,
         complete: function (results) {
           let importedLocations = [];
           let errors = [];
-
-          let newError = {};
 
           for (let i = 0; i < results.data.length; i++) {
             const row = results.data[i];
@@ -135,7 +136,7 @@ const Location = ({
 
             if (tmp.error) {
               let keys = Object.keys(tmp.error);
-              newError = {
+              error = {
                 line: i + 1,
                 comment: tmp.error[keys[0]],
                 value: [keys[0]],
@@ -173,22 +174,17 @@ const Location = ({
             }
           }
 
+          console.log("err", errors);
           if (errors.length) {
-            addImportErrors(errors);
-            if (importedLocations.length) {
-              freezeLocations(importedLocations);
-            }
+            jsonAlert(errors, importedLocations);
 
-            console.log("errors", errors);
-          } else console.log("imported", importedLocations);
+            return;
+          }
+
           if (importedLocations.length) {
             addLocations(importedLocations);
           }
-
-          console.log("Finished:", results.data);
-          console.log("test", results.data);
-          setImportJson(results.data);
-          jsonAlert(results.data);
+          setIsImport(false);
         },
       });
     }
@@ -200,7 +196,8 @@ const Location = ({
     setAlert(null);
   };
 
-  const jsonAlert = (locations) => {
+  const jsonAlert = (importErrors, locations) => {
+
     setAlert(
       <ReactBSAlert
         title="Import"
@@ -210,22 +207,45 @@ const Location = ({
         showCloseButton
         customClass="bs-alerts"
       >
+         <Row className="trigger-item">
+         <Col>Failed to recognise locations.</Col>
+         </Row>
+          {importErrors.map((error) => (
+            <>
+            <Row className="trigger-item">
+            <Col md="1">{error.line}</Col>
+            <Col>{error.comment}</Col>
+            <Col>{error.value}</Col>
+            </Row>
+            </>
+          ))}
+        
+        <br/>
+        <Row className="trigger-item">
+          <Col>Recognised locations</Col>
+          </Row>
         <Row className="trigger-item">
           <Col md="1">#</Col>
           <Col>Location</Col>
           <Col>Latitide</Col>
           <Col>Longitude</Col>
         </Row>
-        {locations.map((jsonData, index) => (
+        {locations.map((location, index) => (
           <>
             <Row className="trigger-item" key={index}>
               <Col md="1">{index + 1}</Col>
-              <Col>{jsonData[0]}</Col>
-              <Col>{jsonData[1]}</Col>
-              <Col>{jsonData[2]}</Col>
+              <Col>{location.name}</Col>
+              <Col>{location.lat}</Col>
+              <Col>{location.lon}</Col>
             </Row>
           </>
         ))}
+             <Row className="trigger-item">
+<Col className="text-end">
+  <Button
+  className="button-neutral">
+    Upload recognised locations
+  </Button>
         <input
           type="button"
           type="file"
@@ -233,32 +253,11 @@ const Location = ({
           aria-pressed="true"
           onClick={getJson}
         />
+        </Col>
+        </Row>
       </ReactBSAlert>
     );
   };
-
-  const jsonError = (importErrors, close) => {
-
-  <ReactBSAlert
-  title="Error!"
-  onCancel={close}
-  onConfirm={close}
-  showConfirm={false}
-  showCloseButton
-  customClass="bs-alerts"
->
-  <br />
-  <p>
-   .
-  </p>
-
-  <br />
-  <Col className="text-end">
-
-  </Col>
-</ReactBSAlert>
-
-  }
 
   const locationConstructor = (name, lat, lon) => {
     let newError = {};
@@ -336,18 +335,18 @@ const Location = ({
     const newLocations = [...locations, ...data];
     setLocations(newLocations);
   };
-  
 
-  const freezeLocations = (payload) => {
-    this.state.frozenLocations = payload;
+  /*
+  const freezeLocations = (freezeLocations) => {
+    const newFrozenLocations = [...freezeLocations]
   };
 
-  const addImportErrors = (payload) => {
-    if (payload.length) {
-      this.state.importErrors = payload;
-      this.state.showImportDialog = true;
-    }
+
+  const addImportErrors = (importErrors) => {
+    const newImportErrors = [...importErrors]
+   
   };
+  */
 
   return (
     <div className="location">

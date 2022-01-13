@@ -68,7 +68,7 @@ const HeaderMarket = () => {
               </div>
             </li>
             <li>
-                <a href="https://home.openweathermap.org/history_bulks/new">History Bulk</a>
+                <a href="/history_bulks/new">History Bulk</a>
               </li>
               <li>
                 <a href="https://home.openweathermap.org/history_forecast_bulks/new">History Forecast Bulk</a>
@@ -80,7 +80,7 @@ const HeaderMarket = () => {
 
 
             <li>
-                <a className="marketplace" href="https://home.openweathermap.org/marketplace">
+                <a className="marketplace" href="/marketplace">
                   Marketplace
                 </a>
               </li>

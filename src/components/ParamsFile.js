@@ -2,18 +2,14 @@ import React, { useState } from 'react'
 import { Button, Label, Form, FormGroup, Input, Row } from 'reactstrap'
 import { file } from '../config'
 import ReactBSAlert from 'react-bootstrap-sweetalert'
-import ParamCategories from './ParamsCategory'
 
-const FileParams = ({parameters, setParameters}) => {
+const FileParams = () => {
 
-  const [alert, setAlert] = useState(null)
+const [alert, setAlert] = useState(null)
 
-  const [checked, setCheckBoxChecked] = useState(false);
+const [fileValue, setFileValue] = useState()
 
-  const onAddCategory = value => {
-    setCheckBoxChecked(value);
-    setParameters(value)
-  };
+console.log('test', fileValue)
 
   const hideAlert = () => {
     setAlert(null)
@@ -29,12 +25,34 @@ const FileParams = ({parameters, setParameters}) => {
         showCloseButton
         customClass="bs-alerts"
       >
+            <Row className='text-start mt-4'>
+    <Form className="checkbox-radios ml-5">
+        {file.map(option => (
+              <FormGroup check className="form-check-radio">
+                <Label check>
+              {option.label}
+              <Input
+                id="individualRadioButton"
+                name="file"
+                checked={option.value === fileValue}
+                onChange={() => setFileValue(option.value)}
+                type="checkbox"
+                value={fileValue}
+              />
+            </Label>
+            </FormGroup>
+        ))}
+    </Form>
+    </Row>
+        {/*}
               <ParamCategories
         key={"channel.key"}
         options={file}
         onChange={value => onAddCategory(value)}
         checked={checked}
       />
+    */}
+
       </ReactBSAlert>,
     )
   }
@@ -45,7 +63,7 @@ return (
         <Button className='button-neutral'
         onClick={fileAlert}>
           File:{' '}
-          {checked ? parameters : 'CSV'}
+          {fileValue ? fileValue : 'CSV'}
           {' '}
       <img src="https://home.openweathermap.org/assets/icon_down_black.svg" alt="icon down" />
         </Button>
