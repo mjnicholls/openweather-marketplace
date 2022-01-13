@@ -115,6 +115,7 @@ const Location = ({
     if (files) {
       console.log(files[0]);
       Papa.parse(files[0], {
+        // skipEmptyLines: true,
         complete: function (results) {
           let importedLocations = [];
           let errors = [];
@@ -123,9 +124,9 @@ const Location = ({
 
           for (let i = 0; i < results.data.length; i++) {
             const row = results.data[i];
-            if (row.length < 3) {
-              break;
-            }
+            // if (row.length < 3) {
+            //   continue
+            // }
             console.log("log", row);
 
             const tmp = locationConstructor(row[0], row[1], row[2]);
@@ -143,7 +144,7 @@ const Location = ({
               for (let j = 0; j < importedLocations.length; j++) {
                 if (
                   importedLocations[j].lat === tmp.location.lat &&
-                  importedLocations[j].location.lon === tmp.lon
+                  importedLocations[j].lon === tmp.location.lon
                 ) {
                   error = {
                     line: i + 1,

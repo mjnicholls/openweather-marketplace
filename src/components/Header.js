@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 
 import { Dropdown, DropdownToggle, DropdownMenu } from 'reactstrap'
+import { useSelector } from 'react-redux'
+
+const selectUserName = (state) => state.auth.user.username
 
 
 const HeaderMarket = () => {
-  const userName = 'mjnicholls'
+  const userName = useSelector(selectUserName)
   const [isDropDown, setIsDropDown] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
