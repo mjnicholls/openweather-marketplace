@@ -32,13 +32,7 @@ const Location = ({
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
   const [isImport, setIsImport] = useState(false);
 
-  const [time, setTime] = useState(new Date());
-  const handleCalendarClose = () => console.log("Calendar closed");
-  const handleCalendarOpen = () => console.log("Calendar opened");
-
   const [isEdit, setisEdit] = useState(false);
-
-  const [importJson, setImportJson] = useState([]);
 
   const setCoordinates = () => {
     setError({});
@@ -139,8 +133,9 @@ const Location = ({
               error = {
                 line: i + 1,
                 comment: tmp.error[keys[0]],
-                value: [keys[0]],
+                value: tmp.error.errorVal
               };
+              
             } else {
               for (let j = 0; j < importedLocations.length; j++) {
                 if (
@@ -190,6 +185,8 @@ const Location = ({
     }
   };
 
+
+
   const [alert, setAlert] = React.useState(null);
 
   const hideAlert = () => {
@@ -197,7 +194,6 @@ const Location = ({
   };
 
   const jsonAlert = (importErrors, locations) => {
-
     setAlert(
       <ReactBSAlert
         title="Import"
@@ -207,23 +203,23 @@ const Location = ({
         showCloseButton
         customClass="bs-alerts"
       >
-         <Row className="trigger-item">
-         <Col>Failed to recognise locations.</Col>
-         </Row>
-          {importErrors.map((error) => (
-            <>
+        <Row className="trigger-item">
+          <Col>Failed to recognise locations.</Col>
+        </Row>
+        {importErrors.map((error) => (
+          <>
             <Row className="trigger-item">
-            <Col md="1">{error.line}</Col>
-            <Col>{error.comment}</Col>
-            <Col>{error.value}</Col>
+              <Col md="1">{error.line}</Col>
+              <Col>{error.comment}</Col>
+              <Col>{error.value}</Col>
             </Row>
-            </>
-          ))}
-        
-        <br/>
+          </>
+        ))}
+
+        <br />
         <Row className="trigger-item">
           <Col>Recognised locations</Col>
-          </Row>
+        </Row>
         <Row className="trigger-item">
           <Col md="1">#</Col>
           <Col>Location</Col>
@@ -240,20 +236,35 @@ const Location = ({
             </Row>
           </>
         ))}
-             <Row className="trigger-item">
-<Col className="text-end">
-  <Button
-  className="button-neutral">
-    Upload recognised locations
-  </Button>
-        <input
-          type="button"
-          type="file"
-          accept=".csv,.xlsx,.xls"
-          aria-pressed="true"
-          onClick={getJson}
-        />
-        </Col>
+        <br/>
+        <Row className="trigger-item">
+          <Col className="text-end">
+            <Button 
+            className="button-active"
+            onClick={() => {addLocations(locations); hideAlert()}}>
+              Upload recognised locations
+            </Button>
+                    <input
+        type="file"
+        accept=".csv,.xlsx,.xls"
+        onClick={getJson}
+        name="file1"
+        aria-pressed="false"
+        style={{ display: 'none' }}
+        id="contained-button-file"
+      />
+      <label htmlFor="contained-button-file">
+        <Button
+        variant="contained"
+        className="button-neutral"
+        component="span"
+        //onClick={importTwo}
+        >
+          Upload New File
+        </Button>
+      </label>
+    
+          </Col>
         </Row>
       </ReactBSAlert>
     );
@@ -269,11 +280,15 @@ const Location = ({
     if (!lat) {
       newError = {
         lat: "No value was found for latitude.",
+        errorVal: lat
       };
+  
+
     }
     if (isNaN(parseFloat(lat))) {
       newError = {
         lat: "Latitude value should be a number.",
+        errorVal: lat
       };
     }
 
@@ -282,6 +297,7 @@ const Location = ({
     if (lat < -90 || lat > 90) {
       newError = {
         lat: "Latitude should be a number in a range between -90 and 90.",
+        errorVal: lat
       };
     }
 
@@ -291,11 +307,13 @@ const Location = ({
     if (!lon) {
       newError = {
         error: "No value was found for longitude.",
+        errorVal: lon
       };
     }
     if (isNaN(parseFloat(lon))) {
       newError = {
         error: "Longitude value should be a number.",
+        errorVal: lon
       };
     }
 
@@ -304,13 +322,13 @@ const Location = ({
     if (lon < -180 || lon > 180) {
       newError = {
         error: "Longitude should be a number in a range between -180 and 180.",
+        errorVal: lon
       };
     }
 
     lon = parseFloat(lon).toFixed(coordPrecision);
 
     if (Object.keys(newError).length) {
-      //setError(newError)
       return { error: newError };
     }
     return {
@@ -336,17 +354,6 @@ const Location = ({
     setLocations(newLocations);
   };
 
-  /*
-  const freezeLocations = (freezeLocations) => {
-    const newFrozenLocations = [...freezeLocations]
-  };
-
-
-  const addImportErrors = (importErrors) => {
-    const newImportErrors = [...importErrors]
-   
-  };
-  */
 
   return (
     <div className="location">
@@ -482,29 +489,23 @@ const Location = ({
                       </Row>
                     </Col>
                   </Row>
-                  <Row>
-                    <Col className="text-end mt-4 text-end">
-                      {/*}
-                      <Button
-                        type="button"
-                        className="padded-button-active"
-                        onClick={importFileUpload}
-                        aria-pressed="true"
-                        id="importCSV"
-                      >
-                        Import CSV
-                      </Button>
-            
-     */}
-
-                      <input
-                        type="button"
-                        type="file"
-                        accept=".csv,.xlsx,.xls"
-                        aria-pressed="true"
-                        onChange={getJson}
-                      />
-                    </Col>
+                  <Row className="trigger-item-parse">
+                    <Col className="mt-4 text-end">
+                    <input
+        type="file"
+        accept=".csv,.xlsx,.xls"
+        onChange={getJson}
+        name="file1"
+        aria-pressed="true"
+        style={{ display: 'none' }}
+        id="contained-button-file"
+      />
+      <label htmlFor="contained-button-file">
+        <Button variant="contained" className="button-active" component="span">
+          Import CSV File
+        </Button>
+      </label>
+      </Col>
                   </Row>
                 </>
               ) : null}
