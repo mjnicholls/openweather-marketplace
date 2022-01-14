@@ -1,7 +1,15 @@
 import React from "react";
+
+import {useSelector} from 'react-redux'
+
 import { Button, Card, CardBody, Col, Row } from "reactstrap";
 
+const selectCurrency = (state) => state.auth.currency
+
 const HomeMarket = () => {
+
+  const currency = useSelector(selectCurrency)
+
   return (
     <div className="container">
           <Row className="home-row">
@@ -30,7 +38,7 @@ const HomeMarket = () => {
               </ul>
               <Row>
                 <Col md="4">
-                  <h3>7 GBP</h3>
+                  <h3>7 {currency}</h3>
                 </Col>
                 <Col md="4">
                 </Col>
@@ -63,7 +71,7 @@ const HomeMarket = () => {
               </ul>
               <Row>
                 <Col md="4">
-                  <h3>35 GBP</h3>
+                  <h3>35 {currency}</h3>
                 </Col>
                 <Col md="4">
                 </Col>
@@ -100,7 +108,7 @@ const HomeMarket = () => {
               </ul>
               <Row>
                 <Col md="4">
-                  <h3>7 GBP</h3>
+                  <h3>7 {currency}</h3>
                 </Col>
                 <Col md="4">
                 </Col>

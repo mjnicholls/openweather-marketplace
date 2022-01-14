@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Dropdown, DropdownToggle, DropdownMenu } from 'reactstrap'
 import { useSelector } from 'react-redux'
 
-const selectUserName = (state) => state.auth.user.username
+const selectUserName = (state) => state.auth.userName
 
 
 const HeaderMarket = () => {
