@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { coordinatesError } from "../utils/validation";
 import AutoCompleteForm from "./LocationAutoComplete";
@@ -7,7 +7,7 @@ import { Button, Col, Input, Row, FormGroup, Label } from "reactstrap";
 import Papa from "papaparse";
 import Parameters from "./Parameters";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-import DatePicker from "react-datepicker";
+import DatePickerMarket from "./DatePicker";
 
 import { Edit, Delete, Ok } from "react-ikonate";
 
@@ -27,11 +27,14 @@ const Location = ({
   setLocations,
   parameters,
   setParameters,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
   const [isImport, setIsImport] = useState(false);
-
   const [isEdit, setisEdit] = useState(false);
 
   const setCoordinates = () => {
@@ -56,13 +59,6 @@ const Location = ({
     tempLocation.lat !== coordsTempLocation.lat ||
     tempLocation.lon !== coordsTempLocation.lon;
 
-  /*
-  const setLocationName = (val) => {
-    setLocation({ ...location, name: val });
-    setIsLocationNameEdited(true);
-  };
-
-  */
 
   const setSearchandImportImport = () => {
     setIsSearchByName(true);
@@ -186,6 +182,11 @@ const Location = ({
   };
 
 
+  const closeAndReopen = () => {
+
+    hideAlert()
+  
+  }
 
   const [alert, setAlert] = React.useState(null);
 
@@ -258,7 +259,7 @@ const Location = ({
         variant="contained"
         className="button-neutral"
         component="span"
-        //onClick={importTwo}
+        onClick={closeAndReopen}
         >
           Upload New File
         </Button>
@@ -363,11 +364,21 @@ const Location = ({
         style={{ position: "relative" }}
         ref={searchBoxRef}
       >
-        <div className="d-flex align-items-baseline">
+        <div>
+          <Row>
+            <Col md="7" className="text-start">
           <h5>Location</h5>
+          </Col>
+          <Col md="2" className="text-start">
+         From
+          </Col>
+          <Col md="2" className="text-center">
+         To
+          </Col>
+          </Row>
         </div>
         <Row>
-          <Col md="7">
+          <Col md="6">
             {isSearchByName ? (
               <AutoCompleteForm
                 mapRef={mapRef}
@@ -389,29 +400,16 @@ const Location = ({
             )}
           </Col>
           <Col md="1">
-            <img src="../time.png" alt="time" />
+            <img src="../time.png" alt="time" style={{paddingLeft: "15pt", paddingTop:"4pt"}} />
           </Col>
-          <Col md="2">
-            <FormGroup>
-              <Input
-                type="date"
-                name="date"
-                id="exampleDate"
-                placeholder="date placeholder"
-              />
-            </FormGroup>
-          </Col>
-          <Col md="2">
-            <FormGroup>
-              <Input
-                type="date"
-                name="date"
-                id="exampleDate"
-                placeholder="date placeholder"
-              />
-            </FormGroup>
-          </Col>
+      <DatePickerMarket
+      startDate={startDate}
+      setStartDate={setStartDate}
+      endDate={endDate}
+      setEndDate={setEndDate}
+      />
         </Row>
+        {console.log('start',startDate)}
         {isDropDown && (
           <div className="padded search-pop-up d-flex justify-content-between">
             <div>
@@ -501,8 +499,18 @@ const Location = ({
         id="contained-button-file"
       />
       <label htmlFor="contained-button-file">
-        <Button variant="contained" className="button-active" component="span">
+        <Button variant="contained" accept=".csv,.xlsx,.xls" className="button-active" component="span" type="file" onClick={getJson}>
+                         <input
+        type="file"
+        accept=".csv,.xlsx,.xls"
+        onChange={getJson}
+        name="file1"
+        aria-pressed="true"
+        style={{ display: 'none' }}
+        id="contained-button-file"
+      />
           Import CSV File
+        
         </Button>
       </label>
       </Col>
@@ -583,6 +591,7 @@ const Location = ({
       {error.location && (
         <div className="invalid-feedback d-block">{error.location}</div>
       )}
+
     </div>
   );
 };

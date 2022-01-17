@@ -1029,4 +1029,39 @@ input.input-marketplace, input.marketplace-input__input {
 }
 
 
+.datepicker-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+
+.agro-datepicker {
+  color: #525f7f;
+  .rdtDays {
+    tr {
+      .rdtDay {
+        color: #344675;
+        &.rdtDisabled {
+          color: #9A9A9A;
+        }
+      }
+    }
+  }
+}
+
+.chart-calendar-right {
+  .rdtPicker {
+    right: 0 !important;
+    &:before {
+      display: none;
+    }
+    &:after {
+      left: auto;
+      right: 10px;
+    }
+  }
+}
+
+
 
