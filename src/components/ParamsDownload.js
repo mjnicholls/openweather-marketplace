@@ -1,19 +1,18 @@
-import React, { useState } from 'react'
-import { Button, Label, Form, FormGroup, Input, Row } from 'reactstrap'
-import { download } from '../config'
-import ReactBSAlert from 'react-bootstrap-sweetalert'
+import React, { useState } from "react";
+import { Button, Label, Form, FormGroup, Input, Row } from "reactstrap";
+import { download } from "../config";
+import ReactBSAlert from "react-bootstrap-sweetalert";
 
 const DownloadParams = () => {
+  const [alert, setAlert] = useState(null);
 
-const [alert, setAlert] = useState(null)
+  const [fileValue, setFileValue] = useState();
 
-const [fileValue, setFileValue] = useState()
-
-console.log('test', fileValue)
+  console.log("test", fileValue);
 
   const hideAlert = () => {
-    setAlert(null)
-  }
+    setAlert(null);
+  };
 
   const downloadAlert = () => {
     setAlert(
@@ -25,13 +24,13 @@ console.log('test', fileValue)
         showCloseButton
         customClass="bs-alerts"
       >
-            <Row className='text-start mt-4'>
-    <Form className="checkbox-radios ml-5">
-        {download.map(option => (
+        <Row className="text-start mt-4">
+          <Form className="checkbox-radios ml-5">
+            {download.map((option) => (
               <FormGroup check className="form-check-radio">
                 <Label check>
-              {option.label}
-            <Input
+                  {option.label}
+                  <Input
                     // id="individualRadioButton"
                     id={option.value}
                     name="file"
@@ -40,11 +39,11 @@ console.log('test', fileValue)
                     type="radio"
                     value={option.value}
                   />
-            </Label>
-            </FormGroup>
-        ))}
-    </Form>
-    </Row>
+                </Label>
+              </FormGroup>
+            ))}
+          </Form>
+        </Row>
         {/*}
               <ParamCategories
         key={"channel.key"}
@@ -53,23 +52,22 @@ console.log('test', fileValue)
         checked={checked}
       />
     */}
+      </ReactBSAlert>
+    );
+  };
 
-      </ReactBSAlert>,
-    )
-  }
+  return (
+    <>
+      {alert}
+      <Button className="button-neutral" onClick={downloadAlert}>
+        Downloads: {fileValue ? fileValue : "All locations"}{" "}
+        <img
+          src="https://home.openweathermap.org/assets/icon_down_black.svg"
+          alt="icon down"
+        />
+      </Button>
+    </>
+  );
+};
 
-return (
-  <>
-  {alert}
-        <Button className='button-neutral'
-        onClick={downloadAlert}>
-          Downloads:{' '}
-          {fileValue ? fileValue : 'All locations'}
-          {' '}
-      <img src="https://home.openweathermap.org/assets/icon_down_black.svg" alt="icon down" />
-        </Button>
-  </>
-)
-}
-
-export default DownloadParams
+export default DownloadParams;

@@ -30,7 +30,7 @@ const Location = ({
   startDate,
   setStartDate,
   endDate,
-  setEndDate
+  setEndDate,
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -58,7 +58,6 @@ const Location = ({
   const canSetCoordinates = () =>
     tempLocation.lat !== coordsTempLocation.lat ||
     tempLocation.lon !== coordsTempLocation.lon;
-
 
   const setSearchandImportImport = () => {
     setIsSearchByName(true);
@@ -129,9 +128,8 @@ const Location = ({
               error = {
                 line: i + 1,
                 comment: tmp.error[keys[0]],
-                value: tmp.error.errorVal
+                value: tmp.error.errorVal,
               };
-              
             } else {
               for (let j = 0; j < importedLocations.length; j++) {
                 if (
@@ -181,18 +179,20 @@ const Location = ({
     }
   };
 
-
   const closeAndReopen = () => {
-
-    hideAlert()
-  
-  }
+    hideAlert();
+  };
 
   const [alert, setAlert] = React.useState(null);
 
   const hideAlert = () => {
     setAlert(null);
   };
+
+  const buttonInput = () => {
+    getJson(document.getElementsByClassName('contained-button-file'))
+    
+  }
 
   const jsonAlert = (importErrors, locations) => {
     setAlert(
@@ -206,6 +206,11 @@ const Location = ({
       >
         <Row className="trigger-item">
           <Col>Failed to recognise locations.</Col>
+        </Row>
+        <Row className="trigger-item">
+          <Col md="1">#</Col>
+          <Col>Error</Col>
+          <Col>Value</Col>
         </Row>
         {importErrors.map((error) => (
           <>
@@ -237,34 +242,37 @@ const Location = ({
             </Row>
           </>
         ))}
-        <br/>
+        <br />
         <Row className="trigger-item">
           <Col className="text-end">
-            <Button 
-            className="button-active"
-            onClick={() => {addLocations(locations); hideAlert()}}>
+            <Button
+              className="button-active"
+              onClick={() => {
+                addLocations(locations);
+                hideAlert();
+              }}
+            >
               Upload recognised locations
             </Button>
-                    <input
-        type="file"
-        accept=".csv,.xlsx,.xls"
-        onClick={getJson}
-        name="file1"
-        aria-pressed="false"
-        style={{ display: 'none' }}
-        id="contained-button-file"
-      />
-      <label htmlFor="contained-button-file">
-        <Button
-        variant="contained"
-        className="button-neutral"
-        component="span"
-        onClick={closeAndReopen}
-        >
-          Upload New File
-        </Button>
-      </label>
-    
+            <input
+              type="file"
+              accept=".csv,.xlsx,.xls"
+              onClick={getJson}
+              name="file1"
+              aria-pressed="false"
+              style={{ display: "none" }}
+              id="contained-button-file"
+            />
+            <label htmlFor="contained-button-file">
+              <Button
+                variant="contained"
+                className="button-neutral"
+                component="span"
+                onClick={closeAndReopen}
+              >
+                Upload New File
+              </Button>
+            </label>
           </Col>
         </Row>
       </ReactBSAlert>
@@ -281,15 +289,13 @@ const Location = ({
     if (!lat) {
       newError = {
         lat: "No value was found for latitude.",
-        errorVal: lat
+        errorVal: lat,
       };
-  
-
     }
     if (isNaN(parseFloat(lat))) {
       newError = {
         lat: "Latitude value should be a number.",
-        errorVal: lat
+        errorVal: lat,
       };
     }
 
@@ -298,7 +304,7 @@ const Location = ({
     if (lat < -90 || lat > 90) {
       newError = {
         lat: "Latitude should be a number in a range between -90 and 90.",
-        errorVal: lat
+        errorVal: lat,
       };
     }
 
@@ -308,13 +314,13 @@ const Location = ({
     if (!lon) {
       newError = {
         error: "No value was found for longitude.",
-        errorVal: lon
+        errorVal: lon,
       };
     }
     if (isNaN(parseFloat(lon))) {
       newError = {
         error: "Longitude value should be a number.",
-        errorVal: lon
+        errorVal: lon,
       };
     }
 
@@ -323,7 +329,7 @@ const Location = ({
     if (lon < -180 || lon > 180) {
       newError = {
         error: "Longitude should be a number in a range between -180 and 180.",
-        errorVal: lon
+        errorVal: lon,
       };
     }
 
@@ -355,7 +361,6 @@ const Location = ({
     setLocations(newLocations);
   };
 
-
   return (
     <div className="location">
       {alert}
@@ -364,21 +369,16 @@ const Location = ({
         style={{ position: "relative" }}
         ref={searchBoxRef}
       >
-        <div>
-          <Row>
+        <div className="location">
+          <Row mb="4">
             <Col md="7" className="text-start">
-          <h5>Location</h5>
-          </Col>
-          <Col md="2" className="text-start">
-         From
-          </Col>
-          <Col md="2" className="text-center">
-         To
-          </Col>
+              <h5>Location</h5>
+            </Col>
           </Row>
         </div>
         <Row>
-          <Col md="6">
+          <Col md="6" className="dateLabel">
+            <Label>Search</Label>
             {isSearchByName ? (
               <AutoCompleteForm
                 mapRef={mapRef}
@@ -400,23 +400,27 @@ const Location = ({
             )}
           </Col>
           <Col md="1">
-            <img src="../time.png" alt="time" style={{paddingLeft: "15pt", paddingTop:"4pt"}} />
+          <Label></Label>
+            <img
+              src="../time.png"
+              alt="time"
+              style={{ paddingLeft: "15pt", paddingTop: "4pt" }}
+            />
           </Col>
-      <DatePickerMarket
-      startDate={startDate}
-      setStartDate={setStartDate}
-      endDate={endDate}
-      setEndDate={setEndDate}
-      />
+          <DatePickerMarket
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+          />
         </Row>
-        {console.log('start',startDate)}
         {isDropDown && (
           <div className="padded search-pop-up d-flex justify-content-between">
             <div>
               <Button
                 type="button"
                 className={`padded-button ${
-                  isSearchByName ? "padded-button-active" : ""
+                  isSearchByName && !isImport ? "padded-button-active" : ""
                 }`}
                 onClick={() => setSearchandImport()}
                 aria-pressed="true"
@@ -427,6 +431,7 @@ const Location = ({
                 type="button"
                 className={`padded-button ${
                   !isSearchByName ? "padded-button-active" : ""
+                  
                 }`}
                 onClick={() => setSearchNameandImport()}
                 aria-pressed="true"
@@ -489,31 +494,38 @@ const Location = ({
                   </Row>
                   <Row className="trigger-item-parse">
                     <Col className="mt-4 text-end">
-                    <input
-        type="file"
-        accept=".csv,.xlsx,.xls"
-        onChange={getJson}
-        name="file1"
-        aria-pressed="true"
-        style={{ display: 'none' }}
-        id="contained-button-file"
-      />
-      <label htmlFor="contained-button-file">
-        <Button variant="contained" accept=".csv,.xlsx,.xls" className="button-active" component="span" type="file" onClick={getJson}>
-                         <input
-        type="file"
-        accept=".csv,.xlsx,.xls"
-        onChange={getJson}
-        name="file1"
-        aria-pressed="true"
-        style={{ display: 'none' }}
-        id="contained-button-file"
-      />
-          Import CSV File
-        
-        </Button>
-      </label>
-      </Col>
+                      <input
+                        type="file"
+                        accept=".csv,.xlsx,.xls"
+                        onChange={getJson}
+                        name="file1"
+                        aria-pressed="true"
+                        style={{ display: "none" }}
+                        id="contained-button-file"
+                      />
+                      <label htmlFor="contained-button-file">
+                        <Button
+                          variant="contained"
+                          accept=".csv,.xlsx,.xls"
+                          className="button-active"
+                          component="span"
+                          type="file"
+
+                          onClick={buttonInput}
+                        >
+                          <input
+                            type="file"
+                            accept=".csv,.xlsx,.xls"
+                            onChange={getJson}
+                            name="file1"
+                            aria-pressed="true"
+                            style={{ display: "none" }}
+                            id="contained-button-file"
+                          />
+                          Import CSV File
+                        </Button>
+                      </label>
+                    </Col>
                   </Row>
                 </>
               ) : null}
@@ -535,9 +547,7 @@ const Location = ({
         )}
       </div>
 
-      <div>
-        <Parameters parameters={parameters} setParameters={setParameters} />
-      </div>
+      <Parameters parameters={parameters} setParameters={setParameters} />
 
       <div className="my-3">
         <Row className="w-100 mx-0">
@@ -545,30 +555,41 @@ const Location = ({
             <Row className="trigger-item bold">
               <Col md="1">#</Col>
               <Col md="3">Name</Col>
+              {isEdit ? <Col>Set</Col> : <Col></Col>}
               <Col md="3">Latitude</Col>
               <Col md="3">Longitude</Col>
               <Col></Col>
               <Col></Col>
             </Row>
+
             {locations.length ? (
               locations.map((location, index) => (
-                <Row className="trigger-item">
+                <Row className="trigger-item" key={index}>
                   <Col md="1">{index + 1}</Col>
 
                   {isEdit ? (
-                    <Col md="3" className="text-nowrap">
-                      <Input
-                        value={location.name}
-                        onChange={(e) => editLocation(e.target.value, index)}
-                      />
-                      <Ok onClick={addLocation}>Set</Ok>
-                    </Col>
+                    <>
+                      <Col md="3" className="text-nowrap">
+                        <Input
+                          value={location.name}
+                          onChange={(e) => editLocation(e.target.value, index)}
+                          type="text"
+                          name="name"
+                        />
+                      </Col>
+                      <Col>
+                        <Ok onClick={addLocation}>Set</Ok>
+                      </Col>
+                    </>
                   ) : (
-                    <Col md="3">{location.name}</Col>
+                    <>
+                      <Col md="3">{location.name}</Col>
+                      <Col></Col>
+                    </>
                   )}
 
-                  <Col md="3">{location.lat}</Col>
-                  <Col md="3">{location.lon}</Col>
+                  <Col md="3">{parseFloat(location.lat).toFixed(6)}</Col>
+                  <Col md="3">{parseFloat(location.lon).toFixed(6)}</Col>
                   <Col>
                     <Delete onClick={() => deleteLocation(index)}></Delete>
                   </Col>
@@ -591,7 +612,6 @@ const Location = ({
       {error.location && (
         <div className="invalid-feedback d-block">{error.location}</div>
       )}
-
     </div>
   );
 };

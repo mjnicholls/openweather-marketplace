@@ -55,8 +55,6 @@ h1 {
 
 .container {
 
-  padding-bottom: 40px;
-
   p {
     text-align: center;
     font-size: 17px;
@@ -854,7 +852,7 @@ input.input-marketplace, input.marketplace-input__input {
   border-radius: 4pt;
   border: 1px solid $brand-grey;
   padding: 8pt;
-  //width: 100%;
+  width: 100%;
   &:focus {
     outline: none;
     border: 1px solid $brand-grey;
@@ -1063,5 +1061,15 @@ input.input-marketplace, input.marketplace-input__input {
   }
 }
 
+.dateLabel {
+  Label {
+    font-size: 12pt;
+    font-weight: bold;
+  }
+}
+
+.location {
+  margin-bottom: 20px;
+}
 
 

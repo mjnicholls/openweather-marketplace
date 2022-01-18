@@ -37,7 +37,7 @@ console.log('test', fileValue)
                     name="file"
                     // checked={option.value === fileValue}
                     onChange={() => setFileValue(option.value)}
-                    type="checkbox"
+                    type="radio"
                     value={option.value}
                   />
                 </Label>
@@ -45,14 +45,6 @@ console.log('test', fileValue)
             ))}
           </Form>
         </Row>
-        {/*}
-              <ParamCategories
-        key={"channel.key"}
-        options={file}
-        onChange={value => onAddCategory(value)}
-        checked={checked}
-      />
-    */}
       </ReactBSAlert>
     );
   }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Label, Form, FormGroup, Input, Row } from 'reactstrap'
+import { Button, Col, Label, Form, FormGroup, Input, Row } from 'reactstrap'
 import { weathers } from '../config'
 import ReactBSAlert from 'react-bootstrap-sweetalert'
 
@@ -27,6 +27,7 @@ console.log('test', fileValue)
         customClass="bs-alerts"
       >
             <Row className='text-start mt-4'>
+              <Col>
     <Form className="checkbox-radios ml-5">
         {weathers.map(option => (
               <FormGroup check className="form-check-radio">
@@ -41,8 +42,29 @@ console.log('test', fileValue)
                   />
             </Label>
             </FormGroup>
-        ))}
+        )).slice(0,7)}
     </Form>
+    </Col>
+
+    <Col>
+    <Form className="checkbox-radios ml-5">
+        {weathers.map(option => (
+              <FormGroup check className="form-check-radio">
+                <Label check>
+              {option.label}
+              <Input
+                    id={option.value}
+                    name="file"
+                    onChange={() => setFileValue(option.value)}
+                    type="checkbox"
+                    value={option.value}
+                  />
+            </Label>
+            </FormGroup>
+        )).slice(7)}
+    </Form>
+    </Col>
+
     </Row>
         {/*}
               <ParamCategories

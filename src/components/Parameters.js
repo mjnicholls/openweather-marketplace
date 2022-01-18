@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Button, Col, Row } from "reactstrap";
-import ReactBSAlert from "react-bootstrap-sweetalert";
+import React from "react";
+import { Col, Row } from "reactstrap";
 import WeatherParams from "./ParamsWeather";
 import UnitsParams from "./ParamsUnits";
 import FileParams from "./ParamsFile";
@@ -11,7 +10,7 @@ const Parameters = ({ parameters, setParameters }) => {
 
   return (
     <>
-      <Row className="mt-2">
+      <Row className="mt-3">
         <Col>
         <WeatherParams parameters={parameters} setParameters={setParameters} />
           <UnitsParams parameters={parameters} setParameters={setParameters} />

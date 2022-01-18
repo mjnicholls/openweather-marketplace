@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import { getMonth, getYear } from 'date-fns';
+import { getMonth, getYear, subDays } from 'date-fns';
 import range from "lodash/range";
-import { Col } from "reactstrap";
+import { Col, Form, Label } from "reactstrap";
 import "react-datepicker/dist/react-datepicker.css";
 
 const DatePickerMarket = () => {
@@ -12,8 +12,8 @@ const DatePickerMarket = () => {
     const [endDate, setEndDate] = useState(new Date())
 
     const years = range(2007, getYear(new Date()) + 1, 1);
-    
-    const months = [
+
+      const months = [
       "January",
       "February",
       "March",
@@ -33,9 +33,13 @@ const DatePickerMarket = () => {
 
   return (
     <>
-      <Col md="2">
+      <Col md="2" className="dateLabel">
+      <Form>
+        <Label>From: </Label>
       <DatePicker
       className="owm-selector"
+      //minDate={subDays(endDate, 1)}
+      placeholder="From"
       renderCustomHeader={({
         date,
         changeYear,
@@ -87,11 +91,14 @@ const DatePickerMarket = () => {
       selected={startDate}
       onChange={(date) => setStartDate(date)}
     />
-      
+      </Form>
       </Col>
-      <Col md="2">
+      <Col md="2" className="dateLabel">
+      <Form>
+        <Label>To: </Label>
          <DatePicker
          className="owm-selector"
+         minDate={subDays(startDate, -1)}
       renderCustomHeader={({
         date,
         changeYear,
@@ -143,6 +150,7 @@ const DatePickerMarket = () => {
       selected={endDate}
       onChange={(date) => setEndDate(date)}
     />
+    </Form>
       </Col>
     </>
   );
