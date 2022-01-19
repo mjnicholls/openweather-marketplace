@@ -568,6 +568,29 @@ p {
   }
 }
 
+.button-neutral-input {
+  padding: 7pt 9pt;
+  border-radius: 16pt;
+  text-decoration: none;
+  white-space: nowrap;
+  margin-left: 4pt;
+  padding-top: 5pt;
+  padding-bottom: 8pt;
+  -webkit-appearance: button;
+  &:focus{
+    outline: none;
+  }
+  border: 1px solid rgba(72, 72, 74, 0.4);
+  background-color: transparent;
+  color: $brand-black;
+
+  &:hover {
+    background-color: #f2f2f2;
+    border-color: #f2f2f2;
+    color: $brand-black;
+  }
+}
+
 .button-turquoise {
   @include button-round;
   background-color:  $brand-turquoise;
@@ -1071,5 +1094,16 @@ input.input-marketplace, input.marketplace-input__input {
 .location {
   margin-bottom: 20px;
 }
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
 
 

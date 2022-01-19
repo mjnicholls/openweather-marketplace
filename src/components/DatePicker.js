@@ -33,9 +33,13 @@ const DatePickerMarket = () => {
 
   return (
     <>
-      <Col md="2" className="dateLabel">
+     
+      <Col className="dateLabel">
+ 
       <Form>
+
         <Label>From: </Label>
+        
       <DatePicker
       className="owm-selector"
       //minDate={subDays(endDate, 1)}
@@ -56,9 +60,7 @@ const DatePickerMarket = () => {
             justifyContent: "center",
           }}
         >
-          <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
-            {"<"}
-          </button>
+  
           <select
             value={getYear(date)}
             onChange={({ target: { value } }) => changeYear(value)}
@@ -83,17 +85,16 @@ const DatePickerMarket = () => {
             ))}
           </select>
 
-          <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
-            {">"}
-          </button>
+       
         </div>
       )}
       selected={startDate}
       onChange={(date) => setStartDate(date)}
     />
+    
       </Form>
       </Col>
-      <Col md="2" className="dateLabel">
+      <Col className="dateLabel">
       <Form>
         <Label>To: </Label>
          <DatePicker
@@ -115,9 +116,7 @@ const DatePickerMarket = () => {
             justifyContent: "center",
           }}
         >
-          <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
-            {"<"}
-          </button>
+  
           <select
             value={getYear(date)}
             onChange={({ target: { value } }) => changeYear(value)}
@@ -142,9 +141,6 @@ const DatePickerMarket = () => {
             ))}
           </select>
 
-          <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
-            {">"}
-          </button>
         </div>
       )}
       selected={endDate}

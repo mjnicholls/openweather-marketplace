@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button, Card, CardBody, Col, Row } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import Map from "../components/Map";
 import placeMarker from "../utils/placeMarker";
 import Location from "../components/Location";
-import EditableInput from "../components/EditableInput";
 
 const NewHistoryBulk = () => {
   const mapRef = useRef(null);

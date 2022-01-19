@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { coordinatesError } from "../utils/validation";
 import AutoCompleteForm from "./LocationAutoComplete";
 import CoordinatesSearch from "./LocationCoordinates";
-import { Button, Col, Input, Row, FormGroup, Label } from "reactstrap";
+import { Button, Col, Row, Label } from "reactstrap";
 import Papa from "papaparse";
 import Parameters from "./Parameters";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import DatePickerMarket from "./DatePicker";
-
-import { Edit, Delete, Ok } from "react-ikonate";
+import LocationList from "./LocationsList";
+import { locationConstructor } from "../utils/locationConstructor";
 
 const Location = ({
   mapRef,
-  location,
-  setLocation,
   tempLocation,
   setTempLocation,
   error,
@@ -22,7 +20,6 @@ const Location = ({
   searchBoxRef,
   isDropDown,
   setIsDropDown,
-  setIsLocationNameEdited,
   locations,
   setLocations,
   parameters,
@@ -35,7 +32,6 @@ const Location = ({
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
   const [isImport, setIsImport] = useState(false);
-  const [isEdit, setisEdit] = useState(false);
 
   const setCoordinates = () => {
     setError({});
@@ -74,34 +70,6 @@ const Location = ({
     setIsImport(false);
   };
 
-  const addLocation = (e) => {
-    if (e.key === "Enter") {
-      setLocations(location);
-    }
-    setisEdit(false);
-  };
-
-  const editLocation = (name, index) => {
-    const newLocations = locations.map((el, i) => {
-      if (index !== i) {
-        return el;
-      } else {
-        return {
-          ...el,
-          name,
-        };
-      }
-    });
-    setLocations(newLocations);
-    setisEdit(true);
-  };
-
-  const deleteLocation = (index) => {
-    const locationsCopy = [...locations];
-    locationsCopy.splice(index, 1);
-    setLocations(locationsCopy);
-  };
-
   const getJson = (e) => {
     const files = e.target.files;
     if (files) {
@@ -114,9 +82,6 @@ const Location = ({
 
           for (let i = 0; i < results.data.length; i++) {
             const row = results.data[i];
-            // if (row.length < 3) {
-            //   continue
-            // }
             console.log("log", row);
 
             const tmp = locationConstructor(row[0], row[1], row[2]);
@@ -179,9 +144,6 @@ const Location = ({
     }
   };
 
-  const closeAndReopen = () => {
-    hideAlert();
-  };
 
   const [alert, setAlert] = React.useState(null);
 
@@ -189,10 +151,7 @@ const Location = ({
     setAlert(null);
   };
 
-  const buttonInput = () => {
-    getJson(document.getElementsByClassName('contained-button-file'))
-    
-  }
+
 
   const jsonAlert = (importErrors, locations) => {
     setAlert(
@@ -254,97 +213,20 @@ const Location = ({
             >
               Upload recognised locations
             </Button>
+
+            <label for="file-upload" className="button-neutral-input">
+              Upload New File
+            </label>
             <input
               type="file"
               accept=".csv,.xlsx,.xls"
-              onClick={getJson}
-              name="file1"
-              aria-pressed="false"
-              style={{ display: "none" }}
-              id="contained-button-file"
+              onChange={getJson}
+              id="file-upload"
             />
-            <label htmlFor="contained-button-file">
-              <Button
-                variant="contained"
-                className="button-neutral"
-                component="span"
-                onClick={closeAndReopen}
-              >
-                Upload New File
-              </Button>
-            </label>
           </Col>
         </Row>
       </ReactBSAlert>
     );
-  };
-
-  const locationConstructor = (name, lat, lon) => {
-    let newError = {};
-
-    const coordPrecision = 6;
-    name = name ? name : "Custom location";
-
-    // validate Latitude
-    if (!lat) {
-      newError = {
-        lat: "No value was found for latitude.",
-        errorVal: lat,
-      };
-    }
-    if (isNaN(parseFloat(lat))) {
-      newError = {
-        lat: "Latitude value should be a number.",
-        errorVal: lat,
-      };
-    }
-
-    lat = parseFloat(lat);
-
-    if (lat < -90 || lat > 90) {
-      newError = {
-        lat: "Latitude should be a number in a range between -90 and 90.",
-        errorVal: lat,
-      };
-    }
-
-    lat = parseFloat(lat).toFixed(coordPrecision);
-
-    // validate Longitude
-    if (!lon) {
-      newError = {
-        error: "No value was found for longitude.",
-        errorVal: lon,
-      };
-    }
-    if (isNaN(parseFloat(lon))) {
-      newError = {
-        error: "Longitude value should be a number.",
-        errorVal: lon,
-      };
-    }
-
-    lon = parseFloat(lon);
-
-    if (lon < -180 || lon > 180) {
-      newError = {
-        error: "Longitude should be a number in a range between -180 and 180.",
-        errorVal: lon,
-      };
-    }
-
-    lon = parseFloat(lon).toFixed(coordPrecision);
-
-    if (Object.keys(newError).length) {
-      return { error: newError };
-    }
-    return {
-      location: {
-        name,
-        lat,
-        lon,
-      },
-    };
   };
 
   const checkCoordinates = (lat, lon) => {
@@ -399,14 +281,7 @@ const Location = ({
               />
             )}
           </Col>
-          <Col md="1">
-          <Label></Label>
-            <img
-              src="../time.png"
-              alt="time"
-              style={{ paddingLeft: "15pt", paddingTop: "4pt" }}
-            />
-          </Col>
+    
           <DatePickerMarket
             startDate={startDate}
             setStartDate={setStartDate}
@@ -431,7 +306,6 @@ const Location = ({
                 type="button"
                 className={`padded-button ${
                   !isSearchByName ? "padded-button-active" : ""
-                  
                 }`}
                 onClick={() => setSearchNameandImport()}
                 aria-pressed="true"
@@ -494,37 +368,15 @@ const Location = ({
                   </Row>
                   <Row className="trigger-item-parse">
                     <Col className="mt-4 text-end">
+                      <label for="file-upload" className="button-active">
+                        Import CSV File
+                      </label>
                       <input
                         type="file"
                         accept=".csv,.xlsx,.xls"
                         onChange={getJson}
-                        name="file1"
-                        aria-pressed="true"
-                        style={{ display: "none" }}
-                        id="contained-button-file"
+                        id="file-upload"
                       />
-                      <label htmlFor="contained-button-file">
-                        <Button
-                          variant="contained"
-                          accept=".csv,.xlsx,.xls"
-                          className="button-active"
-                          component="span"
-                          type="file"
-
-                          onClick={buttonInput}
-                        >
-                          <input
-                            type="file"
-                            accept=".csv,.xlsx,.xls"
-                            onChange={getJson}
-                            name="file1"
-                            aria-pressed="true"
-                            style={{ display: "none" }}
-                            id="contained-button-file"
-                          />
-                          Import CSV File
-                        </Button>
-                      </label>
                     </Col>
                   </Row>
                 </>
@@ -549,63 +401,7 @@ const Location = ({
 
       <Parameters parameters={parameters} setParameters={setParameters} />
 
-      <div className="my-3">
-        <Row className="w-100 mx-0">
-          <Col>
-            <Row className="trigger-item bold">
-              <Col md="1">#</Col>
-              <Col md="3">Name</Col>
-              {isEdit ? <Col>Set</Col> : <Col></Col>}
-              <Col md="3">Latitude</Col>
-              <Col md="3">Longitude</Col>
-              <Col></Col>
-              <Col></Col>
-            </Row>
-
-            {locations.length ? (
-              locations.map((location, index) => (
-                <Row className="trigger-item" key={index}>
-                  <Col md="1">{index + 1}</Col>
-
-                  {isEdit ? (
-                    <>
-                      <Col md="3" className="text-nowrap">
-                        <Input
-                          value={location.name}
-                          onChange={(e) => editLocation(e.target.value, index)}
-                          type="text"
-                          name="name"
-                        />
-                      </Col>
-                      <Col>
-                        <Ok onClick={addLocation}>Set</Ok>
-                      </Col>
-                    </>
-                  ) : (
-                    <>
-                      <Col md="3">{location.name}</Col>
-                      <Col></Col>
-                    </>
-                  )}
-
-                  <Col md="3">{parseFloat(location.lat).toFixed(6)}</Col>
-                  <Col md="3">{parseFloat(location.lon).toFixed(6)}</Col>
-                  <Col>
-                    <Delete onClick={() => deleteLocation(index)}></Delete>
-                  </Col>
-                  <Col>
-                    <Edit onClick={() => editLocation(index)}></Edit>
-                  </Col>
-                </Row>
-              ))
-            ) : (
-              <Row className="trigger-item text-start">
-                <Col className="text-start">No selected locations.</Col>
-              </Row>
-            )}
-          </Col>
-        </Row>
-      </div>
+      <LocationList locations={locations} setLocations={setLocations} />
 
       {error.lat && <div className="invalid-feedback d-block">{error.lat}</div>}
       {error.lon && <div className="invalid-feedback d-block">{error.lon}</div>}

@@ -6,7 +6,7 @@ import HeaderMarket from './components/Header';
 import FooterMarket from './components/Footer';
 import { Container } from 'reactstrap'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import HomeMarket from './components/Home';
+import HomeMarket from './pages/Home';
 import NewHistoryBulk from './components/NewHistoryBulk';
 import store from './store'
 
