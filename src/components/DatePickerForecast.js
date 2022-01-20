@@ -5,13 +5,14 @@ import range from "lodash/range";
 import { Col, Form, Label } from "reactstrap";
 import "react-datepicker/dist/react-datepicker.css";
 
-const DatePickerMarket = () => {
+const DatePickerForecast = () => {
     
     const [startDate, setStartDate] = useState(new Date())
 
+
     const [endDate, setEndDate] = useState(new Date())
 
-    const years = range(2007, getYear(new Date()) + 1, 1);
+    const years = range(2017, getYear(new Date()) + 1, 1);
 
       const months = [
       "January",
@@ -48,10 +49,6 @@ const DatePickerMarket = () => {
         date,
         changeYear,
         changeMonth,
-        decreaseMonth,
-        increaseMonth,
-        prevMonthButtonDisabled,
-        nextMonthButtonDisabled,
       }) => (
         <div
           style={{
@@ -148,4 +145,4 @@ const DatePickerMarket = () => {
   );
 };
 
-export default DatePickerMarket;
+export default DatePickerForecast;

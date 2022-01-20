@@ -7,7 +7,8 @@ import FooterMarket from './components/Footer';
 import { Container } from 'reactstrap'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import HomeMarket from './pages/Home';
-import NewHistoryBulk from './components/NewHistoryBulk';
+import NewHistoryBulk from './pages/NewHistoryBulk';
+import HistoryForecastBulk from './pages/HistoryForecastBulk';
 import store from './store'
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
             <Route
               path="/history_bulks/new"
               component={NewHistoryBulk}
+            />
+            <Route
+              path="/history_forecast_bulks/new"
+              component={HistoryForecastBulk}
             />
             </Switch>
         </BrowserRouter>

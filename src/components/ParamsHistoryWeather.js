@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Button, Col, Label, Form, FormGroup, Input, Row } from 'reactstrap'
-import { weathers } from '../config'
+import { weathersHistory } from '../config'
 import ReactBSAlert from 'react-bootstrap-sweetalert'
 
-const WeatherParams = () => {
+const WeatherHistoryParams = () => {
 
 const [alert, setAlert] = useState(null)
 
@@ -27,7 +27,7 @@ const [fileValue, setFileValue] = useState()
             <Row className='text-start mt-4'>
               <Col>
     <Form className="checkbox-radios ml-5">
-        {weathers.map(option => (
+        {weathersHistory.map(option => (
               <FormGroup check className="form-check-radio">
                 <Label check>
               {option.label}
@@ -40,13 +40,13 @@ const [fileValue, setFileValue] = useState()
                   />
             </Label>
             </FormGroup>
-        )).slice(0,7)}
+        )).slice(0,4)}
     </Form>
     </Col>
 
     <Col>
     <Form className="checkbox-radios ml-5">
-        {weathers.map(option => (
+        {weathersHistory.map(option => (
               <FormGroup check className="form-check-radio">
                 <Label check>
               {option.label}
@@ -59,7 +59,7 @@ const [fileValue, setFileValue] = useState()
                   />
             </Label>
             </FormGroup>
-        )).slice(7)}
+        )).slice(4)}
     </Form>
     </Col>
 
@@ -83,4 +83,4 @@ return (
 )
 }
 
-export default WeatherParams
+export default WeatherHistoryParams

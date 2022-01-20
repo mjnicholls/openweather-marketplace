@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { Col, Row } from "reactstrap";
 import Map from "../components/Map";
 import placeMarker from "../utils/placeMarker";
-import Location from "../components/Location";
+import LocationForecast from "../components/LocationsForecast";
 
-const NewHistoryBulk = () => {
+const HistoryForecastBulk = () => {
   const mapRef = useRef(null);
   const searchBoxRef = useRef();
 
@@ -17,6 +17,8 @@ const NewHistoryBulk = () => {
     lat: "",
     lon: "",
   });
+
+  const [price, setPrice] = useState(0)
 
   const [parameters, setParameters] = useState();
 
@@ -57,14 +59,6 @@ const NewHistoryBulk = () => {
       document.removeEventListener("mousedown", handleClickOutsideSearchBox);
     };
   }, []);
-
-  const setNameFunc = (val) => {
-    setError({
-      ...error,
-      name: null,
-    });
-    setName(val);
-  };
 
   const setLocationNameAware = (val) => {
     setError({
@@ -108,9 +102,9 @@ const NewHistoryBulk = () => {
       <Row>
         <Col md="7" className="page-padding text-start">
           <div style={{ marginBottom: "100px" }}>
-            <h3>Create New History Bulk</h3>
+            <h3>Create New History Forecast Bulk</h3>
           </div>
-          <Location
+          <LocationForecast
             mapRef={mapRef}
             location={location}
             setLocation={setLocation}
@@ -128,6 +122,8 @@ const NewHistoryBulk = () => {
             setIsLocationNameEdited={setIsLocationNameEdited}
             parameters={parameters}
             setParameters={setParameters}
+            price={price}
+            setPrice={setPrice}
           />
         </Col>
 
@@ -139,6 +135,8 @@ const NewHistoryBulk = () => {
             setLocations={setLocations}
             setLocation={setLocationNameAware}
             onClickMap={onClickMap}
+            price={price}
+            setPrice={setPrice}
             isButtonInfoWindow={
               location.lat !== tempLocation.lat ||
               location.lon !== tempLocation.lon
@@ -150,4 +148,4 @@ const NewHistoryBulk = () => {
   );
 };
 
-export default NewHistoryBulk;
+export default HistoryForecastBulk;

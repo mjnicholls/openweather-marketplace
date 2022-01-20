@@ -2,9 +2,10 @@ import React from 'react'
 
 import PropTypes from 'prop-types'
 
-const InfoWindow = ({ location, showButton, setLocations, locations }) => {
+const InfoWindow = ({ location, showButton, setLocations, locations, price, setPrice }) => {
   const onSetLocationClick = (e) => {
     setLocations([...locations, location])
+    setPrice(price + 7)
     e.stopPropagation()
   }
   

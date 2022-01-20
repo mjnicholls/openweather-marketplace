@@ -1105,5 +1105,24 @@ input[type="file"] {
   cursor: pointer;
 }
 
+.price {
+  padding-top: 30px;
+
+}
+
+.button-neutral-square {
+  padding: 10pt;
+  border: 1px solid rgba(72, 72, 74, 0.4);
+  background-color: transparent;
+  color: $brand-black;
+
+  &:hover {
+    background-color: #f2f2f2;
+    border-color: #f2f2f2;
+    color: $brand-black;
+  }
+}
+
+
 
 

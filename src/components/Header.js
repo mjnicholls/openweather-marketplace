@@ -71,7 +71,7 @@ const HeaderMarket = () => {
                 <a href="/history_bulks/new">History Bulk</a>
               </li>
               <li>
-                <a href="https://home.openweathermap.org/history_forecast_bulks/new">History Forecast Bulk</a>
+                <a href="/history_forecast_bulks/new">History Forecast Bulk</a>
               </li>
 
             <li>

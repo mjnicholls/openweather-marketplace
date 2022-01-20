@@ -32,3 +32,13 @@ export const file = [
     { value: 'Snow', label: 'Snow' },
     { value: 'Visibility', label: 'Visibility' },
   ]
+
+  export const weathersHistory = [
+    { value: 'Temperature', label: 'Temperature' },
+    { value: 'Pressure', label: 'Pressure' },
+    { value: 'Clouds', label: 'Clouds' },
+    { value: 'Dew Pt', label: 'Dew Point' },
+    { value: 'Wind', label: 'Wind (speed, direction)' },
+    { value: 'Humidity', label: 'Humidity' },
+    { value: 'Precipitation', label: 'Precipitation' },
+  ]

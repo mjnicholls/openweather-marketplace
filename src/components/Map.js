@@ -14,6 +14,8 @@ const Map = ({
   onClickMap,
   locations,
   setLocations,
+  price,
+  setPrice,
   isButtonInfoWindow,
   isDraggable = true,
 }) => {
@@ -47,6 +49,8 @@ const Map = ({
           showButton={isButtonInfoWindow}
           locations={locations}
           setLocations={setLocations}
+          setPrice={setPrice}
+          price={price}
         />
       </GoogleMapReact>
     </div>

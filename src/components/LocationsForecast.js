@@ -5,13 +5,13 @@ import AutoCompleteForm from "./LocationAutoComplete";
 import CoordinatesSearch from "./LocationCoordinates";
 import { Button, Col, Row, Label } from "reactstrap";
 import Papa from "papaparse";
-import Parameters from "./Parameters";
+import ParametersForecast from "./ParametersForecast";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-import DatePickerMarket from "./DatePicker";
+import DatePickerForecast from "./DatePickerForecast";
 import LocationList from "./LocationsList";
 import { locationConstructor } from "../utils/locationConstructor";
 
-const Location = ({
+const LocationForecast = ({
   mapRef,
   tempLocation,
   setTempLocation,
@@ -85,7 +85,8 @@ const Location = ({
           for (let i = 0; i < results.data.length; i++) {
             const row = results.data[i];
 
-            setPrice(price = ((results.data.length * 7) - 7))
+            console.log('price', price)
+            console.log("log", row);
 
             const tmp = locationConstructor(row[0], row[1], row[2]);
             console.log("tmp", tmp);
@@ -100,8 +101,6 @@ const Location = ({
               };
             } else {
               for (let j = 0; j < importedLocations.length; j++) {
-      
-                console.log('import', importedLocations.length)
                 if (
                   importedLocations[j].lat === tmp.location.lat &&
                   importedLocations[j].lon === tmp.location.lon
@@ -111,8 +110,7 @@ const Location = ({
                     comment: "Duplicated value.",
                     value: row[1] + ", " + row[2],
                   };
-                  console.log("temp", importedLocations.length);
-                  
+                  console.log("temp", importedLocations);
                   break;
                 }
               }
@@ -130,17 +128,15 @@ const Location = ({
 
             if (Object.keys(error).length) {
               errors.push(error);
-           
-              console.log('goo', errors.length)
             } else if (tmp.location) {
               importedLocations.push(tmp.location);
-             
             }
           }
 
           console.log("err", errors);
           if (errors.length) {
             jsonAlert(errors, importedLocations);
+
             return;
           }
 
@@ -291,7 +287,7 @@ const Location = ({
             )}
           </Col>
     
-          <DatePickerMarket
+          <DatePickerForecast
             startDate={startDate}
             setStartDate={setStartDate}
             endDate={endDate}
@@ -408,7 +404,7 @@ const Location = ({
         )}
       </div>
 
-      <Parameters parameters={parameters} setParameters={setParameters} />
+      <ParametersForecast parameters={parameters} setParameters={setParameters} />
 
       <LocationList 
       locations={locations}
@@ -444,7 +440,7 @@ const Location = ({
   );
 };
 
-Location.propTypes = {
+LocationForecast.propTypes = {
   mapRef: PropTypes.object,
   location: PropTypes.object,
   setLocation: PropTypes.func,
@@ -459,4 +455,4 @@ Location.propTypes = {
   setIsLocationNameEdited: PropTypes.func,
 };
 
-export default Location;
+export default LocationForecast;
