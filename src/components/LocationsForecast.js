@@ -85,11 +85,7 @@ const LocationForecast = ({
           for (let i = 0; i < results.data.length; i++) {
             const row = results.data[i];
 
-            console.log('price', price)
-            console.log("log", row);
-
             const tmp = locationConstructor(row[0], row[1], row[2]);
-            console.log("tmp", tmp);
             let error = {};
 
             if (tmp.error) {
@@ -101,6 +97,7 @@ const LocationForecast = ({
               };
             } else {
               for (let j = 0; j < importedLocations.length; j++) {
+      
                 if (
                   importedLocations[j].lat === tmp.location.lat &&
                   importedLocations[j].lon === tmp.location.lon
@@ -110,7 +107,7 @@ const LocationForecast = ({
                     comment: "Duplicated value.",
                     value: row[1] + ", " + row[2],
                   };
-                  console.log("temp", importedLocations);
+                  
                   break;
                 }
               }
@@ -128,15 +125,23 @@ const LocationForecast = ({
 
             if (Object.keys(error).length) {
               errors.push(error);
+           
             } else if (tmp.location) {
               importedLocations.push(tmp.location);
             }
+
+            if (errors.length > 0) {
+              setPrice(price = ((results.data.length * 7) / errors.length) - 7 )
+            }
+
+            else {
+              setPrice(price = ((results.data.length * 7) - 7))
+            }
+
           }
 
-          console.log("err", errors);
           if (errors.length) {
             jsonAlert(errors, importedLocations);
-
             return;
           }
 

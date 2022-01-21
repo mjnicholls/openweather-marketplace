@@ -10,6 +10,7 @@ import HomeMarket from './pages/Home';
 import NewHistoryBulk from './pages/NewHistoryBulk';
 import HistoryForecastBulk from './pages/HistoryForecastBulk';
 import store from './store'
+import DataUSState from './pages/DataUSState';
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
             <Route
               path="/history_forecast_bulks/new"
               component={HistoryForecastBulk}
+            />
+              <Route
+              path="/zip_code_data/new"
+              component={DataUSState}
             />
             </Switch>
         </BrowserRouter>

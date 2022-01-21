@@ -29,7 +29,9 @@ const Location = ({
   endDate,
   setEndDate,
   price, 
-  setPrice
+  setPrice,
+  location,
+  setLocation
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -85,10 +87,7 @@ const Location = ({
           for (let i = 0; i < results.data.length; i++) {
             const row = results.data[i];
 
-            setPrice(price = ((results.data.length * 7) - 7))
-
             const tmp = locationConstructor(row[0], row[1], row[2]);
-            console.log("tmp", tmp);
             let error = {};
 
             if (tmp.error) {
@@ -101,7 +100,6 @@ const Location = ({
             } else {
               for (let j = 0; j < importedLocations.length; j++) {
       
-                console.log('import', importedLocations.length)
                 if (
                   importedLocations[j].lat === tmp.location.lat &&
                   importedLocations[j].lon === tmp.location.lon
@@ -111,7 +109,6 @@ const Location = ({
                     comment: "Duplicated value.",
                     value: row[1] + ", " + row[2],
                   };
-                  console.log("temp", importedLocations.length);
                   
                   break;
                 }
@@ -131,14 +128,20 @@ const Location = ({
             if (Object.keys(error).length) {
               errors.push(error);
            
-              console.log('goo', errors.length)
             } else if (tmp.location) {
               importedLocations.push(tmp.location);
-             
             }
+
+            if (errors.length > 0) {
+              setPrice(price = ((results.data.length * 7) / errors.length) - 7 )
+            }
+
+            else {
+              setPrice(price = ((results.data.length * 7) - 7))
+            }
+
           }
 
-          console.log("err", errors);
           if (errors.length) {
             jsonAlert(errors, importedLocations);
             return;
@@ -415,6 +418,8 @@ const Location = ({
       setLocations={setLocations}
       price={price}
       setPrice={setPrice}
+      location={location}
+      setLocation={setLocation}
       />
 
       {error.lat && <div className="invalid-feedback d-block">{error.lat}</div>}

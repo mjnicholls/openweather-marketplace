@@ -75,7 +75,7 @@ const HeaderMarket = () => {
               </li>
 
             <li>
-                <a href="https://home.openweathermap.org/zip_code_data/new">Data by US State</a>
+                <a href="/zip_code_data/new">Data by US State</a>
               </li>
 
 

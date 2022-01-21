@@ -1123,6 +1123,24 @@ input[type="file"] {
   }
 }
 
+.US-list {
 
+ul {
+  list-style: none;
+}
 
+ul li:before {
+  content: '✓    ';
+}
+
+}
+
+.us-header {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.us-header-2 {
+  margin-bottom: 20px;
+}
 

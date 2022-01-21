@@ -9,8 +9,6 @@ const LocationCoordinates = ({
   setCoordinates,
   error,
   setError,
-  fixedLocation,
- setFixedLocation
 }) => {
   const lonRef = useRef(null)
 

@@ -42,16 +42,11 @@ const DatePickerMarket = () => {
         
       <DatePicker
       className="owm-selector"
-      //minDate={subDays(endDate, 1)}
       placeholder="From"
       renderCustomHeader={({
         date,
         changeYear,
         changeMonth,
-        decreaseMonth,
-        increaseMonth,
-        prevMonthButtonDisabled,
-        nextMonthButtonDisabled,
       }) => (
         <div
           style={{
