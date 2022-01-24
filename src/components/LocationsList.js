@@ -6,10 +6,10 @@ import { Edit, Delete, Ok } from "react-ikonate";
 
 const LocationList = ({ locations, setLocations, price, setPrice }) => {
   const [isEdit, setisEdit] = useState(false);
-
+  
 
   const editLocation = (name, index) => {
-  
+
     const newLocations = locations.map((el, i) => {
       if (index !== i) {
         return el;
@@ -18,18 +18,17 @@ const LocationList = ({ locations, setLocations, price, setPrice }) => {
         return {
           ...el,
           name
+          
         }; 
       }
     }
+    
     );
+
     setLocations(newLocations);
     setisEdit(true);
   };
  
-
-
-
-
 
   const deleteLocation = (index) => {
     const locationsCopy = [...locations];
@@ -72,8 +71,10 @@ const LocationList = ({ locations, setLocations, price, setPrice }) => {
                   <Edit onClick={() => editLocation(index)}></Edit>
                 
                 </Col>
-
-                {isEdit ? (
+            
+                {isEdit ? 
+                (
+                  
                   <>
                     <Col md="3">
                       <Input
@@ -93,16 +94,18 @@ const LocationList = ({ locations, setLocations, price, setPrice }) => {
                     <Col></Col>
                   </>
                 )}
-
+          
                 <Col md="3">{parseFloat(location.lat).toFixed(6)}</Col>
                 <Col md="3">{parseFloat(location.lon).toFixed(6)}</Col>
                 <Col className="d-md-flex d-none">
                   <Delete onClick={() => deleteLocation(index)}></Delete>
                 </Col>
                 <Col className="d-md-flex d-none">
-
+                  {index ? 
                   <Edit onClick={() => editLocation(index)}></Edit>
-                
+                :
+                <Edit onClick={() => editLocation(index)}></Edit>
+                  }
                 </Col>
               </Row>
             ))
@@ -122,4 +125,4 @@ LocationList.propTypes = {
   setLocations: PropTypes.bool,
 };
 
-export default LocationList;
+export default LocationList

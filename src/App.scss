@@ -1123,6 +1123,19 @@ input[type="file"] {
   }
 }
 
+.button-orange-square {
+  padding: 10pt;
+  background-color: $brand-orange;
+  color: #ffffff;
+  font-size: 10pt;
+  &:hover {
+    background-color: $brand-orange;
+    border-color: $brand-orange;
+  }
+}
+
+
+
 .US-list {
 
 ul {
