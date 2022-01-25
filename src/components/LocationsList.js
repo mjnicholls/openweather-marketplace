@@ -6,35 +6,29 @@ import { Edit, Delete, Ok } from "react-ikonate";
 
 const LocationList = ({ locations, setLocations, price, setPrice }) => {
   const [isEdit, setisEdit] = useState(false);
-  
 
   const editLocation = (name, index) => {
-
     const newLocations = locations.map((el, i) => {
       if (index !== i) {
         return el;
-      } 
-      else {
+      } else {
         return {
           ...el,
-          name
-          
-        }; 
+          name,
+        };
       }
-    }
-    
-    );
+    });
 
     setLocations(newLocations);
+
     setisEdit(true);
   };
- 
 
   const deleteLocation = (index) => {
     const locationsCopy = [...locations];
     locationsCopy.splice(index, 1);
     setLocations(locationsCopy);
-    setPrice(price - 7)
+    setPrice(price - 7);
   };
 
   const addLocation = (e) => {
@@ -61,25 +55,21 @@ const LocationList = ({ locations, setLocations, price, setPrice }) => {
           {locations.length ? (
             locations.map((location, index) => (
               <Row className="trigger-item" key={index}>
-                <Col md="1">
-                  {index + 1}</Col>
+                <Col md="1">{index + 1}</Col>
 
                 <Col className="d-sm-flex d-md-none text-end">
                   <Delete onClick={() => deleteLocation(index)}></Delete>
-                  {'  '}
-                  
-                  <Edit onClick={() => editLocation(index)}></Edit>
-                
+                  {"  "}
+
+                  <Edit onClick={() => editLocation()}></Edit>
                 </Col>
-            
-                {isEdit ? 
-                (
-                  
+
+                {isEdit ? (
                   <>
                     <Col md="3">
                       <Input
                         value={location.name}
-                       onChange={(e) => editLocation(e.target.value, index)}
+                        onChange={(e) => editLocation(e.target.value, index)}
                         type="text"
                         name="name"
                       />
@@ -94,18 +84,14 @@ const LocationList = ({ locations, setLocations, price, setPrice }) => {
                     <Col></Col>
                   </>
                 )}
-          
+
                 <Col md="3">{parseFloat(location.lat).toFixed(6)}</Col>
                 <Col md="3">{parseFloat(location.lon).toFixed(6)}</Col>
                 <Col className="d-md-flex d-none">
                   <Delete onClick={() => deleteLocation(index)}></Delete>
                 </Col>
                 <Col className="d-md-flex d-none">
-                  {index ? 
                   <Edit onClick={() => editLocation(index)}></Edit>
-                :
-                <Edit onClick={() => editLocation(index)}></Edit>
-                  }
                 </Col>
               </Row>
             ))
@@ -125,4 +111,4 @@ LocationList.propTypes = {
   setLocations: PropTypes.bool,
 };
 
-export default LocationList
+export default LocationList;

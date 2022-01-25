@@ -5,11 +5,16 @@ import { useSelector } from "react-redux";
 import { Label, Col, Row, FormGroup, Button } from "reactstrap";
 import Select from "react-select";
 import { statesOfAmerica, years } from "../config";
+import InvoiceSettings from "../components/InvoicePop";
+import ReactBSAlert from 'react-bootstrap-sweetalert'
 
 const selectCurrency = (state) => state.auth.currency;
+const selectInvoice = (state) => state.auth.invoiceInfo;
 
 const DataUSState = () => {
   const currency = useSelector(selectCurrency);
+
+  const invoice = useSelector(selectInvoice);
 
   const [price, setPrice] = useState(0);
   const [country, setCountry] = useState("");
@@ -22,8 +27,28 @@ const DataUSState = () => {
     setPrice(e.price);
   };
 
+  const [alert, setAlert] = React.useState(null)
+
+  const hideAlert = () => {
+    setAlert(null)
+  }
+
+  const htmlAlert = () => {
+    setAlert(
+      <ReactBSAlert
+        customClass="agro-alert"
+        onConfirm={() => hideAlert()}
+        onCancel={() => hideAlert()}
+        showConfirm={false}
+      >
+        <InvoiceSettings close={hideAlert} year={year} country={country} price={price} />
+      </ReactBSAlert>,
+    )
+  }
+
   return (
     <div className="container">
+         {alert}
       <Row>
         <Col md="7" className="page-padding text-start">
           <div style={{ marginBottom: "50px" }}>
@@ -112,7 +137,17 @@ const DataUSState = () => {
         </Col>
         {country && year ? (
           <Col>
-            <Button className="button-orange-square">Place Order</Button>
+            <Button
+              data-dismiss="modal"
+              type="button"
+              onClick={(e) => {
+                htmlAlert(false);
+                e.stopPropagation();
+              }}
+              className="button-orange-square"
+            >
+              Place Order
+            </Button>
           </Col>
         ) : (
           <Col>

@@ -1157,3 +1157,34 @@ ul li:before {
   margin-bottom: 20px;
 }
 
+.bold {
+  font-weight: bold;
+}
+
+.step-header {
+  @include button-round;
+  background-color: $brand-black;
+  border-color: $brand-black;
+  color: $brand-grey;
+}
+
+.step-header-neutral {
+  @include button-round;
+  background-color: $brand-grey;
+  border-color: $brand-black;
+  color: $brand-black;
+}
+
+.small-text {
+  font-size: 9pt;
+}
+
+
+hr {
+  display: block;
+  height: 6px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
