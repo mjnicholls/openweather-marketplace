@@ -152,7 +152,7 @@ const DataUSState = () => {
         ) : (
           <Col>
             <Button disabled className="button-neutral-square">
-              Don't Place Order
+              Place Order
             </Button>
           </Col>
         )}

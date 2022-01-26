@@ -1125,9 +1125,10 @@ input[type="file"] {
 
 .button-orange-square {
   padding: 10pt;
+  border: 1px solid rgba(72, 72, 74, 0.4);
   background-color: $brand-orange;
   color: #ffffff;
-  font-size: 10pt;
+
   &:hover {
     background-color: $brand-orange;
     border-color: $brand-orange;
@@ -1187,4 +1188,14 @@ hr {
   border-top: 1px solid #ccc;
   margin: 1em 0;
   padding: 0;
+}
+
+.danger-border {
+  width: 100%;
+  padding: 0.6rem 1.3rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  border: 0.5px solid red !important;
 }

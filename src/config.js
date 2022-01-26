@@ -108,11 +108,11 @@ export const file = [
   ]
 
   export const titles = [
-    { value: 'Mr', label: 'Mr' },
-    { value: 'Mrs', label: 'Mrs' },
-    { value: 'Miss', label: 'Miss' },
-    { value: 'Ms', label: 'Ms' },
-    { value: 'Dr', label: 'Dr' },
+    { code: 'Mr', name: 'Mr' },
+    { code: 'Mrs', name: 'Mrs' },
+    { code: 'Miss', name: 'Miss' },
+    { code: 'Ms', name: 'Ms' },
+    { code: 'Dr', name: 'Dr' },
   ]
 
   export const countriesDefault = [

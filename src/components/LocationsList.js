@@ -7,6 +7,8 @@ import { Edit, Delete, Ok } from "react-ikonate";
 const LocationList = ({ locations, setLocations, price, setPrice }) => {
   const [isEdit, setisEdit] = useState(false);
 
+  //const [rowEdited, setRowEdited] = useState(-1)
+
   const editLocation = (name, index) => {
     const newLocations = locations.map((el, i) => {
       if (index !== i) {
@@ -20,7 +22,7 @@ const LocationList = ({ locations, setLocations, price, setPrice }) => {
     });
 
     setLocations(newLocations);
-
+      console.log('index', index)
     setisEdit(true);
   };
 
@@ -61,7 +63,7 @@ const LocationList = ({ locations, setLocations, price, setPrice }) => {
                   <Delete onClick={() => deleteLocation(index)}></Delete>
                   {"  "}
 
-                  <Edit onClick={() => editLocation()}></Edit>
+                  <Edit onClick={(index) => editLocation(index)}></Edit>
                 </Col>
 
                 {isEdit ? (

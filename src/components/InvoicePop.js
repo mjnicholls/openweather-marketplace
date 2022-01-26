@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Col, Form, Label, Row } from "reactstrap";
-
+import ReactBSAlert from "react-bootstrap-sweetalert";
 import {
   getAccountInfo,
   updateBillingDetails,
@@ -17,13 +17,18 @@ const selectInvoice = (state) => state.auth.invoiceInfo;
 const selectEmail = (state) => state.auth.email;
 
 const InvoiceSettings = ({ country, year, price }) => {
-
   const [error, setError] = useState({});
   const [isNew, setIsNew] = useState(true);
   const [step, setStep] = useState(0);
 
   const invoice = useSelector(selectInvoice);
   const email = useSelector(selectEmail);
+
+  const [alert, setAlert] = React.useState(null);
+
+  const hideAlert = () => {
+    setAlert(null);
+  };
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 
@@ -68,19 +73,17 @@ const InvoiceSettings = ({ country, year, price }) => {
   const confirmInvoice = () => {
     setError({});
     const newError = {
-    county: !country.length,
-    year: !year.length,
-      country: !invoiceSettings.country.length,
       address_line_1: !invoiceSettings.address_line_1.length,
-      address_line_2: !invoiceSettings.address_line_2.length,
-      city: !invoiceSettings.address_line_2.length,
+      city: !invoiceSettings.city.length,
       postal_code: !invoiceSettings.postal_code.length,
+      email: !email.length,
+      country: !invoiceSettings.country.length,
       phone: !invoiceSettings.phone.length,
     };
 
     setError(newError);
 
-    console.log('new error', newError)
+    console.log("new error", newError);
 
     if (Object.values(newError).filter(Boolean).length) {
       console.log("Please fill in required fields");
@@ -105,11 +108,12 @@ const InvoiceSettings = ({ country, year, price }) => {
     }
   };
 
+  console.log("invoice", invoiceSettings);
+
   const decrementStep = () => {
     if (step === 2) {
       setStep(1);
-    } 
-    else {
+    } else {
       console.log("decrement-error-2");
     }
   };
@@ -117,16 +121,14 @@ const InvoiceSettings = ({ country, year, price }) => {
   const decrementStepOne = () => {
     if (step === 1) {
       setStep(0);
-    } 
-    else {
+    } else {
       console.log("decrement-error-1");
     }
   };
 
-
   const firstStep = () => {
-        setStep(1);
-  }
+    setStep(1);
+  };
 
   const incrementStep = () => {
     setError({});
@@ -136,15 +138,25 @@ const InvoiceSettings = ({ country, year, price }) => {
       if (invoiceSettings.type === "individual") {
         if (
           !invoiceSettings.first_name.length ||
-          !invoiceSettings.last_name.length
+          !invoiceSettings.last_name.length ||
+          !invoiceSettings.phone.length ||
+          !email.length
         ) {
           newError.first_name = !invoiceSettings.first_name.length;
           newError.last_name = !invoiceSettings.last_name.length;
+          newError.phone = !invoiceSettings.phone.length;
+          newError.email = !email.length;
         }
       } else {
         // eslint-disable-next-line
-        if (!invoiceSettings.organisation.length) {
-          newError.organisation = true;
+        if (
+          !invoiceSettings.organisation.length ||
+          !invoiceSettings.phone.length ||
+          !email.length
+        ) {
+          newError.organisation = !invoiceSettings.organisation.length;
+          newError.phone = !invoiceSettings.phone.length;
+          newError.email = !email.length;
         }
       }
       console.log("newError", newError);
@@ -157,47 +169,161 @@ const InvoiceSettings = ({ country, year, price }) => {
         setStep(2);
       }
     }
- 
   };
 
+  const sorryAlert = () => {
+    setAlert(
+      <ReactBSAlert
+        customClass="agro-alert"
+        onConfirm={() => hideAlert()}
+        onCancel={() => hideAlert()}
+        showConfirm={false}
+      >
+        <div className="text-start">
+          <Row>
+            <h2>Sorry!</h2>
+          </Row>
+          <br/>
+          <Row>
+            <Col>
+            This feature is not available at the moment. If you wish to make use
+            of your service, please make a note of your details below, and get
+            in touch with us.
+            </Col>
+          </Row>
+          <br/>
+          <Row><h4>Order Details</h4></Row>
+          <br/>
+          <Row>
+            <Col>State:</Col>
+            <Col>{country}</Col>
+          </Row>
+          <Row>
+            <Col>Year:</Col>
+            <Col>{year}</Col>
+          </Row>
+          <br/>
+          {invoiceSettings.type === 'individual' ? 
+          <>
+          <Row><h4>Billing Details</h4></Row>
+          <br/>
+          <Row>
+            <Col>Title:</Col>
+            <Col>{invoiceSettings.title}</Col>
+          </Row>
+          <Row>
+            <Col>First Name:</Col>
+            <Col>{invoiceSettings.first_name}</Col>
+          </Row>
+
+          <Row>
+            <Col>Surname:</Col>
+            <Col>{invoiceSettings.last_name}</Col>
+          </Row>
+          <Row>
+            <Col>Phone No.:</Col>
+            <Col>{invoiceSettings.phone}</Col>
+          </Row>
+          <Row>
+            <Col>Email:</Col>
+            <Col>{email}</Col>
+          </Row>
+          <br/>
+          </>
+:
+<>
+<Row><h4>Billing Details</h4></Row>
+<br/>
+<Row>
+  <Col>Organisation:</Col>
+  <Col>{invoiceSettings.organisation}</Col>
+</Row>
+<Row>
+  <Col>VAT ID:</Col>
+  <Col>{invoiceSettings.vat_id}</Col>
+</Row>
+
+<Row>
+  <Col>Phone No.:</Col>
+  <Col>{invoiceSettings.phone}</Col>
+</Row>
+<Row>
+  <Col>Email:</Col>
+  <Col>{email}</Col>
+</Row> 
+<br/>
+</>
+    }
+          <Row><h4>Billing Address</h4></Row>
+          <br/>
+          <Row>
+            <Col>Address Line 1:</Col>
+            <Col>{invoiceSettings.address_line_1}</Col>
+          </Row>
+          <Row>
+            <Col>Address Line 2:</Col>
+            <Col>{invoiceSettings.address_line_2}</Col>
+          </Row>
+
+          <Row>
+            <Col>Country:</Col>
+            <Col>{invoiceSettings.country}</Col>
+          </Row>
+          <Row>
+            <Col>City:</Col>
+            <Col>{invoiceSettings.city}</Col>
+          </Row>
+          <Row>
+            <Col>Postcode:</Col>
+            <Col>{invoiceSettings.postal_code}</Col>
+          </Row>
+          <Row>
+            <Col>State:</Col>
+            <Col>{invoiceSettings.state}</Col>
+          </Row>
+          <Row>
+            <Col>Phone No:</Col>
+            <Col>{invoiceSettings.phone}</Col>
+          </Row>
+          <br/>
+          <Row className="text-end">
+            <Col>
+            <a href="mailto:info@openweathermap.org" type="button" className="button-active">Contact Us</a>
+            </Col>
+          </Row>
+        </div>
+      </ReactBSAlert>
+    );
+  };
 
   return (
     <div>
-        <Row>
-            <Col className={step === 0 ? "step-header" : "step-header-neutral"}>
-            1
-            </Col>
-          <Col>
-            <hr/>
-            </Col>
-            <Col className={step === 1 ? "step-header" : "step-header-neutral"}>
-            2
-            </Col>
-            <Col>
-            <hr/>
-            </Col>
-            <Col className={step === 2 ? "step-header" : "step-header-neutral"}>
-            3
-            </Col>
-        </Row>
-        <Row className="small-text text-middle">
-            <Col>
-            Order details
-            </Col>
-            <Col>
-            
-            </Col>
-            <Col>
-            Billing details
-            </Col>
-            <Col>
-            
-            </Col>
-            <Col>
-            Billing address
-            </Col>
-        </Row>
-        <br/>
+      {alert}
+      <Row>
+        <Col className={step === 0 ? "step-header" : "step-header-neutral"}>
+          1
+        </Col>
+        <Col>
+          <hr />
+        </Col>
+        <Col className={step === 1 ? "step-header" : "step-header-neutral"}>
+          2
+        </Col>
+        <Col>
+          <hr />
+        </Col>
+        <Col className={step === 2 ? "step-header" : "step-header-neutral"}>
+          3
+        </Col>
+      </Row>
+      <Row className="small-text text-middle">
+        <Col>Order details</Col>
+        <Col></Col>
+        <Col>Billing details</Col>
+        <Col></Col>
+        <Col>Billing address</Col>
+      </Row>
+      <br />
       {step === 0 ? (
         <Step0 year={year} country={country} price={price} />
       ) : null}
@@ -239,45 +365,45 @@ const InvoiceSettings = ({ country, year, price }) => {
             )}
 
             {step === 1 && (
-                    <>
-                    <Button
-                      className="button-neutral"
-                      color="default"
-                      type="button"
-                      onClick={decrementStepOne}
-                      style={{
-                        float: "left",
-                      }}
-                    >
-                      Back
-                    </Button>
-              <Button
-                className="button-neutral"
-                type="button"
-                onClick={incrementStep}
-                style={{
-                  float: "right",
-                }}
-              >
-                Next
-              </Button>
+              <>
+                <Button
+                  className="button-neutral"
+                  color="default"
+                  type="button"
+                  onClick={decrementStepOne}
+                  style={{
+                    float: "left",
+                  }}
+                >
+                  Back
+                </Button>
+                <Button
+                  className="button-neutral"
+                  type="button"
+                  onClick={incrementStep}
+                  style={{
+                    float: "right",
+                  }}
+                >
+                  Next
+                </Button>
               </>
             )}
 
             {step === 2 && (
-                <>
-              <Button
-                className="button-neutral"
-                color="default"
-                type="button"
-                onClick={decrementStep}
-                style={{
+              <>
+                <Button
+                  className="button-neutral"
+                  color="default"
+                  type="button"
+                  onClick={decrementStep}
+                  style={{
                     float: "left",
                   }}
-              >
-                Back
-              </Button>
-                  <Button
+                >
+                  Back
+                </Button>
+                <Button
                   className="button-active"
                   color="primary"
                   type="button"
@@ -288,7 +414,7 @@ const InvoiceSettings = ({ country, year, price }) => {
                 >
                   Subscribe
                 </Button>
-                </>
+              </>
             )}
           </Col>
         </Row>

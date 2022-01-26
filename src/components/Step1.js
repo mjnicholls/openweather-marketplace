@@ -53,12 +53,24 @@ const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => 
           <>
             <Row>
               <Col>
-                <Label>Title *</Label>
+                <Label>Title</Label>
                 <FormGroup>
                   <Select
-                    className="react-select info mb-3"
+                     className='react-select info mb-3'
                     classNamePrefix="react-select"
+                    onChange={(title) => {
+                      handleChange('title', title.code)
+                    }}
                     options={titles}
+                    getOptionLabel={(option) => option.name}
+                    getOptionValue={(option) => option.code}
+                    placeholder={
+                      invoiceSettings.title
+                        ? titles.find(
+                            (obj) => obj.code === invoiceSettings.title,
+                          ).name
+                        : ''
+                    }
                   />
                 </FormGroup>
               </Col>
