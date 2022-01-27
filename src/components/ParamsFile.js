@@ -9,8 +9,6 @@ const [alert, setAlert] = useState(null)
 
 const [fileValue, setFileValue] = useState()
 
-console.log('test', fileValue)
-
   const hideAlert = () => {
     setAlert(null)
   }

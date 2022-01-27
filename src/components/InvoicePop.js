@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Col, Form, Label, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-import {
-  getAccountInfo,
-  updateBillingDetails,
-  confirmVatNumber,
-  createBillingDetails,
-} from "../api/personalAccountAPI";
+
+import PropTypes from 'prop-types'
 
 import Step0 from "./Step0";
 import Step1 from "./Step1";
@@ -18,7 +14,6 @@ const selectEmail = (state) => state.auth.email;
 
 const InvoiceSettings = ({ country, year, price }) => {
   const [error, setError] = useState({});
-  const [isNew, setIsNew] = useState(true);
   const [step, setStep] = useState(0);
 
   const invoice = useSelector(selectInvoice);
@@ -32,43 +27,6 @@ const InvoiceSettings = ({ country, year, price }) => {
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 
-  useEffect(() => {
-    refreshData();
-  }, []);
-
-  const refreshData = () => {
-    getAccountInfo().then((res) => {
-      if (Object.keys(res.invoice_info).length) {
-        setInvoiceSettings(res.invoice_info);
-        setIsNew(false);
-      } else {
-        setIsNew(true);
-      }
-    });
-  };
-
-  const billingInfoCreate = () => {
-    createBillingDetails(invoiceSettings)
-      .then(() => {
-        console.log("Billing details saved");
-        refreshData();
-      })
-      // eslint-disable-next-line
-      .catch((error) => {
-        console.log(`Error saving billing details + ${error.message}`);
-      });
-  };
-
-  const billingInfoUpdate = () => {
-    updateBillingDetails(invoiceSettings)
-      .then(() => {
-        console.log("Billing details updated");
-      })
-      // eslint-disable-next-line
-      .catch((error) => {
-        console.log(`Error saving billing details + ${error.message}`);
-      });
-  };
 
   const confirmInvoice = () => {
     setError({});
@@ -88,23 +46,6 @@ const InvoiceSettings = ({ country, year, price }) => {
     if (Object.values(newError).filter(Boolean).length) {
       console.log("Please fill in required fields");
       return;
-    }
-
-    if (
-      invoiceSettings.type === "organisation" &&
-      invoiceSettings.vat_id.length
-    ) {
-      confirmVatNumber(invoiceSettings.vat_id)
-        .then(() => {
-          // eslint-disable-next-line
-          isNew ? billingInfoCreate() : billingInfoUpdate();
-        })
-        .catch(() => {
-          console.log("Incorrect VAT number");
-        });
-    } else {
-      // eslint-disable-next-line
-      isNew ? billingInfoCreate() : billingInfoUpdate();
     }
   };
 
@@ -171,6 +112,11 @@ const InvoiceSettings = ({ country, year, price }) => {
     }
   };
 
+  const errorAndConfirm = () => {
+    confirmInvoice()
+    sorryAlert()
+  }
+
   const sorryAlert = () => {
     setAlert(
       <ReactBSAlert
@@ -180,10 +126,10 @@ const InvoiceSettings = ({ country, year, price }) => {
         showConfirm={false}
       >
         <div className="text-start">
-          <Row>
-            <h2>Sorry!</h2>
+          <Row className="margin-small">
+            <h2 className="high2">Sorry!</h2>
           </Row>
-          <br/>
+        
           <Row>
             <Col>
             This feature is not available at the moment. If you wish to make use
@@ -192,8 +138,7 @@ const InvoiceSettings = ({ country, year, price }) => {
             </Col>
           </Row>
           <br/>
-          <Row><h4>Order Details</h4></Row>
-          <br/>
+          <Row className="margin-small"><h4>Order Details</h4></Row>
           <Row>
             <Col>State:</Col>
             <Col>{country}</Col>
@@ -205,8 +150,7 @@ const InvoiceSettings = ({ country, year, price }) => {
           <br/>
           {invoiceSettings.type === 'individual' ? 
           <>
-          <Row><h4>Billing Details</h4></Row>
-          <br/>
+          <Row className="margin-small"><h4>Billing Details</h4></Row>
           <Row>
             <Col>Title:</Col>
             <Col>{invoiceSettings.title}</Col>
@@ -232,8 +176,7 @@ const InvoiceSettings = ({ country, year, price }) => {
           </>
 :
 <>
-<Row><h4>Billing Details</h4></Row>
-<br/>
+<Row className="margin-small"><h4>Billing Details</h4></Row>
 <Row>
   <Col>Organisation:</Col>
   <Col>{invoiceSettings.organisation}</Col>
@@ -254,8 +197,8 @@ const InvoiceSettings = ({ country, year, price }) => {
 <br/>
 </>
     }
-          <Row><h4>Billing Address</h4></Row>
-          <br/>
+             <Row className="margin-small"><h4>Billing Address</h4></Row>
+
           <Row>
             <Col>Address Line 1:</Col>
             <Col>{invoiceSettings.address_line_1}</Col>
@@ -304,13 +247,13 @@ const InvoiceSettings = ({ country, year, price }) => {
           1
         </Col>
         <Col>
-          <hr />
+          <hr className={step >= 1 ? "line-active" : "line-neutral"}/>
         </Col>
         <Col className={step === 1 ? "step-header" : "step-header-neutral"}>
           2
         </Col>
         <Col>
-          <hr />
+        <hr className={step === 2 ? "line-active" : "line-neutral"}/>
         </Col>
         <Col className={step === 2 ? "step-header" : "step-header-neutral"}>
           3
@@ -331,7 +274,6 @@ const InvoiceSettings = ({ country, year, price }) => {
         <Step1
           invoiceSettings={invoiceSettings}
           setInvoiceSettings={setInvoiceSettings}
-          isNew={isNew}
           error={error}
           email={email}
         />
@@ -341,7 +283,6 @@ const InvoiceSettings = ({ country, year, price }) => {
         <Step2
           invoiceSettings={invoiceSettings}
           setInvoiceSettings={setInvoiceSettings}
-          isNew={isNew}
           error={error}
         />
       ) : null}
@@ -407,7 +348,7 @@ const InvoiceSettings = ({ country, year, price }) => {
                   className="button-active"
                   color="primary"
                   type="button"
-                  onClick={confirmInvoice}
+                  onClick={errorAndConfirm}
                   style={{
                     float: "right",
                   }}
@@ -422,5 +363,11 @@ const InvoiceSettings = ({ country, year, price }) => {
     </div>
   );
 };
+
+InvoiceSettings.propTypes = {
+  year: PropTypes.number,
+  country: PropTypes.string,
+  price: PropTypes.number,
+}
 
 export default InvoiceSettings;

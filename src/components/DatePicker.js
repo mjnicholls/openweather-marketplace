@@ -28,8 +28,7 @@ const DatePickerMarket = () => {
       "December",
     ];
 
-  console.log('start', startDate)
-  console.log('end', endDate)
+
 
   return (
     <>

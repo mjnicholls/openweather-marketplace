@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import '../App.scss'
+import PropTypes from 'prop-types'
 
 const FooterSection = (props) => {
   const [open, setOpen] = useState(false)
@@ -36,6 +36,10 @@ const FooterSection = (props) => {
       <div className="d-none d-xl-block">{props.children}</div>
     </div>
   )
+}
+
+FooterSection.propTypes = {
+  props: PropTypes.string,
 }
 
 

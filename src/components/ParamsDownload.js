@@ -8,8 +8,6 @@ const DownloadParams = () => {
 
   const [fileValue, setFileValue] = useState();
 
-  console.log("test", fileValue);
-
   const hideAlert = () => {
     setAlert(null);
   };
@@ -44,14 +42,6 @@ const DownloadParams = () => {
             ))}
           </Form>
         </Row>
-        {/*}
-              <ParamCategories
-        key={"channel.key"}
-        options={file}
-        onChange={value => onAddCategory(value)}
-        checked={checked}
-      />
-    */}
       </ReactBSAlert>
     );
   };

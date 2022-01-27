@@ -36,6 +36,7 @@ const FooterMarket = () => (
                 <a
                   href="https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Terms and conditions of sale
                 </a>
@@ -44,6 +45,7 @@ const FooterMarket = () => (
                 <a
                   href="https://openweather.co.uk/privacy-policy"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Privacy Policy
                 </a>

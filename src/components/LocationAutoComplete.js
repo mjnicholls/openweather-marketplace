@@ -62,8 +62,8 @@ const AutoComplete = ({
       onFocus={onFocus}
       onChange={onStartTyping}
       placeholder="Enter location"
-      fixedLocation={fixedLocation}
-      setFixedLocation={setFixedLocation}
+      fixedlocation={fixedLocation}
+      setfixedlocation={setFixedLocation}
     />
   )
 }
@@ -72,6 +72,10 @@ AutoComplete.propTypes = {
   setTempLocation: PropTypes.func,
   error: PropTypes.object,
   mapRef: PropTypes.object,
+  setError: PropTypes.func,
+  setIsDropDown: PropTypes.func,
+  fixedLocation: PropTypes.string,
+ setFixedLocation: PropTypes.object
 }
 
 export default AutoComplete

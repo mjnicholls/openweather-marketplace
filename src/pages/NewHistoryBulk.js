@@ -10,6 +10,7 @@ const NewHistoryBulk = () => {
 
   const [error, setError] = useState({});
 
+   /*eslint-disable-next-line*/
   const [name, setName] = useState("");
 
   const [location, setLocation] = useState({
@@ -30,7 +31,6 @@ const NewHistoryBulk = () => {
 
   const [tempLocation, setTempLocation] = useState({ ...location });
 
-  const [recipients, setRecipients] = useState([]);
 
   useEffect(() => {
     setTempLocation({
@@ -38,6 +38,7 @@ const NewHistoryBulk = () => {
       lat: location.lat,
       lon: location.lon,
     });
+    /*eslint-disable-next-line*/
   }, [location]);
 
   useEffect(() => {

@@ -7,8 +7,6 @@ import { Edit, Delete, Ok } from "react-ikonate";
 const LocationList = ({ locations, setLocations, price, setPrice }) => {
   const [isEdit, setisEdit] = useState(false);
 
-  //const [rowEdited, setRowEdited] = useState(-1)
-
   const editLocation = (name, index) => {
     const newLocations = locations.map((el, i) => {
       if (index !== i) {
@@ -25,6 +23,7 @@ const LocationList = ({ locations, setLocations, price, setPrice }) => {
       console.log('index', index)
     setisEdit(true);
   };
+  
 
   const deleteLocation = (index) => {
     const locationsCopy = [...locations];
@@ -109,8 +108,10 @@ const LocationList = ({ locations, setLocations, price, setPrice }) => {
 };
 
 LocationList.propTypes = {
-  locations: PropTypes.func,
-  setLocations: PropTypes.bool,
+  locations: PropTypes.array,
+  setLocations: PropTypes.func,
+  price: PropTypes.number,
+  setPrice: PropTypes.func,
 };
 
 export default LocationList;

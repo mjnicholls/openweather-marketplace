@@ -4,6 +4,7 @@ import WeatherParams from "./ParamsWeather";
 import UnitsParams from "./ParamsUnits";
 import FileParams from "./ParamsFile";
 import DownloadParams from "./ParamsDownload";
+import PropTypes from "prop-types";
 
 const Parameters = ({ parameters, setParameters }) => {
   
@@ -24,5 +25,10 @@ const Parameters = ({ parameters, setParameters }) => {
     </>
   );
 };
+
+Parameters.propTypes = {
+  parameters: PropTypes.object,
+  setParameters: PropTypes.func,
+}
 
 export default Parameters;

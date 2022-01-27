@@ -13,8 +13,6 @@ const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => 
     setInvoiceSettings(newObj)
   }
 
-  console.log('email', email)
-
   return (
     <div>
             <Col className='bold text-start'><h3>Billing Details</h3></Col>

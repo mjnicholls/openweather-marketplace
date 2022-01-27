@@ -4,10 +4,10 @@ import WeatherHistoryParams from "./ParamsHistoryWeather";
 import UnitsParams from "./ParamsUnits";
 import FileParams from "./ParamsFile";
 import DownloadParams from "./ParamsDownload";
+import PropTypes from "prop-types";
 
 const ParametersForecast = ({ parameters, setParameters }) => {
   
-
   return (
     <>
       <Row className="mt-3">
@@ -24,5 +24,11 @@ const ParametersForecast = ({ parameters, setParameters }) => {
     </>
   );
 };
+
+ParametersForecast.propTypes = {
+  parameters: PropTypes.object,
+  setParameters: PropTypes.object,
+}
+
 
 export default ParametersForecast;

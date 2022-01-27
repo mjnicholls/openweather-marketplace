@@ -9,17 +9,17 @@ import InvoiceSettings from "../components/InvoicePop";
 import ReactBSAlert from 'react-bootstrap-sweetalert'
 
 const selectCurrency = (state) => state.auth.currency;
-const selectInvoice = (state) => state.auth.invoiceInfo;
 
 const DataUSState = () => {
   const currency = useSelector(selectCurrency);
 
-  const invoice = useSelector(selectInvoice);
 
   const [price, setPrice] = useState(0);
   const [country, setCountry] = useState("");
   const [zip, setZip] = useState("");
   const [year, setYear] = useState("");
+
+  console.log('zip', zip)
 
   const handleChange = (e) => {
     setZip(e.zip);

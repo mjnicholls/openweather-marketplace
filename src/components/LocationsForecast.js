@@ -457,7 +457,16 @@ LocationForecast.propTypes = {
   searchBoxRef: PropTypes.object,
   isDropDown: PropTypes.bool,
   setIsDropDown: PropTypes.func,
-  setIsLocationNameEdited: PropTypes.func,
+  locations: PropTypes.object,
+  setLocations: PropTypes.object,
+  parameters: PropTypes.object,
+  setParameters: PropTypes.object,
+  startDate: PropTypes.number,
+  setStartDate: PropTypes.object,
+  endDate: PropTypes.number,
+  setEndDate: PropTypes.object,
+  price: PropTypes.number,
+  setPrice: PropTypes.object,
 };
 
 export default LocationForecast;

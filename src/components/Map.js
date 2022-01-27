@@ -64,6 +64,10 @@ Map.propTypes = {
   onClickMap: PropTypes.func,
   isButtonInfoWindow: PropTypes.bool,
   isDraggable: PropTypes.bool,
+  price: PropTypes.number,
+  setPrice: PropTypes.func,
+  locations: PropTypes.array,
+  setLocations: PropTypes.func,
 }
 
 export default Map

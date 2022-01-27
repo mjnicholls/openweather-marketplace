@@ -1,19 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import { Dropdown, DropdownToggle, DropdownMenu } from 'reactstrap'
-import { useSelector } from 'react-redux'
+import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
+import { useSelector } from "react-redux";
 
-const selectUserName = (state) => state.auth.userName
-
+const selectUserName = (state) => state.auth.userName;
 
 const HeaderMarket = () => {
-  const userName = useSelector(selectUserName)
-  const [isDropDown, setIsDropDown] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
+  const userName = useSelector(selectUserName);
+  const [isDropDown, setIsDropDown] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className={`page-header ${isMenuOpen ? 'open' : ''}`}>
+    <nav className={`page-header ${isMenuOpen ? "open" : ""}`}>
       <div className="container-xxl">
         <div className="page-header-content">
           <a href="https://openweathermap.org/">
@@ -24,7 +22,6 @@ const HeaderMarket = () => {
               width="93.33px"
             />
           </a>
-
 
           <button
             className="remove-default-button-style d-xxl-none"
@@ -39,7 +36,7 @@ const HeaderMarket = () => {
 
           <div className="break d-xxl-none"></div>
 
-          <ul className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
+          <ul className={`mobile-menu ${isMenuOpen ? "open" : ""}`}>
             <li className="d-xxl-none">
               <div className="input-group search ms-auto">
                 <div className="input-group-append">
@@ -63,27 +60,26 @@ const HeaderMarket = () => {
                     placeholder="Weather in your city"
                     name="q"
                   />
-                  <input style={{ display: 'none' }} type="submit" />
+                  <input style={{ display: "none" }} type="submit" />
                 </form>
               </div>
             </li>
             <li>
-                <a href="/history_bulks/new">History Bulk</a>
-              </li>
-              <li>
-                <a href="/history_forecast_bulks/new">History Forecast Bulk</a>
-              </li>
+              <a href="/history_bulks/new">History Bulk</a>
+            </li>
+            <li>
+              <a href="/history_forecast_bulks/new">History Forecast Bulk</a>
+            </li>
 
             <li>
-                <a href="/zip_code_data/new">Data by US State</a>
-              </li>
-
+              <a href="/zip_code_data/new">Data by US State</a>
+            </li>
 
             <li>
-                <a className="marketplace" href="/marketplace">
-                  Marketplace
-                </a>
-              </li>
+              <a className="marketplace" href="/marketplace">
+                Marketplace
+              </a>
+            </li>
 
             {userName ? (
               <li className="d-none d-lg-block">
@@ -102,30 +98,35 @@ const HeaderMarket = () => {
                     <a
                       href="https://home.openweathermap.org/myservices"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       My Services
                     </a>
                     <a
                       href="https://home.openweathermap.org/api_keys"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       My API Keys
                     </a>
                     <a
                       href="https://home.openweathermap.org/payments"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       My Payments
                     </a>
                     <a
                       href="https://home.openweathermap.org/home"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       My Profile
                     </a>
                     <a
                       href="https://home.openweathermap.org/users/sign_out"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       Logout
                     </a>
@@ -137,6 +138,7 @@ const HeaderMarket = () => {
                 <a
                   href="https://home.openweathermap.org/users/sign_in"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Sign In
                 </a>
@@ -149,7 +151,7 @@ const HeaderMarket = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default HeaderMarket
+export default HeaderMarket;

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Label, Form, FormGroup, Input, Row } from 'reactstrap'
+import PropTypes from "prop-types";
 
 const ParamCategories = props => {
   return (
@@ -24,5 +25,10 @@ const ParamCategories = props => {
     </Row>
   );
 };
+
+ParamCategories.propTypes = {
+  props: PropTypes.object,
+}
+
 
 export default ParamCategories

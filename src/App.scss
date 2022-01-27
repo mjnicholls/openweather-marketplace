@@ -1181,13 +1181,26 @@ ul li:before {
 }
 
 
-hr {
+.line-neutral {
   display: block;
-  height: 6px;
+  height: 10px;
   border: 0;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid grey;
   margin: 1em 0;
-  padding: 0;
+  padding: 1pt;
+  background-color: grey;
+  color: grey;
+}
+
+.line-active {
+  display: block;
+  height: 10px;
+  border: 0;
+  border-top: 1px solid black;
+  margin: 1em 0;
+  padding: 1pt;
+  background-color: black;
+  color: black;
 }
 
 .danger-border {
@@ -1198,4 +1211,14 @@ hr {
   background-color: #fff;
   border-radius: 0.25rem;
   border: 0.5px solid red !important;
+}
+
+.margin-small {
+  margin-bottom: 5px;
+}
+
+.high2 {
+  font-weight: bold;
+    padding-top: 0px;
+    text-align: left;
 }

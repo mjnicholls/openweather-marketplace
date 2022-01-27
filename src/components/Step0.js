@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 
 const Step0 = ({ year, country, price }) => {
 
-
   return (
     <div>
       <Row className='text-start'>
@@ -48,10 +47,9 @@ const Step0 = ({ year, country, price }) => {
 }
 
 Step0.propTypes = {
-  error: PropTypes.func,
-  isNew: PropTypes.bool,
-  invoiceSettings: PropTypes.object,
-  setInvoiceSettings: PropTypes.func
+  year: PropTypes.number,
+  country: PropTypes.string,
+  price: PropTypes.number,
 }
 
 export default Step0

@@ -6,6 +6,7 @@ import { countriesDefault } from '../config'
 import PropTypes from 'prop-types'
 
 const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
+
   const [countries, setCountries] = useState(countriesDefault)
 
   const handleChange = (key, value) => {
@@ -13,6 +14,8 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
     let newObj = Object.assign({}, invoiceSettings)
     newObj[key] = value
     setInvoiceSettings(newObj)
+
+    console.log('set', setCountries)
   }
 
   return (
@@ -49,7 +52,7 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
               <Select
                 className={classnames(
                   'react-select info mb-3',
-                  error.country ? 'danger-border' : '',
+                  error.country ? 'react-select info mb-3 danger-border' : '',
                 )}
                 classNamePrefix="react-select"
                 onChange={(country) => {
