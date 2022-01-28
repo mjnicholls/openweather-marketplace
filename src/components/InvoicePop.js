@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button, Col, Form, Label, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-
-import PropTypes from 'prop-types'
+import { confirmVatNumber, getAccountInfo } from "../api/personalAccountAPI";
+import PropTypes from "prop-types";
 
 import Step0 from "./Step0";
 import Step1 from "./Step1";
@@ -16,6 +16,8 @@ const InvoiceSettings = ({ country, year, price }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
 
+  const [isNew, setIsNew] = useState(true);
+
   const invoice = useSelector(selectInvoice);
   const email = useSelector(selectEmail);
 
@@ -26,7 +28,6 @@ const InvoiceSettings = ({ country, year, price }) => {
   };
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
-
 
   const confirmInvoice = () => {
     setError({});
@@ -47,9 +48,23 @@ const InvoiceSettings = ({ country, year, price }) => {
       console.log("Please fill in required fields");
       return;
     }
+    if (
+      invoiceSettings.type === "organisation" &&
+      invoiceSettings.vat_id.length
+    ) {
+      confirmVatNumber(invoiceSettings.vat_id)
+        .then(() => {
+          // eslint-disable-next-line
+          isNew ? billingInfoCreate() : billingInfoUpdate();
+        })
+        .catch(() => {
+          console.log("Incorrect VAT number");
+        });
+    } else {
+      // eslint-disable-next-line
+      isNew ? billingInfoCreate() : billingInfoUpdate();
+    }
   };
-
-  console.log("invoice", invoiceSettings);
 
   const decrementStep = () => {
     if (step === 2) {
@@ -112,10 +127,25 @@ const InvoiceSettings = ({ country, year, price }) => {
     }
   };
 
+  useEffect(() => {
+    refreshData();
+  }, []);
+
+  const refreshData = () => {
+    getAccountInfo().then((res) => {
+      if (Object.keys(res.invoice_info).length) {
+        setInvoiceSettings(res.invoice_info);
+        setIsNew(false);
+      } else {
+        setIsNew(true);
+      }
+    });
+  };
+
   const errorAndConfirm = () => {
-    confirmInvoice()
-    sorryAlert()
-  }
+    confirmInvoice();
+    sorryAlert();
+  };
 
   const sorryAlert = () => {
     setAlert(
@@ -129,16 +159,18 @@ const InvoiceSettings = ({ country, year, price }) => {
           <Row className="margin-small">
             <h2 className="high2">Sorry!</h2>
           </Row>
-        
+
           <Row>
             <Col>
-            This feature is not available at the moment. If you wish to make use
-            of your service, please make a note of your details below, and get
-            in touch with us.
+              This feature is not available at the moment. If you wish to make
+              use of your service, please make a note of your details below, and
+              get in touch with us.
             </Col>
           </Row>
-          <br/>
-          <Row className="margin-small"><h4>Order Details</h4></Row>
+          <br />
+          <Row className="margin-small">
+            <h4>Order Details</h4>
+          </Row>
           <Row>
             <Col>State:</Col>
             <Col>{country}</Col>
@@ -147,57 +179,63 @@ const InvoiceSettings = ({ country, year, price }) => {
             <Col>Year:</Col>
             <Col>{year}</Col>
           </Row>
-          <br/>
-          {invoiceSettings.type === 'individual' ? 
-          <>
-          <Row className="margin-small"><h4>Billing Details</h4></Row>
-          <Row>
-            <Col>Title:</Col>
-            <Col>{invoiceSettings.title}</Col>
-          </Row>
-          <Row>
-            <Col>First Name:</Col>
-            <Col>{invoiceSettings.first_name}</Col>
-          </Row>
+          <br />
+          {invoiceSettings.type === "individual" ? (
+            <>
+              <Row className="margin-small">
+                <h4>Billing Details</h4>
+              </Row>
+              <Row>
+                <Col>Title:</Col>
+                <Col>{invoiceSettings.title}</Col>
+              </Row>
+              <Row>
+                <Col>First Name:</Col>
+                <Col>{invoiceSettings.first_name}</Col>
+              </Row>
 
-          <Row>
-            <Col>Surname:</Col>
-            <Col>{invoiceSettings.last_name}</Col>
-          </Row>
-          <Row>
-            <Col>Phone No.:</Col>
-            <Col>{invoiceSettings.phone}</Col>
-          </Row>
-          <Row>
-            <Col>Email:</Col>
-            <Col>{email}</Col>
-          </Row>
-          <br/>
-          </>
-:
-<>
-<Row className="margin-small"><h4>Billing Details</h4></Row>
-<Row>
-  <Col>Organisation:</Col>
-  <Col>{invoiceSettings.organisation}</Col>
-</Row>
-<Row>
-  <Col>VAT ID:</Col>
-  <Col>{invoiceSettings.vat_id}</Col>
-</Row>
+              <Row>
+                <Col>Surname:</Col>
+                <Col>{invoiceSettings.last_name}</Col>
+              </Row>
+              <Row>
+                <Col>Phone No.:</Col>
+                <Col>{invoiceSettings.phone}</Col>
+              </Row>
+              <Row>
+                <Col>Email:</Col>
+                <Col>{email}</Col>
+              </Row>
+              <br />
+            </>
+          ) : (
+            <>
+              <Row className="margin-small">
+                <h4>Billing Details</h4>
+              </Row>
+              <Row>
+                <Col>Organisation:</Col>
+                <Col>{invoiceSettings.organisation}</Col>
+              </Row>
+              <Row>
+                <Col>VAT ID:</Col>
+                <Col>{invoiceSettings.vat_id}</Col>
+              </Row>
 
-<Row>
-  <Col>Phone No.:</Col>
-  <Col>{invoiceSettings.phone}</Col>
-</Row>
-<Row>
-  <Col>Email:</Col>
-  <Col>{email}</Col>
-</Row> 
-<br/>
-</>
-    }
-             <Row className="margin-small"><h4>Billing Address</h4></Row>
+              <Row>
+                <Col>Phone No.:</Col>
+                <Col>{invoiceSettings.phone}</Col>
+              </Row>
+              <Row>
+                <Col>Email:</Col>
+                <Col>{email}</Col>
+              </Row>
+              <br />
+            </>
+          )}
+          <Row className="margin-small">
+            <h4>Billing Address</h4>
+          </Row>
 
           <Row>
             <Col>Address Line 1:</Col>
@@ -228,10 +266,16 @@ const InvoiceSettings = ({ country, year, price }) => {
             <Col>Phone No:</Col>
             <Col>{invoiceSettings.phone}</Col>
           </Row>
-          <br/>
+          <br />
           <Row className="text-end">
             <Col>
-            <a href="mailto:info@openweathermap.org" type="button" className="button-active">Contact Us</a>
+              <a
+                href="mailto:info@openweathermap.org"
+                type="button"
+                className="button-active"
+              >
+                Contact Us
+              </a>
             </Col>
           </Row>
         </div>
@@ -247,13 +291,13 @@ const InvoiceSettings = ({ country, year, price }) => {
           1
         </Col>
         <Col>
-          <hr className={step >= 1 ? "line-active" : "line-neutral"}/>
+          <hr className={step >= 1 ? "line-active" : "line-neutral"} />
         </Col>
         <Col className={step === 1 ? "step-header" : "step-header-neutral"}>
           2
         </Col>
         <Col>
-        <hr className={step === 2 ? "line-active" : "line-neutral"}/>
+          <hr className={step === 2 ? "line-active" : "line-neutral"} />
         </Col>
         <Col className={step === 2 ? "step-header" : "step-header-neutral"}>
           3
@@ -276,6 +320,7 @@ const InvoiceSettings = ({ country, year, price }) => {
           setInvoiceSettings={setInvoiceSettings}
           error={error}
           email={email}
+          isNew={isNew}
         />
       ) : null}
 
@@ -365,9 +410,9 @@ const InvoiceSettings = ({ country, year, price }) => {
 };
 
 InvoiceSettings.propTypes = {
-  year: PropTypes.number,
+  year: PropTypes.string,
   country: PropTypes.string,
   price: PropTypes.number,
-}
+};
 
 export default InvoiceSettings;

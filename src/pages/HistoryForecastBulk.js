@@ -10,7 +10,7 @@ const HistoryForecastBulk = () => {
 
   const [error, setError] = useState({});
 
-   /*eslint-disable-next-line*/
+  /*eslint-disable-next-line*/
   const [name, setName] = useState("");
 
   const [location, setLocation] = useState({
@@ -19,7 +19,7 @@ const HistoryForecastBulk = () => {
     lon: "",
   });
 
-  const [price, setPrice] = useState(0)
+  const [price, setPrice] = useState(0);
 
   const [parameters, setParameters] = useState();
 
@@ -37,7 +37,7 @@ const HistoryForecastBulk = () => {
       lat: location.lat,
       lon: location.lon,
     });
-     /*eslint-disable-next-line*/
+    /*eslint-disable-next-line*/
   }, [location]);
 
   useEffect(() => {

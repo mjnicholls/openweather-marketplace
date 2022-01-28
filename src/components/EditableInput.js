@@ -1,32 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import PropTypes from 'prop-types'
-import { Edit } from 'react-ikonate'
-import { Input } from 'reactstrap'
+import PropTypes from "prop-types";
+import { Edit } from "react-ikonate";
+import { Input } from "reactstrap";
 
 const EditableInput = ({ content, setContent, error, tagName }) => {
-  const [isEdit, setIsEdit] = useState(false)
+  const [isEdit, setIsEdit] = useState(false);
 
   const onKeyDown = (e) => {
     if (e.keyCode === 13) {
-      setIsEdit(false)
+      setIsEdit(false);
     } else {
-      setIsEdit(true)
+      setIsEdit(true);
     }
-  }
+  };
 
   return isEdit || !content.length ? (
     <div className="d-flex align-items-center">
       <div className="d-flex flex-grow-1 flex-column">
         <Input
           type="text"
-          className={`owm-selector ${error ? 'danger-border' : ''}`}
+          className={`owm-selector ${error ? "danger-border" : ""}`}
           onChange={(e) => setContent(e.target.value)}
           onKeyDown={onKeyDown}
           placeholder="Enter name" // TODO
           value={content}
         />
-        <div className={`invalid-feedback ${error ? 'd-block' : ''}`}>
+        <div className={`invalid-feedback ${error ? "d-block" : ""}`}>
           {error}
         </div>
       </div>
@@ -45,23 +45,23 @@ const EditableInput = ({ content, setContent, error, tagName }) => {
     </div>
   ) : (
     <div className="d-flex align-items-center">
-      {tagName === 'p' ? (
+      {tagName === "p" ? (
         <p className="m-0">
           {content}
           <Edit
             className="ms-2"
             onClick={() => {
-              setIsEdit(true)
+              setIsEdit(true);
             }}
           />
         </p>
-      ) : tagName === 'h2' ? (
+      ) : tagName === "h2" ? (
         <h2 className="m-0 p-0">
           {content}
           <Edit
             className="ms-2"
             onClick={() => {
-              setIsEdit(true)
+              setIsEdit(true);
             }}
           />
         </h2>
@@ -71,20 +71,20 @@ const EditableInput = ({ content, setContent, error, tagName }) => {
           <Edit
             className="ms-2"
             onClick={() => {
-              setIsEdit(true)
+              setIsEdit(true);
             }}
           />
         </h5>
       )}
     </div>
-  )
-}
+  );
+};
 
 EditableInput.propTypes = {
   content: PropTypes.string,
   setContent: PropTypes.func,
   error: PropTypes.string,
   tagName: PropTypes.string,
-}
+};
 
-export default EditableInput
+export default EditableInput;

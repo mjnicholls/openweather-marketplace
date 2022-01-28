@@ -1,15 +1,14 @@
-import React from 'react'
-import { Label, Form, FormGroup, Input, Row } from 'reactstrap'
+import React from "react";
+import { Label, Form, FormGroup, Input, Row } from "reactstrap";
 import PropTypes from "prop-types";
 
-const ParamCategories = props => {
+const ParamCategories = (props) => {
   return (
-    
-    <Row className='text-start mt-4'>
-    <Form className="checkbox-radios ml-5">
-        {props.options.map(option => (
-              <FormGroup check key={props.key}>
-                <Label check>
+    <Row className="text-start mt-4">
+      <Form className="checkbox-radios ml-5">
+        {props.options.map((option) => (
+          <FormGroup check key={props.key}>
+            <Label check>
               {option.label}
               <Input
                 className={props.className}
@@ -19,16 +18,15 @@ const ParamCategories = props => {
                 type="checkbox"
               />
             </Label>
-            </FormGroup>
+          </FormGroup>
         ))}
-    </Form>
+      </Form>
     </Row>
   );
 };
 
 ParamCategories.propTypes = {
   props: PropTypes.object,
-}
+};
 
-
-export default ParamCategories
+export default ParamCategories;

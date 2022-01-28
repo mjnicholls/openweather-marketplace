@@ -1,63 +1,69 @@
-import React from 'react'
-import { Col, Form, Label, FormGroup, Input, Row } from 'reactstrap'
-import Select from 'react-select'
+import React from "react";
+import { Col, Form, Label, FormGroup, Input, Row } from "reactstrap";
+import Select from "react-select";
 
-import { titles } from '../config'
-import PropTypes from 'prop-types'
+import { titles } from "../config";
+import PropTypes from "prop-types";
 
-const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => {
+const Step1 = ({
+  invoiceSettings,
+  setInvoiceSettings,
+  isNew,
+  error,
+  email,
+}) => {
   const handleChange = (key, value) => {
     // eslint-disable-next-line
-    let newObj = Object.assign({}, invoiceSettings)
-    newObj[key] = value
-    setInvoiceSettings(newObj)
-  }
+    let newObj = Object.assign({}, invoiceSettings);
+    newObj[key] = value;
+    setInvoiceSettings(newObj);
+  };
 
   return (
     <div>
-            <Col className='bold text-start'><h3>Billing Details</h3></Col>
-      <Form className='text-start'>
+      <Col className="bold text-start">
+        <h3>Billing Details</h3>
+      </Col>
+      <Form className="text-start">
         <Label>Legal form: </Label>
-        <FormGroup className='mr-4'>
-          <Label style={{paddingRight: "20px"}} check>
+        <FormGroup className="mr-4">
+          <Label style={{ paddingRight: "20px" }} check>
             <Input
               id="individualRadioButton"
               name="legalForm"
               type="radio"
-              checked={invoiceSettings.type === 'individual'}
-              onChange={() => handleChange('type', 'individual')}
-              disabled={!isNew && invoiceSettings.type === 'organisation'}
+              checked={invoiceSettings.type === "individual"}
+              onChange={() => handleChange("type", "individual")}
+              disabled={!isNew && invoiceSettings.type === "organisation"}
             />
-            <span className="form-check-sign" />
-            {' '}Individual
+            <span className="form-check-sign" /> Individual
           </Label>
           <Label check>
             <Input
               id="organisationRadioButton"
               name="legalForm"
               type="radio"
-              checked={invoiceSettings.type === 'organisation'}
-              onChange={() => handleChange('type', 'organisation')}
-              disabled={!isNew && invoiceSettings.type === 'individual'}
+              checked={invoiceSettings.type === "organisation"}
+              onChange={() => handleChange("type", "organisation")}
+              disabled={!isNew && invoiceSettings.type === "individual"}
             />
-            <span className="form-check-sign" />
-            {' '}Organisation
+            <span className="form-check-sign" /> Organisation
           </Label>
         </FormGroup>
       </Form>
 
       <Form className="form-horizontal text-start">
-        {invoiceSettings.type === 'individual' ? (
+        {invoiceSettings.type === "individual" ? (
           <>
             <Row>
               <Col>
                 <Label>Title</Label>
                 <FormGroup>
                   <Select
-                     className='react-select info mb-3'
+                    className="react-select info mb-3"
                     classNamePrefix="react-select"
                     onChange={(title) => {
-                      handleChange('title', title.code)
+                      handleChange("title", title.code);
                     }}
                     options={titles}
                     getOptionLabel={(option) => option.name}
@@ -65,9 +71,9 @@ const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => 
                     placeholder={
                       invoiceSettings.title
                         ? titles.find(
-                            (obj) => obj.code === invoiceSettings.title,
+                            (obj) => obj.code === invoiceSettings.title
                           ).name
-                        : ''
+                        : ""
                     }
                   />
                 </FormGroup>
@@ -77,9 +83,9 @@ const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => 
                 <FormGroup>
                   <Input
                     type="text"
-                    onChange={(e) => handleChange('first_name', e.target.value)}
+                    onChange={(e) => handleChange("first_name", e.target.value)}
                     value={invoiceSettings.first_name}
-                    className={error.first_name ? 'danger-border' : ''}
+                    className={error.first_name ? "danger-border" : ""}
                   />
                 </FormGroup>
               </Col>
@@ -88,9 +94,9 @@ const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => 
                 <FormGroup>
                   <Input
                     type="text"
-                    onChange={(e) => handleChange('last_name', e.target.value)}
+                    onChange={(e) => handleChange("last_name", e.target.value)}
                     value={invoiceSettings.last_name}
-                    className={error.last_name ? 'danger-border' : ''}
+                    className={error.last_name ? "danger-border" : ""}
                   />
                 </FormGroup>
               </Col>
@@ -101,9 +107,9 @@ const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => 
                 <FormGroup>
                   <Input
                     type="text"
-                    onChange={(e) => handleChange('phone', e.target.value)}
+                    onChange={(e) => handleChange("phone", e.target.value)}
                     value={invoiceSettings.phone}
-                    className={error.phone ? 'danger-border' : ''}
+                    className={error.phone ? "danger-border" : ""}
                   />
                 </FormGroup>
               </Col>
@@ -112,9 +118,9 @@ const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => 
                 <FormGroup>
                   <Input
                     type="text"
-                    onChange={(e) => handleChange('email', e.target.value)}
+                    onChange={(e) => handleChange("email", e.target.value)}
                     value={email}
-                    className={error.email ? 'danger-border' : ''}
+                    className={error.email ? "danger-border" : ""}
                   />
                 </FormGroup>
               </Col>
@@ -129,10 +135,10 @@ const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => 
                   <Input
                     type="text"
                     onChange={(e) =>
-                      handleChange('organisation', e.target.value)
+                      handleChange("organisation", e.target.value)
                     }
                     value={invoiceSettings.organisation}
-                    className={error.organisation ? 'danger-border' : ''}
+                    className={error.organisation ? "danger-border" : ""}
                   />
                 </FormGroup>
               </Col>
@@ -142,10 +148,10 @@ const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => 
                   <Input
                     type="text"
                     onChange={(e) => {
-                      handleChange('vat_id', e.target.value)
+                      handleChange("vat_id", e.target.value);
                     }}
                     value={invoiceSettings.vat_id}
-                    className={error.vat_id ? 'danger-border' : ''}
+                    className={error.vat_id ? "danger-border" : ""}
                   />
                 </FormGroup>
               </Col>
@@ -156,9 +162,9 @@ const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => 
                 <FormGroup>
                   <Input
                     type="text"
-                    onChange={(e) => handleChange('phone', e.target.value)}
+                    onChange={(e) => handleChange("phone", e.target.value)}
                     value={invoiceSettings.phone}
-                    className={error.phone ? 'danger-border' : ''}
+                    className={error.phone ? "danger-border" : ""}
                   />
                 </FormGroup>
               </Col>
@@ -167,9 +173,9 @@ const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => 
                 <FormGroup>
                   <Input
                     type="text"
-                    onChange={(e) => handleChange('email', e.target.value)}
+                    onChange={(e) => handleChange("email", e.target.value)}
                     value={email}
-                    className={error.email ? 'danger-border' : ''}
+                    className={error.email ? "danger-border" : ""}
                   />
                 </FormGroup>
               </Col>
@@ -178,15 +184,15 @@ const Step1 = ({ invoiceSettings, setInvoiceSettings, isNew, error, email }) => 
         )}
       </Form>
     </div>
-  )
-}
+  );
+};
 
 Step1.propTypes = {
-  error: PropTypes.func,
+  error: PropTypes.object,
   isNew: PropTypes.bool,
   invoiceSettings: PropTypes.object,
   setInvoiceSettings: PropTypes.func,
-  email: PropTypes.string
-}
+  email: PropTypes.string,
+};
 
-export default Step1
+export default Step1;

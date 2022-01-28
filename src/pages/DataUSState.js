@@ -6,20 +6,19 @@ import { Label, Col, Row, FormGroup, Button } from "reactstrap";
 import Select from "react-select";
 import { statesOfAmerica, years } from "../config";
 import InvoiceSettings from "../components/InvoicePop";
-import ReactBSAlert from 'react-bootstrap-sweetalert'
+import ReactBSAlert from "react-bootstrap-sweetalert";
 
 const selectCurrency = (state) => state.auth.currency;
 
 const DataUSState = () => {
   const currency = useSelector(selectCurrency);
 
-
   const [price, setPrice] = useState(0);
   const [country, setCountry] = useState("");
   const [zip, setZip] = useState("");
   const [year, setYear] = useState("");
 
-  console.log('zip', zip)
+  console.log("zip", zip);
 
   const handleChange = (e) => {
     setZip(e.zip);
@@ -27,11 +26,11 @@ const DataUSState = () => {
     setPrice(e.price);
   };
 
-  const [alert, setAlert] = React.useState(null)
+  const [alert, setAlert] = React.useState(null);
 
   const hideAlert = () => {
-    setAlert(null)
-  }
+    setAlert(null);
+  };
 
   const htmlAlert = () => {
     setAlert(
@@ -41,14 +40,19 @@ const DataUSState = () => {
         onCancel={() => hideAlert()}
         showConfirm={false}
       >
-        <InvoiceSettings close={hideAlert} year={year} country={country} price={price} />
-      </ReactBSAlert>,
-    )
-  }
+        <InvoiceSettings
+          close={hideAlert}
+          year={year}
+          country={country}
+          price={price}
+        />
+      </ReactBSAlert>
+    );
+  };
 
   return (
     <div className="container">
-         {alert}
+      {alert}
       <Row>
         <Col md="7" className="page-padding text-start">
           <div style={{ marginBottom: "50px" }}>

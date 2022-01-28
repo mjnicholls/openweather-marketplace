@@ -1,10 +1,10 @@
 /* eslint-disable */
-import React from 'react'
+import React from "react";
 
-import PropTypes from 'prop-types'
-import Autocomplete, { usePlacesWidget } from 'react-google-autocomplete'
+import PropTypes from "prop-types";
+import Autocomplete, { usePlacesWidget } from "react-google-autocomplete";
 
-import placeMarker from '../utils/placeMarker'
+import placeMarker from "../utils/placeMarker";
 
 const AutoComplete = ({
   mapRef,
@@ -13,7 +13,7 @@ const AutoComplete = ({
   setError,
   setIsDropDown,
   fixedLocation,
- setFixedLocation
+  setFixedLocation,
 }) => {
   const onPlaceSelected = (place) => {
     if (
@@ -27,37 +27,37 @@ const AutoComplete = ({
         name: place.formatted_address,
         lat: place.geometry.location.lat(),
         lon: place.geometry.location.lng(),
-      })
+      });
 
       placeMarker(
         place.geometry.location,
         // eslint-disable-next-line
-        mapRef.current.map_,
-      )
+        mapRef.current.map_
+      );
     }
-  }
+  };
 
   const onStartTyping = () => {
     setError({
       ...error,
       location: null,
-    })
-  }
+    });
+  };
 
   const onFocus = () => {
-    setIsDropDown(true)
-  }
+    setIsDropDown(true);
+  };
 
   const { ref } = usePlacesWidget({
     apiKey: process.env.REACT_APP_GOOGLE_MAP_KEY,
     onPlaceSelected: (place) => onPlaceSelected(place),
-  })
+  });
 
   return (
     <Autocomplete
-      className={`owm-selector w-100 ${error.location ? 'danger-border' : ''}`}
+      className={`owm-selector w-100 ${error.location ? "danger-border" : ""}`}
       onPlaceSelected={(place) => {
-        onPlaceSelected(place)
+        onPlaceSelected(place);
       }}
       onFocus={onFocus}
       onChange={onStartTyping}
@@ -65,8 +65,8 @@ const AutoComplete = ({
       fixedlocation={fixedLocation}
       setfixedlocation={setFixedLocation}
     />
-  )
-}
+  );
+};
 
 AutoComplete.propTypes = {
   setTempLocation: PropTypes.func,
@@ -75,7 +75,7 @@ AutoComplete.propTypes = {
   setError: PropTypes.func,
   setIsDropDown: PropTypes.func,
   fixedLocation: PropTypes.string,
- setFixedLocation: PropTypes.object
-}
+  setFixedLocation: PropTypes.object,
+};
 
-export default AutoComplete
+export default AutoComplete;

@@ -1,25 +1,26 @@
 import React from "react";
 
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 
 import { Button, Card, CardBody, Col, Row } from "reactstrap";
 
-const selectCurrency = (state) => state.auth.currency
+const selectCurrency = (state) => state.auth.currency;
 
 const HomeMarket = () => {
-
-  const currency = useSelector(selectCurrency)
+  const currency = useSelector(selectCurrency);
 
   return (
     <div className="container">
-          <Row className="home-row">
-      <h1>Custom Weather Products</h1>
-      <Col md="7" className="mt-2 mb-2">
-       <p> OpenWeatherMap provides access to 40-year historical weather data for
-        any location. Get various weather parameters, such as temperature,
-        precipitation, wind and many more.
-        </p>
-      </Col>
+      <Row className="home-row">
+        <h1>Custom Weather Products</h1>
+        <Col md="7" className="mt-2 mb-2">
+          <p>
+            {" "}
+            OpenWeatherMap provides access to 40-year historical weather data
+            for any location. Get various weather parameters, such as
+            temperature, precipitation, wind and many more.
+          </p>
+        </Col>
       </Row>
       <Row className="home-row d-xl-flex d-none">
         <Col md="5">
@@ -40,16 +41,25 @@ const HomeMarket = () => {
                 <Col md="4">
                   <h3>7 {currency}</h3>
                 </Col>
-                <Col md="4">
-                </Col>
-                </Row>
-                <Row>
+                <Col md="4"></Col>
+              </Row>
+              <Row>
                 <Col md="4">
                   <h6>per location</h6>
                 </Col>
                 <Col className="text-end md-8 text-nowrap">
-                  <Button className="btn button-neutral" href="https://openweathermap.org/history-bulk">Documentation</Button>
-                  <Button className="btn button-active" href="https://home.openweathermap.org/history_bulks/new">Place Order</Button>
+                  <Button
+                    className="btn button-neutral"
+                    href="https://openweathermap.org/history-bulk"
+                  >
+                    Documentation
+                  </Button>
+                  <Button
+                    className="btn button-active"
+                    href="https://home.openweathermap.org/history_bulks/new"
+                  >
+                    Place Order
+                  </Button>
                 </Col>
               </Row>
             </CardBody>
@@ -73,19 +83,27 @@ const HomeMarket = () => {
                 <Col md="4">
                   <h3>35 {currency}</h3>
                 </Col>
-                <Col md="4">
-                </Col>
-                </Row>
-                <Row>
+                <Col md="4"></Col>
+              </Row>
+              <Row>
                 <Col md="4">
                   <h6>per location</h6>
                 </Col>
                 <Col className="text-end md-8 text-nowrap">
-                <Button className="btn button-neutral" href="https://openweathermap.org/api/history-forecast-bulk">Documentation</Button>
-                  <Button className="btn button-active" href="https://home.openweathermap.org/history_forecast_bulks/new">Place Order</Button>
+                  <Button
+                    className="btn button-neutral"
+                    href="https://openweathermap.org/api/history-forecast-bulk"
+                  >
+                    Documentation
+                  </Button>
+                  <Button
+                    className="btn button-active"
+                    href="https://home.openweathermap.org/history_forecast_bulks/new"
+                  >
+                    Place Order
+                  </Button>
                 </Col>
               </Row>
-             
             </CardBody>
           </Card>
         </Col>
@@ -110,16 +128,25 @@ const HomeMarket = () => {
                 <Col md="4">
                   <h3>7 {currency}</h3>
                 </Col>
-                <Col md="4">
-                </Col>
-                </Row>
-                <Row>
+                <Col md="4"></Col>
+              </Row>
+              <Row>
                 <Col md="4">
                   <h6>per location</h6>
                 </Col>
                 <Col className="text-end md-8 text-nowrap">
-                  <Button className="btn button-neutral" href="https://openweathermap.org/history-bulk">Documentation</Button>
-                  <Button className="btn button-active" href="https://home.openweathermap.org/history_bulks/new">Place Order</Button>
+                  <Button
+                    className="btn button-neutral"
+                    href="https://openweathermap.org/history-bulk"
+                  >
+                    Documentation
+                  </Button>
+                  <Button
+                    className="btn button-active"
+                    href="https://home.openweathermap.org/history_bulks/new"
+                  >
+                    Place Order
+                  </Button>
                 </Col>
               </Row>
             </CardBody>
@@ -128,7 +155,7 @@ const HomeMarket = () => {
       </Row>
 
       <Row className="home-row d-xl-none d-sm-flex">
-      <Col>
+        <Col>
           <Card>
             <CardBody className="home">
               <h4>History Forecast Bulk</h4>
@@ -146,27 +173,34 @@ const HomeMarket = () => {
                 <Col md="4">
                   <h3>35 GBP</h3>
                 </Col>
-                <Col md="4">
-                </Col>
-                </Row>
-                <Row>
+                <Col md="4"></Col>
+              </Row>
+              <Row>
                 <Col md="4">
                   <h6>per location</h6>
                 </Col>
                 <Col className="text-end md-8 text-nowrap">
-                <Button className="btn button-neutral" href="https://openweathermap.org/api/history-forecast-bulk">Documentation</Button>
-                  <Button className="btn button-active" href="https://home.openweathermap.org/history_forecast_bulks/new">Place Order</Button>
+                  <Button
+                    className="btn button-neutral"
+                    href="https://openweathermap.org/api/history-forecast-bulk"
+                  >
+                    Documentation
+                  </Button>
+                  <Button
+                    className="btn button-active"
+                    href="https://home.openweathermap.org/history_forecast_bulks/new"
+                  >
+                    Place Order
+                  </Button>
                 </Col>
               </Row>
-             
             </CardBody>
           </Card>
         </Col>
       </Row>
 
-
       <Row className="home-row d-xl-flex d-none">
-      <h1>Historical Data Archives</h1>
+        <h1>Historical Data Archives</h1>
         <Col md="6">
           <Card>
             <CardBody className="home">
@@ -186,16 +220,25 @@ const HomeMarket = () => {
                 <Col md="4" className="text-nowrap">
                   from <h3>$3000</h3>
                 </Col>
-                <Col md="4">
-                </Col>
-                </Row>
-                <Row>
+                <Col md="4"></Col>
+              </Row>
+              <Row>
                 <Col md="4" className="text-nowrap">
                   <h6>per location</h6>
                 </Col>
                 <Col className="text-end md-8 text-nowrap">
-                <Button className="btn button-neutral" href="http://openweathermap.org/api/history-data-state">Documentation</Button>
-                  <Button className="btn button-active" href="https://home.openweathermap.org/zip_code_data/new">Place Order</Button>
+                  <Button
+                    className="btn button-neutral"
+                    href="http://openweathermap.org/api/history-data-state"
+                  >
+                    Documentation
+                  </Button>
+                  <Button
+                    className="btn button-active"
+                    href="https://home.openweathermap.org/zip_code_data/new"
+                  >
+                    Place Order
+                  </Button>
                 </Col>
               </Row>
             </CardBody>
@@ -203,9 +246,8 @@ const HomeMarket = () => {
         </Col>
       </Row>
 
-      
       <Row className="home-row d-xl-none d-sm-flex">
-      <h1>Historical Data Archives</h1>
+        <h1>Historical Data Archives</h1>
         <Col>
           <Card>
             <CardBody className="home">
@@ -225,16 +267,25 @@ const HomeMarket = () => {
                 <Col md="4" className="text-nowrap">
                   from <h3>$3000</h3>
                 </Col>
-                <Col md="4">
-                </Col>
-                </Row>
-                <Row>
+                <Col md="4"></Col>
+              </Row>
+              <Row>
                 <Col md="4" className="text-nowrap">
                   <h6>per location</h6>
                 </Col>
                 <Col className="text-end md-8 text-nowrap">
-                <Button className="btn button-neutral" href="http://openweathermap.org/api/history-data-state">Documentation</Button>
-                  <Button className="btn button-active" href="https://home.openweathermap.org/zip_code_data/new">Place Order</Button>
+                  <Button
+                    className="btn button-neutral"
+                    href="http://openweathermap.org/api/history-data-state"
+                  >
+                    Documentation
+                  </Button>
+                  <Button
+                    className="btn button-active"
+                    href="https://home.openweathermap.org/zip_code_data/new"
+                  >
+                    Place Order
+                  </Button>
                 </Col>
               </Row>
             </CardBody>

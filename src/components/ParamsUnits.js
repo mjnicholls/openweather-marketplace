@@ -1,17 +1,16 @@
-import React, { useState } from 'react'
-import { Button, Label, Form, FormGroup, Input, Row } from 'reactstrap'
-import { units } from '../config'
-import ReactBSAlert from 'react-bootstrap-sweetalert'
+import React, { useState } from "react";
+import { Button, Label, Form, FormGroup, Input, Row } from "reactstrap";
+import { units } from "../config";
+import ReactBSAlert from "react-bootstrap-sweetalert";
 
 const UnitsParams = () => {
+  const [alert, setAlert] = useState(null);
 
-const [alert, setAlert] = useState(null)
-
-const [fileValue, setFileValue] = useState()
+  const [fileValue, setFileValue] = useState();
 
   const hideAlert = () => {
-    setAlert(null)
-  }
+    setAlert(null);
+  };
 
   const unitAlert = () => {
     setAlert(
@@ -23,13 +22,13 @@ const [fileValue, setFileValue] = useState()
         showCloseButton
         customClass="bs-alerts"
       >
-            <Row className='text-start mt-4'>
-    <Form className="checkbox-radios ml-5">
-        {units.map(option => (
+        <Row className="text-start mt-4">
+          <Form className="checkbox-radios ml-5">
+            {units.map((option) => (
               <FormGroup check className="form-check-radio">
                 <Label check>
-              {option.label}
-              <Input
+                  {option.label}
+                  <Input
                     // id="individualRadioButton"
                     id={option.value}
                     name="file"
@@ -38,11 +37,11 @@ const [fileValue, setFileValue] = useState()
                     type="radio"
                     value={option.value}
                   />
-            </Label>
-            </FormGroup>
-        ))}
-    </Form>
-    </Row>
+                </Label>
+              </FormGroup>
+            ))}
+          </Form>
+        </Row>
         {/*}
               <ParamCategories
         key={"channel.key"}
@@ -51,23 +50,22 @@ const [fileValue, setFileValue] = useState()
         checked={checked}
       />
     */}
+      </ReactBSAlert>
+    );
+  };
 
-      </ReactBSAlert>,
-    )
-  }
+  return (
+    <>
+      {alert}
+      <Button className="button-neutral" onClick={unitAlert}>
+        Units: {fileValue ? fileValue : "Metric"}{" "}
+        <img
+          src="https://home.openweathermap.org/assets/icon_down_black.svg"
+          alt="icon down"
+        />
+      </Button>
+    </>
+  );
+};
 
-return (
-  <>
-  {alert}
-        <Button className='button-neutral'
-        onClick={unitAlert}>
-          Units:{' '}
-          {fileValue ? fileValue : 'Metric'}
-          {' '}
-      <img src="https://home.openweathermap.org/assets/icon_down_black.svg" alt="icon down" />
-        </Button>
-  </>
-)
-}
-
-export default UnitsParams
+export default UnitsParams;

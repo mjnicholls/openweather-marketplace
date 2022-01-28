@@ -28,8 +28,8 @@ const LocationForecast = ({
   setStartDate,
   endDate,
   setEndDate,
-  price, 
-  setPrice
+  price,
+  setPrice,
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -97,7 +97,6 @@ const LocationForecast = ({
               };
             } else {
               for (let j = 0; j < importedLocations.length; j++) {
-      
                 if (
                   importedLocations[j].lat === tmp.location.lat &&
                   importedLocations[j].lon === tmp.location.lon
@@ -107,7 +106,7 @@ const LocationForecast = ({
                     comment: "Duplicated value.",
                     value: row[1] + ", " + row[2],
                   };
-                  
+
                   break;
                 }
               }
@@ -120,24 +119,19 @@ const LocationForecast = ({
                   value: row[1] + ", " + row[2],
                 };
               }
-
             }
 
             if (Object.keys(error).length) {
               errors.push(error);
-           
             } else if (tmp.location) {
               importedLocations.push(tmp.location);
             }
 
             if (errors.length > 0) {
-              setPrice(price = ((results.data.length * 7) / errors.length) - 7 )
+              setPrice((price = (results.data.length * 7) / errors.length - 7));
+            } else {
+              setPrice((price = results.data.length * 7 - 7));
             }
-
-            else {
-              setPrice(price = ((results.data.length * 7) - 7))
-            }
-
           }
 
           if (errors.length) {
@@ -146,7 +140,6 @@ const LocationForecast = ({
           }
 
           if (importedLocations.length) {
-
             addLocations(importedLocations);
           }
           setIsImport(false);
@@ -154,7 +147,6 @@ const LocationForecast = ({
       });
     }
   };
-
 
   const [alert, setAlert] = React.useState(null);
 
@@ -250,7 +242,7 @@ const LocationForecast = ({
   const addLocations = (data) => {
     const newLocations = [...locations, ...data];
     setLocations(newLocations);
-    setPrice(price + 7)
+    setPrice(price + 7);
   };
 
   return (
@@ -291,7 +283,7 @@ const LocationForecast = ({
               />
             )}
           </Col>
-    
+
           <DatePickerForecast
             startDate={startDate}
             setStartDate={setStartDate}
@@ -409,13 +401,16 @@ const LocationForecast = ({
         )}
       </div>
 
-      <ParametersForecast parameters={parameters} setParameters={setParameters} />
+      <ParametersForecast
+        parameters={parameters}
+        setParameters={setParameters}
+      />
 
-      <LocationList 
-      locations={locations}
-      setLocations={setLocations}
-      price={price}
-      setPrice={setPrice}
+      <LocationList
+        locations={locations}
+        setLocations={setLocations}
+        price={price}
+        setPrice={setPrice}
       />
 
       {error.lat && <div className="invalid-feedback d-block">{error.lat}</div>}
@@ -425,21 +420,19 @@ const LocationForecast = ({
       )}
 
       <Row className="mt-4 flex-end price">
-      
         <Col>
-        <p style={{fontSize:"14pt"}}><i>To proceed please fill in the required details</i></p>
-        {' '}
+          <p style={{ fontSize: "14pt" }}>
+            <i>To proceed please fill in the required details</i>
+          </p>{" "}
         </Col>
         <Col>
-        <p style={{fontWeight:"bold", fontSize:"18pt"}}>Total {price} GBP</p>
+          <p style={{ fontWeight: "bold", fontSize: "18pt" }}>
+            Total {price} GBP
+          </p>
         </Col>
         <Col>
-        <Button className="button-neutral-square">
-          Place Order
-        </Button>
+          <Button className="button-neutral-square">Place Order</Button>
         </Col>
-
-   
       </Row>
     </div>
   );

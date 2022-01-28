@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-import GoogleMapReact from 'google-map-react'
-import PropTypes from 'prop-types'
+import GoogleMapReact from "google-map-react";
+import PropTypes from "prop-types";
 
-import { mapStyles } from '../assets/mapStyles'
-import { mapStyle } from '../utils/styles'
-import InfoWindow from './InfoWindow'
+import { mapStyles } from "../assets/mapStyles";
+import { mapStyle } from "../utils/styles";
+import InfoWindow from "./InfoWindow";
 
 const Map = ({
   mapRef,
@@ -22,8 +22,7 @@ const Map = ({
   const defaultCenter = {
     lat: 51.509865,
     lng: -0.118092,
-  }
-
+  };
 
   return (
     <div id="map" style={mapStyle}>
@@ -54,8 +53,8 @@ const Map = ({
         />
       </GoogleMapReact>
     </div>
-  )
-}
+  );
+};
 
 Map.propTypes = {
   mapRef: PropTypes.object,
@@ -68,6 +67,6 @@ Map.propTypes = {
   setPrice: PropTypes.func,
   locations: PropTypes.array,
   setLocations: PropTypes.func,
-}
+};
 
-export default Map
+export default Map;

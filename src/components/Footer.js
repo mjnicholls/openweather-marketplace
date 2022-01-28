@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
-import '../App.scss'
-import FooterSection from './FooterSection'
+import "../App.scss";
+import FooterSection from "./FooterSection";
 
 const FooterMarket = () => (
   <footer className="page-footer p-4">
@@ -9,7 +9,7 @@ const FooterMarket = () => (
       <div className="row">
         <div className="col-xl-4 mt-4">
           <FooterSection header="Weather Dashboard">
-            <ul className='text-start'>
+            <ul className="text-start">
               <li>
                 <a href="/" target="_blank">
                   About
@@ -31,7 +31,7 @@ const FooterMarket = () => (
 
         <div className="col-xl-4 mt-4">
           <FooterSection header="Terms and Conditions">
-            <ul className='text-start'>
+            <ul className="text-start">
               <li>
                 <a
                   href="https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf"
@@ -61,7 +61,7 @@ const FooterMarket = () => (
 
         <div className="col-xl-4 mt-4">
           <FooterSection header="About Us">
-            <ul className='text-start'>
+            <ul className="text-start">
               <li>
                 OpenWeather is a team of IT experts and data scientists that has
                 been practising deep weather data science since 2014. For each
@@ -172,6 +172,6 @@ const FooterMarket = () => (
       </div>
     </div>
   </footer>
-)
+);
 
-export default FooterMarket
+export default FooterMarket;

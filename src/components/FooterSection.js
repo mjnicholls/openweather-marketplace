@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 const FooterSection = (props) => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   return (
     <div>
@@ -20,14 +20,14 @@ const FooterSection = (props) => {
           className="d-xl-none"
           src="https://openweathermap.org/themes/openweathermap/assets/img/owm_icons/icon_down_black.svg"
           alt="arrow"
-          style={{ transform: open ? 'rotate(180deg)' : 'none' }}
+          style={{ transform: open ? "rotate(180deg)" : "none" }}
         />
       </div>
 
       <div className="d-xl-none pb-3 section-body-mobile">
         <div
           style={{
-            display: open ? 'block' : 'none',
+            display: open ? "block" : "none",
           }}
         >
           {props.children}
@@ -35,12 +35,11 @@ const FooterSection = (props) => {
       </div>
       <div className="d-none d-xl-block">{props.children}</div>
     </div>
-  )
-}
+  );
+};
 
 FooterSection.propTypes = {
   props: PropTypes.string,
-}
+};
 
-
-export default FooterSection
+export default FooterSection;

@@ -1,14 +1,20 @@
-import React from 'react'
+import React from "react";
 
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
-const InfoWindow = ({ location, showButton, setLocations, locations, price, setPrice }) => {
+const InfoWindow = ({
+  location,
+  showButton,
+  setLocations,
+  locations,
+  price,
+  setPrice,
+}) => {
   const onSetLocationClick = (e) => {
-    setLocations([...locations, location])
-    setPrice(price + 7)
-    e.stopPropagation()
-  }
-  
+    setLocations([...locations, location]);
+    setPrice(price + 7);
+    e.stopPropagation();
+  };
 
   return location.lat && location.lon ? (
     <div className="mapPop text-start">
@@ -18,7 +24,7 @@ const InfoWindow = ({ location, showButton, setLocations, locations, price, setP
         <div>
           <p>
             <b>Latitude: </b>
-            {location.lat.toFixed(6)}{' '}
+            {location.lat.toFixed(6)}{" "}
           </p>
           <p>
             <b>Longitude: </b>
@@ -38,13 +44,13 @@ const InfoWindow = ({ location, showButton, setLocations, locations, price, setP
         </div>
       </div>
     </div>
-  ) : null
-}
+  ) : null;
+};
 
 InfoWindow.propTypes = {
   location: PropTypes.object,
   setLocation: PropTypes.func,
   showButton: PropTypes.bool,
-}
+};
 
-export default InfoWindow
+export default InfoWindow;

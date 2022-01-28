@@ -7,13 +7,14 @@ import DownloadParams from "./ParamsDownload";
 import PropTypes from "prop-types";
 
 const Parameters = ({ parameters, setParameters }) => {
-  
-
   return (
     <>
       <Row className="mt-3">
         <Col>
-        <WeatherParams parameters={parameters} setParameters={setParameters} />
+          <WeatherParams
+            parameters={parameters}
+            setParameters={setParameters}
+          />
           <UnitsParams parameters={parameters} setParameters={setParameters} />
           <FileParams parameters={parameters} setParameters={setParameters} />
           <DownloadParams
@@ -29,6 +30,6 @@ const Parameters = ({ parameters, setParameters }) => {
 Parameters.propTypes = {
   parameters: PropTypes.object,
   setParameters: PropTypes.func,
-}
+};
 
 export default Parameters;

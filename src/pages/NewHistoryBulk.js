@@ -10,7 +10,7 @@ const NewHistoryBulk = () => {
 
   const [error, setError] = useState({});
 
-   /*eslint-disable-next-line*/
+  /*eslint-disable-next-line*/
   const [name, setName] = useState("");
 
   const [location, setLocation] = useState({
@@ -19,7 +19,7 @@ const NewHistoryBulk = () => {
     lon: "",
   });
 
-  const [price, setPrice] = useState(0)
+  const [price, setPrice] = useState(0);
 
   const [parameters, setParameters] = useState();
 
@@ -30,7 +30,6 @@ const NewHistoryBulk = () => {
   const [isLocationNameEdited, setIsLocationNameEdited] = useState(false);
 
   const [tempLocation, setTempLocation] = useState({ ...location });
-
 
   useEffect(() => {
     setTempLocation({
