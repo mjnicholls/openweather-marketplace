@@ -51,8 +51,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "@imaginary-cloud/react"
     ]
   },
   "browserslist": {
