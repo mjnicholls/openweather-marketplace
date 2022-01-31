@@ -49,11 +49,6 @@
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write \"{,!(node_modules)/**/}*.js\""
   },
-  "eslintConfig": {
-    "extends": [
-      "@imaginary-cloud/react"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
