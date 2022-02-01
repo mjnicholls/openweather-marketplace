@@ -3,8 +3,13 @@ import { Col, Row } from "reactstrap";
 import Map from "../components/Map";
 import placeMarker from "../utils/placeMarker";
 import Location from "../components/Location";
+import { useSelector } from "react-redux";
+
+const selectCurrency= (state) => state.auth.currency;
 
 const NewHistoryBulk = () => {
+
+  const currency = useSelector(selectCurrency);
   const mapRef = useRef(null);
   const searchBoxRef = useRef();
 
@@ -30,6 +35,21 @@ const NewHistoryBulk = () => {
   const [isLocationNameEdited, setIsLocationNameEdited] = useState(false);
 
   const [tempLocation, setTempLocation] = useState({ ...location });
+
+  const [checkedWeather, setCheckedWeather] = useState([]);
+
+  const [fileValue, setFileValue] = useState(false);
+
+  const [unitsValue, setUnitsValue] = useState();
+
+  const [downloadsValue, setDownloadsValue] = useState();
+
+  const [formatValue, setFormatValue] = useState()
+
+  const [startDate, setStartDate] = useState(new Date());
+
+  const [endDate, setEndDate] = useState(new Date());
+  
 
   useEffect(() => {
     setTempLocation({
@@ -83,12 +103,10 @@ const NewHistoryBulk = () => {
 
   const handleClickOutsideSearchBox = (e) => {
     if (searchBoxRef.current.contains(e.target)) {
-      // inside click
       return;
     }
     setIsDropDown(false);
-    // outside click
-    // ... do whatever on click outside here ...
+
   };
 
   const handleChange = (key, value) => {
@@ -97,8 +115,10 @@ const NewHistoryBulk = () => {
     setLocation(newLocation);
   };
 
+
   return (
     <div className="container">
+      {alert}
       <Row>
         <Col md="7" className="page-padding text-start">
           <div style={{ marginBottom: "100px" }}>
@@ -124,6 +144,21 @@ const NewHistoryBulk = () => {
             setParameters={setParameters}
             price={price}
             setPrice={setPrice}
+            checkedWeather={checkedWeather}
+            setCheckedWeather={setCheckedWeather}
+            fileValue={fileValue}
+            setFileValue={setFileValue}
+            unitsValue={unitsValue}
+            setUnitsValue={setUnitsValue}
+            downloadsValue={downloadsValue}
+            setDownloadsValue={setDownloadsValue}
+            formatValue={formatValue}
+            setFormatValue={setFormatValue}
+            setStartDate={setStartDate}
+            startDate={startDate}
+            setEndDate={setEndDate}
+            endDate={endDate}
+            currency={currency}
           />
         </Col>
 

@@ -17,6 +17,7 @@ export const units = [
   { value: "Standard", label: "Standard (Kelvin, hPa, meter/sec, mm/h)" },
 ];
 
+/*
 export const weathers = [
   { value: "Temperature", label: "Temperature" },
   { value: "Max Temp", label: "Max Temperature" },
@@ -31,6 +32,23 @@ export const weathers = [
   { value: "Conditions", label: "Weather Conditions" },
   { value: "Snow", label: "Snow" },
   { value: "Visibility", label: "Visibility" },
+];
+*/
+
+export const weathers = [
+  "Temperature",
+  "Max Temperature",
+  "Pressure",
+  "Clouds",
+  "Rain",
+  "Dew Point",
+  "Wind",
+  "Min Temp",
+  "Feels Like",
+  "Humidity",
+  "Conditions",
+  "Snow",
+  "Visibility",
 ];
 
 export const weathersHistory = [

@@ -3,10 +3,8 @@ import { Button, Label, Form, FormGroup, Input, Row } from "reactstrap";
 import { file } from "../config";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 
-const FileParams = () => {
+const FileParams = ({formatValue, setFormatValue}) => {
   const [alert, setAlert] = useState(null);
-
-  const [fileValue, setFileValue] = useState();
 
   const hideAlert = () => {
     setAlert(null);
@@ -32,8 +30,8 @@ const FileParams = () => {
                     // id="individualRadioButton"
                     id={option.value}
                     name="file"
-                    // checked={option.value === fileValue}
-                    onChange={() => setFileValue(option.value)}
+                    // checked={option.value === formatValue}
+                    onChange={() => setFormatValue(option.value)}
                     type="radio"
                     value={option.value}
                   />
@@ -50,7 +48,7 @@ const FileParams = () => {
     <>
       {alert}
       <Button className="button-neutral" onClick={fileAlert}>
-        File: {fileValue ? fileValue : "CSV"}{" "}
+        File: {formatValue ? formatValue : "CSV"}{" "}
         <img
           src="https://home.openweathermap.org/assets/icon_down_black.svg"
           alt="icon down"

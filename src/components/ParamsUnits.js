@@ -3,15 +3,14 @@ import { Button, Label, Form, FormGroup, Input, Row } from "reactstrap";
 import { units } from "../config";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 
-const UnitsParams = () => {
+const UnitsParams = ({unitsValue, setUnitsValue }) => {
   const [alert, setAlert] = useState(null);
-
-  const [fileValue, setFileValue] = useState();
 
   const hideAlert = () => {
     setAlert(null);
   };
 
+  
   const unitAlert = () => {
     setAlert(
       <ReactBSAlert
@@ -32,8 +31,8 @@ const UnitsParams = () => {
                     // id="individualRadioButton"
                     id={option.value}
                     name="file"
-                    // checked={option.value === fileValue}
-                    onChange={() => setFileValue(option.value)}
+                   // checked={option.value === setUnitsValue}
+                    onChange={() => setUnitsValue(option.value)}
                     type="radio"
                     value={option.value}
                   />
@@ -41,6 +40,7 @@ const UnitsParams = () => {
               </FormGroup>
             ))}
           </Form>
+          <p>{unitsValue}</p>
         </Row>
         {/*}
               <ParamCategories
@@ -58,7 +58,7 @@ const UnitsParams = () => {
     <>
       {alert}
       <Button className="button-neutral" onClick={unitAlert}>
-        Units: {fileValue ? fileValue : "Metric"}{" "}
+        Units: {unitsValue ? unitsValue : "Metric"}{" "}
         <img
           src="https://home.openweathermap.org/assets/icon_down_black.svg"
           alt="icon down"

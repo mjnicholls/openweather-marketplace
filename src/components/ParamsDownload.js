@@ -3,10 +3,8 @@ import { Button, Label, Form, FormGroup, Input, Row } from "reactstrap";
 import { download } from "../config";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 
-const DownloadParams = () => {
+const DownloadParams = ({downloadsValue, setDownloadsValue}) => {
   const [alert, setAlert] = useState(null);
-
-  const [fileValue, setFileValue] = useState();
 
   const hideAlert = () => {
     setAlert(null);
@@ -32,8 +30,8 @@ const DownloadParams = () => {
                     // id="individualRadioButton"
                     id={option.value}
                     name="file"
-                    // checked={option.value === fileValue}
-                    onChange={() => setFileValue(option.value)}
+                    // checked={option.value === downloadsValue}
+                    onChange={() => setDownloadsValue(option.value)}
                     type="radio"
                     value={option.value}
                   />
@@ -50,7 +48,7 @@ const DownloadParams = () => {
     <>
       {alert}
       <Button className="button-neutral" onClick={downloadAlert}>
-        Downloads: {fileValue ? fileValue : "All locations"}{" "}
+        Downloads: {downloadsValue ? downloadsValue : "All locations"}{" "}
         <img
           src="https://home.openweathermap.org/assets/icon_down_black.svg"
           alt="icon down"

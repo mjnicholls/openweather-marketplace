@@ -10,6 +10,7 @@ import ReactBSAlert from "react-bootstrap-sweetalert";
 import DatePickerMarket from "./DatePicker";
 import LocationList from "./LocationsList";
 import { locationConstructor } from "../utils/locationConstructor";
+import InvoiceSettingsBulk from "./InvoicePopBulk";
 
 const Location = ({
   mapRef,
@@ -32,10 +33,24 @@ const Location = ({
   setPrice,
   location,
   setLocation,
+  year,
+  country,
+  checkedWeather,
+  setCheckedWeather,
+  fileValue,
+  setFileValue,
+  unitsValue,
+  setUnitsValue,
+  downloadsValue,
+  setDownloadsValue,
+  formatValue,
+  setFormatValue,
+  currency
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
   const [isImport, setIsImport] = useState(false);
+  //const [fileValue, setFileValue] = useState([]);
 
   const setCoordinates = () => {
     setError({});
@@ -247,6 +262,32 @@ const Location = ({
     setPrice(price + 7);
   };
 
+
+  const checkoutAlert = () => {
+    setAlert(
+      <ReactBSAlert
+        customClass="agro-alert"
+        onConfirm={() => hideAlert()}
+        onCancel={() => hideAlert()}
+        showConfirm={false}
+      >
+        <InvoiceSettingsBulk
+          close={hideAlert}
+          locations={locations}
+          price={price}
+          startDate={startDate}
+          endDate={endDate}
+          checkedWeather={checkedWeather}
+          fileValue={fileValue}
+          unitsValue={unitsValue}
+          downloadsValue={downloadsValue}
+          formatValue={formatValue}
+          currency={currency}
+        />
+      </ReactBSAlert>
+    );
+  };
+
   return (
     <div className="location">
       {alert}
@@ -403,7 +444,20 @@ const Location = ({
         )}
       </div>
 
-      <Parameters parameters={parameters} setParameters={setParameters} />
+      <Parameters
+        parameters={parameters}
+        setParameters={setParameters}
+        checkedWeather={checkedWeather}
+        setCheckedWeather={setCheckedWeather}
+        fileValue={fileValue}
+        setFileValue={setFileValue}
+        unitsValue={unitsValue}
+        setUnitsValue={setUnitsValue}
+        downloadsValue={downloadsValue}
+        setDownloadsValue={setDownloadsValue}
+        formatValue={formatValue}
+        setFormatValue={setFormatValue}
+      />
 
       <LocationList
         locations={locations}
@@ -428,11 +482,31 @@ const Location = ({
         </Col>
         <Col>
           <p style={{ fontWeight: "bold", fontSize: "18pt" }}>
-            Total {price} GBP
+            Total {price} {currency}
           </p>
         </Col>
         <Col>
-          <Button className="button-neutral-square">Place Order</Button>
+          {locations && startDate && endDate ? (
+            <Col>
+              <Button
+                data-dismiss="modal"
+                type="button"
+                onClick={(e) => {
+                  checkoutAlert(false);
+                  e.stopPropagation();
+                }}
+                className="button-orange-square"
+              >
+                Place Order
+              </Button>
+            </Col>
+          ) : (
+            <Col>
+              <Button disabled className="button-neutral-square">
+                Place Order
+              </Button>
+            </Col>
+          )}
         </Col>
       </Row>
     </div>
