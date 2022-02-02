@@ -6,20 +6,47 @@ import FileParams from "./ParamsFile";
 import DownloadParams from "./ParamsDownload";
 import PropTypes from "prop-types";
 
-const ParametersForecast = ({ parameters, setParameters }) => {
+const ParametersForecast = ({   
+  checkedWeather,
+  setCheckedWeather,
+  parametersUnits,
+  setParametersUnits,
+  downloadsValue,
+  setDownloadsValue,
+  formatValue,
+  setFormatValue,
+  fileValue,
+  setFileValue,
+  unitsValue,
+  setUnitsValue,
+  checked,
+  setChecked
+ }) => {
   return (
     <>
       <Row className="mt-3">
         <Col>
           <WeatherHistoryParams
-            parameters={parameters}
-            setParameters={setParameters}
+           checkedWeather={checkedWeather}
+           setCheckedWeather={setCheckedWeather}
+           fileValue={fileValue}
+           setFileValue={setFileValue}
+           checked={checked}
+           setChecked={setChecked}
           />
-          <UnitsParams parameters={parameters} setParameters={setParameters} />
-          <FileParams parameters={parameters} setParameters={setParameters} />
+         <UnitsParams
+            parametersUnits={parametersUnits}
+            setParametersUnits={setParametersUnits}
+            unitsValue={unitsValue}
+            setUnitsValue={setUnitsValue}
+          />
+          <FileParams
+            formatValue={formatValue}
+            setFormatValue={setFormatValue}
+          />
           <DownloadParams
-            parameters={parameters}
-            setParameters={setParameters}
+            downloadsValue={downloadsValue}
+            setDownloadsValue={setDownloadsValue}
           />
         </Col>
       </Row>

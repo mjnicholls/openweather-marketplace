@@ -3,8 +3,14 @@ import { Col, Row } from "reactstrap";
 import Map from "../components/Map";
 import placeMarker from "../utils/placeMarker";
 import LocationForecast from "../components/LocationsForecast";
+import { useSelector } from "react-redux";
+
+const selectCurrency = (state) => state.auth.currency;
 
 const HistoryForecastBulk = () => {
+
+  const currency = useSelector(selectCurrency);
+
   const mapRef = useRef(null);
   const searchBoxRef = useRef();
 
@@ -30,6 +36,25 @@ const HistoryForecastBulk = () => {
   const [isLocationNameEdited, setIsLocationNameEdited] = useState(false);
 
   const [tempLocation, setTempLocation] = useState({ ...location });
+
+  const [checkedWeather, setCheckedWeather] = useState([]);
+
+  const [fileValue, setFileValue] = useState(false);
+
+  const [unitsValue, setUnitsValue] = useState();
+
+  const [downloadsValue, setDownloadsValue] = useState();
+
+  const [formatValue, setFormatValue] = useState()
+
+  const [startDate, setStartDate] = useState(new Date());
+
+  const [endDate, setEndDate] = useState(new Date());
+
+  const [checked, setChecked] = useState([]);
+
+  const [importPrice, setImportPrice] = useState(0);
+
 
   useEffect(() => {
     setTempLocation({
@@ -124,6 +149,25 @@ const HistoryForecastBulk = () => {
             setParameters={setParameters}
             price={price}
             setPrice={setPrice}
+            checkedWeather={checkedWeather}
+            setCheckedWeather={setCheckedWeather}
+            fileValue={fileValue}
+            setFileValue={setFileValue}
+            unitsValue={unitsValue}
+            setUnitsValue={setUnitsValue}
+            downloadsValue={downloadsValue}
+            setDownloadsValue={setDownloadsValue}
+            formatValue={formatValue}
+            setFormatValue={setFormatValue}
+            setStartDate={setStartDate}
+            startDate={startDate}
+            setEndDate={setEndDate}
+            endDate={endDate}
+            currency={currency}
+            checked={checked}
+            setChecked={setChecked}
+            importPrice={importPrice}
+            setImportPrice={setImportPrice}
           />
         </Col>
 

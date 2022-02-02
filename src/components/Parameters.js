@@ -21,6 +21,8 @@ const Parameters = ({
   setFileValue,
   unitsValue,
   setUnitsValue,
+  checked,
+  setChecked
 }) => {
   return (
     <>
@@ -33,6 +35,8 @@ const Parameters = ({
             setparametersWeather={setparametersWeather}
             fileValue={fileValue}
             setFileValue={setFileValue}
+            checked={checked}
+            setChecked={setChecked}
           />
           <UnitsParams
             parametersUnits={parametersUnits}

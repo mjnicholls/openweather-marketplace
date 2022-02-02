@@ -1053,8 +1053,6 @@ input.input-marketplace, input.marketplace-input__input {
 
 .checkbox-radios {
 
-  columns: 2 auto;
-
   input {
     padding: 13px;
     margin-right: 10px;
@@ -1141,9 +1139,9 @@ input[type="file"] {
 
 .button-orange-square {
   padding: 10pt;
-  border: 1px solid rgba(72, 72, 74, 0.4);
-  background-color: $brand-orange;
-  color: #ffffff;
+  border: 1px solid $brand-orange;
+  background-color: white;
+  color: $brand-orange;
 
   &:hover {
     background-color: $brand-orange;
@@ -1199,11 +1197,10 @@ ul li:before {
 
 .line-neutral {
   display: block;
-  height: 10px;
   border: 0;
   border-top: 1px solid grey;
   margin: 1em 0;
-  padding: 1pt;
+  padding: 1.5pt;
   background-color: grey;
   color: grey;
 }
@@ -1214,7 +1211,7 @@ ul li:before {
   border: 0;
   border-top: 1px solid black;
   margin: 1em 0;
-  padding: 1pt;
+  padding: 1.5pt;
   background-color: black;
   color: black;
 }
@@ -1263,4 +1260,10 @@ ul li:before {
 .checked-item,
 .not-checked-item {
   margin-left: 10px;
+}
+
+.step-bulk {
+
+    margin-bottom: 5px;
+  
 }

@@ -26,6 +26,8 @@ const NewHistoryBulk = () => {
 
   const [price, setPrice] = useState(0);
 
+  const [importPrice, setImportPrice] = useState(0);
+
   const [parameters, setParameters] = useState();
 
   const [locations, setLocations] = useState([]);
@@ -49,6 +51,8 @@ const NewHistoryBulk = () => {
   const [startDate, setStartDate] = useState(new Date());
 
   const [endDate, setEndDate] = useState(new Date());
+
+  const [checked, setChecked] = useState([]);
   
 
   useEffect(() => {
@@ -159,6 +163,10 @@ const NewHistoryBulk = () => {
             setEndDate={setEndDate}
             endDate={endDate}
             currency={currency}
+            checked={checked}
+            setChecked={setChecked}
+            importPrice={importPrice}
+            setImportPrice={setImportPrice}
           />
         </Col>
 

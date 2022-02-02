@@ -33,8 +33,6 @@ const Location = ({
   setPrice,
   location,
   setLocation,
-  year,
-  country,
   checkedWeather,
   setCheckedWeather,
   fileValue,
@@ -45,12 +43,18 @@ const Location = ({
   setDownloadsValue,
   formatValue,
   setFormatValue,
-  currency
+  currency,
+  checked,
+  setChecked,
+  importPrice,
+  setImportPrice
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
   const [isImport, setIsImport] = useState(false);
   //const [fileValue, setFileValue] = useState([]);
+
+  const total = price + importPrice
 
   const setCoordinates = () => {
     setError({});
@@ -145,9 +149,11 @@ const Location = ({
             }
 
             if (errors.length > 0) {
-              setPrice((price = (results.data.length * 7) / errors.length - 7));
+              setImportPrice(importPrice = (results.data.length * 7) / errors.length - 7);
+
             } else {
-              setPrice((price = results.data.length * 7 - 7));
+              setImportPrice(importPrice = results.data.length * 7 - 7);
+ 
             }
           }
 
@@ -276,6 +282,8 @@ const Location = ({
           locations={locations}
           price={price}
           startDate={startDate}
+          importPrice={importPrice}
+          setImportPrice={setImportPrice}
           endDate={endDate}
           checkedWeather={checkedWeather}
           fileValue={fileValue}
@@ -283,6 +291,8 @@ const Location = ({
           downloadsValue={downloadsValue}
           formatValue={formatValue}
           currency={currency}
+          checked={checked}
+          setChecked={setChecked}
         />
       </ReactBSAlert>
     );
@@ -457,6 +467,8 @@ const Location = ({
         setDownloadsValue={setDownloadsValue}
         formatValue={formatValue}
         setFormatValue={setFormatValue}
+        checked={checked}
+        setChecked={setChecked}
       />
 
       <LocationList
@@ -482,11 +494,11 @@ const Location = ({
         </Col>
         <Col>
           <p style={{ fontWeight: "bold", fontSize: "18pt" }}>
-            Total {price} {currency}
+            Total {total} {currency}
           </p>
         </Col>
         <Col>
-          {locations && startDate && endDate ? (
+          {locations.length >= 1 && startDate && endDate ? (
             <Col>
               <Button
                 data-dismiss="modal"

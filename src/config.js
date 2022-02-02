@@ -52,6 +52,17 @@ export const weathers = [
 ];
 
 export const weathersHistory = [
+  "Temperature",
+  "Pressure",
+  "Clouds",
+  "Dew Point",
+  "Wind",
+  "Humidity",
+  "Precipitation",
+];
+
+/*
+export const weathersHistory = [
   { value: "Temperature", label: "Temperature" },
   { value: "Pressure", label: "Pressure" },
   { value: "Clouds", label: "Clouds" },
@@ -60,6 +71,7 @@ export const weathersHistory = [
   { value: "Humidity", label: "Humidity" },
   { value: "Precipitation", label: "Precipitation" },
 ];
+*/
 
 export const statesOfAmerica = [
   {

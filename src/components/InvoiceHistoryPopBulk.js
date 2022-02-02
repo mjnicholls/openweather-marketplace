@@ -18,7 +18,6 @@ const InvoiceSettingsBulk = ({
   country,
   year,
   price,
-  importPrice,
   checkedWeather,
   unitsValue,
   fileValue,
@@ -27,7 +26,8 @@ const InvoiceSettingsBulk = ({
   locations,
   currency,
   checked,
-  setChecked
+  setChecked,
+  importPrice,
 }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
@@ -332,7 +332,6 @@ const InvoiceSettingsBulk = ({
           year={year}
           country={country}
           price={price}
-          importPrice={importPrice}
           endDate={endDate}
           startDate={startDate}
           checkedWeather={checkedWeather}
@@ -344,6 +343,7 @@ const InvoiceSettingsBulk = ({
           currency={currency}
           checked={checked}
           setChecked={setChecked}
+          importPrice={importPrice}
         />
       ) : null}
       {step === 1 ? (

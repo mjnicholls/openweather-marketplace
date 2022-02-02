@@ -7,16 +7,16 @@ const Step0Bulk = ({
     startDate,
     endDate,
     price,
-    importPrice,
     checkedWeather,
     unitsValue,
     formatValue,
     downloadsValue,
     locations,
     currency,
+    importPrice
 }) => {
 
-  const totalPrice = price + importPrice
+    const totalPrice = price + importPrice
 
   return (
     <div>
@@ -39,8 +39,8 @@ const Step0Bulk = ({
       <Row className="text-start step-bulk">
         <Col className="bold">Weather Parameters:</Col>
         <Col>
-          {checkedWeather.length === 0 ? 'Temperature, Max Temperature, Pressure, Clouds, Rain, Dew Point, Wind, Min Temp, Feels Like, Humidity, Conditions, Snow, Visibility' : checkedWeather.map((total, item) => {
-        return <Col>{total}</Col>
+          {checkedWeather.length === 0 ? 'All (Temperature, Max Temperature, Pressure, Clouds, Rain, Dew Point, Wind, Min Temp, Feels Like, Humidity, Conditions, Snow, Visibility)' : checkedWeather.map((total, item) => {
+        return <Col key={item}>{total}</Col>
       })}
         </Col>
       </Row>

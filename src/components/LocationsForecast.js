@@ -10,6 +10,7 @@ import ReactBSAlert from "react-bootstrap-sweetalert";
 import DatePickerForecast from "./DatePickerForecast";
 import LocationList from "./LocationsList";
 import { locationConstructor } from "../utils/locationConstructor";
+import InvoiceSettingsBulk from "./InvoiceHistoryPopBulk";
 
 const LocationForecast = ({
   mapRef,
@@ -30,10 +31,31 @@ const LocationForecast = ({
   setEndDate,
   price,
   setPrice,
+  location,
+  setLocation,
+  year,
+  country,
+  checkedWeather,
+  setCheckedWeather,
+  fileValue,
+  setFileValue,
+  unitsValue,
+  setUnitsValue,
+  downloadsValue,
+  setDownloadsValue,
+  formatValue,
+  setFormatValue,
+  currency,
+  checked,
+  setChecked, 
+  importPrice,
+  setImportPrice
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
   const [isImport, setIsImport] = useState(false);
+
+  const total = price + importPrice
 
   const setCoordinates = () => {
     setError({});
@@ -128,9 +150,11 @@ const LocationForecast = ({
             }
 
             if (errors.length > 0) {
-              setPrice((price = (results.data.length * 7) / errors.length - 7));
+              setImportPrice(importPrice = (results.data.length * 7) / errors.length - 7);
+
             } else {
-              setPrice((price = results.data.length * 7 - 7));
+              setImportPrice(importPrice = results.data.length * 7 - 7);
+ 
             }
           }
 
@@ -243,6 +267,35 @@ const LocationForecast = ({
     const newLocations = [...locations, ...data];
     setLocations(newLocations);
     setPrice(price + 7);
+  };
+
+  const checkoutAlert = () => {
+    setAlert(
+      <ReactBSAlert
+        customClass="agro-alert"
+        onConfirm={() => hideAlert()}
+        onCancel={() => hideAlert()}
+        showConfirm={false}
+      >
+        <InvoiceSettingsBulk
+          close={hideAlert}
+          locations={locations}
+          price={price}
+          startDate={startDate}
+          endDate={endDate}
+          checkedWeather={checkedWeather}
+          fileValue={fileValue}
+          unitsValue={unitsValue}
+          downloadsValue={downloadsValue}
+          formatValue={formatValue}
+          currency={currency}
+          checked={checked}
+          setChecked={setChecked}
+          importPrice={importPrice}
+          setImportPrice={setImportPrice}
+        />
+      </ReactBSAlert>
+    );
   };
 
   return (
@@ -404,6 +457,20 @@ const LocationForecast = ({
       <ParametersForecast
         parameters={parameters}
         setParameters={setParameters}
+        parameters={parameters}
+        setParameters={setParameters}
+        checkedWeather={checkedWeather}
+        setCheckedWeather={setCheckedWeather}
+        fileValue={fileValue}
+        setFileValue={setFileValue}
+        unitsValue={unitsValue}
+        setUnitsValue={setUnitsValue}
+        downloadsValue={downloadsValue}
+        setDownloadsValue={setDownloadsValue}
+        formatValue={formatValue}
+        setFormatValue={setFormatValue}
+        checked={checked}
+        setChecked={setChecked}
       />
 
       <LocationList
@@ -427,11 +494,31 @@ const LocationForecast = ({
         </Col>
         <Col>
           <p style={{ fontWeight: "bold", fontSize: "18pt" }}>
-            Total {price} GBP
+            Total {total} GBP
           </p>
         </Col>
         <Col>
-          <Button className="button-neutral-square">Place Order</Button>
+          {locations.length >= 1 && startDate && endDate ? (
+            <Col>
+              <Button
+                data-dismiss="modal"
+                type="button"
+                onClick={(e) => {
+                  checkoutAlert(false);
+                  e.stopPropagation();
+                }}
+                className="button-orange-square"
+              >
+                Place Order
+              </Button>
+            </Col>
+          ) : (
+            <Col>
+              <Button disabled className="button-neutral-square">
+                Place Order
+              </Button>
+            </Col>
+          )}
         </Col>
       </Row>
     </div>

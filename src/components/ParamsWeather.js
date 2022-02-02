@@ -3,7 +3,8 @@ import { Button, Col, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import CheckyBox from "./checkBox";
 
-const WeatherParams = ({checkedWeather, setCheckedWeather, fileValue, setFileValue}) => {
+const WeatherParams = ({checkedWeather, setCheckedWeather, fileValue, setFileValue, checked,
+  setChecked}) => {
   const [alert, setAlert] = useState(null);
 
   //const [fileValue, setFileValue] = useState([]);
@@ -25,7 +26,13 @@ const WeatherParams = ({checkedWeather, setCheckedWeather, fileValue, setFileVal
         <Row className="text-start mt-4">
    
           <Col>
-      <CheckyBox checkedWeather={checkedWeather} setCheckedWeather={setCheckedWeather} setFileValue={setFileValue} />
+      <CheckyBox
+      checkedWeather={checkedWeather}
+      setCheckedWeather={setCheckedWeather}
+      setFileValue={setFileValue}
+      checked={checked}
+      setChecked={setChecked}
+      />
           {/*}
             <Form className="checkbox-radios ml-5">
               {weathers

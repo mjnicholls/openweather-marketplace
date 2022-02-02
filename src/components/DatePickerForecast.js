@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import DatePicker from "react-datepicker";
 import { getMonth, getYear, subDays } from "date-fns";
 import range from "lodash/range";
 import { Col, Form, Label } from "reactstrap";
 import "react-datepicker/dist/react-datepicker.css";
 
-const DatePickerForecast = () => {
-  const [startDate, setStartDate] = useState(new Date());
-
-  const [endDate, setEndDate] = useState(new Date());
+const DatePickerForecast = ({startDate, setStartDate, endDate, setEndDate}) => {
 
   const years = range(2017, getYear(new Date()) + 1, 1);
 
