@@ -1,9 +1,12 @@
+
+
 import axios from 'axios'
 
 import {
   accountInfo,
   invoiceUpdate,
   confirmVat,
+  test
 } from './index'
 
 export const createBillingDetails = (params) =>
@@ -21,3 +24,7 @@ export const updateBillingDetails = (params) =>
   export const getAccountInfo = () =>
   /** Get account preferences */
   axios.get(accountInfo)
+
+  export const stripe = () => axios.put(test)
+
+  

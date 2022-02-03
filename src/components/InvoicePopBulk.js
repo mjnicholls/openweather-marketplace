@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button, Col, Form, Label, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-import { confirmVatNumber, getAccountInfo } from "../api/personalAccountAPI";
+import { getAccountInfo, stripe} from "../api/personalAccountAPI";
 import PropTypes from "prop-types";
+import axios from 'axios';
+import { loadStripe } from '@stripe/stripe-js';
+import { validatePhoneNumber, validateVat } from "../utils/validation";
 
 import Step0Bulk from "./Step0Bulk";
 import Step1 from "./Step1";
@@ -11,6 +14,8 @@ import Step2 from "./Step2";
 
 const selectInvoice = (state) => state.auth.invoiceInfo;
 const selectEmail = (state) => state.auth.email;
+const selectProduct = (state) => state.auth.prices
+//const selectGon = (state) => state.auth.gonObject
 
 const InvoiceSettingsBulk = ({
   startDate,
@@ -36,6 +41,8 @@ const InvoiceSettingsBulk = ({
 
   const invoice = useSelector(selectInvoice);
   const email = useSelector(selectEmail);
+  //const gon = useSelector(selectGon);
+  const prices = useSelector(selectProduct)
 
   const [alert, setAlert] = React.useState(null);
 
@@ -54,7 +61,13 @@ const InvoiceSettingsBulk = ({
       email: !email.length,
       country: !invoiceSettings.country.length,
       phone: !invoiceSettings.phone.length,
-    };
+    }
+    if (invoiceSettings.phone) {
+      const phoneValidation = validatePhoneNumber(invoiceSettings.phone)
+      if (phoneValidation) {
+        newError.phone = phoneValidation
+      }
+    }
 
     setError(newError);
 
@@ -64,23 +77,86 @@ const InvoiceSettingsBulk = ({
       console.log("Please fill in required fields");
       return;
     }
-    if (
-      invoiceSettings.type === "organisation" &&
-      invoiceSettings.vat_id.length
-    ) {
-      confirmVatNumber(invoiceSettings.vat_id)
-        .then(() => {
-          // eslint-disable-next-line
-          isNew ? billingInfoCreate() : billingInfoUpdate();
-        })
-        .catch(() => {
-          console.log("Incorrect VAT number");
-        });
+
+    const invoiceDetails = { ...invoiceSettings }
+
+    if (invoiceDetails.type === 'individual') {
+      delete invoiceDetails.organisation
+      delete invoiceDetails.vat_id
     } else {
-      // eslint-disable-next-line
-      isNew ? billingInfoCreate() : billingInfoUpdate();
+      delete invoiceDetails.title
+      delete invoiceDetails.first_name
+      delete invoiceDetails.last_name
     }
-  };
+    invoiceDetails.legal_form = invoiceDetails.type
+    delete invoiceDetails.type
+
+    const data = {
+      utf8: "✓",
+      authenticity_token: document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '',
+      user: {
+        email: email,
+      },
+      invoice_form: invoiceDetails,
+    }
+
+    axios.post('https://home.openweathermap.org/history_bulks/', data, {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      })
+    .then((res) => {
+      console.log(
+          'Successfully subscribed. You will be redirected to stripe page'
+      )
+      loadStripe(res.stripe_publishable_key).then((stripe) => {
+        stripe.redirectToCheckout({
+          sessionId: res.stripe_session_id,
+        })
+      })
+    })
+    .catch((err) => {
+      console.log(`Error: ${err.message}`)
+    })
+
+  }
+
+
+  const buy = () => {
+
+      let data = {
+        utf8: "✓",
+        authenticity_token: document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '',
+        invoice_info: invoiceSettings,
+        account: {
+          email: email,
+        }
+      };
+      data = prices.hb
+
+     axios.post(data, {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      })
+        .then(response => {
+          newError({})
+          let error = response.data.error;
+          if (error) {
+            newError = error;
+          } else {
+            const {stripe_session_id, stripe_publishable_key} = response.data;
+            loadStripe(stripe_publishable_key)
+              .then(stripe => {
+                stripe.redirectToCheckout({sessionId: stripe_session_id})
+              })
+              .catch(err => {newError = err;})
+              }})
+        .catch(err => {
+          newError({})
+          newError = 'Something went wrong';
+          console.log(err)
+        })
+      }
+  
 
   const decrementStep = () => {
     if (step === 2) {
@@ -131,17 +207,40 @@ const InvoiceSettingsBulk = ({
           newError.email = !email.length;
         }
       }
-      console.log("newError", newError);
-      setError(newError);
+    {/*
+      if (invoiceSettings.vat_id) {
+        validateVat(invoiceSettings.vat_id, invoiceSettings.country)
+          .then(() => {
+            invoiceSettings.vat_id = invoiceSettings.vat_id
+          })
+          .catch(() => {
+            newError.vat_id = 'VAT ID is not valid'
+          })
+          .finally(() => {
+            if (Object.keys(newError).length) {
+              setError(newError)
+              return
+            }
+          })
+      } 
+    } else {
       if (Object.keys(newError).length) {
-        // eslint-disable-next-line
-        return;
-        // eslint-disable-next-line
+        setError(newError)
+        return
       } else {
         setStep(2);
       }
+    */}
+    if (Object.keys(newError).length) {
+      setError(newError)
+      return
+    } else {
+      setStep(2);
     }
+    }
+
   };
+
 
   useEffect(() => {
     refreshData();
@@ -158,10 +257,6 @@ const InvoiceSettingsBulk = ({
     });
   };
 
-  const errorAndConfirm = () => {
-    confirmInvoice();
-    sorryAlert();
-  };
 
   const sorryAlert = () => {
     setAlert(
@@ -425,7 +520,7 @@ const InvoiceSettingsBulk = ({
                   className="button-active"
                   color="primary"
                   type="button"
-                  onClick={errorAndConfirm}
+                  onClick={confirmInvoice}
                   style={{
                     float: "right",
                   }}

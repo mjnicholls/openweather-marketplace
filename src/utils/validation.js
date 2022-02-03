@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 import { noBlankErrorMessage } from '../config'
 
 export const validateEmail = (email) => {
@@ -25,4 +27,26 @@ export const coordinatesError = (lat, lon) => {
     return error
   }
   return null
+}
+
+export const validatePhoneNumber = (val) => {
+  let res
+  if (val.length > 20) {
+    res = "Phone number is too long"
+  } else {
+    let re = /^[0-9A-Za-z\s-+()]+$/
+    if (!re.test(val)) {
+      res = "Can only contain digits, letters and +, (), - characters"
+    }
+  }
+  return res
+}
+
+export const validateVat = (vat, country) => {
+  /** Confirm VAT
+   * Override base url - the method is at the moment at another domain,
+   * it might change in the future
+   * API Response: 200 - correct VAT, 422 - incorrect VAT */
+  const url = `${confirmVat}?vat_id=${vat}&country=${country}`
+  return axios({ url, baseURL: '' })
 }
