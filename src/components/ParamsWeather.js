@@ -3,7 +3,7 @@ import { Button, Col, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import CheckyBox from "./checkBox";
 
-const WeatherParams = ({checkedWeather, setCheckedWeather, fileValue, setFileValue, checked,
+const WeatherParams = ({on, setOn, checkedWeather, setCheckedWeather, fileValue, setFileValue, checked,
   setChecked}) => {
   const [alert, setAlert] = useState(null);
 
@@ -32,6 +32,8 @@ const WeatherParams = ({checkedWeather, setCheckedWeather, fileValue, setFileVal
       setFileValue={setFileValue}
       checked={checked}
       setChecked={setChecked}
+      on={on}
+      setOn={setOn}
       />
           {/*}
             <Form className="checkbox-radios ml-5">

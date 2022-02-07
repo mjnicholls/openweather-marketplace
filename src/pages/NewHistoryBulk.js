@@ -5,13 +5,15 @@ import placeMarker from "../utils/placeMarker";
 import Location from "../components/Location";
 import { useSelector } from "react-redux";
 
-const selectCurrency= (state) => state.auth.currency;
+const selectCurrency = (state) => state.auth.currency;
+const selectInvoice = (state) => state.auth.invoiceInfo;
 
 const NewHistoryBulk = () => {
 
   const currency = useSelector(selectCurrency);
   const mapRef = useRef(null);
   const searchBoxRef = useRef();
+  const invoice = useSelector(selectInvoice);
 
   const [error, setError] = useState({});
 
@@ -54,6 +56,10 @@ const NewHistoryBulk = () => {
 
   const [checked, setChecked] = useState([]);
   
+  const [invoiceSettings, setInvoiceSettings] = useState(invoice);
+
+  const [on, setOn] = useState('On')
+
 
   useEffect(() => {
     setTempLocation({
@@ -122,7 +128,7 @@ const NewHistoryBulk = () => {
 
   return (
     <div className="container">
-      {alert}
+ 
       <Row>
         <Col md="7" className="page-padding text-start">
           <div style={{ marginBottom: "100px" }}>
@@ -167,6 +173,10 @@ const NewHistoryBulk = () => {
             setChecked={setChecked}
             importPrice={importPrice}
             setImportPrice={setImportPrice}
+            setInvoiceSettings={setInvoiceSettings}
+            invoiceSettings={invoiceSettings}
+            on={on}
+            setOn={setOn}
           />
         </Col>
 

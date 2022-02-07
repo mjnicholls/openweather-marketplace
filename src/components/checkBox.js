@@ -7,8 +7,8 @@ const CheckyBox = ({ setCheckedWeather, setFileValue }) => {
   const [checked, setChecked] = useState([]);
   const checkList = weathers;
 
+  const [on, setOn] = useState('')
 
-  // Add/Remove checked item from list
   const handleCheck = (event) => {
     var updatedList = [...checked];
     if (event.target.checked) {
@@ -21,6 +21,7 @@ const CheckyBox = ({ setCheckedWeather, setFileValue }) => {
     setFileValue(true)
   };
 
+  console.log('on', on)
   // Generate string of checked items
   const checkedItems = checked.length
     ? checked.reduce((total, item) => {
@@ -31,11 +32,11 @@ const CheckyBox = ({ setCheckedWeather, setFileValue }) => {
 
     console.log('checked', checkedItems)
 
-    //console.log('hey', checkedWeather)
 
   // Return classes based on whether item is checked
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
+    
 
   return (
   <>
@@ -46,6 +47,7 @@ const CheckyBox = ({ setCheckedWeather, setFileValue }) => {
                <span className={isChecked(item)}>{item}</span>
               <Input value={item} type="checkbox" onChange={handleCheck} />
               </Label>
+              <p></p>
             </FormGroup>
           ))}
 </Form>

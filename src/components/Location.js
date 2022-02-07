@@ -47,7 +47,11 @@ const Location = ({
   checked,
   setChecked,
   importPrice,
-  setImportPrice
+  setImportPrice,
+  body,
+  setBody,
+  on,
+  setOn
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -293,6 +297,10 @@ const Location = ({
           currency={currency}
           checked={checked}
           setChecked={setChecked}
+          body={body}
+          setBody={setBody}
+          on={on}
+          setOn={setOn}
         />
       </ReactBSAlert>
     );
@@ -469,6 +477,8 @@ const Location = ({
         setFormatValue={setFormatValue}
         checked={checked}
         setChecked={setChecked}
+        on={on}
+        setOn={setOn}
       />
 
       <LocationList

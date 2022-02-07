@@ -15,6 +15,7 @@ import Step2 from "./Step2";
 const selectInvoice = (state) => state.auth.invoiceInfo;
 const selectEmail = (state) => state.auth.email;
 const selectProduct = (state) => state.auth.prices
+const selectState = (state) => state.auth
 //const selectGon = (state) => state.auth.gonObject
 
 const InvoiceSettingsBulk = ({
@@ -32,7 +33,9 @@ const InvoiceSettingsBulk = ({
   locations,
   currency,
   checked,
-  setChecked
+  setChecked,
+  on,
+  setOn
 }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
@@ -43,14 +46,38 @@ const InvoiceSettingsBulk = ({
   const email = useSelector(selectEmail);
   //const gon = useSelector(selectGon);
   const prices = useSelector(selectProduct)
+  const stateSel = useSelector(selectState)
 
   const [alert, setAlert] = React.useState(null);
 
   const hideAlert = () => {
     setAlert(null);
   };
+  
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
+
+
+/*
+ const [invoices, setInvoices] = useState({
+  invoice_info: invoiceSettings,
+  account:{
+     email: email
+  },
+  history_bulk:{
+     locations: locations,
+     from: startDate,
+     to: endDate,
+     parameters: checkedWeather,
+     units: unitsValue,
+     file_format: formatValue,
+     saving_mode: downloadsValue
+  }
+})
+
+*/
+
+  console.log('body', invoiceSettings)
 
   const confirmInvoice = () => {
     setError({});
@@ -70,6 +97,7 @@ const InvoiceSettingsBulk = ({
     }
 
     setError(newError);
+    
 
     console.log("new error", newError);
 
@@ -78,7 +106,29 @@ const InvoiceSettingsBulk = ({
       return;
     }
 
-    const invoiceDetails = { ...invoiceSettings }
+
+    const datas = {
+      invoice_info: {
+        ...invoiceSettings,
+      },
+      account:{
+        email: email
+     },
+     history_bulk:{
+      locations: locations,
+      from: startDate,
+      to: endDate,
+      parameters: checkedWeather,
+      units: unitsValue,
+      file_format: formatValue,
+      saving_mode: downloadsValue
+   }
+    }
+
+
+    const invoiceDetails = { ...datas }
+
+    console.log('everything', invoiceDetails)
 
     if (invoiceDetails.type === 'individual') {
       delete invoiceDetails.organisation
@@ -91,6 +141,42 @@ const InvoiceSettingsBulk = ({
     invoiceDetails.legal_form = invoiceDetails.type
     delete invoiceDetails.type
 
+
+     axios.post('https://home.openweathermap.org/history_bulks', datas, {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      })
+        .then(res => {
+   
+          loadStripe(res.stripe_publishable_key).then((stripe) => {
+            stripe.redirectToCheckout({
+              sessionId: res.stripe_session_id,
+            })
+          })
+        })
+        .catch((err) => {
+          notifyError(`Error: ${err.message}`)
+        })
+      }
+        /*
+
+            loadStripe(stripe_publishable_key)
+              .then(stripe => {
+                stripe.redirectToCheckout({sessionId: stripe_session_id})
+              })
+              .catch(err => {newError = err;})
+              }})
+        .catch(err => {
+          newError({})
+          newError = 'Something went wrong';
+          console.log(err)
+        })
+      }
+
+
+      /*
+  const buy = () => {
+
     const data = {
       utf8: "✓",
       authenticity_token: document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '',
@@ -100,40 +186,7 @@ const InvoiceSettingsBulk = ({
       invoice_form: invoiceDetails,
     }
 
-    axios.post('https://home.openweathermap.org/history_bulks/', data, {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      })
-    .then((res) => {
-      console.log(
-          'Successfully subscribed. You will be redirected to stripe page'
-      )
-      loadStripe(res.stripe_publishable_key).then((stripe) => {
-        stripe.redirectToCheckout({
-          sessionId: res.stripe_session_id,
-        })
-      })
-    })
-    .catch((err) => {
-      console.log(`Error: ${err.message}`)
-    })
-
-  }
-
-
-  const buy = () => {
-
-      let data = {
-        utf8: "✓",
-        authenticity_token: document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '',
-        invoice_info: invoiceSettings,
-        account: {
-          email: email,
-        }
-      };
-      data = prices.hb
-
-     axios.post(data, {
+     axios.post('https://home.openweathermap.org/history_bulks/', data, {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
       })
@@ -156,6 +209,8 @@ const InvoiceSettingsBulk = ({
           console.log(err)
         })
       }
+
+      */
   
 
   const decrementStep = () => {
