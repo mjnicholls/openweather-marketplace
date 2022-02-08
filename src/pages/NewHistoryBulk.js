@@ -58,7 +58,22 @@ const NewHistoryBulk = () => {
   
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 
-  const [on, setOn] = useState('On')
+  const [on, setOn] = useState({})
+
+  const [temp, setTemp] = useState('On');
+  const [tempMin, setTempMin] = useState('On');
+  const [tempMax, setTempMax] = useState("On");
+  const [feelsLike, setFeelsLike] = useState("On");
+  const [pressure, setPressure] = useState("On");
+  const [humidity, setHumidity] = useState("On");
+  const [clouds, setClouds] = useState("On");
+  const [weather, setWeather] = useState("On");
+  const [rain, setRain] = useState("On");
+  const [snow, setSnow] = useState("On");
+  const [dewPoint, setDewPoint] = useState("On");
+  const [visibility, setVisibility] = useState("On");
+  const [wind, setWind] = useState("On");
+
 
 
   useEffect(() => {
@@ -177,6 +192,32 @@ const NewHistoryBulk = () => {
             invoiceSettings={invoiceSettings}
             on={on}
             setOn={setOn}
+            temp={temp}
+            setTemp={setTemp}
+            tempMin={tempMin}
+            setTempMin={setTempMin}
+            tempMax={tempMax}
+            setTempMax={setTempMax}
+            feelsLike={feelsLike}
+            setFeelsLike={setFeelsLike}
+            pressure={pressure}
+            setPressure={setPressure}
+            humidity={humidity}
+            setHumidity={setHumidity}
+            clouds={clouds}
+            setClouds={setClouds}
+            weather={weather}
+            setWeather={setWeather}
+            rain={rain}
+            setRain={setRain}
+            snow={snow}
+            setSnow={setSnow}
+            dewPoint={dewPoint}
+            setDewPoint={setDewPoint}
+            visibility={visibility}
+            setVisibility={setVisibility}
+            wind={wind}
+            setWind={setWind}
           />
         </Col>
 

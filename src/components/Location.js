@@ -51,7 +51,24 @@ const Location = ({
   body,
   setBody,
   on,
-  setOn
+  setOn,
+  temp, 
+  setTemp,
+  tempMin,
+  setTempMin,
+  tempMax,
+  setTempMax,
+  feelsLike, setFeelsLike,
+  pressure, setPressure,
+  humidity, setHumidity,
+  clouds, setClouds,
+  weather, setWeather,
+  rain, setRain,
+  snow, setSnow,
+  dewPoint, setDewPoint,
+  visibility, setVisibility,
+  wind, setWind,
+
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -301,6 +318,32 @@ const Location = ({
           setBody={setBody}
           on={on}
           setOn={setOn}
+          temp={temp}
+          setTemp={setTemp}
+          tempMin={tempMin}
+          setTempMin={setTempMin}
+          tempMax={tempMax}
+          setTempMax={setTempMax}
+          feelsLike={feelsLike}
+          setFeelsLike={setFeelsLike}
+          pressure={pressure}
+          setPressure={setPressure}
+          humidity={humidity}
+          setHumidity={setHumidity}
+          clouds={clouds}
+          setClouds={setClouds}
+          weather={weather}
+          setWeather={setWeather}
+          rain={rain}
+          setRain={setRain}
+          snow={snow}
+          setSnow={setSnow}
+          dewPoint={dewPoint}
+          setDewPoint={setDewPoint}
+          visibility={visibility}
+          setVisibility={setVisibility}
+          wind={wind}
+          setWind={setWind}
         />
       </ReactBSAlert>
     );
@@ -479,6 +522,32 @@ const Location = ({
         setChecked={setChecked}
         on={on}
         setOn={setOn}
+        temp={temp}
+        setTemp={setTemp}
+        tempMin={tempMin}
+            setTempMin={setTempMin}
+            tempMax={tempMax}
+            setTempMax={setTempMax}
+            feelsLike={feelsLike}
+            setFeelsLike={setFeelsLike}
+            pressure={pressure}
+            setPressure={setPressure}
+            humidity={humidity}
+            setHumidity={setHumidity}
+            clouds={clouds}
+            setClouds={setClouds}
+            weather={weather}
+            setWeather={setWeather}
+            rain={rain}
+            setRain={setRain}
+            snow={snow}
+            setSnow={setSnow}
+            dewPoint={dewPoint}
+            setDewPoint={setDewPoint}
+            visibility={visibility}
+            setVisibility={setVisibility}
+            wind={wind}
+            setWind={setWind}
       />
 
       <LocationList

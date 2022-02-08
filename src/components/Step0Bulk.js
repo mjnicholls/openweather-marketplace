@@ -14,6 +14,22 @@ const Step0Bulk = ({
     downloadsValue,
     locations,
     currency,
+    temp, 
+    setTemp,
+    tempMin,
+    setTempMin,
+    tempMax,
+    setTempMax,
+    feelsLike, setFeelsLike,
+    pressure, setPressure,
+    humidity, setHumidity,
+    clouds, setClouds,
+    weather, setWeather,
+    rain, setRain,
+    snow, setSnow,
+    dewPoint, setDewPoint,
+    visibility, setVisibility,
+    wind, setWind,
 }) => {
 
   const totalPrice = price + importPrice
@@ -39,9 +55,18 @@ const Step0Bulk = ({
       <Row className="text-start step-bulk">
         <Col className="bold">Weather Parameters:</Col>
         <Col>
+        {/*}
           {checkedWeather.length === 0 ? 'Temperature, Max Temperature, Pressure, Clouds, Rain, Dew Point, Wind, Min Temp, Feels Like, Humidity, Conditions, Snow, Visibility' : checkedWeather.map((total, item) => {
         return <Col>{total}</Col>
       })}
+    */}
+    {temp === 'On' ? 'Temperature, ' : ''} {tempMin === 'On' ? 'Min Temperature, ' : ''} 
+    {tempMax === 'On' ? 'Max Temperature, ' : ''} {feelsLike === 'On' ? 'Feels Like, ' : ''}
+    {pressure === 'On' ? 'Pressure, ' : ''} {humidity === 'On' ? 'Humidity, ' : ''}
+    {clouds === 'On' ? 'Clouds, ' : ''} {weather === 'On' ? 'Weather Conditions, ' : ''}
+    {rain === 'On' ? 'Rain, ' : ''} {snow === 'On' ? 'Snow, ' : ''} 
+    {dewPoint === 'On' ? 'Dew Point, ' : ''} {visibility === 'On' ? 'Visibility, ' : ''}
+    {wind === 'On' ? 'Wind (speed, direction, gust) ' : ''}
         </Col>
       </Row>
 

@@ -24,7 +24,23 @@ const Parameters = ({
   checked,
   setChecked,
   on,
-  setOn
+  setOn,
+  temp, 
+  setTemp,
+  tempMin,
+  setTempMin,
+  tempMax,
+  setTempMax,
+  feelsLike, setFeelsLike,
+  pressure, setPressure,
+  humidity, setHumidity,
+  clouds, setClouds,
+  weather, setWeather,
+  rain, setRain,
+  snow, setSnow,
+  dewPoint, setDewPoint,
+  visibility, setVisibility,
+  wind, setWind,
 }) => {
   return (
     <>
@@ -41,6 +57,32 @@ const Parameters = ({
             setChecked={setChecked}
             on={on}
             setOn={setOn}
+            temp={temp}
+            setTemp={setTemp}
+            tempMin={tempMin}
+            setTempMin={setTempMin}
+            tempMax={tempMax}
+            setTempMax={setTempMax}
+            feelsLike={feelsLike}
+            setFeelsLike={setFeelsLike}
+            pressure={pressure}
+            setPressure={setPressure}
+            humidity={humidity}
+            setHumidity={setHumidity}
+            clouds={clouds}
+            setClouds={setClouds}
+            weather={weather}
+            setWeather={setWeather}
+            rain={rain}
+            setRain={setRain}
+            snow={snow}
+            setSnow={setSnow}
+            dewPoint={dewPoint}
+            setDewPoint={setDewPoint}
+            visibility={visibility}
+            setVisibility={setVisibility}
+            wind={wind}
+            setWind={setWind}
           />
           <UnitsParams
             parametersUnits={parametersUnits}

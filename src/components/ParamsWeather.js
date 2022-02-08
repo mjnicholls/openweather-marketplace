@@ -3,8 +3,32 @@ import { Button, Col, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import CheckyBox from "./checkBox";
 
-const WeatherParams = ({on, setOn, checkedWeather, setCheckedWeather, fileValue, setFileValue, checked,
-  setChecked}) => {
+const WeatherParams = ({
+  on,
+  setOn,
+  checkedWeather,
+  setCheckedWeather,
+  fileValue,
+  setFileValue,
+  checked,
+  setChecked,
+  temp,
+  setTemp,
+  tempMin,
+  setTempMin,
+  tempMax,
+  setTempMax,
+  feelsLike, setFeelsLike,
+  pressure, setPressure,
+  humidity, setHumidity,
+  clouds, setClouds,
+  weather, setWeather,
+  rain, setRain,
+  snow, setSnow,
+  dewPoint, setDewPoint,
+  visibility, setVisibility,
+  wind, setWind,
+}) => {
   const [alert, setAlert] = useState(null);
 
   //const [fileValue, setFileValue] = useState([]);
@@ -24,18 +48,43 @@ const WeatherParams = ({on, setOn, checkedWeather, setCheckedWeather, fileValue,
         customClass="bs-alerts"
       >
         <Row className="text-start mt-4">
-   
           <Col>
-      <CheckyBox
-      checkedWeather={checkedWeather}
-      setCheckedWeather={setCheckedWeather}
-      setFileValue={setFileValue}
-      checked={checked}
-      setChecked={setChecked}
-      on={on}
-      setOn={setOn}
-      />
-          {/*}
+            <CheckyBox
+              checkedWeather={checkedWeather}
+              setCheckedWeather={setCheckedWeather}
+              setFileValue={setFileValue}
+              checked={checked}
+              setChecked={setChecked}
+              on={on}
+              setOn={setOn}
+              temp={temp}
+              setTemp={setTemp}
+              tempMin={tempMin}
+              setTempMin={setTempMin}
+              tempMax={tempMax}
+              setTempMax={setTempMax}
+              feelsLike={feelsLike}
+              setFeelsLike={setFeelsLike}
+              pressure={pressure}
+              setPressure={setPressure}
+              humidity={humidity}
+              setHumidity={setHumidity}
+              clouds={clouds}
+              setClouds={setClouds}
+              weather={weather}
+              setWeather={setWeather}
+              rain={rain}
+              setRain={setRain}
+              snow={snow}
+              setSnow={setSnow}
+              dewPoint={dewPoint}
+              setDewPoint={setDewPoint}
+              visibility={visibility}
+              setVisibility={setVisibility}
+              wind={wind}
+              setWind={setWind}
+            />
+            {/*}
             <Form className="checkbox-radios ml-5">
               {weathers
                   .map((option) => (
@@ -56,7 +105,7 @@ const WeatherParams = ({on, setOn, checkedWeather, setCheckedWeather, fileValue,
             </Form>
                   */}
           </Col>
-                 {/*} 
+          {/*} 
           <Col>
             <Form className="checkbox-radios ml-5">
               {weathers
