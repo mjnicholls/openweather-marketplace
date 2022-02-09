@@ -20,7 +20,21 @@ const ParametersForecast = ({
   unitsValue,
   setUnitsValue,
   checked,
-  setChecked
+  setChecked,
+  temp,
+  setTemp,
+  pressure,
+  setPressure,
+  humidity,
+  setHumidity,
+  clouds,
+  setClouds,
+  dewPoint,
+  setDewPoint,
+  precipitation,
+  setPrecipitation,
+  wind,
+  setWind,
  }) => {
   return (
     <>
@@ -33,6 +47,20 @@ const ParametersForecast = ({
            setFileValue={setFileValue}
            checked={checked}
            setChecked={setChecked}
+           temp={temp}
+           setTemp={setTemp}
+           pressure={pressure}
+           setPressure={setPressure}
+           humidity={humidity}
+           setHumidity={setHumidity}
+           clouds={clouds}
+           setClouds={setClouds}
+           dewPoint={dewPoint}
+           setDewPoint={setDewPoint}
+           precipitation={precipitation}
+           setPrecipitation={setPrecipitation}
+           wind={wind}
+           setWind={setWind}
           />
          <UnitsParams
             parametersUnits={parametersUnits}

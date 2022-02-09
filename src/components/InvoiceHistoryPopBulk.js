@@ -5,7 +5,7 @@ import ReactBSAlert from "react-bootstrap-sweetalert";
 import { confirmVatNumber, getAccountInfo } from "../api/personalAccountAPI";
 import PropTypes from "prop-types";
 
-import Step0Bulk from "./Step0Bulk";
+import Step0HistoryBulk from "./Step0HistoryBulk";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 
@@ -28,6 +28,20 @@ const InvoiceSettingsBulk = ({
   checked,
   setChecked,
   importPrice,
+  temp,
+  setTemp,
+  pressure,
+  setPressure,
+  humidity,
+  setHumidity,
+  clouds,
+  setClouds,
+  dewPoint,
+  setDewPoint,
+  precipitation,
+  setPrecipitation,
+  wind,
+  setWind,
 }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
@@ -328,7 +342,7 @@ const InvoiceSettingsBulk = ({
       </Row>
       <br />
       {step === 0 ? (
-        <Step0Bulk
+        <Step0HistoryBulk
           year={year}
           country={country}
           price={price}
@@ -344,6 +358,20 @@ const InvoiceSettingsBulk = ({
           checked={checked}
           setChecked={setChecked}
           importPrice={importPrice}
+          temp={temp}
+          setTemp={setTemp}
+          pressure={pressure}
+          setPressure={setPressure}
+          humidity={humidity}
+          setHumidity={setHumidity}
+          clouds={clouds}
+          setClouds={setClouds}
+          dewPoint={dewPoint}
+          setDewPoint={setDewPoint}
+          precipitation={precipitation}
+          setPrecipitation={setPrecipitation}
+          wind={wind}
+          setWind={setWind}
         />
       ) : null}
       {step === 1 ? (

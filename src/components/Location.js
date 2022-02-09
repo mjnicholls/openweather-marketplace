@@ -52,30 +52,39 @@ const Location = ({
   setBody,
   on,
   setOn,
-  temp, 
+  temp,
   setTemp,
   tempMin,
   setTempMin,
   tempMax,
   setTempMax,
-  feelsLike, setFeelsLike,
-  pressure, setPressure,
-  humidity, setHumidity,
-  clouds, setClouds,
-  weather, setWeather,
-  rain, setRain,
-  snow, setSnow,
-  dewPoint, setDewPoint,
-  visibility, setVisibility,
-  wind, setWind,
-
+  feelsLike,
+  setFeelsLike,
+  pressure,
+  setPressure,
+  humidity,
+  setHumidity,
+  clouds,
+  setClouds,
+  weather,
+  setWeather,
+  rain,
+  setRain,
+  snow,
+  setSnow,
+  dewPoint,
+  setDewPoint,
+  visibility,
+  setVisibility,
+  wind,
+  setWind,
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
   const [isImport, setIsImport] = useState(false);
   //const [fileValue, setFileValue] = useState([]);
 
-  const total = price + importPrice
+  const total = price + importPrice;
 
   const setCoordinates = () => {
     setError({});
@@ -170,11 +179,11 @@ const Location = ({
             }
 
             if (errors.length > 0) {
-              setImportPrice(importPrice = (results.data.length * 7) / errors.length - 7);
-
+              setImportPrice(
+                (importPrice = (results.data.length * 7) / errors.length - 7)
+              );
             } else {
-              setImportPrice(importPrice = results.data.length * 7 - 7);
- 
+              setImportPrice((importPrice = results.data.length * 7 - 7));
             }
           }
 
@@ -288,7 +297,6 @@ const Location = ({
     setLocations(newLocations);
     setPrice(price + 7);
   };
-
 
   const checkoutAlert = () => {
     setAlert(
@@ -525,29 +533,29 @@ const Location = ({
         temp={temp}
         setTemp={setTemp}
         tempMin={tempMin}
-            setTempMin={setTempMin}
-            tempMax={tempMax}
-            setTempMax={setTempMax}
-            feelsLike={feelsLike}
-            setFeelsLike={setFeelsLike}
-            pressure={pressure}
-            setPressure={setPressure}
-            humidity={humidity}
-            setHumidity={setHumidity}
-            clouds={clouds}
-            setClouds={setClouds}
-            weather={weather}
-            setWeather={setWeather}
-            rain={rain}
-            setRain={setRain}
-            snow={snow}
-            setSnow={setSnow}
-            dewPoint={dewPoint}
-            setDewPoint={setDewPoint}
-            visibility={visibility}
-            setVisibility={setVisibility}
-            wind={wind}
-            setWind={setWind}
+        setTempMin={setTempMin}
+        tempMax={tempMax}
+        setTempMax={setTempMax}
+        feelsLike={feelsLike}
+        setFeelsLike={setFeelsLike}
+        pressure={pressure}
+        setPressure={setPressure}
+        humidity={humidity}
+        setHumidity={setHumidity}
+        clouds={clouds}
+        setClouds={setClouds}
+        weather={weather}
+        setWeather={setWeather}
+        rain={rain}
+        setRain={setRain}
+        snow={snow}
+        setSnow={setSnow}
+        dewPoint={dewPoint}
+        setDewPoint={setDewPoint}
+        visibility={visibility}
+        setVisibility={setVisibility}
+        wind={wind}
+        setWind={setWind}
       />
 
       <LocationList

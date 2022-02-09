@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Col, Row } from "reactstrap";
-import Map from "../components/Map";
+import MapHistory from "../components/MapHistory";
 import placeMarker from "../utils/placeMarker";
 import LocationForecast from "../components/LocationsForecast";
 import { useSelector } from "react-redux";
@@ -41,11 +41,11 @@ const HistoryForecastBulk = () => {
 
   const [fileValue, setFileValue] = useState(false);
 
-  const [unitsValue, setUnitsValue] = useState();
+  const [unitsValue, setUnitsValue] = useState("Metric");
 
-  const [downloadsValue, setDownloadsValue] = useState();
+  const [downloadsValue, setDownloadsValue] = useState("All locations");
 
-  const [formatValue, setFormatValue] = useState()
+  const [formatValue, setFormatValue] = useState("CSV")
 
   const [startDate, setStartDate] = useState(new Date());
 
@@ -54,6 +54,14 @@ const HistoryForecastBulk = () => {
   const [checked, setChecked] = useState([]);
 
   const [importPrice, setImportPrice] = useState(0);
+
+  const [temp, setTemp] = useState('On');
+  const [pressure, setPressure] = useState("On");
+  const [humidity, setHumidity] = useState("On");
+  const [clouds, setClouds] = useState("On");
+  const [dewPoint, setDewPoint] = useState("On");
+  const [precipitation, setPrecipitation] = useState("On");
+  const [wind, setWind] = useState("On");
 
 
   useEffect(() => {
@@ -168,11 +176,26 @@ const HistoryForecastBulk = () => {
             setChecked={setChecked}
             importPrice={importPrice}
             setImportPrice={setImportPrice}
+            temp={temp}
+            setTemp={setTemp}
+            pressure={pressure}
+            setPressure={setPressure}
+            humidity={humidity}
+            setHumidity={setHumidity}
+            clouds={clouds}
+            setClouds={setClouds}
+            dewPoint={dewPoint}
+            setDewPoint={setDewPoint}
+            precipitation={precipitation}
+            setPrecipitation={setPrecipitation}
+            wind={wind}
+            setWind={setWind}
+            
           />
         </Col>
 
         <Col md="5">
-          <Map
+          <MapHistory
             mapRef={mapRef}
             mapLocation={tempLocation}
             locations={locations}

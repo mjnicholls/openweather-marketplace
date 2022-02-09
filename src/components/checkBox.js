@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Label, Form, FormGroup, Input } from "reactstrap";
+import { Label, Form, FormGroup, Input, Row } from "reactstrap";
 import { weathers } from "../config";
 
 const CheckyBox = ({
@@ -265,9 +265,9 @@ const CheckyBox = ({
       {/*
         <Form className="checkbox-radio-columns ml-5">
           {checkList.map((item, index) => (
-               <FormGroup index={index} check className="form-check-radio">
+               <FormGroup check index={index} check className="form-check-radio">
                <Label check>
-               <span className={isChecked(item)}>{item}</span>
+               <span className={isChecked(item)}>{item}
               <Input value={item} type="checkbox" onChange={handleCheck} />
               </Label>
               <p></p>
@@ -275,157 +275,166 @@ const CheckyBox = ({
           ))}
 </Form>
           */}
-
+<Row className="text-start mt-4">
       <Form className="checkbox-radio-columns ml-5">
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Temp</span>
+        <FormGroup check className="form-check-radio">
+        <Label check>
+           Temp
             <Input
               type="checkbox"
               onChange={handleParameterToggle}
               checked={!isChecked}
+              className="text-right"
             />
           </Label>
         </FormGroup>
 
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Min Temp</span>
+        <FormGroup check className="form-check-radio">
+          <Label check>
+            Min Temp
             <Input
               type="checkbox"
               onChange={handleParameterToggle2}
               checked={!isChecked2}
+              className="text-right"
             />
           </Label>
         </FormGroup>
 
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Temp Max</span>
+        <FormGroup check className="form-check-radio">
+          <Label check>
+            Temp Max
             <Input
               type="checkbox"
               onChange={handleParameterToggle3}
               checked={!isChecked3}
+              className="text-right"
             />
           </Label>
         </FormGroup>
 
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Feels Like</span>
+        <FormGroup check className="form-check-radio">
+          <Label check>
+            Feels Like
             <Input
               type="checkbox"
               onChange={handleParameterToggle4}
               checked={!isChecked4}
+              className="text-right"
             />
           </Label>
         </FormGroup>
 
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Pressure</span>
+        <FormGroup check className="form-check-radio">
+          <Label check>
+            Pressure
             <Input
               type="checkbox"
               onChange={handleParameterToggle5}
               checked={!isChecked5}
+              className="text-right"
             />
           </Label>
         </FormGroup>
 
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Humidity</span>
+        <FormGroup check className="form-check-radio">
+          <Label check>
+            Humidity
             <Input
               type="checkbox"
               onChange={handleParameterToggle6}
               checked={!isChecked6}
+              className="text-right"
             />
           </Label>
         </FormGroup>
 
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Clouds</span>
+        <FormGroup check className="form-check-radio">
+          <Label check>
+            Clouds
             <Input
               type="checkbox"
               onChange={handleParameterToggle7}
               checked={!isChecked7}
+              className="text-right"
             />
           </Label>
         </FormGroup>
 
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Weather</span>
+        <FormGroup check className="form-check-radio">
+          <Label check>
+            Weather
             <Input
               type="checkbox"
               onChange={handleParameterToggle8}
               checked={!isChecked8}
+              className="text-right"
             />
           </Label>
         </FormGroup>
 
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Rain</span>
+        <FormGroup check className="form-check-radio">
+          <Label check>
+            Rain
             <Input
               type="checkbox"
               onChange={handleParameterToggle9}
               checked={!isChecked9}
+              className="text-right"
             />
           </Label>
         </FormGroup>
 
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Snow</span>
+        <FormGroup check className="form-check-radio">
+          <Label check>
+            Snow
             <Input
               type="checkbox"
               onChange={handleParameterToggle10}
               checked={!isChecked10}
+              className="text-right"
             />
           </Label>
         </FormGroup>
 
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Dew Point</span>
+        <FormGroup check className="form-check-radio">
+          <Label check>
+            Dew Point
             <Input
               type="checkbox"
               onChange={handleParameterToggle11}
               checked={!isChecked11}
+              className="text-right"
             />
           </Label>
         </FormGroup>
 
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Visibility</span>
+        <FormGroup check className="form-check-radio">
+          <Label check>
+            Visibility
             <Input
               type="checkbox"
               onChange={handleParameterToggle12}
               checked={!isChecked12}
+              className="text-right"
             />
           </Label>
         </FormGroup>
 
-        <FormGroup className="form-check-radio">
-          <Label>
-            <span>Wind</span>
+        <FormGroup check className="form-check-radio">
+          <Label check>
+            Wind
             <Input
               type="checkbox"
               onChange={handleParameterToggle13}
               checked={!isChecked13}
+              className="text-right"
             />
           </Label>
         </FormGroup>
       </Form>
+      </Row>
     </>
-    /*}
-      <div>
-        {`Items checked are: ${checkedItems}`}
-      </div>
-          */
   );
 };
 

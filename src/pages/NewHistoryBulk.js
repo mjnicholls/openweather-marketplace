@@ -4,6 +4,7 @@ import Map from "../components/Map";
 import placeMarker from "../utils/placeMarker";
 import Location from "../components/Location";
 import { useSelector } from "react-redux";
+import { units } from "../config";
 
 const selectCurrency = (state) => state.auth.currency;
 const selectInvoice = (state) => state.auth.invoiceInfo;
@@ -44,11 +45,11 @@ const NewHistoryBulk = () => {
 
   const [fileValue, setFileValue] = useState(false);
 
-  const [unitsValue, setUnitsValue] = useState();
+  const [unitsValue, setUnitsValue] = useState("Metric");
 
-  const [downloadsValue, setDownloadsValue] = useState();
+  const [downloadsValue, setDownloadsValue] = useState("All locations");
 
-  const [formatValue, setFormatValue] = useState()
+  const [formatValue, setFormatValue] = useState("CSV")
 
   const [startDate, setStartDate] = useState(new Date());
 

@@ -10,6 +10,7 @@ const UnitsParams = ({unitsValue, setUnitsValue }) => {
     setAlert(null);
   };
 
+
   
   const unitAlert = () => {
     setAlert(
@@ -35,12 +36,12 @@ const UnitsParams = ({unitsValue, setUnitsValue }) => {
                     onChange={() => setUnitsValue(option.value)}
                     type="radio"
                     value={option.value}
+                
                   />
                 </Label>
               </FormGroup>
             ))}
           </Form>
-          <p>{unitsValue}</p>
         </Row>
         {/*}
               <ParamCategories

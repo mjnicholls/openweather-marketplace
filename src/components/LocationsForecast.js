@@ -8,7 +8,7 @@ import Papa from "papaparse";
 import ParametersForecast from "./ParametersForecast";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import DatePickerForecast from "./DatePickerForecast";
-import LocationList from "./LocationsList";
+import LocationListHistory from "./LocationsListHistory";
 import { locationConstructor } from "../utils/locationConstructor";
 import InvoiceSettingsBulk from "./InvoiceHistoryPopBulk";
 
@@ -49,7 +49,21 @@ const LocationForecast = ({
   checked,
   setChecked, 
   importPrice,
-  setImportPrice
+  setImportPrice,
+  temp,
+  setTemp,
+  pressure,
+  setPressure,
+  humidity,
+  setHumidity,
+  clouds,
+  setClouds,
+  dewPoint,
+  setDewPoint,
+  precipitation,
+  setPrecipitation,
+  wind,
+  setWind,
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -150,10 +164,10 @@ const LocationForecast = ({
             }
 
             if (errors.length > 0) {
-              setImportPrice(importPrice = (results.data.length * 7) / errors.length - 7);
+              setImportPrice(importPrice = (results.data.length * 35) / errors.length - 35);
 
             } else {
-              setImportPrice(importPrice = results.data.length * 7 - 7);
+              setImportPrice(importPrice = results.data.length * 35 - 35);
  
             }
           }
@@ -266,7 +280,7 @@ const LocationForecast = ({
   const addLocations = (data) => {
     const newLocations = [...locations, ...data];
     setLocations(newLocations);
-    setPrice(price + 7);
+    setPrice(price + 35);
   };
 
   const checkoutAlert = () => {
@@ -293,6 +307,20 @@ const LocationForecast = ({
           setChecked={setChecked}
           importPrice={importPrice}
           setImportPrice={setImportPrice}
+          temp={temp}
+          setTemp={setTemp}
+          pressure={pressure}
+          setPressure={setPressure}
+          humidity={humidity}
+          setHumidity={setHumidity}
+          clouds={clouds}
+          setClouds={setClouds}
+          dewPoint={dewPoint}
+          setDewPoint={setDewPoint}
+          precipitation={precipitation}
+          setPrecipitation={setPrecipitation}
+          wind={wind}
+          setWind={setWind}
         />
       </ReactBSAlert>
     );
@@ -471,9 +499,23 @@ const LocationForecast = ({
         setFormatValue={setFormatValue}
         checked={checked}
         setChecked={setChecked}
+        temp={temp}
+        setTemp={setTemp}
+        pressure={pressure}
+        setPressure={setPressure}
+        humidity={humidity}
+        setHumidity={setHumidity}
+        clouds={clouds}
+        setClouds={setClouds}
+        dewPoint={dewPoint}
+        setDewPoint={setDewPoint}
+        precipitation={precipitation}
+        setPrecipitation={setPrecipitation}
+        wind={wind}
+        setWind={setWind}
       />
 
-      <LocationList
+      <LocationListHistory
         locations={locations}
         setLocations={setLocations}
         price={price}
