@@ -398,7 +398,7 @@ const InvoiceSettings = ({ country, year, price }) => {
                     float: "right",
                   }}
                 >
-                  Subscribe
+                   Continue with Stripe
                 </Button>
               </>
             )}

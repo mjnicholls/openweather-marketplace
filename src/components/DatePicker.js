@@ -4,25 +4,13 @@ import { getMonth, getYear, subDays } from "date-fns";
 import range from "lodash/range";
 import { Col, Form, Label } from "reactstrap";
 import "react-datepicker/dist/react-datepicker.css";
+import { months } from "../config";
 
 const DatePickerMarket = ({startDate, setStartDate, endDate, setEndDate}) => {
 
-  const years = range(2007, getYear(new Date()) + 1, 1);
+  const years = range(1979, getYear(new Date()) + 1, 1);
 
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  console.log('date', startDate.toUTCString())
 
   return (
     <>

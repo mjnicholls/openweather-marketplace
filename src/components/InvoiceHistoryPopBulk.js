@@ -458,7 +458,7 @@ const InvoiceSettingsBulk = ({
                     float: "right",
                   }}
                 >
-                  Subscribe
+                   Continue with Stripe
                 </Button>
               </>
             )}

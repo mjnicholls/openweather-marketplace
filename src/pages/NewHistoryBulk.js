@@ -4,7 +4,6 @@ import Map from "../components/Map";
 import placeMarker from "../utils/placeMarker";
 import Location from "../components/Location";
 import { useSelector } from "react-redux";
-import { units } from "../config";
 
 const selectCurrency = (state) => state.auth.currency;
 const selectInvoice = (state) => state.auth.invoiceInfo;
@@ -51,9 +50,9 @@ const NewHistoryBulk = () => {
 
   const [formatValue, setFormatValue] = useState("CSV")
 
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date(Date.UTC(0, 0, 0, 0, 0, 0)));
 
-  const [endDate, setEndDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date(Date.UTC(0, 0, 0, 0, 0, 0)));
 
   const [checked, setChecked] = useState([]);
   
@@ -74,8 +73,6 @@ const NewHistoryBulk = () => {
   const [dewPoint, setDewPoint] = useState("On");
   const [visibility, setVisibility] = useState("On");
   const [wind, setWind] = useState("On");
-
-
 
   useEffect(() => {
     setTempLocation({

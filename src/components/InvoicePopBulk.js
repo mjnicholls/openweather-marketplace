@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button, Col, Form, Label, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-import { getAccountInfo, stripe} from "../api/personalAccountAPI";
+import { getAccountInfo, stripe } from "../api/personalAccountAPI";
 import PropTypes from "prop-types";
-import axios from 'axios';
-import { loadStripe } from '@stripe/stripe-js';
+import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
 import { validatePhoneNumber, validateVat } from "../utils/validation";
+import { months } from "../config";
 
 import Step0Bulk from "./Step0Bulk";
 import Step1 from "./Step1";
@@ -14,9 +15,6 @@ import Step2 from "./Step2";
 
 const selectInvoice = (state) => state.auth.invoiceInfo;
 const selectEmail = (state) => state.auth.email;
-const selectProduct = (state) => state.auth.prices
-const selectState = (state) => state.auth
-//const selectGon = (state) => state.auth.gonObject
 
 const InvoiceSettingsBulk = ({
   startDate,
@@ -34,24 +32,32 @@ const InvoiceSettingsBulk = ({
   currency,
   checked,
   setChecked,
-  on,
-  setOn,
-  temp, 
+  temp,
   setTemp,
   tempMin,
   setTempMin,
   tempMax,
   setTempMax,
-  feelsLike, setFeelsLike,
-  pressure, setPressure,
-  humidity, setHumidity,
-  clouds, setClouds,
-  weather, setWeather,
-  rain, setRain,
-  snow, setSnow,
-  dewPoint, setDewPoint,
-  visibility, setVisibility,
-  wind, setWind,
+  feelsLike,
+  setFeelsLike,
+  pressure,
+  setPressure,
+  humidity,
+  setHumidity,
+  clouds,
+  setClouds,
+  weather,
+  setWeather,
+  rain,
+  setRain,
+  snow,
+  setSnow,
+  dewPoint,
+  setDewPoint,
+  visibility,
+  setVisibility,
+  wind,
+  setWind,
 }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
@@ -60,9 +66,6 @@ const InvoiceSettingsBulk = ({
 
   const invoice = useSelector(selectInvoice);
   const email = useSelector(selectEmail);
-  //const gon = useSelector(selectGon);
-  const prices = useSelector(selectProduct)
-  const stateSel = useSelector(selectState)
 
   const [alert, setAlert] = React.useState(null);
 
@@ -70,30 +73,14 @@ const InvoiceSettingsBulk = ({
     setAlert(null);
   };
   
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return `${d.getUTCDate()} ${months[d.getUTCMonth()]}, ${d.getUTCFullYear()}`
+  }
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 
-
-/*
- const [invoices, setInvoices] = useState({
-  invoice_info: invoiceSettings,
-  account:{
-     email: email
-  },
-  history_bulk:{
-     locations: locations,
-     from: startDate,
-     to: endDate,
-     parameters: checkedWeather,
-     units: unitsValue,
-     file_format: formatValue,
-     saving_mode: downloadsValue
-  }
-})
-
-*/
-
-  console.log('body', invoiceSettings)
+  console.log("body", invoiceSettings);
 
   const confirmInvoice = () => {
     setError({});
@@ -104,16 +91,15 @@ const InvoiceSettingsBulk = ({
       email: !email.length,
       country: !invoiceSettings.country.length,
       phone: !invoiceSettings.phone.length,
-    }
+    };
     if (invoiceSettings.phone) {
-      const phoneValidation = validatePhoneNumber(invoiceSettings.phone)
+      const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
       if (phoneValidation) {
-        newError.phone = phoneValidation
+        newError.phone = phoneValidation;
       }
     }
 
     setError(newError);
-    
 
     console.log("new error", newError);
 
@@ -122,19 +108,18 @@ const InvoiceSettingsBulk = ({
       return;
     }
 
-
     const datas = {
       invoice_info: {
-       ...invoiceSettings
+        ...invoiceSettings,
       },
-      account:{
-        email: email
-     },
-     history_bulk:{
-      locations: locations,
-      from: startDate,
-      to: endDate,
-      parameters: {
+      account: {
+        email: email,
+      },
+      history_bulk: {
+        locations: locations,
+        from: formatDate(startDate),
+        to: formatDate(endDate),
+        parameters: {
           temp: temp,
           temp_min: tempMin,
           temp_max: tempMax,
@@ -147,101 +132,46 @@ const InvoiceSettingsBulk = ({
           snow: snow,
           dew_point: dewPoint,
           visibility: visibility,
-          wind: wind
+          wind: wind,
+        },
+        units: unitsValue,
+        file_format: formatValue,
+        saving_mode: downloadsValue,
       },
-      units: unitsValue,
-      file_format: formatValue,
-      saving_mode: downloadsValue
-   }
-    }
+    };
 
+    const invoiceDetails = { ...datas };
 
-    const invoiceDetails = { ...datas }
+    console.log("everything", invoiceDetails);
 
-    console.log('everything', invoiceDetails)
-
-    if (invoiceDetails.type === 'individual') {
-      delete invoiceDetails.organisation
-      delete invoiceDetails.vat_id
+    if (invoiceDetails.type === "individual") {
+      delete invoiceDetails.organisation;
+      delete invoiceDetails.vat_id;
     } else {
-      delete invoiceDetails.title
-      delete invoiceDetails.first_name
-      delete invoiceDetails.last_name
+      delete invoiceDetails.title;
+      delete invoiceDetails.first_name;
+      delete invoiceDetails.last_name;
     }
-    invoiceDetails.legal_form = invoiceDetails.type
-    delete invoiceDetails.type
+    invoiceDetails.legal_form = invoiceDetails.type;
+    delete invoiceDetails.type;
 
 
-     axios.post('https://home.openweathermap.org/history_bulks', datas, {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      })
-        .then(res => {
-   
-          loadStripe(res.stripe_publishable_key).then((stripe) => {
-            stripe.redirectToCheckout({
-              sessionId: res.stripe_session_id,
-            })
-          })
-        })
-        .catch((err) => {
-          notifyError(`Error: ${err.message}`)
-        })
-      }
-        /*
+    axios.post("http://openweathermap.stage.owm.io/history_bulks", datas, {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    })
+    .then((res) => {
+      loadStripe(res.data.stripe_publishable_key).then((stripe) => {
+        stripe.redirectToCheckout({
+          sessionId: res.data.stripe_session_id,
+        });
+      });
+    })
+      .catch((err) => {
+        console.log(`Error: ${err.message}`);
+      });
+  };
 
-            loadStripe(stripe_publishable_key)
-              .then(stripe => {
-                stripe.redirectToCheckout({sessionId: stripe_session_id})
-              })
-              .catch(err => {newError = err;})
-              }})
-        .catch(err => {
-          newError({})
-          newError = 'Something went wrong';
-          console.log(err)
-        })
-      }
-
-
-      /*
-  const buy = () => {
-
-    const data = {
-      utf8: "✓",
-      authenticity_token: document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '',
-      user: {
-        email: email,
-      },
-      invoice_form: invoiceDetails,
-    }
-
-     axios.post('https://home.openweathermap.org/history_bulks/', data, {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      })
-        .then(response => {
-          newError({})
-          let error = response.data.error;
-          if (error) {
-            newError = error;
-          } else {
-            const {stripe_session_id, stripe_publishable_key} = response.data;
-            loadStripe(stripe_publishable_key)
-              .then(stripe => {
-                stripe.redirectToCheckout({sessionId: stripe_session_id})
-              })
-              .catch(err => {newError = err;})
-              }})
-        .catch(err => {
-          newError({})
-          newError = 'Something went wrong';
-          console.log(err)
-        })
-      }
-
-      */
-  
 
   const decrementStep = () => {
     if (step === 2) {
@@ -292,7 +222,8 @@ const InvoiceSettingsBulk = ({
           newError.email = !email.length;
         }
       }
-    {/*
+      {
+        /*
       if (invoiceSettings.vat_id) {
         validateVat(invoiceSettings.vat_id, invoiceSettings.country)
           .then(() => {
@@ -315,17 +246,16 @@ const InvoiceSettingsBulk = ({
       } else {
         setStep(2);
       }
-    */}
-    if (Object.keys(newError).length) {
-      setError(newError)
-      return
-    } else {
-      setStep(2);
+    */
+      }
+      if (Object.keys(newError).length) {
+        setError(newError);
+        return;
+      } else {
+        setStep(2);
+      }
     }
-    }
-
   };
-
 
   useEffect(() => {
     refreshData();
@@ -341,7 +271,6 @@ const InvoiceSettingsBulk = ({
       }
     });
   };
-
 
   const sorryAlert = () => {
     setAlert(
@@ -527,29 +456,29 @@ const InvoiceSettingsBulk = ({
           temp={temp}
           setTemp={setTemp}
           tempMin={tempMin}
-              setTempMin={setTempMin}
-              tempMax={tempMax}
-              setTempMax={setTempMax}
-              feelsLike={feelsLike}
-              setFeelsLike={setFeelsLike}
-              pressure={pressure}
-              setPressure={setPressure}
-              humidity={humidity}
-              setHumidity={setHumidity}
-              clouds={clouds}
-              setClouds={setClouds}
-              weather={weather}
-              setWeather={setWeather}
-              rain={rain}
-              setRain={setRain}
-              snow={snow}
-              setSnow={setSnow}
-              dewPoint={dewPoint}
-              setDewPoint={setDewPoint}
-              visibility={visibility}
-              setVisibility={setVisibility}
-              wind={wind}
-              setWind={setWind}
+          setTempMin={setTempMin}
+          tempMax={tempMax}
+          setTempMax={setTempMax}
+          feelsLike={feelsLike}
+          setFeelsLike={setFeelsLike}
+          pressure={pressure}
+          setPressure={setPressure}
+          humidity={humidity}
+          setHumidity={setHumidity}
+          clouds={clouds}
+          setClouds={setClouds}
+          weather={weather}
+          setWeather={setWeather}
+          rain={rain}
+          setRain={setRain}
+          snow={snow}
+          setSnow={setSnow}
+          dewPoint={dewPoint}
+          setDewPoint={setDewPoint}
+          visibility={visibility}
+          setVisibility={setVisibility}
+          wind={wind}
+          setWind={setWind}
         />
       ) : null}
       {step === 1 ? (
@@ -636,7 +565,7 @@ const InvoiceSettingsBulk = ({
                     float: "right",
                   }}
                 >
-                  Subscribe
+                  Continue with Stripe
                 </Button>
               </>
             )}
