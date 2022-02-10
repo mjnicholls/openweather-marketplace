@@ -13,3 +13,5 @@ export const confirmVat = 'https://home.agromonitoring.com/api/check_vat'
 export const countriesList = 'https://home.agromonitoring.com/api/countries'
 
 export const test = 'https://home.openweathermap.org/history_bulks/'
+
+//export const confirmVat = 'https://old.agromonitoring.com/api/check_vat'

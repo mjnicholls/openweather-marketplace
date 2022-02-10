@@ -403,6 +403,11 @@ const Location = ({
             setEndDate={setEndDate}
           />
         </Row>
+        {error.lat && <div className="invalid-feedback d-block">{error.lat}</div>}
+      {error.lon && <div className="invalid-feedback d-block">{error.lon}</div>}
+      {error.location && (
+        <div className="invalid-feedback d-block">{error.location}</div>
+      )}
         {isDropDown && (
           <div className="padded search-pop-up d-flex justify-content-between">
             <div>
@@ -567,11 +572,7 @@ const Location = ({
         setLocation={setLocation}
       />
 
-      {error.lat && <div className="invalid-feedback d-block">{error.lat}</div>}
-      {error.lon && <div className="invalid-feedback d-block">{error.lon}</div>}
-      {error.location && (
-        <div className="invalid-feedback d-block">{error.location}</div>
-      )}
+ 
 
       <Row className="mt-4 flex-end price">
         <Col>

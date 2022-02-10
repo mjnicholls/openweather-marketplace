@@ -2,6 +2,8 @@ import axios from 'axios'
 
 import { noBlankErrorMessage } from '../config'
 
+import { confirmVat } from '../api'
+
 export const validateEmail = (email) => {
   const re = /^([^@\s]+)@((?:[-A-Za-z0-9]+\.)+[A-Za-z]{2,})$/
   return re.test(email)
@@ -42,11 +44,6 @@ export const validatePhoneNumber = (val) => {
   return res
 }
 
-export const validateVat = (vat, country) => {
-  /** Confirm VAT
-   * Override base url - the method is at the moment at another domain,
-   * it might change in the future
-   * API Response: 200 - correct VAT, 422 - incorrect VAT */
-  const url = `${confirmVat}?vat_id=${vat}&country=${country}`
-  return axios({ url, baseURL: '' })
+export const validateVat = (val, country) => {
+  return axios.get(`http://openweathermap.stage.owm.io/api/check_vat?vat_id=${val}`)
 }

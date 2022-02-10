@@ -56,7 +56,7 @@ const HomeMarket = () => {
                   </Button>
                   <Button
                     className="btn button-active"
-                    href="https://home.openweathermap.org/history_bulks/new"
+                    href="/history_bulks/new"
                   >
                     Place Order
                   </Button>
@@ -98,7 +98,7 @@ const HomeMarket = () => {
                   </Button>
                   <Button
                     className="btn button-active"
-                    href="https://home.openweathermap.org/history_forecast_bulks/new"
+                    href="/history_forecast_bulks/new"
                   >
                     Place Order
                   </Button>
@@ -143,7 +143,7 @@ const HomeMarket = () => {
                   </Button>
                   <Button
                     className="btn button-active"
-                    href="https://home.openweathermap.org/history_bulks/new"
+                    href="/history_bulks/new"
                   >
                     Place Order
                   </Button>
@@ -188,7 +188,7 @@ const HomeMarket = () => {
                   </Button>
                   <Button
                     className="btn button-active"
-                    href="https://home.openweathermap.org/history_forecast_bulks/new"
+                    href="/history_forecast_bulks/new"
                   >
                     Place Order
                   </Button>
@@ -235,7 +235,7 @@ const HomeMarket = () => {
                   </Button>
                   <Button
                     className="btn button-active"
-                    href="https://home.openweathermap.org/zip_code_data/new"
+                    href="/zip_code_data/new"
                   >
                     Place Order
                   </Button>
@@ -282,7 +282,7 @@ const HomeMarket = () => {
                   </Button>
                   <Button
                     className="btn button-active"
-                    href="https://home.openweathermap.org/zip_code_data/new"
+                    href="/zip_code_data/new"
                   >
                     Place Order
                   </Button>

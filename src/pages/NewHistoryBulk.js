@@ -4,6 +4,7 @@ import Map from "../components/Map";
 import placeMarker from "../utils/placeMarker";
 import Location from "../components/Location";
 import { useSelector } from "react-redux";
+import moment from 'moment-timezone';
 
 const selectCurrency = (state) => state.auth.currency;
 const selectInvoice = (state) => state.auth.invoiceInfo;
@@ -14,6 +15,8 @@ const NewHistoryBulk = () => {
   const mapRef = useRef(null);
   const searchBoxRef = useRef();
   const invoice = useSelector(selectInvoice);
+
+  moment.tz.setDefault("America/Los_Angeles");
 
   const [error, setError] = useState({});
 
@@ -50,9 +53,9 @@ const NewHistoryBulk = () => {
 
   const [formatValue, setFormatValue] = useState("CSV")
 
-  const [startDate, setStartDate] = useState(new Date(Date.UTC(0, 0, 0, 0, 0, 0)));
+  const [startDate, setStartDate] = useState(new Date());
 
-  const [endDate, setEndDate] = useState(new Date(Date.UTC(0, 0, 0, 0, 0, 0)));
+  const [endDate, setEndDate] = useState(new Date());
 
   const [checked, setChecked] = useState([]);
   

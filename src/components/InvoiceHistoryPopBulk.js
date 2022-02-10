@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button, Col, Form, Label, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-import { confirmVatNumber, getAccountInfo } from "../api/personalAccountAPI";
+import { validatePhoneNumber, validateVat } from "../utils/validation";
 import PropTypes from "prop-types";
 
 import Step0HistoryBulk from "./Step0HistoryBulk";
@@ -67,12 +67,39 @@ const InvoiceSettingsBulk = ({
       postal_code: !invoiceSettings.postal_code.length,
       email: !email.length,
       country: !invoiceSettings.country.length,
-      phone: !invoiceSettings.phone.length,
     };
 
-    setError(newError);
-
-    console.log("new error", newError);
+    if (!invoiceSettings.address_line_1) {
+      setError({
+        address_line_1: noBlankErrorMessage,
+      })
+      return
+    }
+    if (!invoiceSettings.city) {
+      setError({
+        city: noBlankErrorMessage,
+      })
+      return
+    }
+    if (!invoiceSettings.country) {
+      setError({
+        country: noBlankErrorMessage,
+      })
+      return
+    }
+    if (!invoiceSettings.country) {
+      setError({
+        country: "Please select a country",
+      })
+      return
+    }
+    if (!invoiceSettings.postal_code) {
+      setError({
+        postal_code: noBlankErrorMessage,
+      })
+      return
+    }
+;
 
     if (Object.values(newError).filter(Boolean).length) {
       console.log("Please fill in required fields");
@@ -133,6 +160,36 @@ const InvoiceSettingsBulk = ({
           newError.phone = !invoiceSettings.phone.length;
           newError.email = !email.length;
         }
+        if (!invoiceSettings.first_name) {
+          setError({
+            first_name: noBlankErrorMessage,
+          })
+          return
+        }
+        if (!invoiceSettings.last_name) {
+          setError({
+            last_name: noBlankErrorMessage,
+          })
+          return
+        }
+        if (!invoiceSettings.phone) {
+          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          if (phoneValidation) {
+            newError.phone = phoneValidation;
+          }
+          else {
+            setError({
+              phone: noBlankErrorMessage,
+            })
+            return
+          }
+        }
+        if (!email) {
+          setError({
+            email: noBlankErrorMessage,
+          })
+          return
+        }
       } else {
         // eslint-disable-next-line
         if (
@@ -144,13 +201,52 @@ const InvoiceSettingsBulk = ({
           newError.phone = !invoiceSettings.phone.length;
           newError.email = !email.length;
         }
+        if (!invoiceSettings.organisation) {
+          setError({
+            organisation: noBlankErrorMessage,
+          })
+          return
+        }
+        if (!invoiceSettings.phone) {
+          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          if (phoneValidation) {
+            newError.phone = phoneValidation;
+          }
+          else {
+            setError({
+              phone: noBlankErrorMessage,
+            })
+            return
+          }
+        }
+        if (!email) {
+          setError({
+            email: noBlankErrorMessage,
+          })
+          return
+        }
       }
-      console.log("newError", newError);
-      setError(newError);
+      {
+        
+      if (invoiceSettings.vat_id) {
+        validateVat(invoiceSettings.vat_id)
+          .then(() => {
+            invoiceSettings.vat_id = invoiceSettings.vat_id
+          })
+          .catch(() => {
+            newError.vat_id = 'VAT ID is not valid'
+          })
+          .finally(() => {
+            if (Object.keys(newError).length) {
+              setError(newError)
+              return
+            }
+          })
+      } 
+    } 
       if (Object.keys(newError).length) {
-        // eslint-disable-next-line
+        setError(newError);
         return;
-        // eslint-disable-next-line
       } else {
         setStep(2);
       }

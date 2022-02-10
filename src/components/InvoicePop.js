@@ -4,6 +4,7 @@ import { Button, Col, Form, Label, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import { confirmVatNumber, getAccountInfo } from "../api/personalAccountAPI";
 import PropTypes from "prop-types";
+import { noBlankErrorMessage } from '../config'
 
 import Step0 from "./Step0";
 import Step1 from "./Step1";
@@ -39,6 +40,37 @@ const InvoiceSettings = ({ country, year, price }) => {
       country: !invoiceSettings.country.length,
       phone: !invoiceSettings.phone.length,
     };
+
+    if (!invoiceSettings.address_line_1) {
+      setError({
+        address_line_1: noBlankErrorMessage,
+      })
+      return
+    }
+    if (!invoiceSettings.city) {
+      setError({
+        city: noBlankErrorMessage,
+      })
+      return
+    }
+    if (!invoiceSettings.country) {
+      setError({
+        country: noBlankErrorMessage,
+      })
+      return
+    }
+    if (!invoiceSettings.country) {
+      setError({
+        country: "Please select a country",
+      })
+      return
+    }
+    if (!invoiceSettings.postal_code) {
+      setError({
+        postal_code: noBlankErrorMessage,
+      })
+      return
+    }
 
     setError(newError);
 
@@ -103,6 +135,14 @@ const InvoiceSettings = ({ country, year, price }) => {
           newError.phone = !invoiceSettings.phone.length;
           newError.email = !email.length;
         }
+
+        if (!invoiceSettings.first_name) {
+          setError({
+            first_name: noBlankErrorMessage,
+          })
+          return
+        }
+
       } else {
         // eslint-disable-next-line
         if (

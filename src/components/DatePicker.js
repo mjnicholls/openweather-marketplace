@@ -10,7 +10,7 @@ const DatePickerMarket = ({startDate, setStartDate, endDate, setEndDate}) => {
 
   const years = range(1979, getYear(new Date()) + 1, 1);
 
-  console.log('date', startDate.toUTCString())
+  console.log('try', startDate)
 
   return (
     <>
@@ -53,15 +53,17 @@ const DatePickerMarket = ({startDate, setStartDate, endDate, setEndDate}) => {
                   ))}
                 </select>
               </div>
-            )}
+            )}   
             selected={startDate}
             onChange={(date) => setStartDate(date)}
           />
+    
         </Form>
       </Col>
       <Col className="dateLabel">
         <Form>
           <Label>To: </Label>
+
           <DatePicker
             className="owm-selector"
             minDate={subDays(startDate, -1)}
@@ -101,6 +103,7 @@ const DatePickerMarket = ({startDate, setStartDate, endDate, setEndDate}) => {
             selected={endDate}
             onChange={(date) => setEndDate(date)}
           />
+
         </Form>
       </Col>
     </>

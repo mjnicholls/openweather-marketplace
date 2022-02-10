@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { validatePhoneNumber, validateVat } from "../utils/validation";
-import { months } from "../config";
+import { noBlankErrorMessage } from '../config'
 
 import Step0Bulk from "./Step0Bulk";
 import Step1 from "./Step1";
@@ -73,10 +73,6 @@ const InvoiceSettingsBulk = ({
     setAlert(null);
   };
   
-  const formatDate = (date) => {
-    const d = new Date(date);
-    return `${d.getUTCDate()} ${months[d.getUTCMonth()]}, ${d.getUTCFullYear()}`
-  }
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 
@@ -90,14 +86,39 @@ const InvoiceSettingsBulk = ({
       postal_code: !invoiceSettings.postal_code.length,
       email: !email.length,
       country: !invoiceSettings.country.length,
-      phone: !invoiceSettings.phone.length,
     };
-    if (invoiceSettings.phone) {
-      const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
-      if (phoneValidation) {
-        newError.phone = phoneValidation;
-      }
+
+    if (!invoiceSettings.address_line_1) {
+      setError({
+        address_line_1: noBlankErrorMessage,
+      })
+      return
     }
+    if (!invoiceSettings.city) {
+      setError({
+        city: noBlankErrorMessage,
+      })
+      return
+    }
+    if (!invoiceSettings.country) {
+      setError({
+        country: noBlankErrorMessage,
+      })
+      return
+    }
+    if (!invoiceSettings.country) {
+      setError({
+        country: "Please select a country",
+      })
+      return
+    }
+    if (!invoiceSettings.postal_code) {
+      setError({
+        postal_code: noBlankErrorMessage,
+      })
+      return
+    }
+
 
     setError(newError);
 
@@ -117,8 +138,8 @@ const InvoiceSettingsBulk = ({
       },
       history_bulk: {
         locations: locations,
-        from: formatDate(startDate),
-        to: formatDate(endDate),
+        from: startDate.toLocaleString(),
+        to: endDate.toLocaleString(),
         parameters: {
           temp: temp,
           temp_min: tempMin,
@@ -173,6 +194,8 @@ const InvoiceSettingsBulk = ({
   };
 
 
+  console.log('vat', invoiceSettings.vat_id)
+
   const decrementStep = () => {
     if (step === 2) {
       setStep(1);
@@ -210,6 +233,36 @@ const InvoiceSettingsBulk = ({
           newError.phone = !invoiceSettings.phone.length;
           newError.email = !email.length;
         }
+        if (!invoiceSettings.first_name) {
+          setError({
+            first_name: noBlankErrorMessage,
+          })
+          return
+        }
+        if (!invoiceSettings.last_name) {
+          setError({
+            last_name: noBlankErrorMessage,
+          })
+          return
+        }
+        if (!invoiceSettings.phone) {
+          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          if (phoneValidation) {
+            newError.phone = phoneValidation;
+          }
+          else {
+            setError({
+              phone: noBlankErrorMessage,
+            })
+            return
+          }
+        }
+        if (!email) {
+          setError({
+            email: noBlankErrorMessage,
+          })
+          return
+        }
       } else {
         // eslint-disable-next-line
         if (
@@ -221,11 +274,35 @@ const InvoiceSettingsBulk = ({
           newError.phone = !invoiceSettings.phone.length;
           newError.email = !email.length;
         }
+        if (!invoiceSettings.organisation) {
+          setError({
+            organisation: noBlankErrorMessage,
+          })
+          return
+        }
+        if (!invoiceSettings.phone) {
+          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          if (phoneValidation) {
+            newError.phone = phoneValidation;
+          }
+          else {
+            setError({
+              phone: noBlankErrorMessage,
+            })
+            return
+          }
+        }
+        if (!email) {
+          setError({
+            email: noBlankErrorMessage,
+          })
+          return
+        }
       }
       {
-        /*
+        
       if (invoiceSettings.vat_id) {
-        validateVat(invoiceSettings.vat_id, invoiceSettings.country)
+        validateVat(invoiceSettings.vat_id)
           .then(() => {
             invoiceSettings.vat_id = invoiceSettings.vat_id
           })
@@ -239,15 +316,7 @@ const InvoiceSettingsBulk = ({
             }
           })
       } 
-    } else {
-      if (Object.keys(newError).length) {
-        setError(newError)
-        return
-      } else {
-        setStep(2);
-      }
-    */
-      }
+    } 
       if (Object.keys(newError).length) {
         setError(newError);
         return;
