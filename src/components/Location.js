@@ -123,6 +123,11 @@ const Location = ({
     setIsImport(false);
   };
 
+  const setPricetoZero = () => {
+    setImportPrice(0);
+    hideAlert();
+  };
+
   const getJson = (e) => {
     const files = e.target.files;
     if (files) {
@@ -211,8 +216,8 @@ const Location = ({
     setAlert(
       <ReactBSAlert
         title="Import"
-        onConfirm={() => hideAlert()}
-        onCancel={() => hideAlert()}
+        onConfirm={setPricetoZero}
+        onCancel={setPricetoZero}
         showConfirm={false}
         showCloseButton
         customClass="bs-alerts"
@@ -265,18 +270,13 @@ const Location = ({
                 hideAlert();
               }}
             >
-              Upload recognised locations
+              Upload Recognised Locations
             </Button>
 
-            <label for="file-upload" className="button-neutral-input">
+            <Button className="button-neutral" onClick={setPricetoZero}>
               Upload New File
-            </label>
-            <input
-              type="file"
-              accept=".csv,.xlsx,.xls"
-              onChange={getJson}
-              id="file-upload"
-            />
+            </Button>
+
           </Col>
         </Row>
       </ReactBSAlert>
@@ -403,11 +403,15 @@ const Location = ({
             setEndDate={setEndDate}
           />
         </Row>
-        {error.lat && <div className="invalid-feedback d-block">{error.lat}</div>}
-      {error.lon && <div className="invalid-feedback d-block">{error.lon}</div>}
-      {error.location && (
-        <div className="invalid-feedback d-block">{error.location}</div>
-      )}
+        {error.lat && (
+          <div className="invalid-feedback d-block">{error.lat}</div>
+        )}
+        {error.lon && (
+          <div className="invalid-feedback d-block">{error.lon}</div>
+        )}
+        {error.location && (
+          <div className="invalid-feedback d-block">{error.location}</div>
+        )}
         {isDropDown && (
           <div className="padded search-pop-up d-flex justify-content-between">
             <div>
@@ -487,7 +491,7 @@ const Location = ({
                   </Row>
                   <Row className="trigger-item-parse">
                     <Col className="mt-4 text-end">
-                      <label for="file-upload" className="button-active">
+                      <label htmlFor="file-upload" className="button-active">
                         Import CSV File
                       </label>
                       <input
@@ -571,8 +575,6 @@ const Location = ({
         location={location}
         setLocation={setLocation}
       />
-
- 
 
       <Row className="mt-4 flex-end price">
         <Col>

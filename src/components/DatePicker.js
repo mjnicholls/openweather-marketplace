@@ -6,11 +6,8 @@ import { Col, Form, Label } from "reactstrap";
 import "react-datepicker/dist/react-datepicker.css";
 import { months } from "../config";
 
-const DatePickerMarket = ({startDate, setStartDate, endDate, setEndDate}) => {
-
+const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
   const years = range(1979, getYear(new Date()) + 1, 1);
-
-  console.log('try', startDate)
 
   return (
     <>
@@ -53,11 +50,10 @@ const DatePickerMarket = ({startDate, setStartDate, endDate, setEndDate}) => {
                   ))}
                 </select>
               </div>
-            )}   
+            )}
             selected={startDate}
             onChange={(date) => setStartDate(date)}
           />
-    
         </Form>
       </Col>
       <Col className="dateLabel">
@@ -103,7 +99,6 @@ const DatePickerMarket = ({startDate, setStartDate, endDate, setEndDate}) => {
             selected={endDate}
             onChange={(date) => setEndDate(date)}
           />
-
         </Form>
       </Col>
     </>

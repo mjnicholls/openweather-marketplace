@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 const selectCurrency = (state) => state.auth.currency;
 
 const HistoryForecastBulk = () => {
-
   const currency = useSelector(selectCurrency);
 
   const mapRef = useRef(null);
@@ -45,24 +44,23 @@ const HistoryForecastBulk = () => {
 
   const [downloadsValue, setDownloadsValue] = useState("All locations");
 
-  const [formatValue, setFormatValue] = useState("CSV")
+  const [formatValue, setFormatValue] = useState("CSV");
 
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState();
 
-  const [endDate, setEndDate] = useState(new Date());
+  const [endDate, setEndDate] = useState();
 
   const [checked, setChecked] = useState([]);
 
   const [importPrice, setImportPrice] = useState(0);
 
-  const [temp, setTemp] = useState('On');
+  const [temp, setTemp] = useState("On");
   const [pressure, setPressure] = useState("On");
   const [humidity, setHumidity] = useState("On");
   const [clouds, setClouds] = useState("On");
   const [dewPoint, setDewPoint] = useState("On");
   const [precipitation, setPrecipitation] = useState("On");
   const [wind, setWind] = useState("On");
-
 
   useEffect(() => {
     setTempLocation({
@@ -190,7 +188,6 @@ const HistoryForecastBulk = () => {
             setPrecipitation={setPrecipitation}
             wind={wind}
             setWind={setWind}
-            
           />
         </Col>
 

@@ -33,11 +33,14 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
                 value={invoiceSettings.address_line_1}
                 className={error.address_line_1 ? "danger-border" : ""}
               />
-                  <div className={`invalid-feedback ${error.address_line_1 ? "d-block" : ""}`}>
-          {error.address_line_1}
-        </div>
+              <div
+                className={`invalid-feedback ${
+                  error.address_line_1 ? "d-block" : ""
+                }`}
+              >
+                {error.address_line_1}
+              </div>
             </FormGroup>
-        
           </Col>
         </Row>
         <Row>
@@ -51,8 +54,8 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
               />
             </FormGroup>
           </Col>
-          </Row>
-          <Row>
+        </Row>
+        <Row>
           <Col md="6">
             <Label>Country *</Label>
             <FormGroup>
@@ -76,9 +79,11 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
                     : ""
                 }
               />
-                       <div className={`invalid-feedback ${error.country ? "d-block" : ""}`}>
-          {error.country}
-        </div>
+              <div
+                className={`invalid-feedback ${error.country ? "d-block" : ""}`}
+              >
+                {error.country}
+              </div>
             </FormGroup>
           </Col>
           <Col md="6">
@@ -92,11 +97,11 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
               />
             </FormGroup>
             <div className={`invalid-feedback ${error.city ? "d-block" : ""}`}>
-          {error.city}
-        </div>
+              {error.city}
+            </div>
           </Col>
-          </Row>
-<Row>
+        </Row>
+        <Row>
           <Col md="6">
             <Label>Postcode *</Label>
             <FormGroup>
@@ -106,9 +111,13 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
                 value={invoiceSettings.postal_code}
                 className={error.postal_code ? "danger-border" : ""}
               />
-                    <div className={`invalid-feedback ${error.postal_code ? "d-block" : ""}`}>
-          {error.postal_code}
-        </div>
+              <div
+                className={`invalid-feedback ${
+                  error.postal_code ? "d-block" : ""
+                }`}
+              >
+                {error.postal_code}
+              </div>
             </FormGroup>
           </Col>
 
@@ -129,7 +138,7 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
 };
 
 Step2.propTypes = {
-  error: PropTypes.func,
+  error: PropTypes.object,
   invoiceSettings: PropTypes.object,
   setInvoiceSettings: PropTypes.func,
 };

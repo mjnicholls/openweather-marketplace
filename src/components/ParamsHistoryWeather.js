@@ -4,8 +4,14 @@ import { weathersHistory } from "../config";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import CheckyBoxHistory from "./checkBoxHistory";
 
-const WeatherHistoryParams = ({checkedWeather, setCheckedWeather, fileValue, setFileValue, checked,
-  setChecked,  temp,
+const WeatherHistoryParams = ({
+  checkedWeather,
+  setCheckedWeather,
+  fileValue,
+  setFileValue,
+  checked,
+  setChecked,
+  temp,
   setTemp,
   pressure,
   setPressure,
@@ -18,7 +24,8 @@ const WeatherHistoryParams = ({checkedWeather, setCheckedWeather, fileValue, set
   precipitation,
   setPrecipitation,
   wind,
-  setWind,}) => {
+  setWind,
+}) => {
   const [alert, setAlert] = useState(null);
 
   //const [fileValue, setFileValue] = useState();
@@ -38,27 +45,27 @@ const WeatherHistoryParams = ({checkedWeather, setCheckedWeather, fileValue, set
         customClass="bs-alerts"
       >
         <Row className="text-start mt-4">
-        <CheckyBoxHistory
-      checkedWeather={checkedWeather}
-      setCheckedWeather={setCheckedWeather}
-      setFileValue={setFileValue}
-      checked={checked}
-      setChecked={setChecked}
-      temp={temp}
-      setTemp={setTemp}
-      pressure={pressure}
-      setPressure={setPressure}
-      humidity={humidity}
-      setHumidity={setHumidity}
-      clouds={clouds}
-      setClouds={setClouds}
-      dewPoint={dewPoint}
-      setDewPoint={setDewPoint}
-      precipitation={precipitation}
-      setPrecipitation={setPrecipitation}
-      wind={wind}
-      setWind={setWind}
-      />
+          <CheckyBoxHistory
+            checkedWeather={checkedWeather}
+            setCheckedWeather={setCheckedWeather}
+            setFileValue={setFileValue}
+            checked={checked}
+            setChecked={setChecked}
+            temp={temp}
+            setTemp={setTemp}
+            pressure={pressure}
+            setPressure={setPressure}
+            humidity={humidity}
+            setHumidity={setHumidity}
+            clouds={clouds}
+            setClouds={setClouds}
+            dewPoint={dewPoint}
+            setDewPoint={setDewPoint}
+            precipitation={precipitation}
+            setPrecipitation={setPrecipitation}
+            wind={wind}
+            setWind={setWind}
+          />
         </Row>
       </ReactBSAlert>
     );

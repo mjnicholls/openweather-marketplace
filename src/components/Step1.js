@@ -49,7 +49,6 @@ const Step1 = ({
             />
             <span className="form-check-sign" /> Organisation
           </Label>
-          
         </FormGroup>
       </Form>
 
@@ -89,9 +88,13 @@ const Step1 = ({
                     className={error.first_name ? "danger-border" : ""}
                   />
                 </FormGroup>
-                <div className={`invalid-feedback ${error.first_name ? "d-block" : ""}`}>
-          {error.first_name}
-        </div>
+                <div
+                  className={`invalid-feedback ${
+                    error.first_name ? "d-block" : ""
+                  }`}
+                >
+                  {error.first_name}
+                </div>
               </Col>
               <Col>
                 <Label>Last Name *</Label>
@@ -102,9 +105,13 @@ const Step1 = ({
                     value={invoiceSettings.last_name}
                     className={error.last_name ? "danger-border" : ""}
                   />
-                           <div className={`invalid-feedback ${error.last_name ? "d-block" : ""}`}>
-          {error.last_name}
-        </div>
+                  <div
+                    className={`invalid-feedback ${
+                      error.last_name ? "d-block" : ""
+                    }`}
+                  >
+                    {error.last_name}
+                  </div>
                 </FormGroup>
               </Col>
             </Row>
@@ -119,9 +126,11 @@ const Step1 = ({
                     className={error.phone ? "danger-border" : ""}
                   />
                 </FormGroup>
-                <div className={`invalid-feedback ${error.phone ? "d-block" : ""}`}>
-          {error.phone}
-        </div>
+                <div
+                  className={`invalid-feedback ${error.phone ? "d-block" : ""}`}
+                >
+                  {error.phone}
+                </div>
               </Col>
               <Col>
                 <Label>Email *</Label>
@@ -132,9 +141,13 @@ const Step1 = ({
                     value={email}
                     className={error.email ? "danger-border" : ""}
                   />
-                           <div className={`invalid-feedback ${error.email ? "d-block" : ""}`}>
-          {error.email}
-        </div>
+                  <div
+                    className={`invalid-feedback ${
+                      error.email ? "d-block" : ""
+                    }`}
+                  >
+                    {error.email}
+                  </div>
                 </FormGroup>
               </Col>
             </Row>
@@ -153,11 +166,14 @@ const Step1 = ({
                     value={invoiceSettings.organisation}
                     className={error.organisation ? "danger-border" : ""}
                   />
-                       <div className={`invalid-feedback ${error.organisation ? "d-block" : ""}`}>
-          {error.organisation}
-        </div>
+                  <div
+                    className={`invalid-feedback ${
+                      error.organisation ? "d-block" : ""
+                    }`}
+                  >
+                    {error.organisation}
+                  </div>
                 </FormGroup>
-           
               </Col>
               <Col>
                 <Label>VAT ID</Label>
@@ -170,9 +186,13 @@ const Step1 = ({
                     value={invoiceSettings.vat_id}
                     className={error.vat_id ? "danger-border" : ""}
                   />
-                               <div className={`invalid-feedback ${error.vat_id ? "d-block" : ""}`}>
-          {error.vat_id}
-        </div>
+                  <div
+                    className={`invalid-feedback ${
+                      error.vat_id ? "d-block" : ""
+                    }`}
+                  >
+                    {error.vat_id}
+                  </div>
                 </FormGroup>
               </Col>
             </Row>
@@ -186,11 +206,14 @@ const Step1 = ({
                     value={invoiceSettings.phone}
                     className={error.phone ? "danger-border" : ""}
                   />
-                           <div className={`invalid-feedback ${error.phone ? "d-block" : ""}`}>
-          {error.phone}
-        </div>
+                  <div
+                    className={`invalid-feedback ${
+                      error.phone ? "d-block" : ""
+                    }`}
+                  >
+                    {error.phone}
+                  </div>
                 </FormGroup>
-       
               </Col>
               <Col>
                 <Label>Email *</Label>
@@ -201,9 +224,13 @@ const Step1 = ({
                     value={email}
                     className={error.email ? "danger-border" : ""}
                   />
-                         <div className={`invalid-feedback ${error.email ? "d-block" : ""}`}>
-          {error.email}
-        </div>
+                  <div
+                    className={`invalid-feedback ${
+                      error.email ? "d-block" : ""
+                    }`}
+                  >
+                    {error.email}
+                  </div>
                 </FormGroup>
               </Col>
             </Row>

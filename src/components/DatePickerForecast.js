@@ -5,8 +5,12 @@ import range from "lodash/range";
 import { Col, Form, Label } from "reactstrap";
 import "react-datepicker/dist/react-datepicker.css";
 
-const DatePickerForecast = ({startDate, setStartDate, endDate, setEndDate}) => {
-
+const DatePickerForecast = ({
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+}) => {
   const years = range(2017, getYear(new Date()) + 1, 1);
 
   const months = [
@@ -23,9 +27,6 @@ const DatePickerForecast = ({startDate, setStartDate, endDate, setEndDate}) => {
     "November",
     "December",
   ];
-
-  console.log("start", startDate);
-  console.log("end", endDate);
 
   return (
     <>

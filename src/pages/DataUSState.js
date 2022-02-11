@@ -8,17 +8,15 @@ import { statesOfAmerica, years } from "../config";
 import InvoiceSettings from "../components/InvoicePop";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 
-const selectCurrency = (state) => state.auth.currency;
+//const selectCurrency = (state) => state.auth.currency;
 
 const DataUSState = () => {
-  const currency = useSelector(selectCurrency);
+  const currency = "USD";
 
   const [price, setPrice] = useState(0);
   const [country, setCountry] = useState("");
   const [zip, setZip] = useState("");
   const [year, setYear] = useState("");
-
-  console.log("zip", zip);
 
   const handleChange = (e) => {
     setZip(e.zip);

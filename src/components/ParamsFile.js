@@ -3,7 +3,7 @@ import { Button, Label, Form, FormGroup, Input, Row } from "reactstrap";
 import { file } from "../config";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 
-const FileParams = ({formatValue, setFormatValue}) => {
+const FileParams = ({ formatValue, setFormatValue }) => {
   const [alert, setAlert] = useState(null);
 
   const hideAlert = () => {
@@ -22,8 +22,8 @@ const FileParams = ({formatValue, setFormatValue}) => {
       >
         <Row className="text-start mt-4">
           <Form className="checkbox-radios ml-5">
-            {file.map((option) => (
-              <FormGroup check className="form-check-radio">
+            {file.map((option, index) => (
+              <FormGroup key={index} check className="form-check-radio">
                 <Label check>
                   {option.label}
                   <Input

@@ -4,7 +4,8 @@ import { Button, Col, Form, Label, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import { confirmVatNumber, getAccountInfo } from "../api/personalAccountAPI";
 import PropTypes from "prop-types";
-import { noBlankErrorMessage } from '../config'
+import { noBlankErrorMessage } from "../config";
+import { validatePhoneNumber, validateVat } from "../utils/validation";
 
 import Step0 from "./Step0";
 import Step1 from "./Step1";
@@ -38,38 +39,37 @@ const InvoiceSettings = ({ country, year, price }) => {
       postal_code: !invoiceSettings.postal_code.length,
       email: !email.length,
       country: !invoiceSettings.country.length,
-      phone: !invoiceSettings.phone.length,
     };
 
     if (!invoiceSettings.address_line_1) {
       setError({
         address_line_1: noBlankErrorMessage,
-      })
-      return
+      });
+      return;
     }
     if (!invoiceSettings.city) {
       setError({
         city: noBlankErrorMessage,
-      })
-      return
+      });
+      return;
     }
     if (!invoiceSettings.country) {
       setError({
         country: noBlankErrorMessage,
-      })
-      return
+      });
+      return;
     }
     if (!invoiceSettings.country) {
       setError({
         country: "Please select a country",
-      })
-      return
+      });
+      return;
     }
     if (!invoiceSettings.postal_code) {
       setError({
         postal_code: noBlankErrorMessage,
-      })
-      return
+      });
+      return;
     }
 
     setError(newError);
@@ -79,22 +79,6 @@ const InvoiceSettings = ({ country, year, price }) => {
     if (Object.values(newError).filter(Boolean).length) {
       console.log("Please fill in required fields");
       return;
-    }
-    if (
-      invoiceSettings.type === "organisation" &&
-      invoiceSettings.vat_id.length
-    ) {
-      confirmVatNumber(invoiceSettings.vat_id)
-        .then(() => {
-          // eslint-disable-next-line
-          isNew ? billingInfoCreate() : billingInfoUpdate();
-        })
-        .catch(() => {
-          console.log("Incorrect VAT number");
-        });
-    } else {
-      // eslint-disable-next-line
-      isNew ? billingInfoCreate() : billingInfoUpdate();
     }
   };
 
@@ -135,14 +119,35 @@ const InvoiceSettings = ({ country, year, price }) => {
           newError.phone = !invoiceSettings.phone.length;
           newError.email = !email.length;
         }
-
         if (!invoiceSettings.first_name) {
           setError({
             first_name: noBlankErrorMessage,
-          })
-          return
+          });
+          return;
         }
-
+        if (!invoiceSettings.last_name) {
+          setError({
+            last_name: noBlankErrorMessage,
+          });
+          return;
+        }
+        if (!invoiceSettings.phone) {
+          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          if (phoneValidation) {
+            newError.phone = phoneValidation;
+          } else {
+            setError({
+              phone: noBlankErrorMessage,
+            });
+            return;
+          }
+        }
+        if (!email) {
+          setError({
+            email: noBlankErrorMessage,
+          });
+          return;
+        }
       } else {
         // eslint-disable-next-line
         if (
@@ -154,32 +159,54 @@ const InvoiceSettings = ({ country, year, price }) => {
           newError.phone = !invoiceSettings.phone.length;
           newError.email = !email.length;
         }
+        if (!invoiceSettings.organisation) {
+          setError({
+            organisation: noBlankErrorMessage,
+          });
+          return;
+        }
+        if (!invoiceSettings.phone) {
+          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          if (phoneValidation) {
+            newError.phone = phoneValidation;
+          } else {
+            setError({
+              phone: noBlankErrorMessage,
+            });
+            return;
+          }
+        }
+        if (!email) {
+          setError({
+            email: noBlankErrorMessage,
+          });
+          return;
+        }
       }
-      console.log("newError", newError);
-      setError(newError);
+      {
+        if (invoiceSettings.vat_id) {
+          validateVat(invoiceSettings.vat_id)
+            .then(() => {
+              invoiceSettings.vat_id = invoiceSettings.vat_id;
+            })
+            .catch(() => {
+              newError.vat_id = "VAT ID is not valid";
+            })
+            .finally(() => {
+              if (Object.keys(newError).length) {
+                setError(newError);
+                return;
+              }
+            });
+        }
+      }
       if (Object.keys(newError).length) {
-        // eslint-disable-next-line
+        setError(newError);
         return;
-        // eslint-disable-next-line
       } else {
         setStep(2);
       }
     }
-  };
-
-  useEffect(() => {
-    refreshData();
-  }, []);
-
-  const refreshData = () => {
-    getAccountInfo().then((res) => {
-      if (Object.keys(res.invoice_info).length) {
-        setInvoiceSettings(res.invoice_info);
-        setIsNew(false);
-      } else {
-        setIsNew(true);
-      }
-    });
   };
 
   const errorAndConfirm = () => {
@@ -237,10 +264,6 @@ const InvoiceSettings = ({ country, year, price }) => {
               <Row>
                 <Col>Surname:</Col>
                 <Col>{invoiceSettings.last_name}</Col>
-              </Row>
-              <Row>
-                <Col>Phone No.:</Col>
-                <Col>{invoiceSettings.phone}</Col>
               </Row>
               <Row>
                 <Col>Email:</Col>
@@ -301,10 +324,6 @@ const InvoiceSettings = ({ country, year, price }) => {
           <Row>
             <Col>State:</Col>
             <Col>{invoiceSettings.state}</Col>
-          </Row>
-          <Row>
-            <Col>Phone No:</Col>
-            <Col>{invoiceSettings.phone}</Col>
           </Row>
           <br />
           <Row className="text-end">
@@ -438,7 +457,7 @@ const InvoiceSettings = ({ country, year, price }) => {
                     float: "right",
                   }}
                 >
-                   Continue with Stripe
+                  Continue with Stripe
                 </Button>
               </>
             )}

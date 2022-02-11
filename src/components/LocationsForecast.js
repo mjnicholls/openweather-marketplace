@@ -47,7 +47,7 @@ const LocationForecast = ({
   setFormatValue,
   currency,
   checked,
-  setChecked, 
+  setChecked,
   importPrice,
   setImportPrice,
   temp,
@@ -69,7 +69,7 @@ const LocationForecast = ({
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
   const [isImport, setIsImport] = useState(false);
 
-  const total = price + importPrice
+  const total = price + importPrice;
 
   const setCoordinates = () => {
     setError({});
@@ -108,10 +108,14 @@ const LocationForecast = ({
     setIsImport(false);
   };
 
+  const setPricetoZero = () => {
+    setImportPrice(0);
+    hideAlert();
+  };
+
   const getJson = (e) => {
     const files = e.target.files;
     if (files) {
-      console.log(files[0]);
       Papa.parse(files[0], {
         skipEmptyLines: true,
         complete: function (results) {
@@ -164,11 +168,11 @@ const LocationForecast = ({
             }
 
             if (errors.length > 0) {
-              setImportPrice(importPrice = (results.data.length * 35) / errors.length - 35);
-
+              setImportPrice(
+                (importPrice = (results.data.length * 35) / errors.length - 35)
+              );
             } else {
-              setImportPrice(importPrice = results.data.length * 35 - 35);
- 
+              setImportPrice((importPrice = results.data.length * 35 - 35));
             }
           }
 
@@ -196,8 +200,8 @@ const LocationForecast = ({
     setAlert(
       <ReactBSAlert
         title="Import"
-        onConfirm={() => hideAlert()}
-        onCancel={() => hideAlert()}
+        onConfirm={setPricetoZero}
+        onCancel={setPricetoZero}
         showConfirm={false}
         showCloseButton
         customClass="bs-alerts"
@@ -253,15 +257,9 @@ const LocationForecast = ({
               Upload recognised locations
             </Button>
 
-            <label for="file-upload" className="button-neutral-input">
+            <Button className="button-neutral" onClick={setPricetoZero}>
               Upload New File
-            </label>
-            <input
-              type="file"
-              accept=".csv,.xlsx,.xls"
-              onChange={getJson}
-              id="file-upload"
-            />
+            </Button>
           </Col>
         </Row>
       </ReactBSAlert>
@@ -451,7 +449,7 @@ const LocationForecast = ({
                   </Row>
                   <Row className="trigger-item-parse">
                     <Col className="mt-4 text-end">
-                      <label for="file-upload" className="button-active">
+                      <label htmlFor="file-upload" className="button-active">
                         Import CSV File
                       </label>
                       <input
@@ -579,16 +577,7 @@ LocationForecast.propTypes = {
   searchBoxRef: PropTypes.object,
   isDropDown: PropTypes.bool,
   setIsDropDown: PropTypes.func,
-  locations: PropTypes.object,
-  setLocations: PropTypes.object,
-  parameters: PropTypes.object,
-  setParameters: PropTypes.object,
-  startDate: PropTypes.number,
-  setStartDate: PropTypes.object,
-  endDate: PropTypes.number,
-  setEndDate: PropTypes.object,
-  price: PropTypes.number,
-  setPrice: PropTypes.object,
+  setIsLocationNameEdited: PropTypes.func,
 };
 
 export default LocationForecast;

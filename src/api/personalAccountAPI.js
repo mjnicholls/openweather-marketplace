@@ -1,30 +1,21 @@
+import axios from "axios";
 
-
-import axios from 'axios'
-
-import {
-  accountInfo,
-  invoiceUpdate,
-  confirmVat,
-  test
-} from './index'
+import { accountInfo, invoiceUpdate, confirmVat, test } from "./index";
 
 export const createBillingDetails = (params) =>
   /** Create billing details */
-  axios.post(invoiceUpdate, params)
+  axios.post(invoiceUpdate, params);
 
 export const updateBillingDetails = (params) =>
   /** Update billing information */
-  axios.put(invoiceUpdate, params)
+  axios.put(invoiceUpdate, params);
 
-  export const confirmVatNumber = () =>
+export const confirmVatNumber = () =>
   /** Confirm VAT: 200 - correct VAT, 422 - incorrect VAT */
-  axios.get(confirmVat)
+  axios.get(confirmVat);
 
-  export const getAccountInfo = () =>
+export const getAccountInfo = () =>
   /** Get account preferences */
-  axios.get(accountInfo)
+  axios.get(accountInfo);
 
-  export const stripe = () => axios.put(test)
-
-  
+export const stripe = () => axios.put(test);

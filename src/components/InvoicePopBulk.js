@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { validatePhoneNumber, validateVat } from "../utils/validation";
-import { noBlankErrorMessage } from '../config'
+import { noBlankErrorMessage } from "../config";
 
 import Step0Bulk from "./Step0Bulk";
 import Step1 from "./Step1";
@@ -72,7 +72,6 @@ const InvoiceSettingsBulk = ({
   const hideAlert = () => {
     setAlert(null);
   };
-  
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 
@@ -91,34 +90,33 @@ const InvoiceSettingsBulk = ({
     if (!invoiceSettings.address_line_1) {
       setError({
         address_line_1: noBlankErrorMessage,
-      })
-      return
+      });
+      return;
     }
     if (!invoiceSettings.city) {
       setError({
         city: noBlankErrorMessage,
-      })
-      return
+      });
+      return;
     }
     if (!invoiceSettings.country) {
       setError({
         country: noBlankErrorMessage,
-      })
-      return
+      });
+      return;
     }
     if (!invoiceSettings.country) {
       setError({
         country: "Please select a country",
-      })
-      return
+      });
+      return;
     }
     if (!invoiceSettings.postal_code) {
       setError({
         postal_code: noBlankErrorMessage,
-      })
-      return
+      });
+      return;
     }
-
 
     setError(newError);
 
@@ -176,25 +174,24 @@ const InvoiceSettingsBulk = ({
     invoiceDetails.legal_form = invoiceDetails.type;
     delete invoiceDetails.type;
 
-
-    axios.post("http://openweathermap.stage.owm.io/history_bulks", datas, {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-    })
-    .then((res) => {
-      loadStripe(res.data.stripe_publishable_key).then((stripe) => {
-        stripe.redirectToCheckout({
-          sessionId: res.data.stripe_session_id,
+    axios
+      .post("http://openweathermap.stage.owm.io/history_bulks", datas, {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      })
+      .then((res) => {
+        loadStripe(res.data.stripe_publishable_key).then((stripe) => {
+          stripe.redirectToCheckout({
+            sessionId: res.data.stripe_session_id,
+          });
         });
-      });
-    })
+      })
       .catch((err) => {
         console.log(`Error: ${err.message}`);
       });
   };
 
-
-  console.log('vat', invoiceSettings.vat_id)
+  console.log("vat", invoiceSettings.vat_id);
 
   const decrementStep = () => {
     if (step === 2) {
@@ -236,32 +233,31 @@ const InvoiceSettingsBulk = ({
         if (!invoiceSettings.first_name) {
           setError({
             first_name: noBlankErrorMessage,
-          })
-          return
+          });
+          return;
         }
         if (!invoiceSettings.last_name) {
           setError({
             last_name: noBlankErrorMessage,
-          })
-          return
+          });
+          return;
         }
         if (!invoiceSettings.phone) {
           const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
           if (phoneValidation) {
             newError.phone = phoneValidation;
-          }
-          else {
+          } else {
             setError({
               phone: noBlankErrorMessage,
-            })
-            return
+            });
+            return;
           }
         }
         if (!email) {
           setError({
             email: noBlankErrorMessage,
-          })
-          return
+          });
+          return;
         }
       } else {
         // eslint-disable-next-line
@@ -277,46 +273,44 @@ const InvoiceSettingsBulk = ({
         if (!invoiceSettings.organisation) {
           setError({
             organisation: noBlankErrorMessage,
-          })
-          return
+          });
+          return;
         }
         if (!invoiceSettings.phone) {
           const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
           if (phoneValidation) {
             newError.phone = phoneValidation;
-          }
-          else {
+          } else {
             setError({
               phone: noBlankErrorMessage,
-            })
-            return
+            });
+            return;
           }
         }
         if (!email) {
           setError({
             email: noBlankErrorMessage,
-          })
-          return
+          });
+          return;
         }
       }
       {
-        
-      if (invoiceSettings.vat_id) {
-        validateVat(invoiceSettings.vat_id)
-          .then(() => {
-            invoiceSettings.vat_id = invoiceSettings.vat_id
-          })
-          .catch(() => {
-            newError.vat_id = 'VAT ID is not valid'
-          })
-          .finally(() => {
-            if (Object.keys(newError).length) {
-              setError(newError)
-              return
-            }
-          })
-      } 
-    } 
+        if (invoiceSettings.vat_id) {
+          validateVat(invoiceSettings.vat_id)
+            .then(() => {
+              invoiceSettings.vat_id = invoiceSettings.vat_id;
+            })
+            .catch(() => {
+              newError.vat_id = "VAT ID is not valid";
+            })
+            .finally(() => {
+              if (Object.keys(newError).length) {
+                setError(newError);
+                return;
+              }
+            });
+        }
+      }
       if (Object.keys(newError).length) {
         setError(newError);
         return;
@@ -324,157 +318,6 @@ const InvoiceSettingsBulk = ({
         setStep(2);
       }
     }
-  };
-
-  useEffect(() => {
-    refreshData();
-  }, []);
-
-  const refreshData = () => {
-    getAccountInfo().then((res) => {
-      if (Object.keys(res.invoice_info).length) {
-        setInvoiceSettings(res.invoice_info);
-        setIsNew(false);
-      } else {
-        setIsNew(true);
-      }
-    });
-  };
-
-  const sorryAlert = () => {
-    setAlert(
-      <ReactBSAlert
-        customClass="agro-alert"
-        onConfirm={() => hideAlert()}
-        onCancel={() => hideAlert()}
-        showConfirm={false}
-      >
-        <div className="text-start">
-          <Row className="margin-small">
-            <h2 className="high2">Sorry!</h2>
-          </Row>
-
-          <Row>
-            <Col>
-              This feature is not available at the moment. If you wish to make
-              use of your service, please make a note of your details below, and
-              get in touch with us.
-            </Col>
-          </Row>
-          <br />
-          <Row className="margin-small">
-            <h4>Order Details</h4>
-          </Row>
-          <Row>
-            <Col>State:</Col>
-            <Col>{country}</Col>
-          </Row>
-          <Row>
-            <Col>Year:</Col>
-            <Col>{year}</Col>
-          </Row>
-          <br />
-          {invoiceSettings.type === "individual" ? (
-            <>
-              <Row className="margin-small">
-                <h4>Billing Details</h4>
-              </Row>
-              <Row>
-                <Col>Title:</Col>
-                <Col>{invoiceSettings.title}</Col>
-              </Row>
-              <Row>
-                <Col>First Name:</Col>
-                <Col>{invoiceSettings.first_name}</Col>
-              </Row>
-
-              <Row>
-                <Col>Surname:</Col>
-                <Col>{invoiceSettings.last_name}</Col>
-              </Row>
-              <Row>
-                <Col>Phone No.:</Col>
-                <Col>{invoiceSettings.phone}</Col>
-              </Row>
-              <Row>
-                <Col>Email:</Col>
-                <Col>{email}</Col>
-              </Row>
-              <br />
-            </>
-          ) : (
-            <>
-              <Row className="margin-small">
-                <h4>Billing Details</h4>
-              </Row>
-              <Row>
-                <Col>Organisation:</Col>
-                <Col>{invoiceSettings.organisation}</Col>
-              </Row>
-              <Row>
-                <Col>VAT ID:</Col>
-                <Col>{invoiceSettings.vat_id}</Col>
-              </Row>
-
-              <Row>
-                <Col>Phone No.:</Col>
-                <Col>{invoiceSettings.phone}</Col>
-              </Row>
-              <Row>
-                <Col>Email:</Col>
-                <Col>{email}</Col>
-              </Row>
-              <br />
-            </>
-          )}
-          <Row className="margin-small">
-            <h4>Billing Address</h4>
-          </Row>
-
-          <Row>
-            <Col>Address Line 1:</Col>
-            <Col>{invoiceSettings.address_line_1}</Col>
-          </Row>
-          <Row>
-            <Col>Address Line 2:</Col>
-            <Col>{invoiceSettings.address_line_2}</Col>
-          </Row>
-
-          <Row>
-            <Col>Country:</Col>
-            <Col>{invoiceSettings.country}</Col>
-          </Row>
-          <Row>
-            <Col>City:</Col>
-            <Col>{invoiceSettings.city}</Col>
-          </Row>
-          <Row>
-            <Col>Postcode:</Col>
-            <Col>{invoiceSettings.postal_code}</Col>
-          </Row>
-          <Row>
-            <Col>State:</Col>
-            <Col>{invoiceSettings.state}</Col>
-          </Row>
-          <Row>
-            <Col>Phone No:</Col>
-            <Col>{invoiceSettings.phone}</Col>
-          </Row>
-          <br />
-          <Row className="text-end">
-            <Col>
-              <a
-                href="mailto:info@openweathermap.org"
-                type="button"
-                className="button-active"
-              >
-                Contact Us
-              </a>
-            </Col>
-          </Row>
-        </div>
-      </ReactBSAlert>
-    );
   };
 
   return (

@@ -3,7 +3,7 @@ import { Button, Label, Form, FormGroup, Input, Row } from "reactstrap";
 import { download } from "../config";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 
-const DownloadParams = ({downloadsValue, setDownloadsValue}) => {
+const DownloadParams = ({ downloadsValue, setDownloadsValue }) => {
   const [alert, setAlert] = useState(null);
 
   const hideAlert = () => {
@@ -22,8 +22,8 @@ const DownloadParams = ({downloadsValue, setDownloadsValue}) => {
       >
         <Row className="text-start mt-4">
           <Form className="checkbox-radios ml-5">
-            {download.map((option) => (
-              <FormGroup check className="form-check-radio">
+            {download.map((option, index) => (
+              <FormGroup key={index} check className="form-check-radio">
                 <Label check>
                   {option.label}
                   <Input

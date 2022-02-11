@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { Label, Form, FormGroup, Input, Row} from "reactstrap";
+import { Label, Form, FormGroup, Input, Row } from "reactstrap";
 
-const CheckyBoxHistory = ({ setFileValue,
+const CheckyBoxHistory = ({
+  setFileValue,
   setTemp,
   setPressure,
   setHumidity,
   setClouds,
   setDewPoint,
   setPrecipitation,
-  setWind, }) => {
-
+  setWind,
+}) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked5, setIsChecked5] = useState(false);
   const [isChecked6, setIsChecked6] = useState(false);
@@ -25,14 +26,12 @@ const CheckyBoxHistory = ({ setFileValue,
       setTemp("Off");
     }
     handleOnChange();
-    setFileValue(true)
+    setFileValue(true);
   };
 
   const handleOnChange = () => {
     setIsChecked(!isChecked);
   };
-
-
 
   const handleParameterToggle5 = () => {
     if (isChecked5) {
@@ -41,7 +40,7 @@ const CheckyBoxHistory = ({ setFileValue,
       setPressure("Off");
     }
     handleOnChange5();
-    setFileValue(true)
+    setFileValue(true);
   };
 
   const handleOnChange5 = () => {
@@ -55,7 +54,7 @@ const CheckyBoxHistory = ({ setFileValue,
       setHumidity("Off");
     }
     handleOnChange6();
-    setFileValue(true)
+    setFileValue(true);
   };
 
   const handleOnChange6 = () => {
@@ -69,13 +68,12 @@ const CheckyBoxHistory = ({ setFileValue,
       setClouds("Off");
     }
     handleOnChange7();
-    setFileValue(true)
+    setFileValue(true);
   };
 
   const handleOnChange7 = () => {
     setIsChecked7(!isChecked7);
   };
-
 
   const handleParameterToggle11 = () => {
     if (isChecked11) {
@@ -84,7 +82,7 @@ const CheckyBoxHistory = ({ setFileValue,
       setDewPoint("Off");
     }
     handleOnChange11();
-    setFileValue(true)
+    setFileValue(true);
   };
 
   const handleOnChange11 = () => {
@@ -98,7 +96,7 @@ const CheckyBoxHistory = ({ setFileValue,
       setPrecipitation("Off");
     }
     handleOnChange12();
-    setFileValue(true)
+    setFileValue(true);
   };
 
   const handleOnChange12 = () => {
@@ -112,7 +110,7 @@ const CheckyBoxHistory = ({ setFileValue,
       setWind("Off");
     }
     handleOnChange13();
-    setFileValue(true)
+    setFileValue(true);
   };
 
   const handleOnChange13 = () => {
@@ -120,97 +118,96 @@ const CheckyBoxHistory = ({ setFileValue,
   };
 
   return (
-  <>
-       <Row className="text-start mt-4">
-      <Form className="checkbox-radio-columns ml-5">
-        <FormGroup check className="form-check-radio">
-        <Label check>
-           Temp
-            <Input
-              type="checkbox"
-              onChange={handleParameterToggle}
-              checked={!isChecked}
-              className="text-right"
-            />
-          </Label>
-        </FormGroup>
+    <>
+      <Row className="text-start mt-4">
+        <Form className="checkbox-radio-columns ml-5">
+          <FormGroup check className="form-check-radio">
+            <Label check>
+              Temp
+              <Input
+                type="checkbox"
+                onChange={handleParameterToggle}
+                checked={!isChecked}
+                className="text-right"
+              />
+            </Label>
+          </FormGroup>
 
-        <FormGroup check className="form-check-radio">
-          <Label check>
-            Pressure
-            <Input
-              type="checkbox"
-              onChange={handleParameterToggle5}
-              checked={!isChecked5}
-              className="text-right"
-            />
-          </Label>
-        </FormGroup>
+          <FormGroup check className="form-check-radio">
+            <Label check>
+              Pressure
+              <Input
+                type="checkbox"
+                onChange={handleParameterToggle5}
+                checked={!isChecked5}
+                className="text-right"
+              />
+            </Label>
+          </FormGroup>
 
-        <FormGroup check className="form-check-radio">
-          <Label check>
-            Humidity
-            <Input
-              type="checkbox"
-              onChange={handleParameterToggle6}
-              checked={!isChecked6}
-              className="text-right"
-            />
-          </Label>
-        </FormGroup>
+          <FormGroup check className="form-check-radio">
+            <Label check>
+              Humidity
+              <Input
+                type="checkbox"
+                onChange={handleParameterToggle6}
+                checked={!isChecked6}
+                className="text-right"
+              />
+            </Label>
+          </FormGroup>
 
-        <FormGroup check className="form-check-radio">
-          <Label check>
-            Clouds
-            <Input
-              type="checkbox"
-              onChange={handleParameterToggle7}
-              checked={!isChecked7}
-              className="text-right"
-            />
-          </Label>
-        </FormGroup>
+          <FormGroup check className="form-check-radio">
+            <Label check>
+              Clouds
+              <Input
+                type="checkbox"
+                onChange={handleParameterToggle7}
+                checked={!isChecked7}
+                className="text-right"
+              />
+            </Label>
+          </FormGroup>
 
-        <FormGroup check className="form-check-radio">
-          <Label check>
-            Dew Point
-            <Input
-              type="checkbox"
-              onChange={handleParameterToggle11}
-              checked={!isChecked11}
-              className="text-right"
-            />
-          </Label>
-        </FormGroup>
+          <FormGroup check className="form-check-radio">
+            <Label check>
+              Dew Point
+              <Input
+                type="checkbox"
+                onChange={handleParameterToggle11}
+                checked={!isChecked11}
+                className="text-right"
+              />
+            </Label>
+          </FormGroup>
 
-        <FormGroup check className="form-check-radio">
-          <Label check>
-            Precipitation
-            <Input
-              type="checkbox"
-              onChange={handleParameterToggle12}
-              checked={!isChecked12}
-              className="text-right"
-            />
-          </Label>
-        </FormGroup>
+          <FormGroup check className="form-check-radio">
+            <Label check>
+              Precipitation
+              <Input
+                type="checkbox"
+                onChange={handleParameterToggle12}
+                checked={!isChecked12}
+                className="text-right"
+              />
+            </Label>
+          </FormGroup>
 
-        <FormGroup check className="form-check-radio">
-          <Label check>
-            Wind
-            <Input
-              type="checkbox"
-              onChange={handleParameterToggle13}
-              checked={!isChecked13}
-              className="text-right"
-            />
-          </Label>
-        </FormGroup>
-      </Form>
+          <FormGroup check className="form-check-radio">
+            <Label check>
+              Wind
+              <Input
+                type="checkbox"
+                onChange={handleParameterToggle13}
+                checked={!isChecked13}
+                className="text-right"
+              />
+            </Label>
+          </FormGroup>
+        </Form>
       </Row>
-</>
-
+    </>
   );
-}
+};
 
-export default CheckyBoxHistory
+export default CheckyBoxHistory;

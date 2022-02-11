@@ -24,13 +24,12 @@ const EditTrigger = ({ locations, setLocations, location, close }) => {
       } else {
         return {
           ...el,
-          name,
+          tempName,
         };
       }
     });
 
     setLocations(newLocations);
-    console.log("index", index);
     close();
   };
 

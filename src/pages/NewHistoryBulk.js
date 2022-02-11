@@ -4,13 +4,12 @@ import Map from "../components/Map";
 import placeMarker from "../utils/placeMarker";
 import Location from "../components/Location";
 import { useSelector } from "react-redux";
-import moment from 'moment-timezone';
+import moment from "moment-timezone";
 
 const selectCurrency = (state) => state.auth.currency;
 const selectInvoice = (state) => state.auth.invoiceInfo;
 
 const NewHistoryBulk = () => {
-
   const currency = useSelector(selectCurrency);
   const mapRef = useRef(null);
   const searchBoxRef = useRef();
@@ -51,20 +50,20 @@ const NewHistoryBulk = () => {
 
   const [downloadsValue, setDownloadsValue] = useState("All locations");
 
-  const [formatValue, setFormatValue] = useState("CSV")
+  const [formatValue, setFormatValue] = useState("CSV");
 
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState();
 
-  const [endDate, setEndDate] = useState(new Date());
+  const [endDate, setEndDate] = useState();
 
   const [checked, setChecked] = useState([]);
-  
+
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 
-  const [on, setOn] = useState({})
+  const [on, setOn] = useState({});
 
-  const [temp, setTemp] = useState('On');
-  const [tempMin, setTempMin] = useState('On');
+  const [temp, setTemp] = useState("On");
+  const [tempMin, setTempMin] = useState("On");
   const [tempMax, setTempMax] = useState("On");
   const [feelsLike, setFeelsLike] = useState("On");
   const [pressure, setPressure] = useState("On");
@@ -132,7 +131,6 @@ const NewHistoryBulk = () => {
       return;
     }
     setIsDropDown(false);
-
   };
 
   const handleChange = (key, value) => {
@@ -141,10 +139,8 @@ const NewHistoryBulk = () => {
     setLocation(newLocation);
   };
 
-
   return (
     <div className="container">
- 
       <Row>
         <Col md="7" className="page-padding text-start">
           <div style={{ marginBottom: "100px" }}>

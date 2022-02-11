@@ -6,7 +6,7 @@ import FileParams from "./ParamsFile";
 import DownloadParams from "./ParamsDownload";
 import PropTypes from "prop-types";
 
-const ParametersForecast = ({   
+const ParametersForecast = ({
   checkedWeather,
   setCheckedWeather,
   parametersUnits,
@@ -35,34 +35,34 @@ const ParametersForecast = ({
   setPrecipitation,
   wind,
   setWind,
- }) => {
+}) => {
   return (
     <>
       <Row className="mt-3">
         <Col>
           <WeatherHistoryParams
-           checkedWeather={checkedWeather}
-           setCheckedWeather={setCheckedWeather}
-           fileValue={fileValue}
-           setFileValue={setFileValue}
-           checked={checked}
-           setChecked={setChecked}
-           temp={temp}
-           setTemp={setTemp}
-           pressure={pressure}
-           setPressure={setPressure}
-           humidity={humidity}
-           setHumidity={setHumidity}
-           clouds={clouds}
-           setClouds={setClouds}
-           dewPoint={dewPoint}
-           setDewPoint={setDewPoint}
-           precipitation={precipitation}
-           setPrecipitation={setPrecipitation}
-           wind={wind}
-           setWind={setWind}
+            checkedWeather={checkedWeather}
+            setCheckedWeather={setCheckedWeather}
+            fileValue={fileValue}
+            setFileValue={setFileValue}
+            checked={checked}
+            setChecked={setChecked}
+            temp={temp}
+            setTemp={setTemp}
+            pressure={pressure}
+            setPressure={setPressure}
+            humidity={humidity}
+            setHumidity={setHumidity}
+            clouds={clouds}
+            setClouds={setClouds}
+            dewPoint={dewPoint}
+            setDewPoint={setDewPoint}
+            precipitation={precipitation}
+            setPrecipitation={setPrecipitation}
+            wind={wind}
+            setWind={setWind}
           />
-         <UnitsParams
+          <UnitsParams
             parametersUnits={parametersUnits}
             setParametersUnits={setParametersUnits}
             unitsValue={unitsValue}
@@ -84,7 +84,7 @@ const ParametersForecast = ({
 
 ParametersForecast.propTypes = {
   parameters: PropTypes.object,
-  setParameters: PropTypes.object,
+  setParameters: PropTypes.func,
 };
 
 export default ParametersForecast;
