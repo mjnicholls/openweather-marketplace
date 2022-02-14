@@ -175,7 +175,7 @@ const InvoiceSettingsBulk = ({
     delete invoiceDetails.type;
 
     axios
-      .post("https://home.openweathermap.org/history_bulks", datas, {
+      .post("https://openweathermap.stage.owm.io/history_bulks", datas, {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       })
