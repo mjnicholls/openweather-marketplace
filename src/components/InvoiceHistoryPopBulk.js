@@ -149,7 +149,7 @@ const InvoiceSettingsBulk = ({
 
     axios
       .post(
-        "https://openweathermap.stage.owm.io/history_forecast_bulks",
+        "https://home.openweathermap.org/history_forecast_bulks",
         datas,
         {
           "Content-Type": "application/json",
