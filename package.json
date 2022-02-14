@@ -40,7 +40,7 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "env-cmd -f .env.development react-scripts start",
     "start:dev": "env-cmd -f .env.development react-scripts start",
     "start:prod": "env-cmd -f .env.production react-scripts start",
     "build": "env-cmd -f .env.development react-scripts build",
