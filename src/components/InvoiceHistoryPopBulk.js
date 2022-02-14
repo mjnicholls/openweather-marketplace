@@ -113,7 +113,7 @@ const InvoiceSettingsBulk = ({
       account: {
         email: email,
       },
-      history_bulk: {
+      history_forecast_bulk: {
         locations: locations,
         from: startDate.toLocaleString(),
         to: endDate.toLocaleString(),
