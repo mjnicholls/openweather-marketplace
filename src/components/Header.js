@@ -76,6 +76,10 @@ const HeaderMarket = () => {
             </li>
 
             <li>
+              <a href="/my_orders">My Orders</a>
+            </li>
+
+            <li>
               <a className="marketplace" href="/marketplace">
                 Marketplace
               </a>

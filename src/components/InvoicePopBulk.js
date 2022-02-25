@@ -58,6 +58,8 @@ const InvoiceSettingsBulk = ({
   setVisibility,
   wind,
   setWind,
+  isChecked,
+  setIsChecked
 }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
@@ -391,6 +393,8 @@ const InvoiceSettingsBulk = ({
           setVisibility={setVisibility}
           wind={wind}
           setWind={setWind}
+          isChecked={isChecked}
+          setIsChecked={setIsChecked}
         />
       ) : null}
       {step === 1 ? (

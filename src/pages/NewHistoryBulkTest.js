@@ -9,7 +9,7 @@ import { data } from "../api/data";
 const selectCurrency = (state) => state.auth.currency;
 const selectInvoice = (state) => state.auth.invoiceInfo;
 
-const NewHistoryBulk = () => {
+const NewHistoryBulkTest = () => {
   const currency = useSelector(selectCurrency);
   const mapRef = useRef(null);
   const searchBoxRef = useRef();
@@ -63,24 +63,6 @@ const NewHistoryBulk = () => {
     product: false,
     system: false,
   });
-  
-  // const [weatherSettings, setWeatherSettings] = useState({
-  //   temp: "On",
-  //   tempMin:  "On",
-  //   tempMax:  "On",
-  //   feelsLike: "On",
-  //   pressure:  "On",
-  //   humidity:  "On",
-  //   clouds: "On",
-  //   weather:  "On",
-  //   rain:  "On",
-  //   temp: "On",
-  //   snow:  "On",
-  //   dewPoint:  "On",
-  //   visibility:  "On",
-  //   wind:  "On",
-
-  
 
   const [temp, setTemp] = useState("On");
   const [tempMin, setTempMin] = useState("On");
@@ -109,9 +91,6 @@ const NewHistoryBulk = () => {
   const [isChecked11, setIsChecked11] = useState(false);
   const [isChecked12, setIsChecked12] = useState(false);
   const [isChecked13, setIsChecked13] = useState(false);
-
-  const [isAdded, setIsAdded] = useState(false);
-
 
   useEffect(() => {
     setTempLocation({
@@ -175,7 +154,6 @@ const NewHistoryBulk = () => {
     newLocation[key] = value;
     setLocation(newLocation);
   };
-
 
   return (
     <div className="container">
@@ -285,8 +263,6 @@ const NewHistoryBulk = () => {
         <Col md="5">
           <Map
             mapRef={mapRef}
-            isAdded={isAdded}
-            setIsAdded={setIsAdded}
             mapLocation={tempLocation}
             locations={locations}
             setLocations={setLocations}
@@ -305,4 +281,4 @@ const NewHistoryBulk = () => {
   );
 };
 
-export default NewHistoryBulk;
+export default NewHistoryBulkTest;

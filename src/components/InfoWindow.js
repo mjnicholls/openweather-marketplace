@@ -9,11 +9,14 @@ const InfoWindow = ({
   locations,
   price,
   setPrice,
+  isAdded,
+  setIsAdded,
 }) => {
   const onSetLocationClick = (e) => {
     setLocations([...locations, location]);
     setPrice(price + 7);
     e.stopPropagation();
+   // setIsAdded(true)
   };
 
   return location.lat && location.lon ? (

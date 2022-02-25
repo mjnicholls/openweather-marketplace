@@ -31,23 +31,54 @@ const CheckyBox = ({
   setWind,
   setCheckedWeather,
   setFileValue,
+  isChecked,
+  setIsChecked,
+  isChecked2,
+  setIsChecked2,
+  isChecked3,
+  setIsChecked3,
+  isChecked4,
+  setIsChecked4,
+  isChecked5,
+  setIsChecked5,
+  isChecked6,
+  setIsChecked6,
+  isChecked7,
+  setIsChecked7,
+  isChecked8,
+  setIsChecked8,
+  isChecked9,
+  setIsChecked9,
+  isChecked10,
+  setIsChecked10,
+  isChecked11,
+  setIsChecked11,
+  isChecked12,
+  setIsChecked12,
+  isChecked13,
+  setIsChecked13,
 }) => {
-  const [isChecked, setIsChecked] = useState(false);
-  const [isChecked2, setIsChecked2] = useState(false);
-  const [isChecked3, setIsChecked3] = useState(false);
-  const [isChecked4, setIsChecked4] = useState(false);
-  const [isChecked5, setIsChecked5] = useState(false);
-  const [isChecked6, setIsChecked6] = useState(false);
-  const [isChecked7, setIsChecked7] = useState(false);
-  const [isChecked8, setIsChecked8] = useState(false);
-  const [isChecked9, setIsChecked9] = useState(false);
-  const [isChecked10, setIsChecked10] = useState(false);
-  const [isChecked11, setIsChecked11] = useState(false);
-  const [isChecked12, setIsChecked12] = useState(false);
-  const [isChecked13, setIsChecked13] = useState(false);
+
+  // const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked2, setIsChecked2] = useState(false);
+  // const [isChecked3, setIsChecked3] = useState(false);
+  // const [isChecked4, setIsChecked4] = useState(false);
+  // const [isChecked5, setIsChecked5] = useState(false);
+  // const [isChecked6, setIsChecked6] = useState(false);
+  // const [isChecked7, setIsChecked7] = useState(false);
+  // const [isChecked8, setIsChecked8] = useState(false);
+  // const [isChecked9, setIsChecked9] = useState(false);
+  // const [isChecked10, setIsChecked10] = useState(false);
+  // const [isChecked11, setIsChecked11] = useState(false);
+  // const [isChecked12, setIsChecked12] = useState(false);
+  // const [isChecked13, setIsChecked13] = useState(false);
+
+  // Current: trying to set state of each weather parameter to 'on' if the checkbox is clicked
+  // and 'off' when unclicked
 
   const handleParameterToggle = () => {
-    if (isChecked) {
+    
+    if (isChecked === true) {
       setTemp("On");
     } else {
       setTemp("Off");
@@ -59,6 +90,8 @@ const CheckyBox = ({
   const handleOnChange = () => {
     setIsChecked(!isChecked);
   };
+
+  console.log('temp', temp)
 
   const handleParameterToggle2 = () => {
     if (isChecked2) {
@@ -228,7 +261,8 @@ const CheckyBox = ({
     setIsChecked13(!isChecked13);
   };
 
-  // State with list of all checked item
+  // Original: create an array of weathers when the user selects in checkboxes
+  //TODO: Some way of setting weathers in state to "on" or "off"
   /*
   const [checked, setChecked] = useState([]);
   const checkList = weathers;
@@ -258,7 +292,6 @@ const CheckyBox = ({
 
     console.log('checked', checkedItems)
 
-
   // Return classes based on whether item is checked
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
@@ -266,6 +299,8 @@ const CheckyBox = ({
 
   return (
     <>
+    
+    {/* Original: Loops through selected checkboxes and adds or removes from array */}
       {/*
         <Form className="checkbox-radio-columns ml-5">
           {checkList.map((item, index) => (

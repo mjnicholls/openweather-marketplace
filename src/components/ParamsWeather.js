@@ -38,6 +38,32 @@ const WeatherParams = ({
   setVisibility,
   wind,
   setWind,
+  isChecked,
+  setIsChecked,
+  isChecked2,
+  setIsChecked2,
+  isChecked3,
+  setIsChecked3,
+  isChecked4,
+  setIsChecked4,
+  isChecked5,
+  setIsChecked5,
+  isChecked6,
+  setIsChecked6,
+  isChecked7,
+  setIsChecked7,
+  isChecked8,
+  setIsChecked8,
+  isChecked9,
+  setIsChecked9,
+  isChecked10,
+  setIsChecked10,
+  isChecked11,
+  setIsChecked11,
+  isChecked12,
+  setIsChecked12,
+  isChecked13,
+  setIsChecked13
 }) => {
   const [alert, setAlert] = useState(null);
 
@@ -62,6 +88,7 @@ const WeatherParams = ({
             <CheckyBox
               checkedWeather={checkedWeather}
               setCheckedWeather={setCheckedWeather}
+              fileValue={fileValue}
               setFileValue={setFileValue}
               checked={checked}
               setChecked={setChecked}
@@ -93,6 +120,33 @@ const WeatherParams = ({
               setVisibility={setVisibility}
               wind={wind}
               setWind={setWind}
+              isChecked={isChecked}
+              setIsChecked={setIsChecked}
+              isChecked2={isChecked2}
+              setIsChecked2={setIsChecked2}
+              isChecked3={isChecked3}
+              setIsChecked3={setIsChecked3}
+              isChecked4={isChecked4}
+              setIsChecked4={setIsChecked4}
+              isChecked5={isChecked5}
+              setIsChecked5={setIsChecked5}
+              isChecked6={isChecked6}
+              setIsChecked6={setIsChecked6}
+              isChecked7={isChecked7}
+              setIsChecked7={setIsChecked7}
+              isChecked8={isChecked8}
+              setIsChecked8={setIsChecked8}
+              isChecked9={isChecked9}
+              setIsChecked9={setIsChecked9}
+              isChecked10={isChecked10}
+              setIsChecked10={setIsChecked10}
+              isChecked11={isChecked11}
+              setIsChecked11={setIsChecked11}
+              isChecked12={isChecked12}
+              setIsChecked12={setIsChecked12}
+              isChecked13={isChecked13}
+              setIsChecked13={setIsChecked13}
+              close={hideAlert}
             />
             {/*}
             <Form className="checkbox-radios ml-5">

@@ -332,17 +332,11 @@ const LocationForecast = ({
         style={{ position: "relative" }}
         ref={searchBoxRef}
       >
-        <div className="location">
-          <Row mb="4">
-            <Col md="7" className="text-start">
-              <h5>Location</h5>
-            </Col>
-          </Row>
-        </div>
         <Row>
           <Col md="6" className="dateLabel">
-            <Label>Search</Label>
-            {isSearchByName ? (
+          {isSearchByName ? (
+              <>
+                <Label>Search Location</Label>
               <AutoCompleteForm
                 mapRef={mapRef}
                 setTempLocation={setTempLocation}
@@ -350,7 +344,10 @@ const LocationForecast = ({
                 setError={setError}
                 setIsDropDown={setIsDropDown}
               />
+              </>
             ) : (
+              <>
+              <Label>Search Coordinates</Label>
               <CoordinatesSearch
                 mapRef={mapRef}
                 coordsLocation={coordsTempLocation}
@@ -360,6 +357,7 @@ const LocationForecast = ({
                 error={error}
                 setError={setError}
               />
+              </>
             )}
           </Col>
 

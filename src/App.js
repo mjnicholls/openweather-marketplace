@@ -11,6 +11,8 @@ import NewHistoryBulk from "./pages/NewHistoryBulk";
 import HistoryForecastBulk from "./pages/HistoryForecastBulk";
 import store from "./store";
 import DataUSState from "./pages/DataUSState";
+import NewHistoryBulkTest from './pages/NewHistoryBulkTest'
+import MyOrders from "./pages/MyOrders";
 
 function App() {
   return (
@@ -21,10 +23,14 @@ function App() {
           <BrowserRouter>
             <Switch>
               <Route path="/marketplace" component={HomeMarket} />
-              <Route path="/history_bulks/new" component={NewHistoryBulk} />
+              <Route path="/history_bulks/new" component={NewHistoryBulkTest} />
               <Route
                 path="/history_forecast_bulks/new"
                 component={HistoryForecastBulk}
+              />
+                <Route
+                path="/my_orders"
+                component={MyOrders}
               />
               <Route path="/zip_code_data/new" component={DataUSState} />
             </Switch>

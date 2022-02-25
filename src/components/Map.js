@@ -17,6 +17,8 @@ const Map = ({
   price,
   setPrice,
   isButtonInfoWindow,
+  isAdded,
+  setIsAdded,
   isDraggable = true,
 }) => {
   const defaultCenter = {
@@ -43,6 +45,8 @@ const Map = ({
         // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
         <InfoWindow
+        isAdded={isAdded}
+        setIsAdded={setIsAdded}
           location={mapLocation}
           setLocation={setLocation}
           showButton={isButtonInfoWindow}
