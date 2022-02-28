@@ -36,7 +36,7 @@ let initialState = {
     title: "",
     first_name: "",
     last_name: "",
-    country: "",
+    country: "Great Britain",
     address_line_1: "",
     address_line_2: "",
     city: "",

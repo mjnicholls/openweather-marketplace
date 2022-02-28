@@ -30,7 +30,7 @@ const MyOrders = () => {
         <Col className="mt-2">
         <p className="text-start">
             {" "}
-            <a style={{color:"black"}} href = "/history_bulk">History Bulk</a> - a weather data archive for any location that includes 15 weather parameters, such as temperature, precipitation, wind and many more.
+            <a style={{color:"black"}} href = "/history_bulks/new">History Bulk</a> - a weather data archive for any location that includes 15 weather parameters, such as temperature, precipitation, wind and many more.
           </p>
         </Col>
       </Row>
@@ -38,7 +38,7 @@ const MyOrders = () => {
         <Col className="mb-2">
         <p className="text-start">
             {" "}
-            <a style={{color:"black"}}  href = "/history_forecast_bulk">History Forecast Bulk</a> - aan archive of previous forecasts starting from April 6, 2017.
+            <a style={{color:"black"}}  href = "/history_forecast_bulks/new">History Forecast Bulk</a> - an archive of previous forecasts starting from April 6, 2017.
           </p>
         </Col>
       </Row>

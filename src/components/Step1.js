@@ -27,8 +27,20 @@ const Step1 = ({
       <Form className="text-start">
         <Label>Legal form: </Label>
         <FormGroup className="mr-4">
-          <Label style={{ paddingRight: "20px" }} check>
-            <Input
+        <Label style={{ paddingRight: "20px" }} check>
+            <input
+            defaultChecked
+              id="organisationRadioButton"
+              name="legalForm"
+              type="radio"
+              //checked={invoiceSettings.type === "organisation"}
+              onChange={() => handleChange("type", "organisation")}
+              disabled={!isNew && invoiceSettings.type === "individual"}
+            />
+            <span className="form-check-sign" /> Organisation
+          </Label>
+          <Label check>
+            <input
               id="individualRadioButton"
               name="legalForm"
               type="radio"
@@ -37,17 +49,6 @@ const Step1 = ({
               disabled={!isNew && invoiceSettings.type === "organisation"}
             />
             <span className="form-check-sign" /> Individual
-          </Label>
-          <Label check>
-            <Input
-              id="organisationRadioButton"
-              name="legalForm"
-              type="radio"
-              checked={invoiceSettings.type === "organisation"}
-              onChange={() => handleChange("type", "organisation")}
-              disabled={!isNew && invoiceSettings.type === "individual"}
-            />
-            <span className="form-check-sign" /> Organisation
           </Label>
         </FormGroup>
       </Form>
@@ -125,12 +126,15 @@ const Step1 = ({
                     value={invoiceSettings.phone}
                     className={error.phone ? "danger-border" : ""}
                   />
+                            <div
+                    className={`invalid-feedback ${
+                      error.phone ? "d-block" : ""
+                    }`}
+                  >
+                    {error.phone}
+                  </div>
                 </FormGroup>
-                <div
-                  className={`invalid-feedback ${error.phone ? "d-block" : ""}`}
-                >
-                  {error.phone}
-                </div>
+               
               </Col>
               <Col>
                 <Label>Email *</Label>

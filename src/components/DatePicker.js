@@ -5,6 +5,7 @@ import range from "lodash/range";
 import { Col, Form, Label } from "reactstrap";
 import "react-datepicker/dist/react-datepicker.css";
 import { months } from "../config";
+import moment from 'moment';
 
 const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
   const years = range(1979, getYear(new Date()) + 1, 1);
@@ -18,6 +19,7 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
           <DatePicker
             className="owm-selector"
             placeholder="From"
+            maxDate={moment().toDate()} 
             renderCustomHeader={({ date, changeYear, changeMonth }) => (
               <div
                 style={{
@@ -63,6 +65,7 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
           <DatePicker
             className="owm-selector"
             minDate={subDays(startDate, -1)}
+            maxDate={moment().toDate()} 
             renderCustomHeader={({ date, changeYear, changeMonth }) => (
               <div
                 style={{

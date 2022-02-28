@@ -4,6 +4,7 @@ import { getMonth, getYear, subDays } from "date-fns";
 import range from "lodash/range";
 import { Col, Form, Label } from "reactstrap";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 
 const DatePickerForecast = ({
   startDate,
@@ -36,7 +37,7 @@ const DatePickerForecast = ({
 
           <DatePicker
             className="owm-selector"
-            //minDate={subDays(endDate, 1)}
+            maxDate={moment().toDate()} 
             placeholder="From"
             renderCustomHeader={({ date, changeYear, changeMonth }) => (
               <div
@@ -82,6 +83,7 @@ const DatePickerForecast = ({
           <DatePicker
             className="owm-selector"
             minDate={subDays(startDate, -1)}
+            maxDate={moment().toDate()} 
             renderCustomHeader={({ date, changeYear, changeMonth }) => (
               <div
                 style={{

@@ -5,6 +5,7 @@ import placeMarker from "../utils/placeMarker";
 import Location from "../components/Location";
 import { useSelector } from "react-redux";
 import { data } from "../api/data";
+import { units } from "../config";
 
 const selectCurrency = (state) => state.auth.currency;
 const selectInvoice = (state) => state.auth.invoiceInfo;
@@ -76,21 +77,24 @@ const NewHistoryBulkTest = () => {
   const [snow, setSnow] = useState("On");
   const [dewPoint, setDewPoint] = useState("On");
   const [visibility, setVisibility] = useState("On");
-  const [wind, setWind] = useState("On");
+  const [wind, setWind] = useState("On")
 
-  const [isChecked, setIsChecked] = useState(false);
-  const [isChecked2, setIsChecked2] = useState(false);
-  const [isChecked3, setIsChecked3] = useState(false);
-  const [isChecked4, setIsChecked4] = useState(false);
-  const [isChecked5, setIsChecked5] = useState(false);
-  const [isChecked6, setIsChecked6] = useState(false);
-  const [isChecked7, setIsChecked7] = useState(false);
-  const [isChecked8, setIsChecked8] = useState(false);
-  const [isChecked9, setIsChecked9] = useState(false);
-  const [isChecked10, setIsChecked10] = useState(false);
-  const [isChecked11, setIsChecked11] = useState(false);
-  const [isChecked12, setIsChecked12] = useState(false);
-  const [isChecked13, setIsChecked13] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked2, setIsChecked2] = useState(true);
+  const [isChecked3, setIsChecked3] = useState(true);
+  const [isChecked4, setIsChecked4] = useState(true);
+  const [isChecked5, setIsChecked5] = useState(true);
+  const [isChecked6, setIsChecked6] = useState(true);
+  const [isChecked7, setIsChecked7] = useState(true);
+  const [isChecked8, setIsChecked8] = useState(true);
+  const [isChecked9, setIsChecked9] = useState(true);
+  const [isChecked10, setIsChecked10] = useState(true);
+  const [isChecked11, setIsChecked11] = useState(true);
+  const [isChecked12, setIsChecked12] = useState(true);
+  const [isChecked13, setIsChecked13] = useState(true);
+
+  const [unitsChecked, setUnitsChecked] = useState('Metric');
+  const [isCheckedUnits, setIsCheckedUnits] = useState(true)
 
   useEffect(() => {
     setTempLocation({
@@ -100,6 +104,11 @@ const NewHistoryBulkTest = () => {
     });
     /*eslint-disable-next-line*/
   }, [location]);
+
+  console.log('unitscheck', unitsChecked)
+  console.log('unitsval', unitsValue)
+
+
 
   useEffect(() => {
     if (tempLocation.lat && tempLocation.lon) {
@@ -257,6 +266,10 @@ const NewHistoryBulkTest = () => {
             setIsChecked12={setIsChecked12}
             isChecked13={isChecked13}
             setIsChecked13={setIsChecked13}
+            unitsChecked={unitsChecked}
+            setUnitsChecked={setUnitsChecked}
+            isCheckedUnits={isCheckedUnits}
+            setIsCheckedUnits={setIsCheckedUnits}
           />
         </Col>
 

@@ -12,7 +12,6 @@ import Step0HistoryBulk from "./Step0HistoryBulk";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 
-const selectInvoice = (state) => state.auth.invoiceInfo;
 const selectEmail = (state) => state.auth.email;
 
 const InvoiceSettingsBulk = ({
@@ -218,14 +217,16 @@ const InvoiceSettingsBulk = ({
           return;
         }
         if (!invoiceSettings.phone) {
-          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          setError({
+            phone: noBlankErrorMessage,
+          });
+          return;
+          } 
+          
+          if (invoiceSettings.phone) {
+            const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
           if (phoneValidation) {
             newError.phone = phoneValidation;
-          } else {
-            setError({
-              phone: noBlankErrorMessage,
-            });
-            return;
           }
         }
         if (!email) {
@@ -252,14 +253,16 @@ const InvoiceSettingsBulk = ({
           return;
         }
         if (!invoiceSettings.phone) {
-          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          setError({
+            phone: noBlankErrorMessage,
+          });
+          return;
+          } 
+          
+          if (invoiceSettings.phone) {
+            const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
           if (phoneValidation) {
             newError.phone = phoneValidation;
-          } else {
-            setError({
-              phone: noBlankErrorMessage,
-            });
-            return;
           }
         }
         if (!email) {

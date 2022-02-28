@@ -132,14 +132,16 @@ const InvoiceSettings = ({ country, year, price }) => {
           return;
         }
         if (!invoiceSettings.phone) {
-          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          setError({
+            phone: noBlankErrorMessage,
+          });
+          return;
+          } 
+          
+          if (invoiceSettings.phone) {
+            const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
           if (phoneValidation) {
             newError.phone = phoneValidation;
-          } else {
-            setError({
-              phone: noBlankErrorMessage,
-            });
-            return;
           }
         }
         if (!email) {
@@ -166,14 +168,16 @@ const InvoiceSettings = ({ country, year, price }) => {
           return;
         }
         if (!invoiceSettings.phone) {
-          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          setError({
+            phone: noBlankErrorMessage,
+          });
+          return;
+          } 
+          
+          if (invoiceSettings.phone) {
+            const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
           if (phoneValidation) {
             newError.phone = phoneValidation;
-          } else {
-            setError({
-              phone: noBlankErrorMessage,
-            });
-            return;
           }
         }
         if (!email) {

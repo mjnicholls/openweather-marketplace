@@ -4,9 +4,15 @@ import classnames from "classnames";
 import { Col, Form, Label, FormGroup, Input, Row } from "reactstrap";
 import { countriesDefault } from "../config";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+
+const selectInvoice = (state) => state.auth.invoiceInfo.country;
 
 const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
+
   const [countries, setCountries] = useState(countriesDefault);
+
+  const invoice = useSelector(selectInvoice);
 
   const handleChange = (key, value) => {
     // eslint-disable-next-line
@@ -69,8 +75,10 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
                   handleChange("country", country.code);
                 }}
                 options={countries}
+                placeholder={invoice}
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.code}
+                /*
                 placeholder={
                   invoiceSettings.country
                     ? countries.find(
@@ -78,6 +86,7 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
                       ).name
                     : ""
                 }
+                */
               />
               <div
                 className={`invalid-feedback ${error.country ? "d-block" : ""}`}

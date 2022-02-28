@@ -104,6 +104,10 @@ const Location = ({
   setIsChecked12,
   isChecked13,
   setIsChecked13,
+  unitsChecked,
+  setUnitsChecked,
+  isCheckedUnits,
+  setIsCheckedUnits
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -152,10 +156,10 @@ const Location = ({
   const setPricetoZero = () => {
     setImportPrice(0);
     hideAlert();
-    getJson();
   };
 
   const getJson = (e) => {
+
     const files = e.target.files;
     if (files) {
       console.log(files[0]);
@@ -233,6 +237,7 @@ const Location = ({
     }
   };
 
+
   const [alert, setAlert] = React.useState(null);
 
   const hideAlert = () => {
@@ -257,14 +262,14 @@ const Location = ({
           <Col>Error</Col>
           <Col>Value</Col>
         </Row>
-        {importErrors.map((error) => (
-          <>
+        {importErrors.map((error, index) => (
+          <React.Fragment key={index}>
             <Row className="trigger-item">
               <Col md="1">{error.line}</Col>
               <Col>{error.comment}</Col>
               <Col>{error.value}</Col>
             </Row>
-          </>
+          </React.Fragment>
         ))}
 
         <br />
@@ -278,14 +283,14 @@ const Location = ({
           <Col>Longitude</Col>
         </Row>
         {locations.map((location, index) => (
-          <>
+              <React.Fragment key={index}>
             <Row className="trigger-item" key={index}>
               <Col md="1">{index + 1}</Col>
               <Col>{location.name}</Col>
               <Col>{location.lat}</Col>
               <Col>{location.lon}</Col>
             </Row>
-          </>
+          </React.Fragment>
         ))}
         <br />
         <Row className="trigger-item">
@@ -299,7 +304,7 @@ const Location = ({
             >
               Upload Recognised Locations
             </Button>
-            {/* <label htmlFor="file-upload" className="button-active">
+            <label htmlFor="file-upload" className="button-active">
               Upload New File
             </label>
             <input
@@ -307,16 +312,19 @@ const Location = ({
               accept=".csv,.xlsx,.xls"
               onClick={getJson}
               id="file-upload"
-            /> */}
-
-            <Button className="button-neutral" onClick={setPricetoZero}>
+            />
+            {/*}
+            <Button className="button-neutral" 
+            onClick={setPricetoZero}>
               Upload New File
             </Button>
+            */}
           </Col>
         </Row>
       </ReactBSAlert>
     );
   };
+
 
   const checkCoordinates = (lat, lon) => {
     for (let i = 0; i < locations.length; i++) {
@@ -361,34 +369,22 @@ const Location = ({
           setBody={setBody}
           on={on}
           setOn={setOn}
-          temp={temp}
-          setTemp={setTemp}
-          tempMin={tempMin}
-          setTempMin={setTempMin}
-          tempMax={tempMax}
-          setTempMax={setTempMax}
-          feelsLike={feelsLike}
-          setFeelsLike={setFeelsLike}
-          pressure={pressure}
-          setPressure={setPressure}
-          humidity={humidity}
-          setHumidity={setHumidity}
-          clouds={clouds}
-          setClouds={setClouds}
-          weather={weather}
-          setWeather={setWeather}
-          rain={rain}
-          setRain={setRain}
-          snow={snow}
-          setSnow={setSnow}
-          dewPoint={dewPoint}
-          setDewPoint={setDewPoint}
-          visibility={visibility}
-          setVisibility={setVisibility}
-          wind={wind}
-          setWind={setWind}
           isChecked={isChecked}
           setIsChecked={setIsChecked}
+          isChecked2={isChecked2}
+          isChecked3={isChecked3}
+          isChecked4={isChecked4}
+          isChecked5={isChecked5}
+          isChecked6={isChecked6}
+          isChecked7={isChecked7}
+          isChecked8={isChecked8}
+          isChecked9={isChecked9}
+          isChecked10={isChecked10}
+          isChecked11={isChecked11}
+          isChecked12={isChecked12}
+          isChecked13={isChecked13}
+          isCheckedUnits={isCheckedUnits}
+          setIsCheckedUnits={setIsCheckedUnits}
         />
       </ReactBSAlert>
     );
@@ -626,6 +622,10 @@ const Location = ({
         setIsChecked12={setIsChecked12}
         isChecked13={isChecked13}
         setIsChecked13={setIsChecked13}
+        unitsChecked={unitsChecked}
+        setUnitsChecked={setUnitsChecked}
+        isCheckedUnits={isCheckedUnits}
+        setIsCheckedUnits={setIsCheckedUnits}
       />
 
       <LocationList

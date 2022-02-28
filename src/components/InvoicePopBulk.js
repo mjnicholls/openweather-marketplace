@@ -30,36 +30,33 @@ const InvoiceSettingsBulk = ({
   downloadsValue,
   locations,
   currency,
-  checked,
-  setChecked,
   temp,
-  setTemp,
   tempMin,
-  setTempMin,
   tempMax,
-  setTempMax,
   feelsLike,
-  setFeelsLike,
   pressure,
-  setPressure,
   humidity,
-  setHumidity,
   clouds,
-  setClouds,
   weather,
-  setWeather,
   rain,
-  setRain,
   snow,
-  setSnow,
   dewPoint,
-  setDewPoint,
   visibility,
-  setVisibility,
   wind,
-  setWind,
   isChecked,
-  setIsChecked
+  setIsChecked,
+  isChecked2,
+  isChecked3,
+  isChecked4,
+  isChecked5,
+  isChecked6,
+  isChecked7,
+  isChecked8,
+  isChecked9,
+  isChecked10,
+  isChecked11,
+  isChecked12,
+  isChecked13,
 }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
@@ -244,17 +241,21 @@ const InvoiceSettingsBulk = ({
           });
           return;
         }
+        
         if (!invoiceSettings.phone) {
-          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          setError({
+            phone: noBlankErrorMessage,
+          });
+          return;
+          } 
+          
+          if (invoiceSettings.phone) {
+            const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
           if (phoneValidation) {
             newError.phone = phoneValidation;
-          } else {
-            setError({
-              phone: noBlankErrorMessage,
-            });
-            return;
           }
         }
+
         if (!email) {
           setError({
             email: noBlankErrorMessage,
@@ -279,14 +280,16 @@ const InvoiceSettingsBulk = ({
           return;
         }
         if (!invoiceSettings.phone) {
-          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          setError({
+            phone: noBlankErrorMessage,
+          });
+          return;
+          } 
+          
+          if (invoiceSettings.phone) {
+            const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
           if (phoneValidation) {
             newError.phone = phoneValidation;
-          } else {
-            setError({
-              phone: noBlankErrorMessage,
-            });
-            return;
           }
         }
         if (!email) {
@@ -365,36 +368,20 @@ const InvoiceSettingsBulk = ({
           formatValue={formatValue}
           locations={locations}
           currency={currency}
-          checked={checked}
-          setChecked={setChecked}
-          temp={temp}
-          setTemp={setTemp}
-          tempMin={tempMin}
-          setTempMin={setTempMin}
-          tempMax={tempMax}
-          setTempMax={setTempMax}
-          feelsLike={feelsLike}
-          setFeelsLike={setFeelsLike}
-          pressure={pressure}
-          setPressure={setPressure}
-          humidity={humidity}
-          setHumidity={setHumidity}
-          clouds={clouds}
-          setClouds={setClouds}
-          weather={weather}
-          setWeather={setWeather}
-          rain={rain}
-          setRain={setRain}
-          snow={snow}
-          setSnow={setSnow}
-          dewPoint={dewPoint}
-          setDewPoint={setDewPoint}
-          visibility={visibility}
-          setVisibility={setVisibility}
-          wind={wind}
-          setWind={setWind}
           isChecked={isChecked}
           setIsChecked={setIsChecked}
+          isChecked2={isChecked2}
+          isChecked3={isChecked3}
+          isChecked4={isChecked4}
+          isChecked5={isChecked5}
+          isChecked6={isChecked6}
+          isChecked7={isChecked7}
+          isChecked8={isChecked8}
+          isChecked9={isChecked9}
+          isChecked10={isChecked10}
+          isChecked11={isChecked11}
+          isChecked12={isChecked12}
+          isChecked13={isChecked13}
         />
       ) : null}
       {step === 1 ? (

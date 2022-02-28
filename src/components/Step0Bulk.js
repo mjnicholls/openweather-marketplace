@@ -8,38 +8,24 @@ const Step0Bulk = ({
   endDate,
   price,
   importPrice,
-  checkedWeather,
   unitsValue,
   formatValue,
   downloadsValue,
   locations,
   currency,
-  temp,
-  setTemp,
-  tempMin,
-  setTempMin,
-  tempMax,
-  setTempMax,
-  feelsLike,
-  setFeelsLike,
-  pressure,
-  setPressure,
-  humidity,
-  setHumidity,
-  clouds,
-  setClouds,
-  weather,
-  setWeather,
-  rain,
-  setRain,
-  snow,
-  setSnow,
-  dewPoint,
-  setDewPoint,
-  visibility,
-  setVisibility,
-  wind,
-  setWind,
+  isChecked,
+  isChecked2,
+  isChecked3,
+  isChecked4,
+  isChecked5,
+  isChecked6,
+  isChecked7,
+  isChecked8,
+  isChecked9,
+  isChecked10,
+  isChecked11,
+  isChecked12,
+  isChecked13,
 }) => {
   const totalPrice = price + importPrice;
 
@@ -72,18 +58,19 @@ const Step0Bulk = ({
         return <Col>{total}</Col>
       })}
     */}
-          {temp === "On" ? "Temperature, " : ""}{" "}
-          {tempMin === "On" ? "Min Temperature, " : ""}
-          {tempMax === "On" ? "Max Temperature, " : ""}{" "}
-          {feelsLike === "On" ? "Feels Like, " : ""}
-          {pressure === "On" ? "Pressure, " : ""}{" "}
-          {humidity === "On" ? "Humidity, " : ""}
-          {clouds === "On" ? "Clouds, " : ""}{" "}
-          {weather === "On" ? "Weather Conditions, " : ""}
-          {rain === "On" ? "Rain, " : ""} {snow === "On" ? "Snow, " : ""}
-          {dewPoint === "On" ? "Dew Point, " : ""}{" "}
-          {visibility === "On" ? "Visibility, " : ""}
-          {wind === "On" ? "Wind (speed, direction, gust) " : ""}
+          {isChecked === true ? "Temperature, " : ""}{" "}
+          {isChecked2 === true ? "Min Temperature, " : ""}
+          {isChecked3 === true ? "Max Temperature, " : ""}{" "}
+          {isChecked4 === true ? "Feels Like, " : ""}
+          {isChecked5 === true ? "Pressure, " : ""}{" "}
+          {isChecked6 === true ? "Humidity, " : ""}
+          {isChecked7 === true ? "Clouds, " : ""}{" "}
+          {isChecked8 === true ? "Weather Conditions, " : ""}
+          {isChecked9 === true ? "Rain, " : ""} 
+          {isChecked10 === true ? "Snow, " : ""}
+          {isChecked11 === true ? "Dew Point, " : ""}{" "}
+          {isChecked12 === true ? "Visibility, " : ""}
+          {isChecked13 === true ? "Wind (speed, direction, gust) " : ""}
         </Col>
       </Row>
 

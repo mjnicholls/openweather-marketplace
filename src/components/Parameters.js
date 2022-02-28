@@ -76,7 +76,10 @@ const Parameters = ({
   isChecked12,
   setIsChecked12,
   isChecked13,
-  setIsChecked13
+  setIsChecked13,
+  unitsChecked,
+  setUnitsChecked,
+  isCheckedUnits, setIsCheckedUnits
 }) => {
   return (
     <>
@@ -151,6 +154,10 @@ const Parameters = ({
             setParametersUnits={setParametersUnits}
             unitsValue={unitsValue}
             setUnitsValue={setUnitsValue}
+            unitsChecked={unitsChecked}
+            setUnitsChecked={setUnitsChecked}
+            isCheckedUnits={isCheckedUnits}
+            setIsCheckedUnits={setIsCheckedUnits}
           />
           <FileParams
             formatValue={formatValue}

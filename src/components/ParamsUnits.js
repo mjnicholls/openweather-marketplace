@@ -10,6 +10,7 @@ const UnitsParams = ({ unitsValue, setUnitsValue }) => {
     setAlert(null);
   };
 
+
   const unitAlert = () => {
     setAlert(
       <ReactBSAlert
@@ -29,9 +30,11 @@ const UnitsParams = ({ unitsValue, setUnitsValue }) => {
                   <Input
                     id={option.value}
                     name="file"
-                    onChange={() => setUnitsValue(option.value)}
+                    onChange={() => {
+                    setUnitsValue(option.value)
+                  }}
                     type="radio"
-                    value={option.value}
+                    checked={unitsValue === option.value ? true : false}
                   />
                 </Label>
               </FormGroup>
