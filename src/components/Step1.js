@@ -29,7 +29,7 @@ const Step1 = ({
         <FormGroup className="mr-4">
         <Label style={{ paddingRight: "20px" }} check>
             <input
-            defaultChecked
+              defaultChecked
               id="organisationRadioButton"
               name="legalForm"
               type="radio"

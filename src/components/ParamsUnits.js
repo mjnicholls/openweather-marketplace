@@ -10,7 +10,6 @@ const UnitsParams = ({ unitsValue, setUnitsValue }) => {
     setAlert(null);
   };
 
-
   const unitAlert = () => {
     setAlert(
       <ReactBSAlert
@@ -22,6 +21,7 @@ const UnitsParams = ({ unitsValue, setUnitsValue }) => {
         customClass="bs-alerts"
       >
         <Row className="text-start mt-4">
+          
           <Form className="checkbox-radios ml-5">
             {units.map((option, index) => (
               <FormGroup key={index} check className="form-check-radio">
@@ -34,12 +34,58 @@ const UnitsParams = ({ unitsValue, setUnitsValue }) => {
                     setUnitsValue(option.value)
                   }}
                     type="radio"
-                    checked={unitsValue === option.value ? true : false}
+                    checked={unitsValue === option.value}
                   />
                 </Label>
               </FormGroup>
             ))}
           </Form>
+               
+
+{/* <Form className="checkbox-radios ml-5">
+              <FormGroup check className="form-check-radio">
+                <Label check>
+                Metric (Celsius, hPa, meter/sec, mm/h)
+                  <Input
+                    name="file"
+                    onChange={() => {
+                    setUnitsValue("Metric")
+                  }}
+                    type="radio"
+                    checked={unitsValue === "Metric"}
+                  />
+                </Label>
+              </FormGroup>
+
+              <FormGroup check className="form-check-radio">
+                <Label check>
+                Imperial (Fahrenheit, hPa, miles/hour, mm/h)
+                  <Input
+                    name="file"
+                    onChange={() => {
+                    setUnitsValue("Imperial")
+                  }}
+                    type="radio"
+                    checked={unitsValue === "Imperial"}
+                  />
+                </Label>
+              </FormGroup>
+
+              <FormGroup check className="form-check-radio">
+                <Label check>
+                Standard (Kelvin, hPa, meter/sec, mm/h
+                  <Input
+                    name="file"
+                    onChange={() => {
+                    setUnitsValue("Standard")
+                  }}
+                    type="radio"
+                    checked={unitsValue === "Standard"}
+                  />
+                </Label>
+              </FormGroup>
+
+          </Form> */}
         </Row>
       </ReactBSAlert>
     );
