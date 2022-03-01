@@ -57,6 +57,14 @@ const InvoiceSettingsBulk = ({
   isChecked11,
   isChecked12,
   isChecked13,
+  fileCheck,
+  setFileCheck,
+  fileCheck2,
+  setFileCheck2,
+  csv,
+  setCSV,
+  json,
+  setJson
 }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
@@ -382,6 +390,14 @@ const InvoiceSettingsBulk = ({
           isChecked11={isChecked11}
           isChecked12={isChecked12}
           isChecked13={isChecked13}
+          fileCheck={fileCheck}
+          setFileCheck={setFileCheck}
+          fileCheck2={fileCheck2}
+          setFileCheck2={setFileCheck2}
+          csv={csv}
+          setCSV={setCSV}
+          json={json}
+          setJson={setJson}
         />
       ) : null}
       {step === 1 ? (

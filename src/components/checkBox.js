@@ -99,9 +99,8 @@ const CheckyBox = ({
     } else setIsChecked(false);
 
     if (tempStatus2 === "On") {
-      setTempMin("On")
-    }
-    else setTempMin("Off");
+      setTempMin("On");
+    } else setTempMin("Off");
 
     if (tempIsChecked2 === true) {
       setIsChecked2(true);
@@ -109,17 +108,15 @@ const CheckyBox = ({
 
     if (tempStatus3 === "On") {
       setTempMax("On");
-    }
-    else setTempMax("Off");
+    } else setTempMax("Off");
 
     if (tempIsChecked3 === true) {
       setIsChecked3(true);
     } else setIsChecked3(false);
 
     if (tempStatus4 === "On") {
-      setFeelsLike("On")
-    }
-    else setFeelsLike("Off");
+      setFeelsLike("On");
+    } else setFeelsLike("Off");
 
     if (tempIsChecked4 === true) {
       setIsChecked4(true);
@@ -127,8 +124,7 @@ const CheckyBox = ({
 
     if (tempStatus5 === "On") {
       setPressure("On");
-    }
-    else setPressure("Off");
+    } else setPressure("Off");
 
     if (tempIsChecked5 === true) {
       setIsChecked5(true);
@@ -136,8 +132,7 @@ const CheckyBox = ({
 
     if (tempStatus6 === "On") {
       setHumidity("On");
-    }
-    else setHumidity("Off");
+    } else setHumidity("Off");
 
     if (tempIsChecked6 === true) {
       setIsChecked6(true);
@@ -145,8 +140,7 @@ const CheckyBox = ({
 
     if (tempStatus7 === "On") {
       setClouds("On");
-    }
-    else setClouds("Off");
+    } else setClouds("Off");
 
     if (tempIsChecked7 === true) {
       setIsChecked7(true);
@@ -154,8 +148,7 @@ const CheckyBox = ({
 
     if (tempStatus8 === "On") {
       setWeather("On");
-    }
-    else setWeather("Off");
+    } else setWeather("Off");
 
     if (tempIsChecked8 === true) {
       setIsChecked8(true);
@@ -163,8 +156,7 @@ const CheckyBox = ({
 
     if (tempStatus9 === "On") {
       setRain("On");
-    }
-    else setRain("Off");
+    } else setRain("Off");
 
     if (tempIsChecked9 === true) {
       setIsChecked9(true);
@@ -172,8 +164,7 @@ const CheckyBox = ({
 
     if (tempStatus10 === "On") {
       setSnow("On");
-    }
-    else setSnow("Off");
+    } else setSnow("Off");
 
     if (tempIsChecked10 === true) {
       setIsChecked10(true);
@@ -181,8 +172,7 @@ const CheckyBox = ({
 
     if (tempStatus11 === "On") {
       setDewPoint("On");
-    }
-    else setDewPoint("Off");
+    } else setDewPoint("Off");
 
     if (tempIsChecked11 === true) {
       setIsChecked11(true);
@@ -190,8 +180,7 @@ const CheckyBox = ({
 
     if (tempStatus12 === "On") {
       setVisibility("On");
-    }
-    else setVisibility("Off");
+    } else setVisibility("Off");
 
     if (tempIsChecked12 === true) {
       setIsChecked12(true);
@@ -199,15 +188,14 @@ const CheckyBox = ({
 
     if (tempStatus13 === "On") {
       setWind("On");
-    }
-    else setWind("Off");
+    } else setWind("Off");
 
     if (tempIsChecked13 === true) {
       setIsChecked13(true);
     } else setIsChecked13(false);
 
-    close()
-    setFileValue(true)
+    close();
+    setFileValue(true);
   };
 
   console.log("ischecked", isChecked);
@@ -464,12 +452,28 @@ const CheckyBox = ({
               />
             </Label>
           </FormGroup>
-
         </Form>
       </Row>
       <Row>
         <Col className="text-end">
-        <Button onClick={handCheck} className="button-active">
+          <Button onClick={handCheck} 
+          className="button-active"
+          disabled={
+            tempStatus === "Off" && 
+            tempStatus2 === "Off" && 
+            tempStatus3 === "Off" && 
+            tempStatus4 === "Off" && 
+            tempStatus5 === "Off" &&
+            tempStatus6 === "Off" && 
+            tempStatus7 === "Off" && 
+            tempStatus8 === "Off" && 
+            tempStatus9 === "Off" && 
+            tempStatus10 === "Off" &&
+            tempStatus11 === "Off" && 
+            tempStatus12 === "Off" && 
+            tempStatus13 === "Off"
+            ? true : false}
+          >
             Save
           </Button>
         </Col>

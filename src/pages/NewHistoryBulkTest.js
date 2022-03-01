@@ -93,6 +93,12 @@ const NewHistoryBulkTest = () => {
   const [isChecked12, setIsChecked12] = useState(true);
   const [isChecked13, setIsChecked13] = useState(true);
 
+  const [fileCheck, setFileCheck] = useState(true)
+  const [fileCheck2, setFileCheck2] = useState(false)
+
+  const [csv, setCSV] = useState("On")
+  const [json, setJson] = useState("Off")
+
   const [unitsChecked, setUnitsChecked] = useState('Metric');
   const [isCheckedUnits, setIsCheckedUnits] = useState(true)
 
@@ -104,10 +110,6 @@ const NewHistoryBulkTest = () => {
     });
     /*eslint-disable-next-line*/
   }, [location]);
-
-  console.log('unitscheck', unitsChecked)
-  console.log('unitsval', unitsValue)
-
 
 
   useEffect(() => {
@@ -270,6 +272,14 @@ const NewHistoryBulkTest = () => {
             setUnitsChecked={setUnitsChecked}
             isCheckedUnits={isCheckedUnits}
             setIsCheckedUnits={setIsCheckedUnits}
+            fileCheck={fileCheck}
+            setFileCheck={setFileCheck}
+            fileCheck2={fileCheck2}
+            setFileCheck2={setFileCheck2}
+            csv={csv}
+            setCSV={setCSV}
+            json={json}
+            setJson={setJson}
           />
         </Col>
 

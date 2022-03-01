@@ -26,6 +26,12 @@ const Step0Bulk = ({
   isChecked11,
   isChecked12,
   isChecked13,
+  fileCheck,
+  fileCheck2,
+  csv,
+  setCSV,
+  json,
+  setJson
 }) => {
   const totalPrice = price + importPrice;
 
@@ -52,31 +58,36 @@ const Step0Bulk = ({
 
       <Row className="text-start step-bulk">
         <Col className="bold">Weather Parameters:</Col>
-        <Col>
+       <Col>
           {/*}
           {checkedWeather.length === 0 ? 'Temperature, Max Temperature, Pressure, Clouds, Rain, Dew Point, Wind, Min Temp, Feels Like, Humidity, Conditions, Snow, Visibility' : checkedWeather.map((total, item) => {
         return <Col>{total}</Col>
       })}
     */}
-          {isChecked === true ? "Temperature, " : ""}{" "}
-          {isChecked2 === true ? "Min Temperature, " : ""}
-          {isChecked3 === true ? "Max Temperature, " : ""}{" "}
-          {isChecked4 === true ? "Feels Like, " : ""}
-          {isChecked5 === true ? "Pressure, " : ""}{" "}
-          {isChecked6 === true ? "Humidity, " : ""}
-          {isChecked7 === true ? "Clouds, " : ""}{" "}
-          {isChecked8 === true ? "Weather Conditions, " : ""}
-          {isChecked9 === true ? "Rain, " : ""} 
-          {isChecked10 === true ? "Snow, " : ""}
-          {isChecked11 === true ? "Dew Point, " : ""}{" "}
-          {isChecked12 === true ? "Visibility, " : ""}
-          {isChecked13 === true ? "Wind (speed, direction, gust) " : ""}
-        </Col>
+  <>
+          {isChecked === true ? <Row style={{paddingLeft: "10px"}}>Temperature</Row> : <Row></Row>}
+          {isChecked2 === true ? <Row style={{paddingLeft: "10px"}}>Min Temperature</Row> : <Row></Row>}
+          {isChecked3 === true ? <Row style={{paddingLeft: "10px"}}>Max Temperature</Row> : <Row></Row>}
+          {isChecked4 === true ? <Row style={{paddingLeft: "10px"}}>Feels Like</Row> : <Row></Row>}
+          {isChecked5 === true ? <Row style={{paddingLeft: "10px"}}>Pressure</Row> : <Row></Row>}
+          {isChecked6 === true ? <Row style={{paddingLeft: "10px"}}>Humidity</Row> : <Row></Row>}
+          {isChecked7 === true ? <Row style={{paddingLeft: "10px"}}>Clouds</Row> : <Row></Row>}
+          {isChecked8 === true ? <Row style={{paddingLeft: "10px"}}>Weather Conditions</Row> : <Row></Row>}
+          {isChecked9 === true ? <Row style={{paddingLeft: "10px"}}>Rain</Row> : <Row></Row> }
+          {isChecked10 === true ? <Row style={{paddingLeft: "10px"}}>Snow</Row> : <Row></Row>}
+          {isChecked11 === true ? <Row style={{paddingLeft: "10px"}}>Dew Point</Row> : <Row></Row>}
+          {isChecked12 === true ? <Row style={{paddingLeft: "10px"}}>Visibility</Row> : <Row></Row>}
+          {isChecked13 === true ? <Row style={{paddingLeft: "10px"}}>Wind (speed, direction, gust)</Row> : <Row></Row>}
+     </>
+     </Col>
       </Row>
 
       <Row className="text-start step-bulk">
         <Col className="bold">File Formats:</Col>
-        <Col>{formatValue ? formatValue : "CSV"}</Col>
+        <Col>{fileCheck === true && fileCheck2 === false ? "CSV" : ""}{" "}
+        {fileCheck2 === true && fileCheck === false ? "JSON" : ""}{" "}
+        {fileCheck2 === true && fileCheck === true ? "CSV, JSON" : ""}{" "}
+        </Col>
       </Row>
 
       <Row className="text-start step-bulk">

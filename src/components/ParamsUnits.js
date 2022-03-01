@@ -22,23 +22,21 @@ const UnitsParams = ({ unitsValue, setUnitsValue }) => {
       >
         <Row className="text-start mt-4">
           
-          <Form className="checkbox-radios ml-5">
-            {units.map((option, index) => (
-              <FormGroup key={index} check className="form-check-radio">
-                <Label check>
-                  {option.label}
-                  <Input
-                    id={option.value}
-                    name="file"
-                    onChange={() => {
-                    setUnitsValue(option.value)
-                  }}
-                    type="radio"
-                    checked={unitsValue === option.value}
-                  />
-                </Label>
-              </FormGroup>
-            ))}
+        <Form className="checkbox-radios ml-5">
+              <FormGroup check className="form-check-radio" onChange={(e) => {setUnitsValue(e.target.value)}}>
+                {units.map((option, index) => (
+                  <Label check key={index}>
+                    {option.label}
+                    <Input
+                      id={option.value}
+                      name="file"
+                      type="radio"
+                      value={option.value}
+                      defaultChecked={option.value === unitsValue}
+                    />
+                  </Label>
+                ))}
+            </FormGroup>
           </Form>
                
 

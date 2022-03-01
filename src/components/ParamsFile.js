@@ -1,9 +1,21 @@
 import React, { useState } from "react";
-import { Button, Label, Form, FormGroup, Input, Row } from "reactstrap";
-import { file } from "../config";
+import { Button, Col, Label, Form, FormGroup, Input, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
+import CheckyBoxFile from "./checkBoxFile";
 
-const FileParams = ({ formatValue, setFormatValue }) => {
+const FileParams = ({
+  formatValue,
+  setFormatValue,
+  fileCheck,
+  setFileCheck,
+  fileCheck2,
+  setFileCheck2,
+  csv,
+  setCSV,
+  json,
+  setJson,
+}) => {
+
   const [alert, setAlert] = useState(null);
 
   const hideAlert = () => {
@@ -20,26 +32,23 @@ const FileParams = ({ formatValue, setFormatValue }) => {
         showCloseButton
         customClass="bs-alerts"
       >
-        <Row className="text-start mt-4">
-          <Form className="checkbox-radios ml-5">
-            {file.map((option, index) => (
-              <FormGroup key={index} check className="form-check-radio">
-                <Label check>
-                  {option.label}
-                  <Input
-                    // id="individualRadioButton"
-                    id={option.value}
-                    name="file"
-                    // checked={option.value === formatValue}
-                    onChange={() => setFormatValue(option.value)}
-                    type="radio"
-                    value={option.value}
-                  />
-                </Label>
-              </FormGroup>
-            ))}
-          </Form>
-        </Row>
+          <Row className="text-start mt-4">
+          <Col>
+            <CheckyBoxFile
+               formatValue={formatValue}
+               setFormatValue={setFormatValue}
+               fileCheck={fileCheck}
+               setFileCheck={setFileCheck}
+               fileCheck2={fileCheck2}
+               setFileCheck2={setFileCheck2}
+               csv={csv}
+               setCSV={setCSV}
+               json={json}
+               setJson={setJson}
+              close={hideAlert}
+            />
+            </Col>
+            </Row>
       </ReactBSAlert>
     );
   };
@@ -48,7 +57,9 @@ const FileParams = ({ formatValue, setFormatValue }) => {
     <>
       {alert}
       <Button className="button-neutral" onClick={fileAlert}>
-        File: {formatValue ? formatValue : "CSV"}{" "}
+        File: {csv === "On" && json === "Off" ? "CSV" : ""}{" "} 
+        {json === "On" & csv === "Off" ? "JSON" : ""}{" "}
+        {json === "On" && csv === "On" ? "CSV, JSON" : ""}{" "}
         <img
           src="https://home.openweathermap.org/assets/icon_down_black.svg"
           alt="icon down"

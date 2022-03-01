@@ -79,7 +79,14 @@ const Parameters = ({
   setIsChecked13,
   unitsChecked,
   setUnitsChecked,
-  isCheckedUnits, setIsCheckedUnits
+  fileCheck,
+  setFileCheck,
+  fileCheck2,
+  setFileCheck2,
+  csv,
+  setCSV,
+  json,
+  setJson
 }) => {
   return (
     <>
@@ -154,14 +161,18 @@ const Parameters = ({
             setParametersUnits={setParametersUnits}
             unitsValue={unitsValue}
             setUnitsValue={setUnitsValue}
-            unitsChecked={unitsChecked}
-            setUnitsChecked={setUnitsChecked}
-            isCheckedUnits={isCheckedUnits}
-            setIsCheckedUnits={setIsCheckedUnits}
           />
           <FileParams
             formatValue={formatValue}
             setFormatValue={setFormatValue}
+            fileCheck={fileCheck}
+            setFileCheck={setFileCheck}
+            fileCheck2={fileCheck2}
+            setFileCheck2={setFileCheck2}
+            csv={csv}
+            setCSV={setCSV}
+            json={json}
+            setJson={setJson}
           />
           <DownloadParams
             downloadsValue={downloadsValue}

@@ -18,7 +18,6 @@ export const months = [
 export const file = [
   { value: "CSV", label: "CSV" },
   { value: "JSON", label: "JSON" },
-  { value: "CSV & JSON", label: "CSV & JSON" },
 ];
 
 export const download = [

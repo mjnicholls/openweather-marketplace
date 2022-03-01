@@ -23,17 +23,21 @@ const DownloadParams = ({ downloadsValue, setDownloadsValue }) => {
         <Row className="text-start mt-4">
           <Form className="checkbox-radios ml-5">
             {download.map((option, index) => (
-              <FormGroup key={index} check className="form-check-radio">
-                <Label check>
+              <FormGroup
+                check
+                className="form-check-radio"
+                onChange={(e) => {
+                  setDownloadsValue(e.target.value);
+                }}
+              >
+                <Label check key={index}>
                   {option.label}
                   <Input
-                    // id="individualRadioButton"
                     id={option.value}
                     name="file"
-                    // checked={option.value === downloadsValue}
-                    onChange={() => setDownloadsValue(option.value)}
                     type="radio"
                     value={option.value}
+                    defaultChecked={option.value === downloadsValue}
                   />
                 </Label>
               </FormGroup>

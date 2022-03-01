@@ -107,7 +107,15 @@ const Location = ({
   unitsChecked,
   setUnitsChecked,
   isCheckedUnits,
-  setIsCheckedUnits
+  setIsCheckedUnits,
+  fileCheck,
+  setFileCheck,
+  fileCheck2,
+  setFileCheck2,
+  csv,
+  setCSV,
+  json,
+  setJson
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -159,7 +167,7 @@ const Location = ({
   };
 
   const getJson = (e) => {
-
+    hideAlert()
     const files = e.target.files;
     if (files) {
       console.log(files[0]);
@@ -310,7 +318,7 @@ const Location = ({
             <input
               type="file"
               accept=".csv,.xlsx,.xls"
-              onClick={getJson}
+              onChange={getJson}
               id="file-upload"
             />
             {/*}
@@ -385,6 +393,14 @@ const Location = ({
           isChecked13={isChecked13}
           isCheckedUnits={isCheckedUnits}
           setIsCheckedUnits={setIsCheckedUnits}
+          fileCheck={fileCheck}
+          setFileCheck={setFileCheck}
+          fileCheck2={fileCheck2}
+          setFileCheck2={setFileCheck2}
+          csv={csv}
+          setCSV={setCSV}
+          json={json}
+          setJson={setJson}
         />
       </ReactBSAlert>
     );
@@ -622,10 +638,14 @@ const Location = ({
         setIsChecked12={setIsChecked12}
         isChecked13={isChecked13}
         setIsChecked13={setIsChecked13}
-        unitsChecked={unitsChecked}
-        setUnitsChecked={setUnitsChecked}
-        isCheckedUnits={isCheckedUnits}
-        setIsCheckedUnits={setIsCheckedUnits}
+        fileCheck={fileCheck}
+        setFileCheck={setFileCheck}
+        fileCheck2={fileCheck2}
+        setFileCheck2={setFileCheck2}
+        csv={csv}
+        setCSV={setCSV}
+        json={json}
+        setJson={setJson}
       />
 
       <LocationList
