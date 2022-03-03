@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { Button } from "reactstrap";
 import PropTypes from "prop-types";
 
 const InfoWindow = ({
@@ -7,17 +7,35 @@ const InfoWindow = ({
   showButton,
   setLocations,
   locations,
-  price,
-  setPrice,
-  isAdded,
-  setIsAdded,
+  errorMap,
+  setErrorMap,
+  count,
+  setCount
 }) => {
+
   const onSetLocationClick = (e) => {
+
+  const toFindDuplicates = (locations) => 
+  locations.filter((item, index) => 
+  locations.indexOf(item) !== index + 1)
+
+  const duplicateElements = toFindDuplicates(locations);
+
+  if (duplicateElements) {
+    setCount(counter => counter + 1)
+  }
+
+  if (count === 1) {
+    setErrorMap(true)
+  }
+
+  if (count === 0) {
+    setErrorMap(false)
     setLocations([...locations, location]);
-    setPrice(price + 7);
     e.stopPropagation();
-   // setIsAdded(true)
-  };
+  }
+
+};
 
   return location.lat && location.lon ? (
     <div className="mapPop text-start">
@@ -25,6 +43,9 @@ const InfoWindow = ({
       <hr />
       <div className="main text-start">
         <div>
+       <p style={{marginBottom: "10px"}}>
+            <b style={{color:"red"}}>{errorMap === true ? "Location has already been added." : null}</b>
+          </p> 
           <p>
             <b>Latitude: </b>
             {location.lat.toFixed(6)}{" "}
@@ -35,15 +56,18 @@ const InfoWindow = ({
           </p>
         </div>
         <div className="text-end">
-          {showButton && (
-            <button
+          {errorMap === false ? 
+          showButton && (
+            <Button
               type="button"
               className="button-active shadow-none"
               onClick={onSetLocationClick}
             >
               Set location
-            </button>
-          )}
+            </Button>
+          )
+        :
+        null }
         </div>
       </div>
     </div>

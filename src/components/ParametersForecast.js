@@ -35,6 +35,28 @@ const ParametersForecast = ({
   setPrecipitation,
   wind,
   setWind,
+  isChecked,
+  setIsChecked,
+  isChecked2,
+  setIsChecked2,
+  isChecked3,
+  setIsChecked3,
+  isChecked4,
+  setIsChecked4,
+  isChecked5,
+  setIsChecked5,
+  isChecked6,
+  setIsChecked6,
+  isChecked7,
+  setIsChecked7,
+  fileCheck,
+  setFileCheck,
+  fileCheck2,
+  setFileCheck2,
+  csv,
+  setCSV,
+  json,
+  setJson
 }) => {
   return (
     <>
@@ -61,6 +83,20 @@ const ParametersForecast = ({
             setPrecipitation={setPrecipitation}
             wind={wind}
             setWind={setWind}
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+            isChecked2={isChecked2}
+            setIsChecked2={setIsChecked2}
+            isChecked3={isChecked3}
+            setIsChecked3={setIsChecked3}
+            isChecked4={isChecked4}
+            setIsChecked4={setIsChecked4}
+            isChecked5={isChecked5}
+            setIsChecked5={setIsChecked5}
+            isChecked6={isChecked6}
+            setIsChecked6={setIsChecked6}
+            isChecked7={isChecked7}
+            setIsChecked7={setIsChecked7}
           />
           <UnitsParams
             parametersUnits={parametersUnits}
@@ -71,6 +107,14 @@ const ParametersForecast = ({
           <FileParams
             formatValue={formatValue}
             setFormatValue={setFormatValue}
+            fileCheck={fileCheck}
+            setFileCheck={setFileCheck}
+            fileCheck2={fileCheck2}
+            setFileCheck2={setFileCheck2}
+            csv={csv}
+            setCSV={setCSV}
+            json={json}
+            setJson={setJson}
           />
           <DownloadParams
             downloadsValue={downloadsValue}

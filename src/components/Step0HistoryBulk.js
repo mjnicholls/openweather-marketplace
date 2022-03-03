@@ -28,6 +28,15 @@ const Step0HistoryBulk = ({
   setPrecipitation,
   wind,
   setWind,
+  isChecked,
+  isChecked2,
+  isChecked3,
+  isChecked4,
+  isChecked5,
+  isChecked6,
+  isChecked7,
+  fileCheck,
+  fileCheck2,
 }) => {
   const totalPrice = price + importPrice;
 
@@ -55,19 +64,22 @@ const Step0HistoryBulk = ({
       <Row className="text-start step-bulk">
         <Col className="bold">Weather Parameters:</Col>
         <Col>
-          {temp === "On" ? "Temperature, " : ""}{" "}
-          {pressure === "On" ? "Pressure, " : ""}{" "}
-          {humidity === "On" ? "Humidity, " : ""}
-          {clouds === "On" ? "Clouds, " : ""}{" "}
-          {dewPoint === "On" ? "Dew Point, " : ""}{" "}
-          {precipitation === "On" ? "Precipitation, " : ""}
-          {wind === "On" ? "Wind (speed, direction) " : ""}
+        {isChecked === true ? <Row style={{paddingLeft: "10px"}}>Temperature</Row> : <Row></Row>}
+          {isChecked2 === true ? <Row style={{paddingLeft: "10px"}}>Pressure</Row> : <Row></Row>}
+          {isChecked3 === true ? <Row style={{paddingLeft: "10px"}}>Humidity</Row> : <Row></Row>}
+          {isChecked4 === true ? <Row style={{paddingLeft: "10px"}}>Clouds</Row> : <Row></Row>}
+          {isChecked5 === true ? <Row style={{paddingLeft: "10px"}}>Dew Point</Row> : <Row></Row>}
+          {isChecked6 === true ? <Row style={{paddingLeft: "10px"}}>Precipitation</Row> : <Row></Row>}
+          {isChecked7 === true ? <Row style={{paddingLeft: "10px"}}>Wind (speed, direction, gust)</Row> : <Row></Row>}
         </Col>
       </Row>
 
       <Row className="text-start step-bulk">
         <Col className="bold">File Formats:</Col>
-        <Col>{formatValue ? formatValue : "CSV"}</Col>
+        <Col>{fileCheck === true && fileCheck2 === false ? "CSV" : ""}{" "}
+        {fileCheck2 === true && fileCheck === false ? "JSON" : ""}{" "}
+        {fileCheck2 === true && fileCheck === true ? "CSV, JSON" : ""}{" "}
+        </Col>
       </Row>
 
       <Row className="text-start step-bulk">

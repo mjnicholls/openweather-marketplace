@@ -62,6 +62,26 @@ const HistoryForecastBulk = () => {
   const [precipitation, setPrecipitation] = useState("On");
   const [wind, setWind] = useState("On");
 
+  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked2, setIsChecked2] = useState(true);
+  const [isChecked3, setIsChecked3] = useState(true);
+  const [isChecked4, setIsChecked4] = useState(true);
+  const [isChecked5, setIsChecked5] = useState(true);
+  const [isChecked6, setIsChecked6] = useState(true);
+  const [isChecked7, setIsChecked7] = useState(true);
+
+  const [fileCheck, setFileCheck] = useState(true)
+  const [fileCheck2, setFileCheck2] = useState(false)
+
+  const [csv, setCSV] = useState("On")
+  const [json, setJson] = useState("Off")
+
+  const [count, setCount] = useState(0)
+  const [errorMap, setErrorMap] = useState(false)
+
+  const [unitsChecked, setUnitsChecked] = useState('Metric');
+  const [isCheckedUnits, setIsCheckedUnits] = useState(true)
+
   useEffect(() => {
     setTempLocation({
       ...tempLocation,
@@ -110,6 +130,12 @@ const HistoryForecastBulk = () => {
       lon: lng,
       name: "Custom location",
     });
+
+    setCount(0)
+
+    if (count === 0) {
+      setErrorMap(false)
+      }
   };
 
   const handleClickOutsideSearchBox = (e) => {
@@ -188,6 +214,28 @@ const HistoryForecastBulk = () => {
             setPrecipitation={setPrecipitation}
             wind={wind}
             setWind={setWind}
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+            isChecked2={isChecked2}
+            setIsChecked2={setIsChecked2}
+            isChecked3={isChecked3}
+            setIsChecked3={setIsChecked3}
+            isChecked4={isChecked4}
+            setIsChecked4={setIsChecked4}
+            isChecked5={isChecked5}
+            setIsChecked5={setIsChecked5}
+            isChecked6={isChecked6}
+            setIsChecked6={setIsChecked6}
+            isChecked7={isChecked7}
+            setIsChecked7={setIsChecked7}
+            fileCheck={fileCheck}
+            setFileCheck={setFileCheck}
+            fileCheck2={fileCheck2}
+            setFileCheck2={setFileCheck2}
+            csv={csv}
+            setCSV={setCSV}
+            json={json}
+            setJson={setJson}
           />
         </Col>
 
@@ -201,6 +249,10 @@ const HistoryForecastBulk = () => {
             onClickMap={onClickMap}
             price={price}
             setPrice={setPrice}
+            errorMap={errorMap}
+            setErrorMap={setErrorMap}
+            count={count}
+            setCount={setCount}
             isButtonInfoWindow={
               location.lat !== tempLocation.lat ||
               location.lon !== tempLocation.lon

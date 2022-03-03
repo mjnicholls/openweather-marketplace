@@ -28,10 +28,6 @@ const Step0Bulk = ({
   isChecked13,
   fileCheck,
   fileCheck2,
-  csv,
-  setCSV,
-  json,
-  setJson
 }) => {
   const totalPrice = price + importPrice;
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import GoogleMapReact from "google-map-react";
 import PropTypes from "prop-types";
@@ -19,12 +19,20 @@ const Map = ({
   isButtonInfoWindow,
   isAdded,
   setIsAdded,
+  errorMap,
+  setErrorMap,
+  count, 
+  setCount,
   isDraggable = true,
 }) => {
+
+
+
   const defaultCenter = {
     lat: 51.509865,
     lng: -0.118092,
   };
+
 
   return (
     <div id="map" style={mapStyle}>
@@ -42,7 +50,6 @@ const Map = ({
           draggable: isDraggable,
         }}
         onClick={onClickMap}
-        // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
         <InfoWindow
         isAdded={isAdded}
@@ -54,6 +61,11 @@ const Map = ({
           setLocations={setLocations}
           setPrice={setPrice}
           price={price}
+          onClick={onClickMap}
+          errorMap={errorMap}
+          setErrorMap={setErrorMap}
+          count={count}
+          setCount={setCount}
         />
       </GoogleMapReact>
     </div>

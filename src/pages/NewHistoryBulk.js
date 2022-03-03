@@ -63,6 +63,7 @@ const NewHistoryBulk = () => {
     product: false,
     system: false,
   });
+
   
   // const [weatherSettings, setWeatherSettings] = useState({
   //   temp: "On",

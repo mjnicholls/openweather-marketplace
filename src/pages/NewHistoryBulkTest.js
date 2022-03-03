@@ -57,6 +57,8 @@ const NewHistoryBulkTest = () => {
 
   const [checked, setChecked] = useState([]);
 
+  const [errorMap, setErrorMap] = useState(false)
+
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 
   const [on, setOn] = useState({
@@ -102,6 +104,8 @@ const NewHistoryBulkTest = () => {
   const [unitsChecked, setUnitsChecked] = useState('Metric');
   const [isCheckedUnits, setIsCheckedUnits] = useState(true)
 
+  const [count, setCount] = useState(0)
+
   useEffect(() => {
     setTempLocation({
       ...tempLocation,
@@ -129,6 +133,7 @@ const NewHistoryBulkTest = () => {
     document.addEventListener("mousedown", handleClickOutsideSearchBox);
     return () => {
       document.removeEventListener("mousedown", handleClickOutsideSearchBox);
+  
     };
   }, []);
 
@@ -151,6 +156,13 @@ const NewHistoryBulkTest = () => {
       lon: lng,
       name: "Custom location",
     });
+
+    setCount(0)
+
+    if (count === 0) {
+      setErrorMap(false)
+      }
+
   };
 
   const handleClickOutsideSearchBox = (e) => {
@@ -164,6 +176,7 @@ const NewHistoryBulkTest = () => {
     const newLocation = { ...location };
     newLocation[key] = value;
     setLocation(newLocation);
+
   };
 
   return (
@@ -293,6 +306,10 @@ const NewHistoryBulkTest = () => {
             onClickMap={onClickMap}
             price={price}
             setPrice={setPrice}
+            errorMap={errorMap}
+            setErrorMap={setErrorMap}
+            count={count}
+            setCount={setCount}
             isButtonInfoWindow={
               location.lat !== tempLocation.lat ||
               location.lon !== tempLocation.lon

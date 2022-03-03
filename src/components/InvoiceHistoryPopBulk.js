@@ -13,6 +13,7 @@ import Step1 from "./Step1";
 import Step2 from "./Step2";
 
 const selectEmail = (state) => state.auth.email;
+const selectInvoice = (state) => state.auth.invoiceInfo;
 
 const InvoiceSettingsBulk = ({
   startDate,
@@ -44,6 +45,28 @@ const InvoiceSettingsBulk = ({
   setPrecipitation,
   wind,
   setWind,
+  isChecked,
+  setIsChecked,
+  isChecked2,
+  setIsChecked2,
+  isChecked3,
+  setIsChecked3,
+  isChecked4,
+  setIsChecked4,
+  isChecked5,
+  setIsChecked5,
+  isChecked6,
+  setIsChecked6,
+  isChecked7,
+  setIsChecked7,
+  fileCheck,
+  setFileCheck,
+  fileCheck2,
+  setFileCheck2,
+  csv,
+  setCSV,
+  json,
+  setJson
 }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
@@ -126,7 +149,10 @@ const InvoiceSettingsBulk = ({
           wind: wind,
         },
         units: unitsValue,
-        file_format: formatValue,
+        file_format: {
+          csv: csv,
+          json: json,
+        },
         saving_mode: downloadsValue,
       },
     };
@@ -495,6 +521,22 @@ const InvoiceSettingsBulk = ({
           setPrecipitation={setPrecipitation}
           wind={wind}
           setWind={setWind}
+          isChecked={isChecked}
+          setIsChecked={setIsChecked}
+          isChecked2={isChecked2}
+          isChecked3={isChecked3}
+          isChecked4={isChecked4}
+          isChecked5={isChecked5}
+          isChecked6={isChecked6}
+          isChecked7={isChecked7}
+          fileCheck={fileCheck}
+          setFileCheck={setFileCheck}
+          fileCheck2={fileCheck2}
+          setFileCheck2={setFileCheck2}
+          csv={csv}
+          setCSV={setCSV}
+          json={json}
+          setJson={setJson}
         />
       ) : null}
       {step === 1 ? (

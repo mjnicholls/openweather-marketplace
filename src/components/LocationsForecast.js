@@ -64,6 +64,28 @@ const LocationForecast = ({
   setPrecipitation,
   wind,
   setWind,
+  isChecked,
+  setIsChecked,
+  isChecked2,
+  setIsChecked2,
+  isChecked3,
+  setIsChecked3,
+  isChecked4,
+  setIsChecked4,
+  isChecked5,
+  setIsChecked5,
+  isChecked6,
+  setIsChecked6,
+  isChecked7,
+  setIsChecked7,
+  fileCheck,
+  setFileCheck,
+  fileCheck2,
+  setFileCheck2,
+  csv,
+  setCSV,
+  json,
+  setJson
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -114,6 +136,7 @@ const LocationForecast = ({
   };
 
   const getJson = (e) => {
+    hideAlert()
     const files = e.target.files;
     if (files) {
       Papa.parse(files[0], {
@@ -167,13 +190,13 @@ const LocationForecast = ({
               importedLocations.push(tmp.location);
             }
 
-            if (errors.length > 0) {
-              setImportPrice(
-                (importPrice = (results.data.length * 35) / errors.length - 35)
-              );
-            } else {
-              setImportPrice((importPrice = results.data.length * 35 - 35));
-            }
+            // if (errors.length > 0) {
+            //   setImportPrice(
+            //     (importPrice = (results.data.length * 35) / errors.length - 35)
+            //   );
+            // } else {
+            //   setImportPrice((importPrice = results.data.length * 35 - 35));
+            // }
           }
 
           if (errors.length) {
@@ -247,19 +270,29 @@ const LocationForecast = ({
         <br />
         <Row className="trigger-item">
           <Col className="text-end">
-            <Button
-              className="button-active"
-              onClick={() => {
+
+          <label onClick={() => {
                 addLocations(locations);
                 hideAlert();
-              }}
-            >
-              Upload recognised locations
-            </Button>
+              }} className="button-neutral">
+              Upload Recognised Locations
+            </label>
 
-            <Button className="button-neutral" onClick={setPricetoZero}>
+            <label htmlFor="file-upload" className="button-active">
+              Upload New File
+            </label>
+            <input
+              type="file"
+              accept=".csv,.xlsx,.xls"
+              onChange={getJson}
+              id="file-upload"
+            />
+            {/*}
+            <Button className="button-neutral" 
+            onClick={setPricetoZero}>
               Upload New File
             </Button>
+            */}
           </Col>
         </Row>
       </ReactBSAlert>
@@ -319,6 +352,28 @@ const LocationForecast = ({
           setPrecipitation={setPrecipitation}
           wind={wind}
           setWind={setWind}
+          isChecked={isChecked}
+          setIsChecked={setIsChecked}
+          isChecked2={isChecked2}
+          setIsChecked2={setIsChecked2}
+          isChecked3={isChecked3}
+          setIsChecked3={setIsChecked3}
+          isChecked4={isChecked4}
+          setIsChecked4={setIsChecked4}
+          isChecked5={isChecked5}
+          setIsChecked5={setIsChecked5}
+          isChecked6={isChecked6}
+          setIsChecked6={setIsChecked6}
+          isChecked7={isChecked7}
+          setIsChecked7={setIsChecked7}
+          fileCheck={fileCheck}
+          setFileCheck={setFileCheck}
+          fileCheck2={fileCheck2}
+          setFileCheck2={setFileCheck2}
+          csv={csv}
+          setCSV={setCSV}
+          json={json}
+          setJson={setJson}
         />
       </ReactBSAlert>
     );
@@ -509,6 +564,28 @@ const LocationForecast = ({
         setPrecipitation={setPrecipitation}
         wind={wind}
         setWind={setWind}
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+        isChecked2={isChecked2}
+        setIsChecked2={setIsChecked2}
+        isChecked3={isChecked3}
+        setIsChecked3={setIsChecked3}
+        isChecked4={isChecked4}
+        setIsChecked4={setIsChecked4}
+        isChecked5={isChecked5}
+        setIsChecked5={setIsChecked5}
+        isChecked6={isChecked6}
+        setIsChecked6={setIsChecked6}
+        isChecked7={isChecked7}
+        setIsChecked7={setIsChecked7}
+        fileCheck={fileCheck}
+        setFileCheck={setFileCheck}
+        fileCheck2={fileCheck2}
+        setFileCheck2={setFileCheck2}
+        csv={csv}
+        setCSV={setCSV}
+        json={json}
+        setJson={setJson}
       />
 
       <LocationListHistory
@@ -532,7 +609,7 @@ const LocationForecast = ({
         </Col>
         <Col>
           <p style={{ fontWeight: "bold", fontSize: "18pt" }}>
-            Total {total} GBP
+          Total {locations.length * 35} {currency}
           </p>
         </Col>
         <Col>

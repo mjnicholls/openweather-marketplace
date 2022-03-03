@@ -198,64 +198,9 @@ const CheckyBox = ({
     setFileValue(true);
   };
 
-  console.log("ischecked", isChecked);
-  console.log("isTempchecked", tempIsChecked);
-  //console.log('temp', tempStatus)
-  //console.log('tempMin', tempMin)
-  // console.log('tempMax', tempMax)
-  // console.log('temptest', temp)
-  // Original: create an array of weathers when the user selects in checkboxes
-  //TODO: Some way of setting weathers in state to "on" or "off"
-  /*
-  const [checked, setChecked] = useState([]);
-  const checkList = weathers;
-
-  const [on, setOn] = useState('')
-
-  const handleCheck = (event) => {
-    var updatedList = [...checked];
-    if (event.target.checked) {
-      updatedList = [...checked, event.target.value];
-    } else {
-      updatedList.splice(checked.indexOf(event.target.value), 1);
-    }
-    setChecked(updatedList);
-    setCheckedWeather(updatedList)
-    setFileValue(true)
-  };
-
-  console.log('on', on)
-  // Generate string of checked items
-  const checkedItems = checked.length
-    ? checked.reduce((total, item) => {
-        return total + ", " + item;
-      })
-     
-    : "";
-
-    console.log('checked', checkedItems)
-
-  // Return classes based on whether item is checked
-  var isChecked = (item) =>
-    checked.includes(item) ? "checked-item" : "not-checked-item";
-    */
 
   return (
     <>
-      {/* Original: Loops through selected checkboxes and adds or removes from array */}
-      {/*
-        <Form className="checkbox-radio-columns ml-5">
-          {checkList.map((item, index) => (
-               <FormGroup check index={index} check className="form-check-radio">
-               <Label check>
-               <span className={isChecked(item)}>{item}
-              <Input value={item} type="checkbox" onChange={handleCheck} />
-              </Label>
-              <p></p>
-            </FormGroup>
-          ))}
-</Form>
-          */}
       <Row className="text-start mt-4">
         <Form className="checkbox-radio-columns ml-5">
           <FormGroup check className="form-check-radio">

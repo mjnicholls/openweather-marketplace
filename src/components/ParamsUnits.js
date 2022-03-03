@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Label, Form, FormGroup, Input, Row } from "reactstrap";
+import { Button, Label, Form, FormGroup, Input, Row, Col } from "reactstrap";
 import { units } from "../config";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 
@@ -21,7 +21,7 @@ const UnitsParams = ({ unitsValue, setUnitsValue }) => {
         customClass="bs-alerts"
       >
         <Row className="text-start mt-4">
-          
+          <Col>
         <Form className="checkbox-radios ml-5">
               <FormGroup check className="form-check-radio" onChange={(e) => {setUnitsValue(e.target.value)}}>
                 {units.map((option, index) => (
@@ -38,6 +38,7 @@ const UnitsParams = ({ unitsValue, setUnitsValue }) => {
                 ))}
             </FormGroup>
           </Form>
+          </Col>
                
 
 {/* <Form className="checkbox-radios ml-5">

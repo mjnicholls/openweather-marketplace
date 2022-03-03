@@ -222,13 +222,13 @@ const Location = ({
               importedLocations.push(tmp.location);
             }
 
-            if (errors.length > 0) {
-              setImportPrice(
-                (importPrice = (results.data.length * 7) / errors.length - 7)
-              );
-            } else {
-              setImportPrice((importPrice = results.data.length * 7 - 7));
-            }
+            // if (errors.length > 0) {
+            //   setImportPrice(
+            //     (importPrice = (results.data.length * 7) / errors.length - 7)
+            //   );
+            // } else {
+            //   setImportPrice((importPrice = results.data.length * 7 - 7));
+            // }
           }
 
           if (errors.length) {
@@ -256,8 +256,8 @@ const Location = ({
     setAlert(
       <ReactBSAlert
         title="Import"
-        onConfirm={setPricetoZero}
-        onCancel={setPricetoZero}
+        onConfirm={() => hideAlert()}
+        onCancel={() => hideAlert()}
         showConfirm={false}
         showCloseButton
         customClass="bs-alerts"
@@ -303,15 +303,13 @@ const Location = ({
         <br />
         <Row className="trigger-item">
           <Col className="text-end">
-            <Button
-              className="button-active"
-              onClick={() => {
+          <label onClick={() => {
                 addLocations(locations);
                 hideAlert();
-              }}
-            >
+              }} className="button-neutral">
               Upload Recognised Locations
-            </Button>
+            </label>
+
             <label htmlFor="file-upload" className="button-active">
               Upload New File
             </label>
@@ -377,6 +375,32 @@ const Location = ({
           setBody={setBody}
           on={on}
           setOn={setOn}
+          temp={temp}
+          setTemp={setTemp}
+          tempMin={tempMin}
+          setTempMin={setTempMin}
+          tempMax={tempMax}
+          setTempMax={setTempMax}
+          feelsLike={feelsLike}
+          setFeelsLike={setFeelsLike}
+          pressure={pressure}
+          setPressure={setPressure}
+          humidity={humidity}
+          setHumidity={setHumidity}
+          clouds={clouds}
+          setClouds={setClouds}
+          weather={weather}
+          setWeather={setWeather}
+          rain={rain}
+          setRain={setRain}
+          snow={snow}
+          setSnow={setSnow}
+          dewPoint={dewPoint}
+          setDewPoint={setDewPoint}
+          visibility={visibility}
+          setVisibility={setVisibility}
+          wind={wind}
+          setWind={setWind}
           isChecked={isChecked}
           setIsChecked={setIsChecked}
           isChecked2={isChecked2}
@@ -665,7 +689,7 @@ const Location = ({
         </Col>
         <Col>
           <p style={{ fontWeight: "bold", fontSize: "18pt" }}>
-            Total {total} {currency}
+            Total {locations.length * 7} {currency}
           </p>
         </Col>
         <Col>

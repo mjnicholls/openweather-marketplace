@@ -25,7 +25,22 @@ const WeatherHistoryParams = ({
   setPrecipitation,
   wind,
   setWind,
+  isChecked,
+  setIsChecked,
+  isChecked2,
+  setIsChecked2,
+  isChecked3,
+  setIsChecked3,
+  isChecked4,
+  setIsChecked4,
+  isChecked5,
+  setIsChecked5,
+  isChecked6,
+  setIsChecked6,
+  isChecked7,
+  setIsChecked7,
 }) => {
+
   const [alert, setAlert] = useState(null);
 
   //const [fileValue, setFileValue] = useState();
@@ -65,6 +80,21 @@ const WeatherHistoryParams = ({
             setPrecipitation={setPrecipitation}
             wind={wind}
             setWind={setWind}
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+            isChecked2={isChecked2}
+            setIsChecked2={setIsChecked2}
+            isChecked3={isChecked3}
+            setIsChecked3={setIsChecked3}
+            isChecked4={isChecked4}
+            setIsChecked4={setIsChecked4}
+            isChecked5={isChecked5}
+            setIsChecked5={setIsChecked5}
+            isChecked6={isChecked6}
+            setIsChecked6={setIsChecked6}
+            isChecked7={isChecked7}
+            setIsChecked7={setIsChecked7}
+            close={hideAlert}
           />
         </Row>
       </ReactBSAlert>

@@ -17,6 +17,10 @@ const MapHistory = ({
   price,
   setPrice,
   isButtonInfoWindow,
+  errorMap,
+  setErrorMap,
+  count, 
+  setCount,
   isDraggable = true,
 }) => {
   const defaultCenter = {
@@ -50,6 +54,10 @@ const MapHistory = ({
           setLocations={setLocations}
           setPrice={setPrice}
           price={price}
+          errorMap={errorMap}
+          setErrorMap={setErrorMap}
+          count={count}
+          setCount={setCount}
         />
       </GoogleMapReact>
     </div>

@@ -83,8 +83,7 @@ const WeatherParams = ({
         showCloseButton
         customClass="bs-alerts"
       >
-        <Row className="text-start mt-4">
-          <Col>
+   
             <CheckyBox
               checkedWeather={checkedWeather}
               setCheckedWeather={setCheckedWeather}
@@ -168,7 +167,7 @@ const WeatherParams = ({
                 .slice(0, 7)}
             </Form>
                   */}
-          </Col>
+          
           {/*} 
           <Col>
             <Form className="checkbox-radios ml-5">
@@ -191,7 +190,7 @@ const WeatherParams = ({
             </Form>
           </Col>
         */}
-        </Row>
+       
       </ReactBSAlert>
     );
   };

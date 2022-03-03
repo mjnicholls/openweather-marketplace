@@ -64,7 +64,7 @@ const InvoiceSettingsBulk = ({
   csv,
   setCSV,
   json,
-  setJson
+  setJson,
 }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
@@ -161,7 +161,10 @@ const InvoiceSettingsBulk = ({
           wind: wind,
         },
         units: unitsValue,
-        file_format: formatValue,
+        file_format: {
+          csv: csv,
+          json: json,
+        },
         saving_mode: downloadsValue,
       },
     };
@@ -249,16 +252,16 @@ const InvoiceSettingsBulk = ({
           });
           return;
         }
-        
+
         if (!invoiceSettings.phone) {
           setError({
             phone: noBlankErrorMessage,
           });
           return;
-          } 
-          
-          if (invoiceSettings.phone) {
-            const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+        }
+
+        if (invoiceSettings.phone) {
+          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
           if (phoneValidation) {
             newError.phone = phoneValidation;
           }
@@ -292,10 +295,10 @@ const InvoiceSettingsBulk = ({
             phone: noBlankErrorMessage,
           });
           return;
-          } 
-          
-          if (invoiceSettings.phone) {
-            const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+        }
+
+        if (invoiceSettings.phone) {
+          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
           if (phoneValidation) {
             newError.phone = phoneValidation;
           }
