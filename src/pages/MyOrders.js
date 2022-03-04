@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Col, Row } from "reactstrap";
+import { Button, Col, Row, Card, CardBody, CardHeader } from "reactstrap";
 
 
 const MyOrders = () => {
@@ -56,7 +56,59 @@ const MyOrders = () => {
         </Col>
       </Row>
 
+        <Card className="trigger-card">
+          <CardHeader
+            style={{ fontWeight: 'bold', paddingRight: 0, paddingLeft: 0 }}
+            className="d-lg-flex d-none"
+          >
+            <Row className="w-100 mx-0">
+              <Col>
+                <Row>
+                  <Col>Info</Col>
+                  <Col>Locations</Col>
+                  <Col>Parameters</Col>
+                  <Col>Dates</Col>
+                  <Col>Status</Col>
+                  <Col>&nbsp;</Col>
+                </Row>
+              </Col>
+            </Row>
+          </CardHeader>
+          <CardBody>
+
+                  <Row className="mx-0 w-100">
+                    <Col>
+              
+                        <Row>
+                          <Col>thing</Col>
+                          <Col>
+                            <b>thing</b>
+                          </Col>
+                          <Col>thing</Col>
+                          <Col>
+                        thing
+                          </Col>
+                          <Col>
+                           thing
+                          </Col>
+    
+                            <Col className="text-nowrap">
+                             thing
+                            </Col>
+                    
+                     
+                        </Row>
+                  
+                    </Col>
+                  
+                  </Row>
+
+          </CardBody>
+        </Card>
+
     </div>
+
+    
   );
 };
 

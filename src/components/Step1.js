@@ -142,7 +142,7 @@ const Step1 = ({
                   <Input
                     type="text"
                     onChange={(e) => handleChange("email", e.target.value)}
-                    value={email}
+                    //value={email}
                     className={error.email ? "danger-border" : ""}
                   />
                   <div

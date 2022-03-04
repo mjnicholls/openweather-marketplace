@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button, Col, Form, Label, Row } from "reactstrap";
-import ReactBSAlert from "react-bootstrap-sweetalert";
-import { getAccountInfo, stripe } from "../api/personalAccountAPI";
+
 import PropTypes from "prop-types";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
@@ -255,16 +254,22 @@ const InvoiceSettingsBulk = ({
 
         if (!invoiceSettings.phone) {
           setError({
-            phone: noBlankErrorMessage,
+            phone: "testtsss",
           });
           return;
         }
 
         if (invoiceSettings.phone) {
           const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+          // if (phoneValidation) {
+          //   newError.phone = phoneValidation;
+          // }
           if (phoneValidation) {
-            newError.phone = phoneValidation;
+            setError({
+              phone: phoneValidation,
+            });
           }
+          return;
         }
 
         if (!email) {

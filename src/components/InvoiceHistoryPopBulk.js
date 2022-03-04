@@ -255,6 +255,7 @@ const InvoiceSettingsBulk = ({
             newError.phone = phoneValidation;
           }
         }
+        
         if (!email) {
           setError({
             email: noBlankErrorMessage,

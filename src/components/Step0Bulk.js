@@ -103,7 +103,7 @@ const Step0Bulk = ({
         </Col>
         <Col>
           <h3>
-            {totalPrice} {currency}
+         {locations.length * 7} {currency}
           </h3>
         </Col>
       </Row>
