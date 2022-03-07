@@ -10,11 +10,15 @@ import { units } from "../config";
 const selectCurrency = (state) => state.auth.currency;
 const selectInvoice = (state) => state.auth.invoiceInfo;
 
+const selectEmail = (state) => state.auth.email;
+
 const NewHistoryBulkTest = () => {
   const currency = useSelector(selectCurrency);
   const mapRef = useRef(null);
   const searchBoxRef = useRef();
   const invoice = useSelector(selectInvoice);
+
+  const emailFromState = useSelector(selectEmail);
 
   const [error, setError] = useState({});
 
@@ -60,6 +64,10 @@ const NewHistoryBulkTest = () => {
   const [errorMap, setErrorMap] = useState(false)
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
+
+  const [email, setEmail] = useState(emailFromState)
+
+  console.log('look', email)
 
   const [on, setOn] = useState({
     news: false,
@@ -293,6 +301,8 @@ const NewHistoryBulkTest = () => {
             setCSV={setCSV}
             json={json}
             setJson={setJson}
+            email={email}
+            setEmail={setEmail}
           />
         </Col>
 

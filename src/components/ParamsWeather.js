@@ -198,7 +198,7 @@ const WeatherParams = ({
   return (
     <>
       {alert}
-      <Button className="button-neutral" onClick={weatherAlert}>
+      <Button className="button-neutral" onClick={weatherAlert} style={{fontSize: "11pt"}}>
         Parameters: {fileValue === true ? "Custom" : "All"}{" "}
         <img
           src="https://home.openweathermap.org/assets/icon_down_black.svg"

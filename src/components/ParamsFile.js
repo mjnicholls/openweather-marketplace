@@ -56,7 +56,7 @@ const FileParams = ({
   return (
     <>
       {alert}
-      <Button className="button-neutral" onClick={fileAlert}>
+      <Button className="button-neutral" onClick={fileAlert} style={{fontSize: "11pt"}}>
         File: {csv === "On" && json === "Off" ? "CSV" : ""}{" "} 
         {json === "On" & csv === "Off" ? "JSON" : ""}{" "}
         {json === "On" && csv === "On" ? "CSV, JSON" : ""}{" "}

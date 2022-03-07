@@ -26,7 +26,7 @@
 // }
 
 let initialState = {
-  email: 'mjnichollsishere@gmail.com',
+  email: "mjnichollsishere@gmail.com",
   userName: "mjnicholls",
   isStripeCustomer: false,
   authorized: false,

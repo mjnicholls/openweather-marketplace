@@ -1283,3 +1283,7 @@ ul li:before {
     padding: 0;
   }
 }
+
+Input:disabled {
+  background: #dddddd;
+}

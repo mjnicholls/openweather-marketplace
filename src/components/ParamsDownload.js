@@ -25,12 +25,13 @@ const DownloadParams = ({ downloadsValue, setDownloadsValue }) => {
             {download.map((option, index) => (
               <FormGroup
                 check
+                key={index}
                 className="form-check-radio"
                 onChange={(e) => {
                   setDownloadsValue(e.target.value);
                 }}
               >
-                <Label check key={index}>
+                <Label check>
                   {option.label}
                   <Input
                     id={option.value}
@@ -51,7 +52,7 @@ const DownloadParams = ({ downloadsValue, setDownloadsValue }) => {
   return (
     <>
       {alert}
-      <Button className="button-neutral" onClick={downloadAlert}>
+      <Button className="button-neutral" onClick={downloadAlert} style={{fontSize: "11pt"}}>
         Downloads: {downloadsValue ? downloadsValue : "All locations"}{" "}
         <img
           src="https://home.openweathermap.org/assets/icon_down_black.svg"

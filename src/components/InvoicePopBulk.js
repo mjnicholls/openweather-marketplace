@@ -5,7 +5,7 @@ import { Button, Col, Form, Label, Row } from "reactstrap";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
-import { validatePhoneNumber, validateVat } from "../utils/validation";
+import { validatePhoneNumber, validateVat, validateEmail } from "../utils/validation";
 import { noBlankErrorMessage } from "../config";
 
 import Step0Bulk from "./Step0Bulk";
@@ -13,7 +13,7 @@ import Step1 from "./Step1";
 import Step2 from "./Step2";
 
 const selectInvoice = (state) => state.auth.invoiceInfo;
-const selectEmail = (state) => state.auth.email;
+//const selectEmail = (state) => state.auth.email;
 
 const InvoiceSettingsBulk = ({
   startDate,
@@ -64,14 +64,18 @@ const InvoiceSettingsBulk = ({
   setCSV,
   json,
   setJson,
+  email,
+  setEmail
 }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
 
+  const [isEmailActive, setIsEmailActive] = useState(false);
+
   const [isNew, setIsNew] = useState(true);
 
   const invoice = useSelector(selectInvoice);
-  const email = useSelector(selectEmail);
+  //const email = useSelector(selectEmail);
 
   const [alert, setAlert] = React.useState(null);
 
@@ -85,53 +89,68 @@ const InvoiceSettingsBulk = ({
 
   const confirmInvoice = () => {
     setError({});
-    const newError = {
-      address_line_1: !invoiceSettings.address_line_1.length,
-      city: !invoiceSettings.city.length,
-      postal_code: !invoiceSettings.postal_code.length,
-      email: !email.length,
-      country: !invoiceSettings.country.length,
-    };
 
-    if (!invoiceSettings.address_line_1) {
-      setError({
-        address_line_1: noBlankErrorMessage,
-      });
-      return;
-    }
-    if (!invoiceSettings.city) {
-      setError({
-        city: noBlankErrorMessage,
-      });
-      return;
-    }
-    if (!invoiceSettings.country) {
-      setError({
-        country: noBlankErrorMessage,
-      });
-      return;
-    }
-    if (!invoiceSettings.country) {
-      setError({
-        country: "Please select a country",
-      });
-      return;
-    }
-    if (!invoiceSettings.postal_code) {
-      setError({
-        postal_code: noBlankErrorMessage,
-      });
-      return;
+    const newError = {};
+
+    const mandatoryFields = [
+      'address_line_1',
+      'city',
+      'country',
+      'postal_code'
+    ]
+
+    for (let i = 0; i < mandatoryFields.length; i += 1) {
+      if (!invoiceSettings[mandatoryFields[i]]) {
+        newError[mandatoryFields[i]] = noBlankErrorMessage
+      }
     }
 
-    setError(newError);
+    // const newError = {
+    //   address_line_1: !invoiceSettings.address_line_1.length,
+    //   city: !invoiceSettings.city.length,
+    //   postal_code: !invoiceSettings.postal_code.length,
+    //   country: !invoiceSettings.country.length,
+    // };
 
-    console.log("new error", newError);
+    // if (!invoiceSettings.address_line_1) {
+    //   setError({
+    //     address_line_1: noBlankErrorMessage,
+    //   });
+    //   return;
+    // }
+    // if (!invoiceSettings.city) {
+    //   setError({
+    //     city: noBlankErrorMessage,
+    //   });
+    //   return;
+    // }
+    // if (!invoiceSettings.country) {
+    //   setError({
+    //     country: noBlankErrorMessage,
+    //   });
+    //   return;
+    // }
+    // if (!invoiceSettings.country) {
+    //   setError({
+    //     country: "Please select a country",
+    //   });
+    //   return;
+    // }
+    // if (!invoiceSettings.postal_code) {
+    //   setError({
+    //     postal_code: noBlankErrorMessage,
+    //   });
+    //   return;
+    // }
 
-    if (Object.values(newError).filter(Boolean).length) {
-      console.log("Please fill in required fields");
+    // setError(newError);
+
+    // console.log("new error", newError);
+
+    if (Object.keys(newError).length) {
+      setError(newError);
       return;
-    }
+    } 
 
     const datas = {
       invoice_info: {
@@ -223,99 +242,42 @@ const InvoiceSettingsBulk = ({
   };
 
   const incrementStep = () => {
-    setError({});
 
     if (step === 1) {
+
       const newError = {};
-      if (invoiceSettings.type === "individual") {
-        if (
-          !invoiceSettings.first_name.length ||
-          !invoiceSettings.last_name.length ||
-          !invoiceSettings.phone.length ||
-          !email.length
-        ) {
-          newError.first_name = !invoiceSettings.first_name.length;
-          newError.last_name = !invoiceSettings.last_name.length;
-          newError.phone = !invoiceSettings.phone.length;
-          newError.email = !email.length;
-        }
-        if (!invoiceSettings.first_name) {
-          setError({
-            first_name: noBlankErrorMessage,
-          });
-          return;
-        }
-        if (!invoiceSettings.last_name) {
-          setError({
-            last_name: noBlankErrorMessage,
-          });
-          return;
-        }
+      setError({})
 
-        if (!invoiceSettings.phone) {
-          setError({
-            phone: "testtsss",
-          });
-          return;
-        }
+      const mandatoryFields = [
+        'phone',
+      ]
 
-        if (invoiceSettings.phone) {
-          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
-          // if (phoneValidation) {
-          //   newError.phone = phoneValidation;
-          // }
-          if (phoneValidation) {
-            setError({
-              phone: phoneValidation,
-            });
-          }
-          return;
-        }
-
-        if (!email) {
-          setError({
-            email: noBlankErrorMessage,
-          });
-          return;
-        }
+      if (invoiceSettings.type === 'individual') {
+        mandatoryFields.push('first_name')
+        mandatoryFields.push('last_name')
       } else {
-        // eslint-disable-next-line
-        if (
-          !invoiceSettings.organisation.length ||
-          !invoiceSettings.phone.length ||
-          !email.length
-        ) {
-          newError.organisation = !invoiceSettings.organisation.length;
-          newError.phone = !invoiceSettings.phone.length;
-          newError.email = !email.length;
-        }
-        if (!invoiceSettings.organisation) {
-          setError({
-            organisation: noBlankErrorMessage,
-          });
-          return;
-        }
-        if (!invoiceSettings.phone) {
-          setError({
-            phone: noBlankErrorMessage,
-          });
-          return;
-        }
-
-        if (invoiceSettings.phone) {
-          const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
-          if (phoneValidation) {
-            newError.phone = phoneValidation;
-          }
-        }
-        if (!email) {
-          setError({
-            email: noBlankErrorMessage,
-          });
-          return;
+        mandatoryFields.push('organisation')
+      }
+      for (let i = 0; i < mandatoryFields.length; i += 1) {
+        if (!invoiceSettings[mandatoryFields[i]]) {
+          newError[mandatoryFields[i]] = noBlankErrorMessage
         }
       }
-      {
+
+      // if (email) {
+      //   const emailValidation = validateEmail(email)
+      //   if (emailValidation){
+      //     newError.email = emailValidation
+      //   }
+      // }
+
+      if (invoiceSettings.phone) {
+        const phoneValidation = validatePhoneNumber(invoiceSettings.phone)
+        if (phoneValidation) {
+          newError.phone = phoneValidation
+        }
+      }   
+      
         if (invoiceSettings.vat_id) {
           validateVat(invoiceSettings.vat_id)
             .then(() => {
@@ -331,7 +293,7 @@ const InvoiceSettingsBulk = ({
               }
             });
         }
-      }
+      
       if (Object.keys(newError).length) {
         setError(newError);
         return;
@@ -406,6 +368,8 @@ const InvoiceSettingsBulk = ({
           setCSV={setCSV}
           json={json}
           setJson={setJson}
+          isEmailActive={isEmailActive}
+          setIsEmailActive={setIsEmailActive}
         />
       ) : null}
       {step === 1 ? (
@@ -414,7 +378,10 @@ const InvoiceSettingsBulk = ({
           setInvoiceSettings={setInvoiceSettings}
           error={error}
           email={email}
+          setEmail={setEmail}
           isNew={isNew}
+          isEmailActive={isEmailActive}
+          setIsEmailActive={setIsEmailActive}
         />
       ) : null}
 

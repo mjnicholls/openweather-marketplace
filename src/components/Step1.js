@@ -8,9 +8,10 @@ import PropTypes from "prop-types";
 const Step1 = ({
   invoiceSettings,
   setInvoiceSettings,
-  isNew,
   error,
   email,
+  isNew,
+  setEmail
 }) => {
   const handleChange = (key, value) => {
     // eslint-disable-next-line
@@ -139,10 +140,12 @@ const Step1 = ({
               <Col>
                 <Label>Email *</Label>
                 <FormGroup>
+                  {email === null ?
+                  <>
                   <Input
                     type="text"
-                    onChange={(e) => handleChange("email", e.target.value)}
-                    //value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                     className={error.email ? "danger-border" : ""}
                   />
                   <div
@@ -152,6 +155,14 @@ const Step1 = ({
                   >
                     {error.email}
                   </div>
+                  </>
+                  :
+                  <Input
+                  type="text"
+                  disabled
+                  value={email}
+                />
+                  }
                 </FormGroup>
               </Col>
             </Row>
@@ -222,9 +233,11 @@ const Step1 = ({
               <Col>
                 <Label>Email *</Label>
                 <FormGroup>
-                  <Input
+                  {email === null ?
+                  <>
+                    <Input
                     type="text"
-                    onChange={(e) => handleChange("email", e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     value={email}
                     className={error.email ? "danger-border" : ""}
                   />
@@ -235,6 +248,14 @@ const Step1 = ({
                   >
                     {error.email}
                   </div>
+                  </>
+                  :
+                  <Input
+                  type="text"
+                  disabled
+                  value={email}
+                />
+                  }
                 </FormGroup>
               </Col>
             </Row>

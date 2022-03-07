@@ -93,7 +93,7 @@ const UnitsParams = ({ unitsValue, setUnitsValue }) => {
   return (
     <>
       {alert}
-      <Button className="button-neutral" onClick={unitAlert}>
+      <Button className="button-neutral" onClick={unitAlert} style={{fontSize: "11pt"}}>
         Units: {unitsValue ? unitsValue : "Metric"}{" "}
         <img
           src="https://home.openweathermap.org/assets/icon_down_black.svg"

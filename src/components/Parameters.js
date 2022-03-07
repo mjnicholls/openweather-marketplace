@@ -86,7 +86,7 @@ const Parameters = ({
   csv,
   setCSV,
   json,
-  setJson
+  setJson,
 }) => {
   return (
     <>
@@ -156,12 +156,16 @@ const Parameters = ({
             isChecked13={isChecked13}
             setIsChecked13={setIsChecked13}
           />
+        </Col>
+        <Col>
           <UnitsParams
             parametersUnits={parametersUnits}
             setParametersUnits={setParametersUnits}
             unitsValue={unitsValue}
             setUnitsValue={setUnitsValue}
           />
+        </Col>
+        <Col>
           <FileParams
             formatValue={formatValue}
             setFormatValue={setFormatValue}
@@ -174,11 +178,14 @@ const Parameters = ({
             json={json}
             setJson={setJson}
           />
+        </Col>
+        <Col>
           <DownloadParams
             downloadsValue={downloadsValue}
             setDownloadsValue={setDownloadsValue}
           />
         </Col>
+        <Col></Col>
       </Row>
     </>
   );

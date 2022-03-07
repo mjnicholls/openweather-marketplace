@@ -104,8 +104,6 @@ const Location = ({
   setIsChecked12,
   isChecked13,
   setIsChecked13,
-  unitsChecked,
-  setUnitsChecked,
   isCheckedUnits,
   setIsCheckedUnits,
   fileCheck,
@@ -115,7 +113,9 @@ const Location = ({
   csv,
   setCSV,
   json,
-  setJson
+  setJson,
+  email,
+  setEmail
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -221,14 +221,6 @@ const Location = ({
             } else if (tmp.location) {
               importedLocations.push(tmp.location);
             }
-
-            // if (errors.length > 0) {
-            //   setImportPrice(
-            //     (importPrice = (results.data.length * 7) / errors.length - 7)
-            //   );
-            // } else {
-            //   setImportPrice((importPrice = results.data.length * 7 - 7));
-            // }
           }
 
           if (errors.length) {
@@ -319,12 +311,6 @@ const Location = ({
               onChange={getJson}
               id="file-upload"
             />
-            {/*}
-            <Button className="button-neutral" 
-            onClick={setPricetoZero}>
-              Upload New File
-            </Button>
-            */}
           </Col>
         </Row>
       </ReactBSAlert>
@@ -425,6 +411,8 @@ const Location = ({
           setCSV={setCSV}
           json={json}
           setJson={setJson}
+          email={email}
+          setEmail={setEmail}
         />
       </ReactBSAlert>
     );
