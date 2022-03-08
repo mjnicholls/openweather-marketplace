@@ -3,8 +3,13 @@ import axios from "axios";
 import { noBlankErrorMessage } from "../config";
 
 export const validateEmail = (email) => {
+  let res;
   const re = /^([^@\s]+)@((?:[-A-Za-z0-9]+\.)+[A-Za-z]{2,})$/;
-  return re.test(email);
+
+  if (!re.test(email)){
+    res = "Must be a proper email address";
+  }
+  return res;
 };
 
 export const coordinatesError = (lat, lon) => {

@@ -6,10 +6,7 @@ import PropTypes from "prop-types";
 const Step0Bulk = ({
   startDate,
   endDate,
-  price,
-  importPrice,
   unitsValue,
-  formatValue,
   downloadsValue,
   locations,
   currency,
@@ -29,7 +26,8 @@ const Step0Bulk = ({
   fileCheck,
   fileCheck2,
 }) => {
-  const totalPrice = price + importPrice;
+
+
 
   return (
     <div>

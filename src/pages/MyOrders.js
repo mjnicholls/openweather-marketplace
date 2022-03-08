@@ -53,10 +53,9 @@ const MyOrders = () => {
         </Col>
       </Row>
 
-      <Card className="trigger-card">
+      <Card className="orders-table">
         <CardHeader
-          style={{ fontWeight: "bold", paddingRight: 0, paddingLeft: 0 }}
-          className="d-lg-flex d-none"
+          className="d-lg-flex d-none card-head"
         >
           <Row className="w-100 mx-0 text-start">
             <Col>
@@ -76,7 +75,7 @@ const MyOrders = () => {
             <Col>
               <Row>
                 <Col>
-                  <p className="text-start">History Bulk</p>
+                  <p className="text-start" style={{fontWeight: "bold"}}>History Bulk</p>
                   <p className="text-start">File Format:</p>
                   <p className="text-start">Units:</p>
                 </Col>

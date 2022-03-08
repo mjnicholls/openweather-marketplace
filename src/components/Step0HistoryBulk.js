@@ -7,27 +7,11 @@ const Step0HistoryBulk = ({
   startDate,
   endDate,
   price,
-  checkedWeather,
   unitsValue,
-  formatValue,
   downloadsValue,
   locations,
   currency,
   importPrice,
-  temp,
-  setTemp,
-  pressure,
-  setPressure,
-  humidity,
-  setHumidity,
-  clouds,
-  setClouds,
-  dewPoint,
-  setDewPoint,
-  precipitation,
-  setPrecipitation,
-  wind,
-  setWind,
   isChecked,
   isChecked2,
   isChecked3,
@@ -38,7 +22,7 @@ const Step0HistoryBulk = ({
   fileCheck,
   fileCheck2,
 }) => {
-  const totalPrice = price + importPrice;
+
 
   return (
     <div>

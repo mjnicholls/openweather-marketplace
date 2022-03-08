@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button, Col, Form, Label, Row } from "reactstrap";
-import ReactBSAlert from "react-bootstrap-sweetalert";
-import { validatePhoneNumber, validateVat } from "../utils/validation";
+import { validatePhoneNumber, validateVat, validateEmail } from "../utils/validation";
 import PropTypes from "prop-types";
 import { noBlankErrorMessage } from "../config";
 import axios from "axios";
@@ -74,7 +73,7 @@ const InvoiceSettingsBulk = ({
   const [isNew, setIsNew] = useState(true);
 
   const invoice = useSelector(selectInvoice);
-  const email = useSelector(selectEmail);
+  const emailFromState = useSelector(selectEmail);
 
   const [alert, setAlert] = React.useState(null);
 
@@ -84,50 +83,31 @@ const InvoiceSettingsBulk = ({
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 
-  const confirmInvoice = () => {
-    setError({});
-    const newError = {
-      address_line_1: !invoiceSettings.address_line_1.length,
-      city: !invoiceSettings.city.length,
-      postal_code: !invoiceSettings.postal_code.length,
-      email: !email.length,
-      country: !invoiceSettings.country.length,
-    };
+  const [email, setEmail] = useState('')
 
-    if (!invoiceSettings.address_line_1) {
-      setError({
-        address_line_1: noBlankErrorMessage,
-      });
-      return;
+  const confirmInvoice = () => {
+   
+    setError({});
+
+    const newError = {};
+
+    const mandatoryFields = [
+      'address_line_1',
+      'city',
+      'country',
+      'postal_code'
+    ]
+
+    for (let i = 0; i < mandatoryFields.length; i += 1) {
+      if (!invoiceSettings[mandatoryFields[i]]) {
+        newError[mandatoryFields[i]] = noBlankErrorMessage
+      }
     }
-    if (!invoiceSettings.city) {
-      setError({
-        city: noBlankErrorMessage,
-      });
+
+    if (Object.keys(newError).length) {
+      setError(newError);
       return;
-    }
-    if (!invoiceSettings.country) {
-      setError({
-        country: noBlankErrorMessage,
-      });
-      return;
-    }
-    if (!invoiceSettings.country) {
-      setError({
-        country: "Please select a country",
-      });
-      return;
-    }
-    if (!invoiceSettings.postal_code) {
-      setError({
-        postal_code: noBlankErrorMessage,
-      });
-      return;
-    }
-    if (Object.values(newError).filter(Boolean).length) {
-      console.log("Please fill in required fields");
-      return;
-    }
+    } 
     const datas = {
       invoice_info: {
         ...invoiceSettings,
@@ -216,103 +196,69 @@ const InvoiceSettingsBulk = ({
   const incrementStep = () => {
     setError({});
 
-    if (step === 1) {
+      if (step === 1) {
+
       const newError = {};
-      if (invoiceSettings.type === "individual") {
-        if (
-          !invoiceSettings.first_name.length ||
-          !invoiceSettings.last_name.length ||
-          !invoiceSettings.phone.length ||
-          !email.length
-        ) {
-          newError.first_name = !invoiceSettings.first_name.length;
-          newError.last_name = !invoiceSettings.last_name.length;
-          newError.phone = !invoiceSettings.phone.length;
-          newError.email = !email.length;
-        }
-        if (!invoiceSettings.first_name) {
-          setError({
-            first_name: noBlankErrorMessage,
-          });
-          return;
-        }
-        if (!invoiceSettings.last_name) {
-          setError({
-            last_name: noBlankErrorMessage,
-          });
-          return;
-        }
-        if (!invoiceSettings.phone) {
-          setError({
-            phone: noBlankErrorMessage,
-          });
-          return;
-          } 
-          
-          if (invoiceSettings.phone) {
-            const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
-          if (phoneValidation) {
-            newError.phone = phoneValidation;
-          }
-        }
-        
-        if (!email) {
-          setError({
-            email: noBlankErrorMessage,
-          });
-          return;
-        }
+      setError({})
+
+      const mandatoryFields = [
+        'phone',
+      ]
+
+      if (invoiceSettings.type === 'individual') {
+        mandatoryFields.push('first_name')
+        mandatoryFields.push('last_name')
       } else {
-        // eslint-disable-next-line
-        if (
-          !invoiceSettings.organisation.length ||
-          !invoiceSettings.phone.length ||
-          !email.length
-        ) {
-          newError.organisation = !invoiceSettings.organisation.length;
-          newError.phone = !invoiceSettings.phone.length;
-          newError.email = !email.length;
-        }
-        if (!invoiceSettings.organisation) {
-          setError({
-            organisation: noBlankErrorMessage,
-          });
-          return;
-        }
-        if (!invoiceSettings.phone) {
-          setError({
-            phone: noBlankErrorMessage,
-          });
-          return;
-          } 
-          
-          if (invoiceSettings.phone) {
-            const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
-          if (phoneValidation) {
-            newError.phone = phoneValidation;
-          }
-        }
-        if (!email) {
-          setError({
-            email: noBlankErrorMessage,
-          });
-          return;
+        mandatoryFields.push('organisation')
+      }
+      for (let i = 0; i < mandatoryFields.length; i += 1) {
+        if (!invoiceSettings[mandatoryFields[i]]) {
+          newError[mandatoryFields[i]] = noBlankErrorMessage
         }
       }
-      {
+
+  const newErrors = {};
+
+  if (email === !emailFromState) {
+    if (!email) {
+      setError({
+        email: noBlankErrorMessage,
+      });
+      return;
+    }
+  }
+    setError(newErrors)
+
+      if (email) {
+        const emailValidation = validateEmail(email)
+        if (emailValidation){
+          newError.email = emailValidation
+        }
+      }
+    
+      if (invoiceSettings.phone) {
+        const phoneValidation = validatePhoneNumber(invoiceSettings.phone)
+        if (phoneValidation) {
+          newError.phone = phoneValidation
+        }
+      }   
+      
         if (invoiceSettings.vat_id) {
           validateVat(invoiceSettings.vat_id)
             .then(() => {
               invoiceSettings.vat_id = invoiceSettings.vat_id;
             })
             .catch(() => {
-              setError({
-                vat_id: "VAT ID is not valid",
-              });
-              return;
+              newError.vat_id = "VAT ID is not valid";
+            })
+            .finally(() => {
+              if (Object.keys(newError).length) {
+                setError(newError);
+                return;
+              }
             });
         }
-      }
+      
       if (Object.keys(newError).length) {
         setError(newError);
         return;
@@ -320,147 +266,6 @@ const InvoiceSettingsBulk = ({
         setStep(2);
       }
     }
-  };
-
-  const errorAndConfirm = () => {
-    confirmInvoice();
-    sorryAlert();
-  };
-
-  const sorryAlert = () => {
-    setAlert(
-      <ReactBSAlert
-        customClass="agro-alert"
-        onConfirm={() => hideAlert()}
-        onCancel={() => hideAlert()}
-        showConfirm={false}
-      >
-        <div className="text-start">
-          <Row className="margin-small">
-            <h2 className="high2">Sorry!</h2>
-          </Row>
-
-          <Row>
-            <Col>
-              This feature is not available at the moment. If you wish to make
-              use of your service, please make a note of your details below, and
-              get in touch with us.
-            </Col>
-          </Row>
-          <br />
-          <Row className="margin-small">
-            <h4>Order Details</h4>
-          </Row>
-          <Row>
-            <Col>State:</Col>
-            <Col>{country}</Col>
-          </Row>
-          <Row>
-            <Col>Year:</Col>
-            <Col>{year}</Col>
-          </Row>
-          <br />
-          {invoiceSettings.type === "individual" ? (
-            <>
-              <Row className="margin-small">
-                <h4>Billing Details</h4>
-              </Row>
-              <Row>
-                <Col>Title:</Col>
-                <Col>{invoiceSettings.title}</Col>
-              </Row>
-              <Row>
-                <Col>First Name:</Col>
-                <Col>{invoiceSettings.first_name}</Col>
-              </Row>
-
-              <Row>
-                <Col>Surname:</Col>
-                <Col>{invoiceSettings.last_name}</Col>
-              </Row>
-              <Row>
-                <Col>Phone No.:</Col>
-                <Col>{invoiceSettings.phone}</Col>
-              </Row>
-              <Row>
-                <Col>Email:</Col>
-                <Col>{email}</Col>
-              </Row>
-              <br />
-            </>
-          ) : (
-            <>
-              <Row className="margin-small">
-                <h4>Billing Details</h4>
-              </Row>
-              <Row>
-                <Col>Organisation:</Col>
-                <Col>{invoiceSettings.organisation}</Col>
-              </Row>
-              <Row>
-                <Col>VAT ID:</Col>
-                <Col>{invoiceSettings.vat_id}</Col>
-              </Row>
-
-              <Row>
-                <Col>Phone No.:</Col>
-                <Col>{invoiceSettings.phone}</Col>
-              </Row>
-              <Row>
-                <Col>Email:</Col>
-                <Col>{email}</Col>
-              </Row>
-              <br />
-            </>
-          )}
-          <Row className="margin-small">
-            <h4>Billing Address</h4>
-          </Row>
-
-          <Row>
-            <Col>Address Line 1:</Col>
-            <Col>{invoiceSettings.address_line_1}</Col>
-          </Row>
-          <Row>
-            <Col>Address Line 2:</Col>
-            <Col>{invoiceSettings.address_line_2}</Col>
-          </Row>
-
-          <Row>
-            <Col>Country:</Col>
-            <Col>{invoiceSettings.country}</Col>
-          </Row>
-          <Row>
-            <Col>City:</Col>
-            <Col>{invoiceSettings.city}</Col>
-          </Row>
-          <Row>
-            <Col>Postcode:</Col>
-            <Col>{invoiceSettings.postal_code}</Col>
-          </Row>
-          <Row>
-            <Col>State:</Col>
-            <Col>{invoiceSettings.state}</Col>
-          </Row>
-          <Row>
-            <Col>Phone No:</Col>
-            <Col>{invoiceSettings.phone}</Col>
-          </Row>
-          <br />
-          <Row className="text-end">
-            <Col>
-              <a
-                href="mailto:info@openweathermap.org"
-                type="button"
-                className="button-active"
-              >
-                Contact Us
-              </a>
-            </Col>
-          </Row>
-        </div>
-      </ReactBSAlert>
-    );
   };
 
   return (
@@ -544,8 +349,9 @@ const InvoiceSettingsBulk = ({
         <Step1
           invoiceSettings={invoiceSettings}
           setInvoiceSettings={setInvoiceSettings}
-          error={error}
           email={email}
+          setEmail={setEmail}
+          error={error}
           isNew={isNew}
         />
       ) : null}

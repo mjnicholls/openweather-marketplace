@@ -1,9 +1,11 @@
 import React from "react";
 import { Col, Form, Label, FormGroup, Input, Row } from "reactstrap";
 import Select from "react-select";
-
+import { useSelector } from "react-redux";
 import { titles } from "../config";
 import PropTypes from "prop-types";
+
+const selectEmail = (state) => state.auth.email;
 
 const Step1 = ({
   invoiceSettings,
@@ -11,14 +13,20 @@ const Step1 = ({
   error,
   email,
   isNew,
-  setEmail
+  setEmail,
 }) => {
+  const emailFromState = useSelector(selectEmail);
+
   const handleChange = (key, value) => {
     // eslint-disable-next-line
     let newObj = Object.assign({}, invoiceSettings);
     newObj[key] = value;
     setInvoiceSettings(newObj);
   };
+
+  
+
+  console.log("mkk", email);
 
   return (
     <div>
@@ -28,7 +36,7 @@ const Step1 = ({
       <Form className="text-start">
         <Label>Legal form: </Label>
         <FormGroup className="mr-4">
-        <Label style={{ paddingRight: "20px" }} check>
+          <Label style={{ paddingRight: "20px" }} check>
             <input
               defaultChecked
               id="organisationRadioButton"
@@ -127,7 +135,7 @@ const Step1 = ({
                     value={invoiceSettings.phone}
                     className={error.phone ? "danger-border" : ""}
                   />
-                            <div
+                  <div
                     className={`invalid-feedback ${
                       error.phone ? "d-block" : ""
                     }`}
@@ -135,34 +143,30 @@ const Step1 = ({
                     {error.phone}
                   </div>
                 </FormGroup>
-               
               </Col>
               <Col>
                 <Label>Email *</Label>
                 <FormGroup>
-                  {email === null ?
                   <>
-                  <Input
-                    type="text"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                    className={error.email ? "danger-border" : ""}
-                  />
-                  <div
-                    className={`invalid-feedback ${
-                      error.email ? "d-block" : ""
-                    }`}
-                  >
-                    {error.email}
-                  </div>
+                    <Input
+                      type="text"
+                      onChange={
+                        emailFromState !== null
+                          ? setEmail(emailFromState)
+                          : (e) => setEmail(e.target.value)
+                      }
+                      value={emailFromState !== null ? emailFromState : email}
+                      disabled={emailFromState !== null}
+                      className={error.email ? "danger-border" : ""}
+                    />
+                    <div
+                      className={`invalid-feedback ${
+                        error.email ? "d-block" : ""
+                      }`}
+                    >
+                      {error.email}
+                    </div>
                   </>
-                  :
-                  <Input
-                  type="text"
-                  disabled
-                  value={email}
-                />
-                  }
                 </FormGroup>
               </Col>
             </Row>
@@ -233,29 +237,26 @@ const Step1 = ({
               <Col>
                 <Label>Email *</Label>
                 <FormGroup>
-                  {email === null ?
                   <>
                     <Input
-                    type="text"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                    className={error.email ? "danger-border" : ""}
-                  />
-                  <div
-                    className={`invalid-feedback ${
-                      error.email ? "d-block" : ""
-                    }`}
-                  >
-                    {error.email}
-                  </div>
+                      type="text"
+                      onChange={
+                        emailFromState !== null
+                          ? setEmail(emailFromState)
+                          : (e) => setEmail(e.target.value)
+                      }
+                      value={emailFromState !== null ? emailFromState : email}
+                      disabled={emailFromState !== null}
+                      className={error.email ? "danger-border" : ""}
+                    />
+                    <div
+                      className={`invalid-feedback ${
+                        error.email ? "d-block" : ""
+                      }`}
+                    >
+                      {error.email}
+                    </div>
                   </>
-                  :
-                  <Input
-                  type="text"
-                  disabled
-                  value={email}
-                />
-                  }
                 </FormGroup>
               </Col>
             </Row>

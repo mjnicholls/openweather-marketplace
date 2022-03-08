@@ -115,14 +115,13 @@ const Location = ({
   json,
   setJson,
   email,
-  setEmail
+  setEmail,
+  emailString,
+  setEmailString
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
   const [isImport, setIsImport] = useState(false);
-  //const [fileValue, setFileValue] = useState([]);
-
-  const total = price + importPrice;
 
   const setCoordinates = () => {
     setError({});
@@ -413,6 +412,8 @@ const Location = ({
           setJson={setJson}
           email={email}
           setEmail={setEmail}
+          emailString={emailString}
+          setEmailString={setEmailString}
         />
       </ReactBSAlert>
     );

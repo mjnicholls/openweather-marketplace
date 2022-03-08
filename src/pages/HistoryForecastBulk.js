@@ -79,6 +79,8 @@ const HistoryForecastBulk = () => {
   const [count, setCount] = useState(0)
   const [errorMap, setErrorMap] = useState(false)
 
+  const [email, setEmail] = useState()
+
   const [unitsChecked, setUnitsChecked] = useState('Metric');
   const [isCheckedUnits, setIsCheckedUnits] = useState(true)
 
@@ -236,6 +238,8 @@ const HistoryForecastBulk = () => {
             setCSV={setCSV}
             json={json}
             setJson={setJson}
+            email={email}
+            setEmail={setEmail}
           />
         </Col>
 

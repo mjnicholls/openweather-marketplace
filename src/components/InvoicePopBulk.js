@@ -13,7 +13,7 @@ import Step1 from "./Step1";
 import Step2 from "./Step2";
 
 const selectInvoice = (state) => state.auth.invoiceInfo;
-//const selectEmail = (state) => state.auth.email;
+const selectEmail = (state) => state.auth.email;
 
 const InvoiceSettingsBulk = ({
   startDate,
@@ -64,8 +64,6 @@ const InvoiceSettingsBulk = ({
   setCSV,
   json,
   setJson,
-  email,
-  setEmail
 }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
@@ -75,7 +73,7 @@ const InvoiceSettingsBulk = ({
   const [isNew, setIsNew] = useState(true);
 
   const invoice = useSelector(selectInvoice);
-  //const email = useSelector(selectEmail);
+  const emailFromState = useSelector(selectEmail);
 
   const [alert, setAlert] = React.useState(null);
 
@@ -85,7 +83,7 @@ const InvoiceSettingsBulk = ({
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 
-  console.log("body", invoiceSettings);
+  const [email, setEmail] = useState('')
 
   const confirmInvoice = () => {
     setError({});
@@ -104,48 +102,6 @@ const InvoiceSettingsBulk = ({
         newError[mandatoryFields[i]] = noBlankErrorMessage
       }
     }
-
-    // const newError = {
-    //   address_line_1: !invoiceSettings.address_line_1.length,
-    //   city: !invoiceSettings.city.length,
-    //   postal_code: !invoiceSettings.postal_code.length,
-    //   country: !invoiceSettings.country.length,
-    // };
-
-    // if (!invoiceSettings.address_line_1) {
-    //   setError({
-    //     address_line_1: noBlankErrorMessage,
-    //   });
-    //   return;
-    // }
-    // if (!invoiceSettings.city) {
-    //   setError({
-    //     city: noBlankErrorMessage,
-    //   });
-    //   return;
-    // }
-    // if (!invoiceSettings.country) {
-    //   setError({
-    //     country: noBlankErrorMessage,
-    //   });
-    //   return;
-    // }
-    // if (!invoiceSettings.country) {
-    //   setError({
-    //     country: "Please select a country",
-    //   });
-    //   return;
-    // }
-    // if (!invoiceSettings.postal_code) {
-    //   setError({
-    //     postal_code: noBlankErrorMessage,
-    //   });
-    //   return;
-    // }
-
-    // setError(newError);
-
-    // console.log("new error", newError);
 
     if (Object.keys(newError).length) {
       setError(newError);
@@ -264,12 +220,25 @@ const InvoiceSettingsBulk = ({
         }
       }
 
-      // if (email) {
-      //   const emailValidation = validateEmail(email)
-      //   if (emailValidation){
-      //     newError.email = emailValidation
-      //   }
-      // }
+  const newErrors = {};
+
+  if (email === !emailFromState) {
+    if (!email) {
+      setError({
+        email: noBlankErrorMessage,
+      });
+      return;
+    }
+  }
+    setError(newErrors)
+
+      if (email) {
+        const emailValidation = validateEmail(email)
+        if (emailValidation){
+          newError.email = emailValidation
+        }
+      }
+    
 
       if (invoiceSettings.phone) {
         const phoneValidation = validatePhoneNumber(invoiceSettings.phone)
@@ -368,8 +337,6 @@ const InvoiceSettingsBulk = ({
           setCSV={setCSV}
           json={json}
           setJson={setJson}
-          isEmailActive={isEmailActive}
-          setIsEmailActive={setIsEmailActive}
         />
       ) : null}
       {step === 1 ? (

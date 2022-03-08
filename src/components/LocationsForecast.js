@@ -85,7 +85,9 @@ const LocationForecast = ({
   csv,
   setCSV,
   json,
-  setJson
+  setJson,
+  email,
+  setEmail
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -374,6 +376,8 @@ const LocationForecast = ({
           setCSV={setCSV}
           json={json}
           setJson={setJson}
+          email={email}
+          setEmail={setEmail}
         />
       </ReactBSAlert>
     );
@@ -534,10 +538,8 @@ const LocationForecast = ({
       </div>
 
       <ParametersForecast
-        parameters={parameters}
         setParameters={setParameters}
         parameters={parameters}
-        setParameters={setParameters}
         checkedWeather={checkedWeather}
         setCheckedWeather={setCheckedWeather}
         fileValue={fileValue}
