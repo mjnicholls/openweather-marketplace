@@ -6,12 +6,10 @@ import PropTypes from "prop-types";
 const Step0HistoryBulk = ({
   startDate,
   endDate,
-  price,
   unitsValue,
   downloadsValue,
   locations,
   currency,
-  importPrice,
   isChecked,
   isChecked2,
   isChecked3,

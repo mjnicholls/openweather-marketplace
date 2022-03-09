@@ -24,10 +24,6 @@ const Step1 = ({
     setInvoiceSettings(newObj);
   };
 
-  
-
-  console.log("mkk", email);
-
   return (
     <div>
       <Col className="bold text-start">

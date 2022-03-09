@@ -1,8 +1,27 @@
 import React from "react";
 
 import { Button, Col, Row, Card, CardBody, CardHeader } from "reactstrap";
+import axios from "axios";
 
 const MyOrders = () => {
+
+
+axios.get('http://openweathermap.stage.owm.io/marketplace/my_orders_list', {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+})
+  .then(response => {
+    if (response && response.data) {
+      const data = response.data
+      console.log('data', response.data)
+      console.log('test', data)
+    }
+  })
+  .catch(err => {
+    console.log(err)
+    })
+
+
   return (
     <div className="container">
       <Row className="mt-4 mb-4 text-start">
@@ -53,7 +72,7 @@ const MyOrders = () => {
         </Col>
       </Row>
 
-      <Card className="orders-table">
+      {/* <Card className="orders-table">
         <CardHeader
           className="d-lg-flex d-none card-head"
         >
@@ -80,18 +99,18 @@ const MyOrders = () => {
                   <p className="text-start">Units:</p>
                 </Col>
                 <Col>
-                  <b>thing</b>
+                  <b>test</b>
                 </Col>
-                <Col>thing</Col>
-                <Col>thing</Col>
-                <Col>thing</Col>
+                <Col>test</Col>
+                <Col>test</Col>
+                <Col>test</Col>
 
-                <Col>thing</Col>
+                <Col>test</Col>
               </Row>
             </Col>
           </Row>
         </CardBody>
-      </Card>
+      </Card> */}
     </div>
   );
 };

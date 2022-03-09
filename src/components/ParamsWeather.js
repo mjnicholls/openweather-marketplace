@@ -147,50 +147,6 @@ const WeatherParams = ({
               setIsChecked13={setIsChecked13}
               close={hideAlert}
             />
-            {/*}
-            <Form className="checkbox-radios ml-5">
-              {weathers
-                  .map((option) => (
-                    <FormGroup check className="form-check-radio">
-                    <Label check>
-                      {option.label}
-                      <Input
-                          type="checkbox"
-                          id={option.value}
-                        name="file"
-                        onChange={() => setFileValue(option.value)}
-                        value={option.value}
-                      />
-                    </Label>
-                  </FormGroup>
-                ))
-                .slice(0, 7)}
-            </Form>
-                  */}
-          
-          {/*} 
-          <Col>
-            <Form className="checkbox-radios ml-5">
-              {weathers
-                .map((option) => (
-                  <FormGroup check className="form-check-radio">
-                    <Label check>
-                      {option.label}
-                      <Input
-                        id={option.value}
-                        name="file"
-                        onChange={() => setFileValue(option.value)}
-                        type="checkbox"
-                        value={option.value}
-                      />
-                    </Label>
-                  </FormGroup>
-                ))
-                .slice(7)}
-            </Form>
-          </Col>
-        */}
-       
       </ReactBSAlert>
     );
   };

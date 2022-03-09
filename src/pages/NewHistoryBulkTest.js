@@ -4,8 +4,6 @@ import Map from "../components/Map";
 import placeMarker from "../utils/placeMarker";
 import Location from "../components/Location";
 import { useSelector } from "react-redux";
-import { data } from "../api/data";
-import { units } from "../config";
 
 const selectCurrency = (state) => state.auth.currency;
 const selectInvoice = (state) => state.auth.invoiceInfo;

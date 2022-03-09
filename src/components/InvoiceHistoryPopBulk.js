@@ -47,17 +47,11 @@ const InvoiceSettingsBulk = ({
   isChecked,
   setIsChecked,
   isChecked2,
-  setIsChecked2,
   isChecked3,
-  setIsChecked3,
   isChecked4,
-  setIsChecked4,
   isChecked5,
-  setIsChecked5,
   isChecked6,
-  setIsChecked6,
   isChecked7,
-  setIsChecked7,
   fileCheck,
   setFileCheck,
   fileCheck2,
@@ -76,10 +70,6 @@ const InvoiceSettingsBulk = ({
   const emailFromState = useSelector(selectEmail);
 
   const [alert, setAlert] = React.useState(null);
-
-  const hideAlert = () => {
-    setAlert(null);
-  };
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 

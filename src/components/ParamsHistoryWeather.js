@@ -104,7 +104,7 @@ const WeatherHistoryParams = ({
   return (
     <>
       {alert}
-      <Button className="button-neutral" onClick={weatherAlert}>
+      <Button className="button-neutral" onClick={weatherAlert} style={{fontSize: "11pt"}}>
         Parameters: {fileValue ? "Custom" : "All"}{" "}
         <img
           src="https://home.openweathermap.org/assets/icon_down_black.svg"

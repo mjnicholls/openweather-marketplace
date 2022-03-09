@@ -44,7 +44,6 @@ const MapHistory = ({
           draggable: isDraggable,
         }}
         onClick={onClickMap}
-        // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
         <InfoWindowHistory
           location={mapLocation}

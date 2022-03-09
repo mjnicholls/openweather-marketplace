@@ -77,8 +77,6 @@ const Parameters = ({
   setIsChecked12,
   isChecked13,
   setIsChecked13,
-  unitsChecked,
-  setUnitsChecked,
   fileCheck,
   setFileCheck,
   fileCheck2,

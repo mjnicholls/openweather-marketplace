@@ -78,15 +78,6 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
                 placeholder={invoice}
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.code}
-                /*
-                placeholder={
-                  invoiceSettings.country
-                    ? countries.find(
-                        (obj) => obj.code === invoiceSettings.country
-                      ).name
-                    : ""
-                }
-                */
               />
               <div
                 className={`invalid-feedback ${error.country ? "d-block" : ""}`}

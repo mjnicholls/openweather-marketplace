@@ -18,15 +18,7 @@ const CheckyBoxFile = ({
   const [tempCSV, setTempCSV] = useState(csv);
   const [tempJson, setTempJson] = useState(json);
 
-  // const [error, setError] = useState({});
-
   const handCheck = () => {
-
-    // setError({});
-    // const newError = {
-    //   csv: !tempCSV.length,
-    //   json: !tempJson.length,
-    // };
 
     if (tempCSV === "On") {
       setCSV("On");
@@ -47,16 +39,6 @@ const CheckyBoxFile = ({
     if (tempCSV === "Off" && tempJson === "Off") {
       setError("You must select at least one option");
     }
-
-    // if (tempCSV === "Off" && tempJson === "Off") {
-    //   setError({
-    //     csv: "You must select at least one option",
-    //   });
-    //   setCSV("On");
-    //   return;
-    // }
-
-    // setError(newError);
 
     close();
   };
@@ -95,9 +77,6 @@ const CheckyBoxFile = ({
             </Label>
           </FormGroup>
         </Form>
-        {/* <div className={`invalid-feedback ${error.csv ? "d-block" : ""}`}>
-          {error.csv}
-        </div> */}
       </Row>
       <Row>
         <Col className="text-end">

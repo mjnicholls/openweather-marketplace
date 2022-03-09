@@ -116,8 +116,6 @@ const Location = ({
   setJson,
   email,
   setEmail,
-  emailString,
-  setEmailString
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -160,10 +158,6 @@ const Location = ({
     setIsImport(false);
   };
 
-  const setPricetoZero = () => {
-    setImportPrice(0);
-    hideAlert();
-  };
 
   const getJson = (e) => {
     hideAlert()
@@ -412,8 +406,6 @@ const Location = ({
           setJson={setJson}
           email={email}
           setEmail={setEmail}
-          emailString={emailString}
-          setEmailString={setEmailString}
         />
       </ReactBSAlert>
     );

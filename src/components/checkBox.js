@@ -28,7 +28,6 @@ const CheckyBox = ({
   setVisibility,
   wind,
   setWind,
-  setCheckedWeather,
   setFileValue,
   isChecked,
   setIsChecked,
@@ -58,8 +57,6 @@ const CheckyBox = ({
   setIsChecked13,
   close,
 }) => {
-  // Current: trying to set state of each weather parameter to 'on' if the checkbox is clicked
-  // and 'off' when unclicked
 
   const [tempIsChecked, setTempIsChecked] = useState(isChecked);
   const [tempIsChecked2, setTempIsChecked2] = useState(isChecked2);

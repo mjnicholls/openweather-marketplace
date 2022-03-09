@@ -53,11 +53,6 @@ const Step0Bulk = ({
       <Row className="text-start step-bulk">
         <Col className="bold">Weather Parameters:</Col>
        <Col>
-          {/*}
-          {checkedWeather.length === 0 ? 'Temperature, Max Temperature, Pressure, Clouds, Rain, Dew Point, Wind, Min Temp, Feels Like, Humidity, Conditions, Snow, Visibility' : checkedWeather.map((total, item) => {
-        return <Col>{total}</Col>
-      })}
-    */}
   <>
           {isChecked === true ? <Row style={{paddingLeft: "10px"}}>Temperature</Row> : <Row></Row>}
           {isChecked2 === true ? <Row style={{paddingLeft: "10px"}}>Min Temperature</Row> : <Row></Row>}
