@@ -26,6 +26,8 @@ const DataUSState = () => {
 
   const [alert, setAlert] = React.useState(null);
 
+  const [email, setEmail] = useState();
+
   const hideAlert = () => {
     setAlert(null);
   };
@@ -38,12 +40,38 @@ const DataUSState = () => {
         onCancel={() => hideAlert()}
         showConfirm={false}
       >
-        <InvoiceSettings
+        <div className="text-start">
+          <Row className="margin-small">
+            <h2 className="high2">Sorry!</h2>
+          </Row>
+
+          <Row>
+            <Col>
+              This service is not available at the moment. If you wish to make
+              use of this service, please get in touch with us.
+            </Col>
+          </Row>
+          <br />
+          <Row className="text-end">
+            <Col>
+              <a
+                href="mailto:info@openweathermap.org"
+                type="button"
+                className="button-active"
+              >
+                Contact Us
+              </a>
+            </Col>
+          </Row>
+        </div>
+        {/* <InvoiceSettings
           close={hideAlert}
           year={year}
           country={country}
           price={price}
-        />
+          email={email}
+          setEmail={setEmail}
+        /> */}
       </ReactBSAlert>
     );
   };

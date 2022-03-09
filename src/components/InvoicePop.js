@@ -234,8 +234,7 @@ const InvoiceSettings = ({ country, year, price }) => {
           <Row>
             <Col>
               This feature is not available at the moment. If you wish to make
-              use of your service, please make a note of your details below, and
-              get in touch with us.
+              use of your service, please get in touch with us.
             </Col>
           </Row>
           <br />
