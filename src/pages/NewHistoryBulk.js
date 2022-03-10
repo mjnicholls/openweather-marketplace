@@ -81,7 +81,6 @@ const NewHistoryBulk = () => {
   //   visibility:  "On",
   //   wind:  "On",
 
-  
 
   const [temp, setTemp] = useState("On");
   const [tempMin, setTempMin] = useState("On");

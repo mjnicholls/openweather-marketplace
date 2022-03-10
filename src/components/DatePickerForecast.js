@@ -1,10 +1,11 @@
 import React from "react";
-import DatePicker from "react-datepicker";
-import { getMonth, getYear, subDays } from "date-fns";
-import range from "lodash/range";
 import { Col, Form, Label } from "reactstrap";
-import "react-datepicker/dist/react-datepicker.css";
-import moment from 'moment';
+import moment from "moment";
+import TextField from "@mui/material/TextField";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
+import Stack from "@mui/material/Stack";
 
 const DatePickerForecast = ({
   startDate,
@@ -12,114 +13,52 @@ const DatePickerForecast = ({
   endDate,
   setEndDate,
 }) => {
-  const years = range(2017, getYear(new Date()) + 1, 1);
-
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
 
   return (
     <>
       <Col className="dateLabel">
         <Form>
           <Label>From: </Label>
-
-          <DatePicker
-            className="owm-selector"
-            maxDate={moment().toDate()} 
-            placeholder="From"
-            renderCustomHeader={({ date, changeYear, changeMonth }) => (
-              <div
-                style={{
-                  margin: 10,
-                  display: "flex",
-                  justifyContent: "center",
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Stack spacing={3}>
+              <DatePicker
+                openTo="year"
+                views={["year", "month", "day"]}
+                minDate={new Date("2017")}
+                maxDate={moment().toDate()}
+                value={startDate}
+                onChange={(newValue) => {
+                  setStartDate(newValue);
                 }}
-              >
-                <select
-                  value={getYear(date)}
-                  onChange={({ target: { value } }) => changeYear(value)}
-                >
-                  {years.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  value={months[getMonth(date)]}
-                  onChange={({ target: { value } }) =>
-                    changeMonth(months.indexOf(value))
-                  }
-                >
-                  {months.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-          />
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
+                )}
+              />
+            </Stack>
+          </LocalizationProvider>
         </Form>
       </Col>
       <Col className="dateLabel">
         <Form>
           <Label>To: </Label>
-          <DatePicker
-            className="owm-selector"
-            minDate={subDays(startDate, -1)}
-            maxDate={moment().toDate()} 
-            renderCustomHeader={({ date, changeYear, changeMonth }) => (
-              <div
-                style={{
-                  margin: 10,
-                  display: "flex",
-                  justifyContent: "center",
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Stack spacing={3}>
+              <DatePicker
+              style={{border: "none"}}
+                openTo="year"
+                views={["year", "month", "day"]}
+                minDate={startDate}
+                maxDate={moment().toDate()}
+                value={endDate}
+                onChange={(newValue) => {
+                  setEndDate(newValue);
                 }}
-              >
-                <select
-                  value={getYear(date)}
-                  onChange={({ target: { value } }) => changeYear(value)}
-                >
-                  {years.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  value={months[getMonth(date)]}
-                  onChange={({ target: { value } }) =>
-                    changeMonth(months.indexOf(value))
-                  }
-                >
-                  {months.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-          />
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
+                )}
+              />
+            </Stack>
+          </LocalizationProvider>
         </Form>
       </Col>
     </>

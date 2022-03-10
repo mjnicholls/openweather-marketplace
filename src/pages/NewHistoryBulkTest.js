@@ -49,7 +49,7 @@ const NewHistoryBulkTest = () => {
 
   const [formatValue, setFormatValue] = useState("CSV");
 
-  const [startDate, setStartDate] = useState();
+  const [startDate, setStartDate] = useState(new Date());
 
   const [endDate, setEndDate] = useState();
 

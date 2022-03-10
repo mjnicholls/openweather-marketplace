@@ -1,22 +1,86 @@
 import React from "react";
-import DatePicker from "react-datepicker";
-import { getMonth, getYear, subDays } from "date-fns";
-import range from "lodash/range";
 import { Col, Form, Label } from "reactstrap";
-import "react-datepicker/dist/react-datepicker.css";
-import { months } from "../config";
-import moment from 'moment';
+import moment from "moment";
+import TextField from "@mui/material/TextField";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
+import Stack from "@mui/material/Stack";
 
 const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
-  const years = range(1979, getYear(new Date()) + 1, 1);
+
+  //   const years = range(1979, getYear(new Date()) + 1, 1);
+
+  //   const [calendar, setCalendar] = useState("Years");
+  //   const [startYear, setStartYear] = useState();
+  //   const [startMonth, setStartMonth] = useState();
+  //   const [startDay, setStartDay] = useState();
+
+  // console.log('calendar', calendar)
+  // console.log('startYear', startYear)
+  // console.log('startMonth', startMonth)
+  // console.log('startDay', startDay)
+  // console.log('final', startDate)
+
+  //const [value, setValue] = useState(new Date());
+
+
+  console.log("setValue", startDate);
 
   return (
     <>
       <Col className="dateLabel">
         <Form>
           <Label>From: </Label>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Stack spacing={3}>
+              <DatePicker
+                openTo="year"
+                views={["year", "month", "day"]}
+                minDate={new Date("1979")}
+                maxDate={moment().toDate()}
+                value={startDate}
+                onChange={(newValue) => {
+                  setStartDate(newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
+                )}
+              />
+            </Stack>
+          </LocalizationProvider>
+          {/* <DatePicker
+            selected={calendar === "Years" ? startYear : calendar === "Months" ? startMonth : calendar === "Days" ? startDay : null}
+            onChange={
+              calendar === "Years" ? 
+              (date) => {
+              setStartYear(date);
+              setCalendar("Months");
+            }
+          :
+          calendar === "Months" ?
+          (date) => {
+            setStartMonth(date);
+            setCalendar("Days");
+          }
+          : 
+          calendar === "Days" ?
+          (date) => {
+            setStartDay(date);
+            setStartDate(startYear, startMonth, startDay)
+          }
+          : 
+          null
+          }
+            showYearPicker={calendar === "Years" ? true : calendar === "Months" ? false : calendar === "Days" ? false : null}
+            showMonthYearPicker={calendar === "Years" ? false : calendar === "Months" ? true : calendar === "Days" ? false : null}
+            dateFormat={calendar === "Years" ? "yyyy" : calendar === "Months" ? "MM/yyyy" : calendar === "Days" ? "dd/MM/yyyy" : null}
+            //value={years}
+            maxDate={moment().toDate()}
+            //minDate={new Date("1979")}
+          /> */}
 
-          <DatePicker
+          {/* <DatePicker
             className="owm-selector"
             placeholder="From"
             maxDate={moment().toDate()} 
@@ -55,17 +119,34 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
             )}
             selected={startDate}
             onChange={(date) => setStartDate(date)}
-          />
+          /> */}
         </Form>
       </Col>
       <Col className="dateLabel">
         <Form>
           <Label>To: </Label>
-
-          <DatePicker
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Stack spacing={3}>
+              <DatePicker
+              style={{border: "none"}}
+                openTo="year"
+                views={["year", "month", "day"]}
+                minDate={startDate}
+                maxDate={moment().toDate()}
+                value={endDate}
+                onChange={(newValue) => {
+                  setEndDate(newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
+                )}
+              />
+            </Stack>
+          </LocalizationProvider>
+          {/* <DatePicker
             className="owm-selector"
             minDate={subDays(startDate, -1)}
-            maxDate={moment().toDate()} 
+            maxDate={moment().toDate()}
             renderCustomHeader={({ date, changeYear, changeMonth }) => (
               <div
                 style={{
@@ -101,11 +182,11 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
             )}
             selected={endDate}
             onChange={(date) => setEndDate(date)}
-          />
+          /> */}
         </Form>
       </Col>
     </>
   );
 };
 
-export default DatePickerMarket;
+export default DatePickerMarket
