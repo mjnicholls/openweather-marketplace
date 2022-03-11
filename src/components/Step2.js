@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 const selectInvoice = (state) => state.auth.invoiceInfo.country;
 
 const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
-
   const [countries, setCountries] = useState(countriesDefault);
 
   const invoice = useSelector(selectInvoice);
@@ -23,6 +22,7 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
     console.log("set", setCountries);
   };
 
+  console.log("invooce", invoice.length);
   return (
     <div>
       <Col className="bold text-start">
@@ -64,27 +64,36 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
         <Row>
           <Col md="6">
             <Label>Country *</Label>
-            <FormGroup>
-              <Select
-                className={classnames(
-                  "react-select info mb-3",
-                  error.country ? "react-select info mb-3 danger-border" : ""
-                )}
-                classNamePrefix="react-select"
-                onChange={(country) => {
-                  handleChange("country", country.code);
-                }}
-                options={countries}
-                placeholder={invoice}
-                getOptionLabel={(option) => option.name}
-                getOptionValue={(option) => option.code}
-              />
-              <div
-                className={`invalid-feedback ${error.country ? "d-block" : ""}`}
-              >
-                {error.country}
-              </div>
-            </FormGroup>
+            {invoice.length > 1 ? (
+              <FormGroup>
+                <Input type="text" value={invoice} disabled></Input>
+              </FormGroup>
+            ) : (
+              <FormGroup>
+                <Select
+                  className={classnames(
+                    "react-select info mb-3",
+                    error.country ? "react-select info mb-3 danger-border" : ""
+                  )}
+                  classNamePrefix="react-select"
+                  onChange={(country) => {
+                    handleChange("country", country.code);
+                  }}
+                  options={countries}
+                  placeholder={invoice}
+                  //disabled={invoice.length > 1 ? true : false}
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.code}
+                />
+                <div
+                  className={`invalid-feedback ${
+                    error.country ? "d-block" : ""
+                  }`}
+                >
+                  {error.country}
+                </div>
+              </FormGroup>
+            )}
           </Col>
           <Col md="6">
             <Label>City *</Label>

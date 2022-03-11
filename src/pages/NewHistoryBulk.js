@@ -112,6 +112,8 @@ const NewHistoryBulk = () => {
 
   const [isAdded, setIsAdded] = useState(false);
 
+  console.log('added', isAdded)
+
 
   useEffect(() => {
     setTempLocation({
@@ -161,6 +163,7 @@ const NewHistoryBulk = () => {
       lon: lng,
       name: "Custom location",
     });
+    setIsAdded(false)
   };
 
   const handleClickOutsideSearchBox = (e) => {

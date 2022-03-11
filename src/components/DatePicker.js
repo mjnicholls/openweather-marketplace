@@ -9,21 +9,7 @@ import Stack from "@mui/material/Stack";
 
 const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
 
-  //   const years = range(1979, getYear(new Date()) + 1, 1);
-
-  //   const [calendar, setCalendar] = useState("Years");
-  //   const [startYear, setStartYear] = useState();
-  //   const [startMonth, setStartMonth] = useState();
-  //   const [startDay, setStartDay] = useState();
-
-  // console.log('calendar', calendar)
-  // console.log('startYear', startYear)
-  // console.log('startMonth', startMonth)
-  // console.log('startDay', startDay)
-  // console.log('final', startDate)
-
-  //const [value, setValue] = useState(new Date());
-
+  const endDatePlusOne = new Date(startDate)
 
   console.log("setValue", startDate);
 
@@ -131,7 +117,7 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
               style={{border: "none"}}
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={startDate}
+                minDate={endDatePlusOne.setDate(endDatePlusOne.getDate() + 1)}
                 maxDate={moment().toDate()}
                 value={endDate}
                 onChange={(newValue) => {

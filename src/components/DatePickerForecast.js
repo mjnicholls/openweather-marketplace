@@ -14,6 +14,8 @@ const DatePickerForecast = ({
   setEndDate,
 }) => {
 
+  const endDatePlusOne = new Date(startDate)
+
   return (
     <>
       <Col className="dateLabel">
@@ -47,7 +49,7 @@ const DatePickerForecast = ({
               style={{border: "none"}}
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={startDate}
+                minDate={endDatePlusOne.setDate(endDatePlusOne.getDate() + 1)}
                 maxDate={moment().toDate()}
                 value={endDate}
                 onChange={(newValue) => {

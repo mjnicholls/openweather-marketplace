@@ -51,6 +51,7 @@ const Map = ({
         }}
         onClick={onClickMap}
       >
+        {isAdded === false ? 
         <InfoWindow
         isAdded={isAdded}
         setIsAdded={setIsAdded}
@@ -66,7 +67,8 @@ const Map = ({
           setErrorMap={setErrorMap}
           count={count}
           setCount={setCount}
-        />
+        /> 
+        :null}
       </GoogleMapReact>
     </div>
   );

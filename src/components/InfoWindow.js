@@ -10,7 +10,9 @@ const InfoWindow = ({
   errorMap,
   setErrorMap,
   count,
-  setCount
+  setCount,
+  isAdded,
+  setIsAdded
 }) => {
 
   const onSetLocationClick = (e) => {
@@ -33,6 +35,7 @@ const InfoWindow = ({
     setErrorMap(false)
     setLocations([...locations, location]);
     e.stopPropagation();
+    setIsAdded(true)
   }
 
 };
@@ -61,7 +64,8 @@ const InfoWindow = ({
             <Button
               type="button"
               className="button-active shadow-none"
-              onClick={onSetLocationClick}
+              onClick={
+                onSetLocationClick}
             >
               Set location
             </Button>

@@ -69,6 +69,10 @@ const NewHistoryBulkTest = () => {
     system: false,
   });
 
+  const [isAdded, setIsAdded] = useState(false);
+
+  console.log('added', isAdded)
+
   const [temp, setTemp] = useState("On");
   const [tempMin, setTempMin] = useState("On");
   const [tempMax, setTempMax] = useState("On");
@@ -126,7 +130,7 @@ const NewHistoryBulkTest = () => {
         tempLocation.lon
       );
       // eslint-disable-next-line
-      placeMarker(position, mapRef.current.map_);
+      placeMarker(position, mapRef.current.map_)
     }
   }, [tempLocation]);
 
@@ -164,6 +168,8 @@ const NewHistoryBulkTest = () => {
     if (count === 0) {
       setErrorMap(false)
       }
+
+      setIsAdded(false)
 
   };
 
@@ -302,6 +308,8 @@ const NewHistoryBulkTest = () => {
 
         <Col md="5">
           <Map
+          isAdded={isAdded}
+          setIsAdded={setIsAdded}
             mapRef={mapRef}
             mapLocation={tempLocation}
             locations={locations}
