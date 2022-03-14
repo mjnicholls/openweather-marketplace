@@ -25,7 +25,7 @@ const MyOrders = () => {
 
 useEffect(() => {
   // GET request using axios inside useEffect React hook
-  axios.get('https://openweathermap.stage.owm.io/marketplace/my_orders_list')
+  axios.get('http://openweathermap.stage.owm.io/marketplace/my_orders_list')
       .then(res => {
         const datas = res.data
         setDatas({datas})  
