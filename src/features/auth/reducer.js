@@ -26,8 +26,8 @@
 // }
 
 let initialState = {
-  email: "mjnichollsishere@gmail.com",
-  userName: "mjnicholls",
+  email: "dev@openweathermap.org",
+  userName: "dev@openweathermap.org",
   isStripeCustomer: false,
   authorized: false,
   invoiceInfo: {
