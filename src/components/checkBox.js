@@ -86,22 +86,34 @@ const CheckyBox = ({
   const [tempStatus12, setTempStatus12] = useState(visibility);
   const [tempStatus13, setTempStatus13] = useState(wind);
 
+  const [unChecked, setUnchecked] = useState([]);
+  const [error, setError] = useState(null)
+
+
   const handCheck = () => {
     if (tempStatus === "On") {
       setTemp("On");
-    } else setTemp("Off");
+    } else {
+      setTemp("Off")
+    }
 
     if (tempIsChecked === true) {
       setIsChecked(true);
-    } else setIsChecked(false);
+    } else {
+      setIsChecked(false)
+    }
 
     if (tempStatus2 === "On") {
       setTempMin("On");
-    } else setTempMin("Off");
+    } else {
+      setTempMin("Off")
+    };
 
     if (tempIsChecked2 === true) {
       setIsChecked2(true);
-    } else setIsChecked2(false);
+    } else {
+    setIsChecked2(false)
+    }
 
     if (tempStatus3 === "On") {
       setTempMax("On");
@@ -189,12 +201,19 @@ const CheckyBox = ({
 
     if (tempIsChecked13 === true) {
       setIsChecked13(true);
-    } else setIsChecked13(false);
+    } 
+    else setIsChecked13(false);
+
+    setError(null)
 
     close();
     setFileValue(true);
+
   };
 
+  console.log('checked', unChecked)
+  console.log('errors', error)
+  
 
   return (
     <>
@@ -211,6 +230,22 @@ const CheckyBox = ({
                   setTempIsChecked(tempStatus === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === true &&
+                  tempIsChecked2 === false &&
+                  tempIsChecked3 === false &&
+                  tempIsChecked4 === false &&
+                  tempIsChecked5 === false &&
+                  tempIsChecked6 === false &&
+                  tempIsChecked7 === false &&
+                  tempIsChecked8 === false &&
+                  tempIsChecked9 === false &&
+                  tempIsChecked10 === false &&
+                  tempIsChecked11 === false &&
+                  tempIsChecked12 === false &&
+                  tempIsChecked13 === false ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
@@ -226,6 +261,22 @@ const CheckyBox = ({
                   setTempIsChecked2(tempStatus2 === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === false &&
+                  tempIsChecked2 === true &&
+                  tempIsChecked3 === false &&
+                  tempIsChecked4 === false &&
+                  tempIsChecked5 === false &&
+                  tempIsChecked6 === false &&
+                  tempIsChecked7 === false &&
+                  tempIsChecked8 === false &&
+                  tempIsChecked9 === false &&
+                  tempIsChecked10 === false &&
+                  tempIsChecked11 === false &&
+                  tempIsChecked12 === false &&
+                  tempIsChecked13 === false ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
@@ -241,6 +292,22 @@ const CheckyBox = ({
                   setTempIsChecked3(tempStatus3 === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === false &&
+                  tempIsChecked2 === false &&
+                  tempIsChecked3 === true &&
+                  tempIsChecked4 === false &&
+                  tempIsChecked5 === false &&
+                  tempIsChecked6 === false &&
+                  tempIsChecked7 === false &&
+                  tempIsChecked8 === false &&
+                  tempIsChecked9 === false &&
+                  tempIsChecked10 === false &&
+                  tempIsChecked11 === false &&
+                  tempIsChecked12 === false &&
+                  tempIsChecked13 === false ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
@@ -256,6 +323,22 @@ const CheckyBox = ({
                   setTempIsChecked4(tempStatus4 === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === false &&
+                  tempIsChecked2 === false &&
+                  tempIsChecked3 === false &&
+                  tempIsChecked4 === true &&
+                  tempIsChecked5 === false &&
+                  tempIsChecked6 === false &&
+                  tempIsChecked7 === false &&
+                  tempIsChecked8 === false &&
+                  tempIsChecked9 === false &&
+                  tempIsChecked10 === false &&
+                  tempIsChecked11 === false &&
+                  tempIsChecked12 === false &&
+                  tempIsChecked13 === false ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
@@ -271,6 +354,22 @@ const CheckyBox = ({
                   setTempIsChecked5(tempStatus5 === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === false &&
+                  tempIsChecked2 === false &&
+                  tempIsChecked3 === false &&
+                  tempIsChecked4 === false &&
+                  tempIsChecked5 === true &&
+                  tempIsChecked6 === false &&
+                  tempIsChecked7 === false &&
+                  tempIsChecked8 === false &&
+                  tempIsChecked9 === false &&
+                  tempIsChecked10 === false &&
+                  tempIsChecked11 === false &&
+                  tempIsChecked12 === false &&
+                  tempIsChecked13 === false ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
@@ -286,6 +385,22 @@ const CheckyBox = ({
                   setTempIsChecked6(tempStatus6 === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === false &&
+                  tempIsChecked2 === false &&
+                  tempIsChecked3 === false &&
+                  tempIsChecked4 === false &&
+                  tempIsChecked5 === false &&
+                  tempIsChecked6 === true &&
+                  tempIsChecked7 === false &&
+                  tempIsChecked8 === false &&
+                  tempIsChecked9 === false &&
+                  tempIsChecked10 === false &&
+                  tempIsChecked11 === false &&
+                  tempIsChecked12 === false &&
+                  tempIsChecked13 === false ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
@@ -301,6 +416,22 @@ const CheckyBox = ({
                   setTempIsChecked7(tempStatus7 === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === false &&
+                  tempIsChecked2 === false &&
+                  tempIsChecked3 === false &&
+                  tempIsChecked4 === false &&
+                  tempIsChecked5 === false &&
+                  tempIsChecked6 === false &&
+                  tempIsChecked7 === true &&
+                  tempIsChecked8 === false &&
+                  tempIsChecked9 === false &&
+                  tempIsChecked10 === false &&
+                  tempIsChecked11 === false &&
+                  tempIsChecked12 === false &&
+                  tempIsChecked13 === false ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
@@ -316,6 +447,22 @@ const CheckyBox = ({
                   setTempIsChecked8(tempStatus8 === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === false &&
+                  tempIsChecked2 === false &&
+                  tempIsChecked3 === false &&
+                  tempIsChecked4 === false &&
+                  tempIsChecked5 === false &&
+                  tempIsChecked6 === false &&
+                  tempIsChecked7 === false &&
+                  tempIsChecked8 === true &&
+                  tempIsChecked9 === false &&
+                  tempIsChecked10 === false &&
+                  tempIsChecked11 === false &&
+                  tempIsChecked12 === false &&
+                  tempIsChecked13 === false ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
@@ -331,6 +478,22 @@ const CheckyBox = ({
                   setTempIsChecked9(tempStatus9 === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === false &&
+                  tempIsChecked2 === false &&
+                  tempIsChecked3 === false &&
+                  tempIsChecked4 === false &&
+                  tempIsChecked5 === false &&
+                  tempIsChecked6 === false &&
+                  tempIsChecked7 === false &&
+                  tempIsChecked8 === false &&
+                  tempIsChecked9 === true &&
+                  tempIsChecked10 === false &&
+                  tempIsChecked11 === false &&
+                  tempIsChecked12 === false &&
+                  tempIsChecked13 === false ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
@@ -346,6 +509,22 @@ const CheckyBox = ({
                   setTempIsChecked10(tempStatus10 === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === false &&
+                  tempIsChecked2 === false &&
+                  tempIsChecked3 === false &&
+                  tempIsChecked4 === false &&
+                  tempIsChecked5 === false &&
+                  tempIsChecked6 === false &&
+                  tempIsChecked7 === false &&
+                  tempIsChecked8 === false &&
+                  tempIsChecked9 === false &&
+                  tempIsChecked10 === true &&
+                  tempIsChecked11 === false &&
+                  tempIsChecked12 === false &&
+                  tempIsChecked13 === false ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
@@ -361,6 +540,22 @@ const CheckyBox = ({
                   setTempIsChecked11(tempStatus11 === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === false &&
+                  tempIsChecked2 === false &&
+                  tempIsChecked3 === false &&
+                  tempIsChecked4 === false &&
+                  tempIsChecked5 === false &&
+                  tempIsChecked6 === false &&
+                  tempIsChecked7 === false &&
+                  tempIsChecked8 === false &&
+                  tempIsChecked9 === false &&
+                  tempIsChecked10 === false &&
+                  tempIsChecked11 === true &&
+                  tempIsChecked12 === false &&
+                  tempIsChecked13 === false ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
@@ -376,6 +571,22 @@ const CheckyBox = ({
                   setTempIsChecked12(tempStatus12 === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === false &&
+                  tempIsChecked2 === false &&
+                  tempIsChecked3 === false &&
+                  tempIsChecked4 === false &&
+                  tempIsChecked5 === false &&
+                  tempIsChecked6 === false &&
+                  tempIsChecked7 === false &&
+                  tempIsChecked8 === false &&
+                  tempIsChecked9 === false &&
+                  tempIsChecked10 === false &&
+                  tempIsChecked11 === false &&
+                  tempIsChecked12 === true &&
+                  tempIsChecked13 === false ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
@@ -391,30 +602,267 @@ const CheckyBox = ({
                   setTempIsChecked13(tempStatus13 === "On" ? false : true);
                 }}
                 className="text-right"
+                disabled={
+                  tempIsChecked === false &&
+                  tempIsChecked2 === false &&
+                  tempIsChecked3 === false &&
+                  tempIsChecked4 === false &&
+                  tempIsChecked5 === false &&
+                  tempIsChecked6 === false &&
+                  tempIsChecked7 === false &&
+                  tempIsChecked8 === false &&
+                  tempIsChecked9 === false &&
+                  tempIsChecked10 === false &&
+                  tempIsChecked11 === false &&
+                  tempIsChecked12 === false &&
+                  tempIsChecked13 === true ?
+                  true : false                
+                }
               />
             </Label>
           </FormGroup>
         </Form>
       </Row>
       <Row>
+      <div>
+      {
+        tempIsChecked === true &&
+        tempIsChecked2 === false &&
+        tempIsChecked3 === false &&
+        tempIsChecked4 === false &&
+        tempIsChecked5 === false &&
+        tempIsChecked6 === false &&
+        tempIsChecked7 === false &&
+        tempIsChecked8 === false &&
+        tempIsChecked9 === false &&
+        tempIsChecked10 === false &&
+        tempIsChecked11 === false &&
+        tempIsChecked12 === false &&
+        tempIsChecked13 === false ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+        <div>
+      {
+        tempIsChecked === false &&
+        tempIsChecked2 === true &&
+        tempIsChecked3 === false &&
+        tempIsChecked4 === false &&
+        tempIsChecked5 === false &&
+        tempIsChecked6 === false &&
+        tempIsChecked7 === false &&
+        tempIsChecked8 === false &&
+        tempIsChecked9 === false &&
+        tempIsChecked10 === false &&
+        tempIsChecked11 === false &&
+        tempIsChecked12 === false &&
+        tempIsChecked13 === false ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+        <div>
+      {
+        tempIsChecked === false &&
+        tempIsChecked2 === false &&
+        tempIsChecked3 === true &&
+        tempIsChecked4 === false &&
+        tempIsChecked5 === false &&
+        tempIsChecked6 === false &&
+        tempIsChecked7 === false &&
+        tempIsChecked8 === false &&
+        tempIsChecked9 === false &&
+        tempIsChecked10 === false &&
+        tempIsChecked11 === false &&
+        tempIsChecked12 === false &&
+        tempIsChecked13 === false ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+        <div>
+      {
+        tempIsChecked === false &&
+        tempIsChecked2 === false &&
+        tempIsChecked3 === false &&
+        tempIsChecked4 === true &&
+        tempIsChecked5 === false &&
+        tempIsChecked6 === false &&
+        tempIsChecked7 === false &&
+        tempIsChecked8 === false &&
+        tempIsChecked9 === false &&
+        tempIsChecked10 === false &&
+        tempIsChecked11 === false &&
+        tempIsChecked12 === false &&
+        tempIsChecked13 === false ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+        <div>
+      {
+        tempIsChecked === false &&
+        tempIsChecked2 === false &&
+        tempIsChecked3 === false &&
+        tempIsChecked4 === false &&
+        tempIsChecked5 === true &&
+        tempIsChecked6 === false &&
+        tempIsChecked7 === false &&
+        tempIsChecked8 === false &&
+        tempIsChecked9 === false &&
+        tempIsChecked10 === false &&
+        tempIsChecked11 === false &&
+        tempIsChecked12 === false &&
+        tempIsChecked13 === false ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+        <div>
+      {
+        tempIsChecked === false &&
+        tempIsChecked2 === false &&
+        tempIsChecked3 === false &&
+        tempIsChecked4 === false &&
+        tempIsChecked5 === false &&
+        tempIsChecked6 === true &&
+        tempIsChecked7 === false &&
+        tempIsChecked8 === false &&
+        tempIsChecked9 === false &&
+        tempIsChecked10 === false &&
+        tempIsChecked11 === false &&
+        tempIsChecked12 === false &&
+        tempIsChecked13 === false ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+        <div>
+      {
+        tempIsChecked === false &&
+        tempIsChecked2 === false &&
+        tempIsChecked3 === false &&
+        tempIsChecked4 === false &&
+        tempIsChecked5 === false &&
+        tempIsChecked6 === false &&
+        tempIsChecked7 === true &&
+        tempIsChecked8 === false &&
+        tempIsChecked9 === false &&
+        tempIsChecked10 === false &&
+        tempIsChecked11 === false &&
+        tempIsChecked12 === false &&
+        tempIsChecked13 === false ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+        <div>
+      {
+        tempIsChecked === false &&
+        tempIsChecked2 === false &&
+        tempIsChecked3 === false &&
+        tempIsChecked4 === false &&
+        tempIsChecked5 === false &&
+        tempIsChecked6 === false &&
+        tempIsChecked7 === false &&
+        tempIsChecked8 === true &&
+        tempIsChecked9 === false &&
+        tempIsChecked10 === false &&
+        tempIsChecked11 === false &&
+        tempIsChecked12 === false &&
+        tempIsChecked13 === false ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+        <div>
+      {
+        tempIsChecked === false &&
+        tempIsChecked2 === false &&
+        tempIsChecked3 === false &&
+        tempIsChecked4 === false &&
+        tempIsChecked5 === false &&
+        tempIsChecked6 === false &&
+        tempIsChecked7 === false &&
+        tempIsChecked8 === false &&
+        tempIsChecked9 === true &&
+        tempIsChecked10 === false &&
+        tempIsChecked11 === false &&
+        tempIsChecked12 === false &&
+        tempIsChecked13 === false ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+        <div>
+      {
+        tempIsChecked === false &&
+        tempIsChecked2 === false &&
+        tempIsChecked3 === false &&
+        tempIsChecked4 === false &&
+        tempIsChecked5 === false &&
+        tempIsChecked6 === false &&
+        tempIsChecked7 === false &&
+        tempIsChecked8 === false &&
+        tempIsChecked9 === false &&
+        tempIsChecked10 === true &&
+        tempIsChecked11 === false &&
+        tempIsChecked12 === false &&
+        tempIsChecked13 === false ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+        <div>
+      {
+        tempIsChecked === false &&
+        tempIsChecked2 === false &&
+        tempIsChecked3 === false &&
+        tempIsChecked4 === false &&
+        tempIsChecked5 === false &&
+        tempIsChecked6 === false &&
+        tempIsChecked7 === false &&
+        tempIsChecked8 === false &&
+        tempIsChecked9 === false &&
+        tempIsChecked10 === false &&
+        tempIsChecked11 === true &&
+        tempIsChecked12 === false &&
+        tempIsChecked13 === false ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+        <div>
+      {
+        tempIsChecked === false &&
+        tempIsChecked2 === false &&
+        tempIsChecked3 === false &&
+        tempIsChecked4 === false &&
+        tempIsChecked5 === false &&
+        tempIsChecked6 === false &&
+        tempIsChecked7 === false &&
+        tempIsChecked8 === false &&
+        tempIsChecked9 === false &&
+        tempIsChecked10 === false &&
+        tempIsChecked11 === false &&
+        tempIsChecked12 === true &&
+        tempIsChecked13 === false ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+        <div>
+      {
+        tempIsChecked === false &&
+        tempIsChecked2 === false &&
+        tempIsChecked3 === false &&
+        tempIsChecked4 === false &&
+        tempIsChecked5 === false &&
+        tempIsChecked6 === false &&
+        tempIsChecked7 === false &&
+        tempIsChecked8 === false &&
+        tempIsChecked9 === false &&
+        tempIsChecked10 === false &&
+        tempIsChecked11 === false &&
+        tempIsChecked12 === false &&
+        tempIsChecked13 === true ?
+        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
+      }
+        </div>
+      </Row>
+      <Row>
         <Col className="text-end">
           <Button onClick={handCheck} 
           className="button-active"
-          disabled={
-            tempStatus === "Off" && 
-            tempStatus2 === "Off" && 
-            tempStatus3 === "Off" && 
-            tempStatus4 === "Off" && 
-            tempStatus5 === "Off" &&
-            tempStatus6 === "Off" && 
-            tempStatus7 === "Off" && 
-            tempStatus8 === "Off" && 
-            tempStatus9 === "Off" && 
-            tempStatus10 === "Off" &&
-            tempStatus11 === "Off" && 
-            tempStatus12 === "Off" && 
-            tempStatus13 === "Off"
-            ? true : false}
           >
             Save
           </Button>
