@@ -98,16 +98,14 @@ const ParametersForecast = ({
             isChecked7={isChecked7}
             setIsChecked7={setIsChecked7}
           />
-          </Col>
-          <Col>
+    
           <UnitsParams
             parametersUnits={parametersUnits}
             setParametersUnits={setParametersUnits}
             unitsValue={unitsValue}
             setUnitsValue={setUnitsValue}
           />
-          </Col>
-          <Col>
+     
           <FileParams
             formatValue={formatValue}
             setFormatValue={setFormatValue}
@@ -120,14 +118,13 @@ const ParametersForecast = ({
             json={json}
             setJson={setJson}
           />
-          </Col>
-          <Col>
+
           <DownloadParams
             downloadsValue={downloadsValue}
             setDownloadsValue={setDownloadsValue}
           />
         </Col>
-        <Col></Col>
+ 
       </Row>
     </>
   );

@@ -112,18 +112,21 @@ const NewHistoryBulkTest = () => {
 
   const [count, setCount] = useState(0)
 
+  const [thing, setThing] = useState(false)
+
   useEffect(() => {
     setTempLocation({
       ...tempLocation,
       lat: location.lat,
       lon: location.lon,
     });
+    
     /*eslint-disable-next-line*/
   }, [location]);
 
 
   useEffect(() => {
-    if (tempLocation.lat && tempLocation.lon) {
+    if (tempLocation.lat && tempLocation.lon && isAdded === false) {
       // eslint-disable-next-line
       const position = new google.maps.LatLng(
         tempLocation.lat,
@@ -132,6 +135,7 @@ const NewHistoryBulkTest = () => {
       // eslint-disable-next-line
       placeMarker(position, mapRef.current.map_)
     }
+
   }, [tempLocation]);
 
   useEffect(() => {
