@@ -4,7 +4,8 @@ import { Button, Col, Row } from "reactstrap";
 import axios from "axios";
 
 const MyOrders = () => {
-  const data = []
+
+const data = []
 
   axios.get('https://marketplace-weather.owm.io/api/my_orders_list', {
     "Content-Type": "application/json",
@@ -15,6 +16,7 @@ const MyOrders = () => {
         const data = response.data
         console.log('data', response.data)
         console.log('test', data)
+        console.log('length', data.length)
       }
     })
     .catch(err => {
@@ -22,7 +24,7 @@ const MyOrders = () => {
       })
 
 
-       console.log('data', data)
+  
 
   // useEffect(() => {
   //   // GET request using axios inside useEffect React hook
