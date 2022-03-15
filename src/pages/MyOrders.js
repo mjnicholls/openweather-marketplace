@@ -5,7 +5,7 @@ import axios from "axios";
 
 const MyOrders = () => {
 
-const data = []
+const { data } =
 
   axios.get('https://marketplace-weather.owm.io/api/my_orders_list', {
     "Content-Type": "application/json",
@@ -13,10 +13,10 @@ const data = []
   })
     .then(response => {
       if (response && response.data) {
-        const data = response.data
+        const datas = response.data
         console.log('data', response.data)
-        console.log('test', data)
-        console.log('length', data.length)
+        console.log('test', datas)
+        console.log('length', datas.length)
       }
     })
     .catch(err => {
