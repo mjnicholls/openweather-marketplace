@@ -11,6 +11,7 @@ const selectInvoice = (state) => state.auth.invoiceInfo;
 const NewHistoryBulkTest = () => {
   const currency = useSelector(selectCurrency);
   const mapRef = useRef(null);
+
   const searchBoxRef = useRef();
   const invoice = useSelector(selectInvoice);
 
@@ -49,19 +50,19 @@ const NewHistoryBulkTest = () => {
 
   const [formatValue, setFormatValue] = useState("CSV");
 
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
 
-  const [endDate, setEndDate] = useState();
+  const [endDate, setEndDate] = useState(null);
 
   const [checked, setChecked] = useState([]);
 
-  const [errorMap, setErrorMap] = useState(false)
+  const [errorMap, setErrorMap] = useState(false);
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState("");
 
-  console.log('look', email)
+  console.log("look", email);
 
   const [on, setOn] = useState({
     news: false,
@@ -71,7 +72,7 @@ const NewHistoryBulkTest = () => {
 
   const [isAdded, setIsAdded] = useState(false);
 
-  console.log('added', isAdded)
+  console.log("added", isAdded);
 
   const [temp, setTemp] = useState("On");
   const [tempMin, setTempMin] = useState("On");
@@ -85,7 +86,7 @@ const NewHistoryBulkTest = () => {
   const [snow, setSnow] = useState("On");
   const [dewPoint, setDewPoint] = useState("On");
   const [visibility, setVisibility] = useState("On");
-  const [wind, setWind] = useState("On")
+  const [wind, setWind] = useState("On");
 
   const [isChecked, setIsChecked] = useState(true);
   const [isChecked2, setIsChecked2] = useState(true);
@@ -101,18 +102,16 @@ const NewHistoryBulkTest = () => {
   const [isChecked12, setIsChecked12] = useState(true);
   const [isChecked13, setIsChecked13] = useState(true);
 
-  const [fileCheck, setFileCheck] = useState(true)
-  const [fileCheck2, setFileCheck2] = useState(false)
+  const [fileCheck, setFileCheck] = useState(true);
+  const [fileCheck2, setFileCheck2] = useState(false);
 
-  const [csv, setCSV] = useState("On")
-  const [json, setJson] = useState("Off")
+  const [csv, setCSV] = useState("On");
+  const [json, setJson] = useState("Off");
 
-  const [unitsChecked, setUnitsChecked] = useState('Metric');
-  const [isCheckedUnits, setIsCheckedUnits] = useState(true)
+  const [unitsChecked, setUnitsChecked] = useState("Metric");
+  const [isCheckedUnits, setIsCheckedUnits] = useState(true);
 
-  const [count, setCount] = useState(0)
-
-  const [thing, setThing] = useState(false)
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     setTempLocation({
@@ -120,20 +119,20 @@ const NewHistoryBulkTest = () => {
       lat: location.lat,
       lon: location.lon,
     });
-    
+
     /*eslint-disable-next-line*/
   }, [location]);
 
 
   useEffect(() => {
-    if (tempLocation.lat && tempLocation.lon && isAdded === false) {
+    if (tempLocation.lat && tempLocation.lon) {
       // eslint-disable-next-line
       const position = new google.maps.LatLng(
         tempLocation.lat,
         tempLocation.lon
       );
       // eslint-disable-next-line
-      placeMarker(position, mapRef.current.map_)
+      placeMarker(position, mapRef.current.map_);
     }
 
   }, [tempLocation]);
@@ -143,7 +142,6 @@ const NewHistoryBulkTest = () => {
     document.addEventListener("mousedown", handleClickOutsideSearchBox);
     return () => {
       document.removeEventListener("mousedown", handleClickOutsideSearchBox);
-  
     };
   }, []);
 
@@ -167,14 +165,13 @@ const NewHistoryBulkTest = () => {
       name: "Custom location",
     });
 
-    setCount(0)
+    setCount(0);
 
     if (count === 0) {
-      setErrorMap(false)
-      }
+      setErrorMap(false);
+    }
 
-      setIsAdded(false)
-
+    setIsAdded(false);
   };
 
   const handleClickOutsideSearchBox = (e) => {
@@ -188,7 +185,6 @@ const NewHistoryBulkTest = () => {
     const newLocation = { ...location };
     newLocation[key] = value;
     setLocation(newLocation);
-
   };
 
   return (
@@ -306,14 +302,18 @@ const NewHistoryBulkTest = () => {
             json={json}
             setJson={setJson}
             email={email}
+            count={count}
+            setCount={setCount}
             setEmail={setEmail}
+            setIsAdded={setIsAdded}
+            setErrorMap={setErrorMap}
           />
         </Col>
 
         <Col md="5">
           <Map
-          isAdded={isAdded}
-          setIsAdded={setIsAdded}
+            isAdded={isAdded}
+            setIsAdded={setIsAdded}
             mapRef={mapRef}
             mapLocation={tempLocation}
             locations={locations}

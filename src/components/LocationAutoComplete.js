@@ -14,6 +14,10 @@ const AutoComplete = ({
   setIsDropDown,
   fixedLocation,
   setFixedLocation,
+  setIsAdded,
+  count,
+  setCount,
+  setErrorMap
 }) => {
   const onPlaceSelected = (place) => {
     if (
@@ -34,6 +38,13 @@ const AutoComplete = ({
         // eslint-disable-next-line
         mapRef.current.map_
       );
+
+      setCount(0);
+      
+      if (count === 0) {
+        setErrorMap(false);
+      }
+      setIsAdded(false)
     }
   };
 
@@ -42,6 +53,7 @@ const AutoComplete = ({
       ...error,
       location: null,
     });
+    //setIsAdded(false)
   };
 
   const onFocus = () => {

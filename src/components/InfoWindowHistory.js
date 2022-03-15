@@ -10,7 +10,9 @@ const InfoWindowHistory = ({
   errorMap,
   setErrorMap,
   count,
-  setCount
+  setCount,
+  isAdded,
+  setIsAdded
 }) => {
 
   const onSetLocationClick = (e) => {
@@ -33,6 +35,7 @@ const InfoWindowHistory = ({
     setErrorMap(false)
     setLocations([...locations, location]);
     e.stopPropagation();
+    setIsAdded(true)
   }
 
 };

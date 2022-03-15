@@ -24,6 +24,8 @@ const HistoryForecastBulk = () => {
     lon: "",
   });
 
+  const [isAdded, setIsAdded] = useState(false);
+
   const [price, setPrice] = useState(0);
 
   const [parameters, setParameters] = useState();
@@ -77,9 +79,14 @@ const HistoryForecastBulk = () => {
   const [json, setJson] = useState("Off")
 
   const [count, setCount] = useState(0)
+
+  console.log('count', count)
+  
   const [errorMap, setErrorMap] = useState(false)
 
   const [email, setEmail] = useState()
+
+  console.log('added', isAdded)
 
   const [unitsChecked, setUnitsChecked] = useState('Metric');
   const [isCheckedUnits, setIsCheckedUnits] = useState(true)
@@ -138,6 +145,8 @@ const HistoryForecastBulk = () => {
     if (count === 0) {
       setErrorMap(false)
       }
+
+      setIsAdded(false);
   };
 
   const handleClickOutsideSearchBox = (e) => {
@@ -240,11 +249,17 @@ const HistoryForecastBulk = () => {
             setJson={setJson}
             email={email}
             setEmail={setEmail}
+            count={count}
+            setCount={setCount}
+            setIsAdded={setIsAdded}
+            setErrorMap={setErrorMap}
           />
         </Col>
 
         <Col md="5">
           <MapHistory
+            isAdded={isAdded}
+            setIsAdded={setIsAdded}
             mapRef={mapRef}
             mapLocation={tempLocation}
             locations={locations}

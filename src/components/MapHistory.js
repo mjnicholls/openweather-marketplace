@@ -21,6 +21,8 @@ const MapHistory = ({
   setErrorMap,
   count, 
   setCount,
+  isAdded,
+  setIsAdded,
   isDraggable = true,
 }) => {
   const defaultCenter = {
@@ -45,6 +47,7 @@ const MapHistory = ({
         }}
         onClick={onClickMap}
       >
+         {isAdded === false ? 
         <InfoWindowHistory
           location={mapLocation}
           setLocation={setLocation}
@@ -57,7 +60,10 @@ const MapHistory = ({
           setErrorMap={setErrorMap}
           count={count}
           setCount={setCount}
+          isAdded={isAdded}
+          setIsAdded={setIsAdded}
         />
+        : null}
       </GoogleMapReact>
     </div>
   );

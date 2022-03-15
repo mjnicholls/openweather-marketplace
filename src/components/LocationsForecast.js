@@ -87,13 +87,16 @@ const LocationForecast = ({
   json,
   setJson,
   email,
-  setEmail
+  setEmail,
+  setIsAdded, 
+  count,
+  setCount,
+  setErrorMap
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
   const [isImport, setIsImport] = useState(false);
 
-  const total = price + importPrice;
 
   const setCoordinates = () => {
     setError({});
@@ -111,6 +114,13 @@ const LocationForecast = ({
       name: "Custom location",
     });
     setIsDropDown(false);
+
+    setCount(0);
+      
+    if (count === 0) {
+      setErrorMap(false);
+    }
+    setIsAdded(false)
   };
 
   const canSetCoordinates = () =>
@@ -402,6 +412,10 @@ const LocationForecast = ({
                 error={error}
                 setError={setError}
                 setIsDropDown={setIsDropDown}
+                count={count}
+                setCount={setCount}
+                setIsAdded={setIsAdded}
+                setErrorMap={setErrorMap}
               />
               </>
             ) : (
@@ -615,7 +629,7 @@ const LocationForecast = ({
           </p>
         </Col>
         <Col>
-          {locations.length >= 1 && startDate && endDate ? (
+        {locations.length >= 1 && startDate >= new Date('10/07/2017') && endDate > startDate && endDate < new Date() ? (
             <Col>
               <Button
                 data-dismiss="modal"

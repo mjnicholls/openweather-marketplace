@@ -8,8 +8,7 @@ import DatePicker from "@mui/lab/DatePicker";
 import Stack from "@mui/material/Stack";
 
 const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
-
-  const endDatePlusOne = new Date(startDate)
+  const endDatePlusOne = new Date(startDate);
 
   console.log("setValue", startDate);
 
@@ -17,109 +16,43 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
     <>
       <Col className="dateLabel">
         <Form>
-          <Label>From: </Label>
+          <Label></Label>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3}>
               <DatePicker
+                className="dateLabel"
                 openTo="year"
                 views={["year", "month", "day"]}
                 minDate={new Date("1979")}
                 maxDate={moment().toDate()}
+                //maxDate={startDateMinusOne.setDate(startDateMinusOne.getDate() + 2)}
                 value={startDate}
+                label={"From"}
                 onChange={(newValue) => {
                   setStartDate(newValue);
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} helperText={null} />
+                  <TextField {...params} helperText={null} placeholder="o" />
                 )}
               />
             </Stack>
           </LocalizationProvider>
-          {/* <DatePicker
-            selected={calendar === "Years" ? startYear : calendar === "Months" ? startMonth : calendar === "Days" ? startDay : null}
-            onChange={
-              calendar === "Years" ? 
-              (date) => {
-              setStartYear(date);
-              setCalendar("Months");
-            }
-          :
-          calendar === "Months" ?
-          (date) => {
-            setStartMonth(date);
-            setCalendar("Days");
-          }
-          : 
-          calendar === "Days" ?
-          (date) => {
-            setStartDay(date);
-            setStartDate(startYear, startMonth, startDay)
-          }
-          : 
-          null
-          }
-            showYearPicker={calendar === "Years" ? true : calendar === "Months" ? false : calendar === "Days" ? false : null}
-            showMonthYearPicker={calendar === "Years" ? false : calendar === "Months" ? true : calendar === "Days" ? false : null}
-            dateFormat={calendar === "Years" ? "yyyy" : calendar === "Months" ? "MM/yyyy" : calendar === "Days" ? "dd/MM/yyyy" : null}
-            //value={years}
-            maxDate={moment().toDate()}
-            //minDate={new Date("1979")}
-          /> */}
-
-          {/* <DatePicker
-            className="owm-selector"
-            placeholder="From"
-            maxDate={moment().toDate()} 
-            renderCustomHeader={({ date, changeYear, changeMonth }) => (
-              <div
-                style={{
-                  margin: 10,
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <select
-                  value={getYear(date)}
-                  onChange={({ target: { value } }) => changeYear(value)}
-                >
-                  {years.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  value={months[getMonth(date)]}
-                  onChange={({ target: { value } }) =>
-                    changeMonth(months.indexOf(value))
-                  }
-                >
-                  {months.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-          /> */}
         </Form>
       </Col>
       <Col className="dateLabel">
         <Form>
-          <Label>To: </Label>
+          <Label></Label>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3}>
               <DatePicker
-              style={{border: "none"}}
+                style={{ border: "none" }}
                 openTo="year"
                 views={["year", "month", "day"]}
                 minDate={endDatePlusOne.setDate(endDatePlusOne.getDate() + 1)}
                 maxDate={moment().toDate()}
                 value={endDate}
+                label={"To"}
+                InputProps={{ readOnly: true }}
                 onChange={(newValue) => {
                   setEndDate(newValue);
                 }}
@@ -129,50 +62,10 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
               />
             </Stack>
           </LocalizationProvider>
-          {/* <DatePicker
-            className="owm-selector"
-            minDate={subDays(startDate, -1)}
-            maxDate={moment().toDate()}
-            renderCustomHeader={({ date, changeYear, changeMonth }) => (
-              <div
-                style={{
-                  margin: 10,
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <select
-                  value={getYear(date)}
-                  onChange={({ target: { value } }) => changeYear(value)}
-                >
-                  {years.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  value={months[getMonth(date)]}
-                  onChange={({ target: { value } }) =>
-                    changeMonth(months.indexOf(value))
-                  }
-                >
-                  {months.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-          /> */}
         </Form>
       </Col>
     </>
   );
 };
 
-export default DatePickerMarket
+export default DatePickerMarket;

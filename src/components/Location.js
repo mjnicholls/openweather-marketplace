@@ -116,6 +116,10 @@ const Location = ({
   setJson,
   email,
   setEmail,
+  setIsAdded, 
+  count,
+  setCount,
+  setErrorMap
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -137,6 +141,13 @@ const Location = ({
       name: "Custom location",
     });
     setIsDropDown(false);
+
+    setCount(0);
+      
+    if (count === 0) {
+      setErrorMap(false);
+    }
+    setIsAdded(false)
   };
 
   const canSetCoordinates = () =>
@@ -157,6 +168,8 @@ const Location = ({
     setIsSearchByName(false);
     setIsImport(false);
   };
+
+  const d = new Date()
 
 
   const getJson = (e) => {
@@ -430,6 +443,10 @@ const Location = ({
                   error={error}
                   setError={setError}
                   setIsDropDown={setIsDropDown}
+                  setIsAdded={setIsAdded}
+                  count={count}
+                  setCount={setCount}
+                  setErrorMap={setErrorMap}
                 />
               </>
             ) : (
@@ -674,7 +691,7 @@ const Location = ({
           </p>
         </Col>
         <Col>
-          {locations.length >= 1 && startDate && endDate ? (
+          {locations.length >= 1 && startDate >= new Date('01/01/1979') && endDate > startDate && endDate < new Date() ? (
             <Col>
               <Button
                 data-dismiss="modal"

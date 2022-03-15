@@ -20,15 +20,16 @@ const DatePickerForecast = ({
     <>
       <Col className="dateLabel">
         <Form>
-          <Label>From: </Label>
+          <Label> </Label>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3}>
               <DatePicker
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={new Date("2017")}
+                minDate={new Date("10/07/2017")}
                 maxDate={moment().toDate()}
                 value={startDate}
+                label={'From'}
                 onChange={(newValue) => {
                   setStartDate(newValue);
                 }}
@@ -42,7 +43,7 @@ const DatePickerForecast = ({
       </Col>
       <Col className="dateLabel">
         <Form>
-          <Label>To: </Label>
+          <Label></Label>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3}>
               <DatePicker
@@ -52,6 +53,7 @@ const DatePickerForecast = ({
                 minDate={endDatePlusOne.setDate(endDatePlusOne.getDate() + 1)}
                 maxDate={moment().toDate()}
                 value={endDate}
+                label={'To'}
                 onChange={(newValue) => {
                   setEndDate(newValue);
                 }}

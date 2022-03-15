@@ -1,39 +1,36 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
-import { Button, Col, Row, Card, CardBody, CardHeader } from "reactstrap";
+import { Button, Col, Row } from "reactstrap";
 import axios from "axios";
 
-
 const MyOrders = () => {
-
   const [datas, setDatas] = useState([]);
 
-// axios.get('http://openweathermap.stage.owm.io/marketplace/my_orders_list', {
-//   "Content-Type": "application/json",
-//   "Access-Control-Allow-Origin": "*",
-// })
-//   .then(response => {
-//     if (response && response.data) {
-//       const data = response.data
-//       console.log('data', response.data)
-//       console.log('test', data)
-//     }
-//   })
-//   .catch(err => {
-//     console.log(err)
-//     })
+  // axios.get('http://openweathermap.stage.owm.io/marketplace/my_orders_list', {
+  //   "Content-Type": "application/json",
+  //   "Access-Control-Allow-Origin": "*",
+  // })
+  //   .then(response => {
+  //     if (response && response.data) {
+  //       const data = response.data
+  //       console.log('data', response.data)
+  //       console.log('test', data)
+  //     }
+  //   })
+  //   .catch(err => {
+  //     console.log(err)
+  //     })
 
-useEffect(() => {
-  // GET request using axios inside useEffect React hook
-  axios.get('http://openweathermap.stage.owm.io/marketplace/my_orders_list')
-      .then(res => {
-        const datas = res.data
-        setDatas({datas})  
+  useEffect(() => {
+    // GET request using axios inside useEffect React hook
+    axios
+      .get("https://openweathermap.stage.owm.io/marketplace/my_orders_list")
+      .then((res) => {
+        const datas = res.data;
+        setDatas({ datas });
       });
-console.log('ddd', datas)
-}, []);
-
-
+    console.log("ddd", datas);
+  }, []);
 
   return (
     <div className="container">
@@ -85,11 +82,10 @@ console.log('ddd', datas)
         </Col>
       </Row>
       <Row>
-
-      {/* {datas.map((option, index) => (
+        {/* {datas.map((option, index) => (
 <p key={index}>{option.client_id}</p>
 ))} */}
-{datas.length}
+        {datas.length}
       </Row>
 
       {/* <Card className="orders-table">
