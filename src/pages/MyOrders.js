@@ -87,10 +87,10 @@ const data = []
         </Col>
       </Row>
       <Row>
-        {/* {datas.map((option, index) => (
-<p key={index}>{option.client_id}</p>
-))} */}
-        {data.length}
+        {data.map((option, index) => (
+<p key={index}>{option.cities}</p>
+))}
+        
       </Row>
 
       {/* <Card className="orders-table">
