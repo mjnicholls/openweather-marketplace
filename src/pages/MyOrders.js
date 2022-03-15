@@ -4,33 +4,36 @@ import { Button, Col, Row } from "reactstrap";
 import axios from "axios";
 
 const MyOrders = () => {
-  const [datas, setDatas] = useState([]);
+  const data = []
 
-  // axios.get('http://openweathermap.stage.owm.io/marketplace/my_orders_list', {
-  //   "Content-Type": "application/json",
-  //   "Access-Control-Allow-Origin": "*",
-  // })
-  //   .then(response => {
-  //     if (response && response.data) {
-  //       const data = response.data
-  //       console.log('data', response.data)
-  //       console.log('test', data)
-  //     }
-  //   })
-  //   .catch(err => {
-  //     console.log(err)
-  //     })
+  axios.get('https://marketplace-weather.owm.io/api/my_orders_list', {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  })
+    .then(response => {
+      if (response && response.data) {
+        const data = response.data
+        console.log('data', response.data)
+        console.log('test', data)
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      })
 
-  useEffect(() => {
-    // GET request using axios inside useEffect React hook
-    axios
-      .get("https://marketplace-weather.owm.io/api/my_orders_list")
-      .then((res) => {
-        const datas = res.data;
-        setDatas({ datas });
-      });
-    console.log("ddd", datas);
-  }, []);
+
+       console.log('data', data)
+
+  // useEffect(() => {
+  //   // GET request using axios inside useEffect React hook
+  //   axios
+  //     .get("https://marketplace-weather.owm.io/api/my_orders_list")
+  //     .then((res) => {
+  //       const datas = res.data;
+  //       setDatas({ datas });
+  //     });
+  //   console.log("ddd", datas);
+  // }, []);
 
   return (
     <div className="container">
@@ -85,7 +88,7 @@ const MyOrders = () => {
         {/* {datas.map((option, index) => (
 <p key={index}>{option.client_id}</p>
 ))} */}
-        {datas.length}
+        {data.length}
       </Row>
 
       {/* <Card className="orders-table">
