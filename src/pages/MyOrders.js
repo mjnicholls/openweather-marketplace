@@ -14,7 +14,7 @@ const [data, setData] = useState([])
     .then(response => {
       if (response && response.data) {
         setData({data: response.data})
-        console.log('data', response.data)
+        console.log('id test', response.data._id)
         console.log('test', data)
         console.log('length', data.length)
       }
