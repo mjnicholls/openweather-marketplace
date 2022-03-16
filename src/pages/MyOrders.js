@@ -5,6 +5,60 @@ import axios from "axios";
 
 const MyOrders = () => {
 
+  const datas = [ {
+    _id:{
+       $oid:""
+    },
+    cities:null,
+    client_id:{
+       $oid:""
+    },
+    created_at:"",
+    deleted_at:null,
+    file_format:"",
+    from:"",
+    hbs_response:{
+       id:"",
+       failed:false,
+       file_path:{
+          json:""
+       },
+       file_server:"",
+       priority:null
+    },
+    locations:[
+       {
+          lat:"",
+          lon:"",
+          name:""
+       },
+       {
+          lat:"",
+          lon:"",
+          name:""
+       },
+       {
+          lat:"",
+          lon:"",
+          name:""
+       }
+    ],
+    parameters:[
+       "",
+    ],
+    product_name:"H",
+    retries:0,
+    saving_mode:"",
+    status:"",
+    time_step:"",
+    to:"",
+    units:"",
+    updated_at:"",
+    user_id:{
+       $oid:""
+    }
+ }]
+
 const [data, setData] = useState([
   {
      _id:{
@@ -72,10 +126,11 @@ const [data, setData] = useState([
   })
     .then(response => {
       if (response && response.data) {
-        setData([{data: response.data}])
+        datas = response.data
+        //setData([{data: response.data}])
         console.log('id test', response.data)
-        console.log('test 2', data)
-        console.log('length', data.cities.length)
+        console.log('test 2', datas)
+        console.log('length', datas.cities.length)
       }
     })
     .catch(err => {
