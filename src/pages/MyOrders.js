@@ -100,9 +100,9 @@ const [data, setData] = useState([])
         </Col>
       </Row>
       <Row>
-        {data.map((option, index) => (
+        {/* {data.map((option, index) => (
 <p key={index}>{option.client_id}</p>
-))}
+))} */}
         
       </Row>
 
