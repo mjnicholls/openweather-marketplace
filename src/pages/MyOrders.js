@@ -13,6 +13,8 @@ const MyOrders = () => {
     setData(previousMovies => previousMovies.filter(m => m._id !== movie._id))
 }
 
+console.log('vvv', data)
+
 // const [data, setData] = useState([
 //   {
 //      _id:{
@@ -164,12 +166,7 @@ const MyOrders = () => {
         </Col>
       </Row>
       <Row>
-      {data.map(movie => (
-        <>
-                    <p key={movie._id}></p>
-                        <p>{movie.title}</p>
-                        </>
-                        ))}
+{data}
         {/* {data._id.map((option, index) => (
 <p key={index}>{option}</p>
 ))} */}
