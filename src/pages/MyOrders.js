@@ -28,7 +28,7 @@ const [data, setData] = useState([])
       useEffect(() => {
         axios.get("https://marketplace-weather.owm.io/api/my_orders_list")
           .then((res) => {
-            setData(res.json)
+            setData(res.data)
             console.log('data', data)
           })
           .catch((err) => {
@@ -97,10 +97,10 @@ const [data, setData] = useState([])
         </Col>
       </Row>
       <Row>
-        {data}
-        {/* {data.map((option, index) => (
-<p key={index}>{option.client_id}</p>
-))} */}
+   
+        {data.map((option, index) => (
+<p key={index}>{option.created_at}</p>
+))}
         
       </Row>
 
