@@ -136,8 +136,7 @@ const MyOrders = () => {
   })
     .then(response => {
       if (response && response.data) {
-        //setData([{data: response.data}])
-        data = response.data
+        setData(response.data)
         console.log('id test', response.data)
       }
     })
