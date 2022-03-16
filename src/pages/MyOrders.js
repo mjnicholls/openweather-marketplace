@@ -2,18 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import { Button, Col, Row } from "reactstrap";
 import axios from "axios";
-import { getOrders } from '../api/personalAccountAPI';
+///import { getOrders } from '../api/personalAccountAPI';
 
 const MyOrders = () => {
 
-  const orders = getOrders()
-  const [data, setData] = useState(orders)
-
-  const handleDelete = (movie) => {
-    setData(previousMovies => previousMovies.filter(m => m._id !== movie._id))
-}
-
-console.log('vvv', data)
 
 // const [data, setData] = useState([
 //   {
@@ -105,16 +97,17 @@ console.log('vvv', data)
       //     })
       // }, [])
 
-  // useEffect(() => {
-  //   // GET request using axios inside useEffect React hook
-  //   axios
-  //     .get("https://marketplace-weather.owm.io/api/my_orders_list")
-  //     .then((res) => {
-  //       const datas = res.data;
-  //       setDatas({ datas });
-  //     });
-  //   console.log("ddd", datas);
-  // }, []);
+      const [datas, setDatas] = useState({})
+
+  useEffect(() => {
+    axios
+      .get("https://marketplace-weather.owm.io/api/my_orders_list")
+      .then((res) => {
+        const datas = res.data;
+        setDatas({ datas });
+      });
+    console.log("ddd", datas);
+  }, []);
 
   return (
     <div className="container">
@@ -166,7 +159,7 @@ console.log('vvv', data)
         </Col>
       </Row>
       <Row>
-{data}
+{datas}
         {/* {data._id.map((option, index) => (
 <p key={index}>{option}</p>
 ))} */}
