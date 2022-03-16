@@ -7,82 +7,82 @@ import axios from "axios";
 const MyOrders = () => {
 
 
-// const [data, setData] = useState([
-//   {
-//      _id:{
-//         $oid:"60cd01c510bf09000c926858"
-//      },
-//      cities:null,
-//      client_id:{
-//         $oid:"5e7497e893e8db0009e5323d"
-//      },
-//      created_at:"2021-06-18T20:27:49.379Z",
-//      deleted_at:null,
-//      file_format:"json",
-//      from:"2018-01-01T00:00:00.000Z",
-//      hbs_response:{
-//         id:"60cd01c510bf09000c926858",
-//         failed:false,
-//         file_path:{
-//            json:"/storage/164047d2ceec69b5561c763f9c78d513.tar.gz"
-//         },
-//         file_server:"http://stage.owm.io:8098",
-//         priority:null
-//      },
-//      locations:[
-//         {
-//            lat:"51.312801",
-//            lon:"9.481544",
-//            name:"Kassel"
-//         },
-//         {
-//            lat:"53.551086",
-//            lon:"9.993682",
-//            name:"Hamburg"
-//         },
-//         {
-//            lat:"48.137154",
-//            lon:"11.576124",
-//            name:"Munich"
-//         }
-//      ],
-//      parameters:[
-//         "temp",
-//         "pressure",
-//         "wind",
-//         "humidity",
-//         "clouds",
-//         "dew_point",
-//         "precipitation"
-//      ],
-//      product_name:"History Forecast Bulk",
-//      retries:0,
-//      saving_mode:"multi",
-//      status:"done",
-//      time_step:"1h",
-//      to:"2021-06-17T23:59:59.000Z",
-//      units:"metric",
-//      updated_at:"2021-06-18T20:34:12.563Z",
-//      user_id:{
-//         $oid:"5e74984493e8db0009e53242"
-//      }
-//   }])
+const [data, setData] = useState([
+  {
+     _id:{
+        $oid:"60cd01c510bf09000c926858"
+     },
+     cities:null,
+     client_id:{
+        $oid:"5e7497e893e8db0009e5323d"
+     },
+     created_at:"2021-06-18T20:27:49.379Z",
+     deleted_at:null,
+     file_format:"json",
+     from:"2018-01-01T00:00:00.000Z",
+     hbs_response:{
+        id:"60cd01c510bf09000c926858",
+        failed:false,
+        file_path:{
+           json:"/storage/164047d2ceec69b5561c763f9c78d513.tar.gz"
+        },
+        file_server:"http://stage.owm.io:8098",
+        priority:null
+     },
+     locations:[
+        {
+           lat:"51.312801",
+           lon:"9.481544",
+           name:"Kassel"
+        },
+        {
+           lat:"53.551086",
+           lon:"9.993682",
+           name:"Hamburg"
+        },
+        {
+           lat:"48.137154",
+           lon:"11.576124",
+           name:"Munich"
+        }
+     ],
+     parameters:[
+        "temp",
+        "pressure",
+        "wind",
+        "humidity",
+        "clouds",
+        "dew_point",
+        "precipitation"
+     ],
+     product_name:"History Forecast Bulk",
+     retries:0,
+     saving_mode:"multi",
+     status:"done",
+     time_step:"1h",
+     to:"2021-06-17T23:59:59.000Z",
+     units:"metric",
+     updated_at:"2021-06-18T20:34:12.563Z",
+     user_id:{
+        $oid:"5e74984493e8db0009e53242"
+     }
+  }])
 
-//   axios.get('https://marketplace-weather.owm.io/api/my_orders_list', {
-//     "Content-Type": "application/json",
-//     "Access-Control-Allow-Origin": "*",
-//   })
-//     .then(response => {
-//       if (response && response.data) {
-//         setData([{data: response.data}])
-//         console.log('id test', response.data)
-//         console.log('test 2', data)
-//         console.log('length', data.cities.length)
-//       }
-//     })
-//     .catch(err => {
-//       console.log(err)
-//       })
+  axios.get('https://marketplace-weather.owm.io/api/my_orders_list', {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  })
+    .then(response => {
+      if (response && response.data) {
+        setData(response.data)
+        console.log('id test', response.data)
+        console.log('test 2', data)
+      //  console.log('length', data.cities.length)
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      })
 
   
 
@@ -97,17 +97,17 @@ const MyOrders = () => {
       //     })
       // }, [])
 
-      const [datas, setDatas] = useState([])
+  //     const [datas, setDatas] = useState([])
 
-  useEffect(() => {
-    axios
-      .get("https://marketplace-weather.owm.io/api/my_orders_list")
-      .then((res) => {
-        const datas = res.data;
-        setDatas({ datas });
-      });
-    console.log("ddd", datas);
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://marketplace-weather.owm.io/api/my_orders_list")
+  //     .then((res) => {
+  //       const datas = res.data;
+  //       setDatas({ datas });
+  //     });
+  //   console.log("ddd", datas);
+  // }, []);
 
   return (
     <div className="container">
@@ -159,7 +159,7 @@ const MyOrders = () => {
         </Col>
       </Row>
       <Row>
-{datas}
+{data}
         {/* {data._id.map((option, index) => (
 <p key={index}>{option}</p>
 ))} */}
