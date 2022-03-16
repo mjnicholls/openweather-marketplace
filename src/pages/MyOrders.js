@@ -98,8 +98,8 @@ const [data, setData] = useState([])
       </Row>
       <Row>
    
-        {data.map((option, index) => (
-<p key={index}>{option.created_at}</p>
+        {data._id.map((option, index) => (
+<p key={index}>{option}</p>
 ))}
         
       </Row>
