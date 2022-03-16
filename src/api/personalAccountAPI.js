@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { accountInfo, invoiceUpdate, confirmVat, test } from "./index";
+import { accountInfo, invoiceUpdate, confirmVat, test, orders } from "./index";
 
 export const createBillingDetails = (params) =>
   /** Create billing details */
@@ -17,5 +17,9 @@ export const confirmVatNumber = () =>
 export const getAccountInfo = () =>
   /** Get account preferences */
   axios.get(accountInfo);
+
+  export const getOrders = () =>
+  /** Get a list of events  */
+  axios.get(orders)
 
 export const stripe = () => axios.put(test);

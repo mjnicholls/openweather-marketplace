@@ -14,4 +14,6 @@ export const countriesList = "https://home.agromonitoring.com/api/countries";
 
 export const test = "https://home.openweathermap.org/history_bulks/";
 
+export const orders = "https://marketplace-weather.owm.io/api/my_orders_list"
+
 //export const confirmVat = 'https://old.agromonitoring.com/api/check_vat'
