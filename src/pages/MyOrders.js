@@ -7,34 +7,34 @@ const MyOrders = () => {
 
 const [data, setData] = useState([])
 
-  // axios.get('https://marketplace-weather.owm.io/api/my_orders_list', {
-  //   "Content-Type": "application/json",
-  //   "Access-Control-Allow-Origin": "*",
-  // })
-  //   .then(response => {
-  //     if (response && response.data) {
-  //       const data = response.data
-  //       console.log('data', response.data)
-  //       console.log('test', data)
-  //       console.log('length', data.length)
-  //     }
-  //   })
-  //   .catch(err => {
-  //     console.log(err)
-  //     })
+  axios.get('https://marketplace-weather.owm.io/api/my_orders_list', {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  })
+    .then(response => {
+      if (response && response.data) {
+        setData({data: response.data})
+        console.log('data', response.data)
+        console.log('test', data)
+        console.log('length', data.length)
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      })
 
 
 
-      useEffect(() => {
-        axios.get("https://marketplace-weather.owm.io/api/my_orders_list")
-          .then((res) => {
-            setData({data: res.data})
-            console.log('data', data)
-          })
-          .catch((err) => {
-            console.log('error', err)
-          })
-      }, [])
+      // useEffect(() => {
+      //   axios.get("https://marketplace-weather.owm.io/api/my_orders_list")
+      //     .then((res) => {
+      //       setData({data: res.data})
+      //       console.log('data', data)
+      //     })
+      //     .catch((err) => {
+      //       console.log('error', err)
+      //     })
+      // }, [])
 
   // useEffect(() => {
   //   // GET request using axios inside useEffect React hook
@@ -97,10 +97,10 @@ const [data, setData] = useState([])
         </Col>
       </Row>
       <Row>
-   
-        {data._id.map((option, index) => (
+   {data.length}
+        {/* {data._id.map((option, index) => (
 <p key={index}>{option}</p>
-))}
+))} */}
         
       </Row>
 
