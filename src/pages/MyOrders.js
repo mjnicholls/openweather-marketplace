@@ -72,7 +72,7 @@ const [data, setData] = useState([
   })
     .then(response => {
       if (response && response.data) {
-        setData({data: response.data})
+        setData([{data: response.data}])
         console.log('id test', response.data)
         console.log('test 2', data)
         console.log('length', data.cities.length)
