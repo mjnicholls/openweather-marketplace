@@ -18,8 +18,14 @@ export const getAccountInfo = () =>
   /** Get account preferences */
   axios.get(accountInfo);
 
-  export const getOrders = () =>
+export const getOrders = () =>
   /** Get a list of events  */
-  axios.get(orders)
+  axios.get(orders, {
+    headers: {
+      Accept: "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+    responseType: "json",
+  });
 
 export const stripe = () => axios.put(test);
