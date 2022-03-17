@@ -138,6 +138,7 @@ const [data, setData] = useState([
       if (response && response.data) {
         setData([response.data])
         console.log('id test', typeof response.data)
+        console.log('headers', response.headers)
       }
     })
     .catch(err => {
