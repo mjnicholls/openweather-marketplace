@@ -137,9 +137,9 @@ const [data, setData] = useState([
   })
     .then(response => {
       if (response && response.data) {
-        setData(response.data.JSON.parse())
-        console.log('test response', typeof response.data)
-        console.log('test parse', response.data.JSON.parse())
+        setData(JSON.parse(response.data))
+        console.log('test response', typeof JSON.parse(response.data))
+        console.log('test parse', JSON.parse(response.data))
         //console.log('test data', typeof data)
         //console.log('headers', response.headers)
         //console.log('headers data', data.headers)
