@@ -130,17 +130,19 @@ const [data, setData] = useState([
 
 //const data = []
 
+
   axios.get('https://marketplace-weather.owm.io/api/my_orders_list', {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
   })
     .then(response => {
       if (response && response.data) {
-        setData({data: response.data})
+        setData(response.data.JSON.parse())
         console.log('test response', typeof response.data)
-        console.log('test data', typeof data)
-        console.log('headers', response.headers)
-        console.log('headers data', data.headers)
+        console.log('test parse', response.data.JSON.parse())
+        //console.log('test data', typeof data)
+        //console.log('headers', response.headers)
+        //console.log('headers data', data.headers)
       }
     })
     .catch(err => {
