@@ -132,8 +132,10 @@ const [data, setData] = useState([
 
 
   axios.get('https://marketplace-weather.owm.io/api/my_orders_list', {
+    headers: {
     "Accept": "application/json",
     "Access-Control-Allow-Origin": "*",
+    },
     responseType: "json"
   })
     .then(response => {
