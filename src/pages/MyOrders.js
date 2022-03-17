@@ -136,7 +136,7 @@ const [data, setData] = useState([
   })
     .then(response => {
       if (response && response.data) {
-        setData(response.data)
+        setData([response.data])
         console.log('id test', typeof response.data)
       }
     })
