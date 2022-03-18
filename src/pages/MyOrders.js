@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, Col, Row, Card, CardHeader, CardBody } from "reactstrap";
-import axios from "axios";
+import {
+  Button,
+  Col,
+  Row,
+  Card,
+  CardHeader,
+  CardBody,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
+} from "reactstrap";
 import { getOrders } from "../api/personalAccountAPI";
 
 const MyOrders = () => {
@@ -68,22 +78,6 @@ const MyOrders = () => {
 
   const [data, setData] = useState([]);
 
-  //const data = []
-
-  //const url = window.location.protocol + '//' + window.location.host + '/api/my_orders_list'
-
-  // getOrders()
-  //     .then(response => {
-  //       if (response && response.data) {
-  //         setData(response.data)
-  //         console.log('test response', response.data)
-  //         console.log('data', data)
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //       })
-
   useEffect(() => {
     getOrders()
       .then((res) => {
@@ -94,185 +88,173 @@ const MyOrders = () => {
       });
   }, []);
 
-  console.log("ddddd", data);
-
-  //  useEffect(() => {
-  //   getOrders()
-  //     .then((res) => {
-  //       setData(data)
-  //       console.log('data', data)
-  //     })
-  //     .catch((err) => {
-  //       console.log('error', err)
-  //     })
-  // return;
-  // }, [])
-
-  //     const [datas, setDatas] = useState([])
-
-  // useEffect(() => {
-  //   axios
-  //     .get("https://marketplace-weather.owm.io/api/my_orders_list")
-  //     .then((res) => {
-  //       const datas = res.data;
-  //       setDatas({ datas });
-  //     });
-  //   console.log("ddd", datas);
-  // }, []);
-
   return (
     <div className="container">
       <Row className="mt-4 mb-4 text-start">
         <h1>My Orders</h1>
       </Row>
-      <Row>
-        <Col className="mt-2 mb-2">
-          <p className="text-start"> You have no orders yet.</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="mt-2 mb-2">
-          <p className="text-start"> You might be interested in:</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="mt-2">
-          <p className="text-start">
-            {" "}
-            <a style={{ color: "black" }} href="/history_bulks/new">
-              History Bulk
-            </a>{" "}
-            - a weather data archive for any location that includes 15 weather
-            parameters, such as temperature, precipitation, wind and many more.
-          </p>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="mb-2">
-          <p className="text-start">
-            {" "}
-            <a style={{ color: "black" }} href="/history_forecast_bulks/new">
-              History Forecast Bulk
-            </a>{" "}
-            - an archive of previous forecasts starting from April 6, 2017.
-          </p>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="mt-2 mb-2">
-          <p className="text-start">
-            {" "}
-            Go to{" "}
-            <Button className="btn button-neutral" href="/marketplace">
-              Marketplace
-            </Button>
-          </p>
-        </Col>
-      </Row>
-
-      <Card className="orders-table">
-        <CardHeader className="d-lg-flex d-none card-head">
-          <Row className="w-100 mx-0 text-start">
-            <Col>
-              <Row>
-                <Col>Info</Col>
-                <Col>Locations</Col>
-                <Col>Parameters</Col>
-                <Col>Dates</Col>
-                <Col>Status</Col>
-                <Col>&nbsp;</Col>
-              </Row>
+      {data.length === 0 ? (
+        <>
+          <Row>
+            <Col className="mt-2 mb-2">
+              <p className="text-start"> You have no orders yet.</p>
             </Col>
           </Row>
-        </CardHeader>
-        <CardBody className="orders">
-          {Object.entries(data).map(([key, value], i) => (
-            <Row key={i} value={key} className="mx-0 w-100 text-start" style={{marginBottom:"25px"}}>
-              <Col>
-                <Row>
-                  <Col>
-                    <p className="text-start" style={{ fontWeight: "bold" }}>
-                      {value.product_name}
-                    </p>
-                    <p className="text-start">
-                      File Format: {value.file_format.toUpperCase()}
-                    </p>
-                    <p className="text-start">
-                      Units:{" "}
-                      {value.units.charAt(0).toUpperCase() +
-                        value.units.slice(1)}
-                    </p>
-                  </Col>
-                  
-                  
-                  
-                  
-                  //
-
-                  {Object.entries(value.locations).map(([key, values], i) => (
-                  <Col key={i} value={key}>
-                      { Object.entries(value.name).map(([key,value], i) => 
-               <option key={i} value={key}>
-                 {value}
-                 </option>
-                 ) }
-                </Col>
-                  ))}
-
-                  <Col>
-               { Object.entries(value.parameters).map(([key,value], i) => 
-               <option key={i} value={key}>
-                 {value.charAt(0).toUpperCase() + value.slice(1)}
-                 </option>
-                 ) }
-
-                </Col>
-                  <Col>{value.from} - {value.to}</Col>
-                <Col>{value.status}</Col>
-
-                <Col><Button a href = {value.file_server}>Download JSON</Button></Col>
-                </Row>
-              </Col>
+          <Row>
+            <Col className="mt-2 mb-2">
+              <p className="text-start"> You might be interested in:</p>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="mt-2">
+              <p className="text-start">
+                {" "}
+                <a style={{ color: "black" }} href="/history_bulks/new">
+                  History Bulk
+                </a>{" "}
+                — a weather data archive for any location that includes 15
+                weather parameters, such as temperature, precipitation, wind and
+                many more.
+              </p>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="mb-2">
+              <p className="text-start">
+                {" "}
+                <a
+                  style={{ color: "black" }}
+                  href="/history_forecast_bulks/new"
+                >
+                  History Forecast Bulk
+                </a>{" "}
+                — an archive of previous forecasts starting from April 6, 2017.
+              </p>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="mt-2 mb-2">
+              <p className="text-start">
+                {" "}
+                Go to{" "}
+                <Button className="btn button-neutral" href="/marketplace">
+                  Marketplace
+                </Button>
+              </p>
+            </Col>
+          </Row>
+        </>
+      ) : (
+        <Card className="orders-table">
+          <CardHeader className="d-lg-flex d-none card-head">
+            <Row className="w-100 mx-0 text-start">
+              <Col>Info</Col>
+              <Col>Locations</Col>
+              <Col style={{ marginRight: "30px" }}>Parameters</Col>
+              <Col style={{ marginRight: "30px" }}>Dates</Col>
+              <Col md="1">Status</Col>
+              <Col>&nbsp;</Col>
             </Row>
-          ))}
-          {/* {data.map((test,index) =>
-          <Row key = {index} className="mx-0 w-100 text-start">
-            <Col>
-              <Row>
+          </CardHeader>
+          <CardBody className="orders">
+            {data.map((row) => (
+              <Row
+                className="mx-0 w-100 text-start"
+                style={{ marginBottom: "25px" }}
+              >
                 <Col>
-                  <p className="text-start" style={{fontWeight: "bold"}}>{[test.product_name]}</p>
-                  <p className="text-start">File Format: {test.file_format.toUpperCase()}</p>
-                  <p className="text-start">Units: {test.units.charAt(0).toUpperCase() + test.units.slice(1)}</p>
+                  <Row className="text-start" style={{ fontWeight: "bold" }}>
+                    {row.product_name}
+                  </Row>
+                  <Row className="text-start">
+                    File Format: {row.file_format.toUpperCase()}
+                  </Row>
+                  <Row className="text-start">
+                    Units:{" "}
+                    {row.units.charAt(0).toUpperCase() + row.units.slice(1)}
+                  </Row>
                 </Col>
                 <Col>
-
-{test.locations.map((tests, x) => 
-<React.Fragment key = {x}>
-   <p> {tests.name} </p>
-   <p> {tests.lat.slice(0,5)}, {tests.lon.slice(0,5)} </p>
-   </React.Fragment>
-  )}
-
+                  {row.state ? (
+                    <Row>{row.state}</Row>
+                  ) : (
+                    <Row className="locations">
+                      {row.locations
+                        ? row.locations
+                            .map((location) =>
+                              location.name
+                                .concat("\r\n", "(" + location.lat.slice(0, 5))
+                                .concat(", ", location.lon.slice(0, 5) + ")")
+                            )
+                            .join("\r\n")
+                        : null}
+                    </Row>
+                  )}
                 </Col>
-                <Col>
-               { Object.entries(test.parameters).map(([key,value],i) => 
-               <option key={i} value={key}>
-                 {value.charAt(0).toUpperCase() + value.slice(1)}
-             
-                 </option>
-                 ) }
-
+                <Col style={{ marginRight: "30px" }}>
+                  {Object.entries(row.parameters).map(([key, value], i) => (
+                    <React.Fragment key={i} value={key}>
+                      {value.charAt(0).toUpperCase() +
+                        value.replaceAll("_", " ").slice(1)}
+                      {", "}
+                    </React.Fragment>
+                  ))}
                 </Col>
-                <Col>{test.from} - {test.to}</Col>
-                <Col>{test.status}</Col>
+                <Col style={{ marginRight: "30px" }}>
+                  {row.product_name !== "Zip Code Data" ? (
+                    <Row className="text-start">
+                      {new Date(row.from)
+                        .toString(Date.parse(row.from))
+                        .slice(3, 10)}
+                      {", "}
+                      {new Date(row.from)
+                        .toString(Date.parse(row.from))
+                        .slice(10, 15)}
+                      {" — "}
+                      {new Date(row.to)
+                        .toString(Date.parse(row.to))
+                        .slice(3, 10)}
+                      {", "}
+                      {new Date(row.from)
+                        .toString(Date.parse(row.from))
+                        .slice(10, 15)}
+                    </Row>
+                  ) : (
+                    <Row className="text-start">Year {row.year}</Row>
+                  )}
+                  <Row className="text-start" style={{ fontSize: "10pt" }}>
+                    Created at:
+                    {new Date(row.created_at)
+                      .toString(Date.parse(row.created_at))
+                      .slice(3, 10)}
+                    {", "}
+                    {new Date(row.created_at)
+                      .toString(Date.parse(row.created_at))
+                      .slice(10, 15)}
+                  </Row>
+                </Col>
+                {row.status === "in_progress" ? (
+                  <Col md="1">In progress</Col>
+                ) : row.status === "done" ? (
+                  <Col md="1">Done</Col>
+                ) : null}
 
-                <Col><Button a href = {test.fileserver}>Download JSON</Button></Col>
+                {row.status === "done" ? (
+                  <Col>
+                    <Button className="button-neutral" a href={row.file_server}>
+                      Download {row.file_format.toUpperCase()}
+                    </Button>
+                  </Col>
+                ) : (
+                  <Col className="text-center" style={{ fontSize: "10pt" }}>
+                    Not available
+                  </Col>
+                )}
               </Row>
-            </Col>
-          </Row>
-           ) } */}
-        </CardBody>
-      </Card>
+            ))}
+          </CardBody>
+        </Card>
+      )}
     </div>
   );
 };
