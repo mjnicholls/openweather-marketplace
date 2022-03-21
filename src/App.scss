@@ -1304,6 +1304,26 @@ Input:disabled {
   
 }
 
+.seeMore {
+  background-color: white; 
+  border:white; 
+  color: black;
+  font-size: 15pt;
+  box-shadow: 0 0 0 0px!important;
+  &:hover{
+    background-color:white;
+    border:white;
+    color: black;
+    box-shadow: 0 0 0 0px!important;
+  };
+  &:focus{
+    background-color:white;
+    border:white;
+    color: black;
+    box-shadow: 0 0 0 0px!important;
+  };
+}
+
 
 .MuiOutlinedInput-root.Mui-focused {
   border-color:#F2F2F2!important;
