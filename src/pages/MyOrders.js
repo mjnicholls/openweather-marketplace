@@ -88,15 +88,16 @@ const MyOrders = () => {
       });
   }, []);
 
-  const [showResults, setShowResults] = useState(false);
+  const [showResults, setShowResults] = useState(false)
 
   const seeMore = () => {
-    setShowResults(true);
-  };
+    setShowResults(true)
+  }
 
   const seeLess = () => {
-    setShowResults(false);
-  };
+    setShowResults(false)
+  }
+
 
   return (
     <div className="container">
@@ -171,11 +172,7 @@ const MyOrders = () => {
               {data.map((row) => (
                 <Row
                   className="mx-0 w-100 text-start"
-                  style={{
-                    marginBottom: "25px",
-                    paddingBottom: "15px",
-                    borderBottom: "2px solid rgb(243, 243, 243)",
-                  }}
+                  style={{ marginBottom: "25px", paddingBottom: "15px", borderBottom:"2px solid rgb(243, 243, 243)" }}
                 >
                   <Col>
                     <Row className="text-start" style={{ fontWeight: "bold" }}>
@@ -307,47 +304,36 @@ const MyOrders = () => {
                                     "(" + location.lat.slice(0, 5)
                                   )
                                   .concat(", ", location.lon.slice(0, 5) + ")")
-                              )
-                              .slice(0, 2)
+                              ).slice(0,2)
                               .join("\r\n")
                           : null}
-                        {row.locations.length >= 3 && showResults === false ? (
-                          <Button
-                            className="seeMore text-start"
-                            onClick={seeMore}
-                          >
-                            &darr; ...
-                          </Button>
-                        ) : row.locations.length >= 3 &&
-                          showResults === true ? (
-                          <Button
-                            className="seeMore text-start"
-                            onClick={seeLess}
-                          >
-                            &uarr;
-                          </Button>
-                        ) : null}
-                        {showResults === true ? (
-                          <Row>
-                            {row.locations
-                              ? row.locations
-                                  .map((location) =>
-                                    location.name
-                                      .concat(
-                                        "\r\n",
-                                        "(" + location.lat.slice(0, 5)
-                                      )
-                                      .concat(
-                                        ", ",
-                                        location.lon.slice(0, 5) + ")"
-                                      )
+                           {row.locations.length >= 3 && showResults === false ? 
+                            <Button className="seeMore text-start" onClick={seeMore}>&darr; ...</Button>
+                            :
+                            row.locations.length >=3 && showResults === true ? 
+                            <Button className="seeMore text-start" onClick={seeLess}>&uarr;</Button>
+                            :
+                            null
+                            }
+                            {showResults === true ? 
+                            <Row>
+                          {row.locations
+                          ? row.locations
+                              .map((location) =>
+                                location.name
+                                  .concat(
+                                    "\r\n",
+                                    "(" + location.lat.slice(0, 5)
                                   )
-                                  .slice(2)
-                                  .join("\r\n")
-                              : null}
-                          </Row>
-                        ) : null}
+                                  .concat(", ", location.lon.slice(0, 5) + ")")
+                              ).slice(2)
+                              .join("\r\n")
+                          : null}
+                            </Row>
+                            :
+                          null}
                       </Row>
+                         
                     )}
                   </Col>
                   <Col style={{ marginRight: "30px" }}>
@@ -473,14 +459,7 @@ const MyOrders = () => {
           </Card>
           <>
             {data.map((row) => (
-              <Row
-                className="mx-0 w-100 text-start"
-                style={{
-                  marginBottom: "25px",
-                  paddingBottom: "15px",
-                  borderBottom: "2px solid rgb(243, 243, 243)",
-                }}
-              >
+              <Row className="mb-4 d-flex d-lg-none"  style={{ marginBottom: "25px", paddingBottom: "15px", borderBottom:"2px solid rgb(243, 243, 243)" }}>
                 <Row style={{ fontWeight: "bold" }}>{row.product_name}</Row>
                 <Row> File Format: {row.file_format.toUpperCase()}</Row>
                 <Row>
@@ -596,43 +575,44 @@ const MyOrders = () => {
                   </Row>
                 ) : (
                   <Row className="locations text-start mt-2 md-2">
-                    {row.locations
-                      ? row.locations
-                          .map((location) =>
-                            location.name
-                              .concat("\r\n", "(" + location.lat.slice(0, 5))
-                              .concat(", ", location.lon.slice(0, 5) + ")")
-                          )
-                          .slice(0, 2)
-                          .join("\r\n")
-                      : null}
-                    {row.locations.length >= 3 && showResults === false ? (
-                      <Button className="seeMore text-start" onClick={seeMore}>
-                        &darr; ...
-                      </Button>
-                    ) : row.locations.length >= 3 && showResults === true ? (
-                      <Button className="seeMore text-start" onClick={seeLess}>
-                        &uarr;
-                      </Button>
-                    ) : null}
-                    {showResults === true ? (
+                  {row.locations
+                    ? row.locations
+                        .map((location) =>
+                          location.name
+                            .concat(
+                              "\r\n",
+                              "(" + location.lat.slice(0, 5)
+                            )
+                            .concat(", ", location.lon.slice(0, 5) + ")")
+                        ).slice(0,2)
+                        .join("\r\n")
+                    : null}
+                     {row.locations.length >= 3 && showResults === false ? 
+                      <Button className="seeMore text-start" onClick={seeMore}>&darr; ...</Button>
+                      :
+                      row.locations.length >=3 && showResults === true ? 
+                      <Button className="seeMore text-start" onClick={seeLess}>&uarr;</Button>
+                      :
+                      null
+                      }
+                      {showResults === true ? 
                       <Row>
-                        {row.locations
-                          ? row.locations
-                              .map((location) =>
-                                location.name
-                                  .concat(
-                                    "\r\n",
-                                    "(" + location.lat.slice(0, 5)
-                                  )
-                                  .concat(", ", location.lon.slice(0, 5) + ")")
-                              )
-                              .slice(2)
-                              .join("\r\n")
-                          : null}
+                    {row.locations
+                    ? row.locations
+                        .map((location) =>
+                          location.name
+                            .concat(
+                              "\r\n",
+                              "(" + location.lat.slice(0, 5)
+                            )
+                            .concat(", ", location.lon.slice(0, 5) + ")")
+                        ).slice(2)
+                        .join("\r\n")
+                    : null}
                       </Row>
-                    ) : null}
-                  </Row>
+                      :
+                    null}
+                </Row>
                 )}
                 <Row className="text-start mt-2 mb-2">
                   {Object.entries(row.parameters).map(([key, value], i) => (
@@ -674,8 +654,48 @@ const MyOrders = () => {
 
                 {row.status === "done" ? (
                   <Row className="mt-2">
-                    <Col className="text-end">
-                      {row.file_format === "json" ? (
+                   <Col className="text-end">
+                    {row.file_format === "json" ? (
+                      
+                      <Button
+                        className="button-neutral"
+                        a
+                        href={
+                          row.hbs_response.file_server +
+                          row.hbs_response.file_path.json
+                        }
+                      >
+                        Download JSON
+                      </Button>
+                    ) : null}
+                    {row.file_format === "csv" &&
+                    row.product_name !== "Zip Code Data" ? (
+                      <Button
+                        className="button-neutral"
+                        a
+                        href={
+                          row.hbs_response.file_server +
+                          row.hbs_response.file_path.csv
+                        }
+                      >
+                        Download CSV
+                      </Button>
+                    ) : null}
+                   
+                    {row.product_name === "Zip Code Data" ? (
+                      <Button
+                        className="button-neutral"
+                        a
+                        href={
+                          row.hbs_response.file_server +
+                          row.hbs_response.file_path
+                        }
+                      >
+                        Download
+                      </Button>
+                    ) : null}
+                    {row.file_format === "json+csv" ? (
+                      <>
                         <Button
                           className="button-neutral"
                           a
@@ -686,9 +706,6 @@ const MyOrders = () => {
                         >
                           Download JSON
                         </Button>
-                      ) : null}
-                      {row.file_format === "csv" &&
-                      row.product_name !== "Zip Code Data" ? (
                         <Button
                           className="button-neutral"
                           a
@@ -699,49 +716,14 @@ const MyOrders = () => {
                         >
                           Download CSV
                         </Button>
-                      ) : null}
-
-                      {row.product_name === "Zip Code Data" ? (
-                        <Button
-                          className="button-neutral"
-                          a
-                          href={
-                            row.hbs_response.file_server +
-                            row.hbs_response.file_path
-                          }
-                        >
-                          Download
-                        </Button>
-                      ) : null}
-                      {row.file_format === "json+csv" ? (
-                        <>
-                          <Button
-                            className="button-neutral"
-                            a
-                            href={
-                              row.hbs_response.file_server +
-                              row.hbs_response.file_path.json
-                            }
-                          >
-                            Download JSON
-                          </Button>
-                          <Button
-                            className="button-neutral"
-                            a
-                            href={
-                              row.hbs_response.file_server +
-                              row.hbs_response.file_path.csv
-                            }
-                          >
-                            Download CSV
-                          </Button>
-                        </>
-                      ) : null}
+                      </>
+                    ) : null}
                     </Col>
+                 
                   </Row>
                 ) : (
                   <Row className="text-start mt-2" style={{ fontSize: "10pt" }}>
-                    <Col className="text-end"></Col> Not available
+                   <Col className="text-end"></Col> Not available
                   </Row>
                 )}
               </Row>
