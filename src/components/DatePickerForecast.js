@@ -30,7 +30,7 @@ const DatePickerForecast = ({
                 openTo="year"
                 views={["year", "month", "day"]}
                 minDate={new Date("2017")}
-                maxDate={moment().toDate()}
+                maxDate={endDate < startDate ? endDate === startDate + 1 : moment().toDate()}
                 value={startDate}
                 label={'From'}
                 onChange={(newValue) => {
