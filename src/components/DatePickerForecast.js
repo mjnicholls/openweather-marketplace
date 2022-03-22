@@ -16,6 +16,8 @@ const DatePickerForecast = ({
 
   const endDatePlusOne = new Date(startDate)
 
+  console.log("setValue", startDate);
+
   return (
     <>
       <Col className="dateLabel">
@@ -24,9 +26,10 @@ const DatePickerForecast = ({
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3}>
               <DatePicker
+              className="dateLabel"
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={new Date("10/07/2017")}
+                minDate={new Date("2017")}
                 maxDate={moment().toDate()}
                 value={startDate}
                 label={'From'}
@@ -34,7 +37,7 @@ const DatePickerForecast = ({
                   setStartDate(newValue);
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} helperText={null} />
+                  <TextField {...params} helperText={null} placeholder="o" />
                 )}
               />
             </Stack>
@@ -51,9 +54,11 @@ const DatePickerForecast = ({
                 openTo="year"
                 views={["year", "month", "day"]}
                 minDate={endDatePlusOne.setDate(endDatePlusOne.getDate() + 1)}
+                //minDate={new Date("2017")}
                 maxDate={moment().toDate()}
                 value={endDate}
                 label={'To'}
+                InputProps={{ readOnly: true }}
                 onChange={(newValue) => {
                   setEndDate(newValue);
                 }}

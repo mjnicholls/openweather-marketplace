@@ -25,7 +25,6 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
                 views={["year", "month", "day"]}
                 minDate={new Date("1979")}
                 maxDate={moment().toDate()}
-                //maxDate={startDateMinusOne.setDate(startDateMinusOne.getDate() + 2)}
                 value={startDate}
                 label={"From"}
                 onChange={(newValue) => {

@@ -48,9 +48,9 @@ const HistoryForecastBulk = () => {
 
   const [formatValue, setFormatValue] = useState("CSV");
 
-  const [startDate, setStartDate] = useState();
+  const [startDate, setStartDate] = useState(null);
 
-  const [endDate, setEndDate] = useState();
+  const [endDate, setEndDate] = useState(null);
 
   const [checked, setChecked] = useState([]);
 
