@@ -50,9 +50,9 @@ const NewHistoryBulk = () => {
 
   const [formatValue, setFormatValue] = useState("CSV");
 
-  const [startDate, setStartDate] = useState();
+  const [startDate, setStartDate] = useState(moment().toDate());
 
-  const [endDate, setEndDate] = useState();
+  const [endDate, setEndDate] = useState(moment().toDate());
 
   const [checked, setChecked] = useState([]);
 
