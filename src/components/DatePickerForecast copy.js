@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { Col, Form, Label } from "reactstrap";
 import moment from "moment";
 import TextField from "@mui/material/TextField";
@@ -7,35 +7,32 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import Stack from "@mui/material/Stack";
 
-const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
-  const endDatePlusOne = new Date(startDate);
+const DatePickerForecast = ({
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+}) => {
 
-  //const yesterday = moment().add(-1, 'days');
+  const endDatePlusOne = new Date(startDate)
 
-  const yesterday = new Date((new Date()).valueOf() - 1000*60*60*24)
-
-
-
-console.log("yesterday", yesterday);
   console.log("setValue", startDate);
 
   return (
     <>
       <Col className="dateLabel">
         <Form>
-          <Label></Label>
+          <Label> </Label>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3}>
               <DatePicker
-              autoOk={true}
-                className="dateLabel"
+              className="dateLabel"
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={new Date("1979")}
-                maxDate={endDate >= startDate ? endDate : moment().toDate()}
-                //maxDate={maxDate}
+                minDate={new Date("2017")}
+                maxDate={moment().toDate()}
                 value={startDate}
-                label={"From"}
+                label={'From'}
                 onChange={(newValue) => {
                   setStartDate(newValue);
                 }}
@@ -53,13 +50,14 @@ console.log("yesterday", yesterday);
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3}>
               <DatePicker
-                style={{ border: "none" }}
+              style={{border: "none"}}
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={endDatePlusOne.setDate(endDatePlusOne.getDate())}
-                maxDate={endDate < startDate ? endDate === startDate + 1 : moment().toDate()}
+                minDate={endDatePlusOne.setDate(endDatePlusOne.getDate() + 1)}
+                //minDate={new Date("2017")}
+                maxDate={moment().toDate()}
                 value={endDate}
-                label={"To"}
+                label={'To'}
                 InputProps={{ readOnly: true }}
                 onChange={(newValue) => {
                   setEndDate(newValue);
@@ -76,4 +74,4 @@ console.log("yesterday", yesterday);
   );
 };
 
-export default DatePickerMarket;
+export default DatePickerForecast;

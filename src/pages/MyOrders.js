@@ -337,13 +337,7 @@ const MyOrders = () => {
                     )}
                   </Col>
                   <Col style={{ marginRight: "30px" }}>
-                    {Object.entries(row.parameters).map(([key, value], i) => (
-                      <React.Fragment key={i} value={key}>
-                        {value.charAt(0).toUpperCase() +
-                          value.replaceAll("_", " ").slice(1)}
-                        {", "}
-                      </React.Fragment>
-                    ))}
+                  {row.parameters.map(p => p.charAt(0).toUpperCase() + p.replaceAll('_', ' ').slice(1)).join(', ')}
                   </Col>
                   <Col style={{ marginRight: "30px" }}>
                     {row.product_name !== "Zip Code Data" ? (
@@ -615,13 +609,7 @@ const MyOrders = () => {
                 </Row>
                 )}
                 <Row className="text-start mt-2 mb-2">
-                  {Object.entries(row.parameters).map(([key, value], i) => (
-                    <React.Fragment className="text-start" key={i} value={key}>
-                      {value.charAt(0).toUpperCase() +
-                        value.replaceAll("_", " ").slice(1)}
-                      {", "}
-                    </React.Fragment>
-                  ))}
+                {row.parameters.map(p => p.charAt(0).toUpperCase() + p.replaceAll('_', ' ').slice(1)).join(', ')}
                 </Row>
                 <Row>
                   {row.product_name !== "Zip Code Data" ? (

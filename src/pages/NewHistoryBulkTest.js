@@ -4,6 +4,7 @@ import Map from "../components/Map";
 import placeMarker from "../utils/placeMarker";
 import Location from "../components/Location";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 const selectCurrency = (state) => state.auth.currency;
 const selectInvoice = (state) => state.auth.invoiceInfo;
@@ -50,9 +51,11 @@ const NewHistoryBulkTest = () => {
 
   const [formatValue, setFormatValue] = useState("CSV");
 
-  const [startDate, setStartDate] = useState(null);
+  const yesterday = new Date((new Date()).valueOf() - 1000*60*60*24)
 
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState(moment().toDate());
+
+  const [endDate, setEndDate] = useState(moment().toDate());
 
   const [checked, setChecked] = useState([]);
 
