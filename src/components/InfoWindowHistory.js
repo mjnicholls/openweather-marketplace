@@ -11,7 +11,6 @@ const InfoWindowHistory = ({
   setErrorMap,
   count,
   setCount,
-  isAdded,
   setIsAdded
 }) => {
 
@@ -78,9 +77,15 @@ const InfoWindowHistory = ({
 };
 
 InfoWindowHistory.propTypes = {
-  location: PropTypes.object,
-  setLocation: PropTypes.func,
+  locations: PropTypes.array,
+  setLocations: PropTypes.func,
   showButton: PropTypes.bool,
+  location: PropTypes.object,
+  errorMap: PropTypes.bool,
+  setErrorMap: PropTypes.func,
+  count: PropTypes.number,
+  setCount: PropTypes.func,
+  setIsAdded: PropTypes.func
 };
 
 export default InfoWindowHistory;

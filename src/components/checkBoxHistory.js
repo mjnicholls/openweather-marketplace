@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Col, Label, Form, FormGroup, Input, Row } from "reactstrap";
+import PropTypes from "prop-types";
 
 const CheckyBoxHistory = ({
   setFileValue,
@@ -243,6 +244,38 @@ const CheckyBoxHistory = ({
       </Row>
     </>
   );
+};
+
+CheckyBoxHistory.propTypes = {
+  isChecked: PropTypes.bool,
+  isChecked2: PropTypes.bool,
+  isChecked3: PropTypes.bool,
+  isChecked4: PropTypes.bool,
+  isChecked5: PropTypes.bool,
+  isChecked6: PropTypes.bool,
+  isChecked7: PropTypes.bool,
+  setIsChecked: PropTypes.func,
+  setIsChecked2: PropTypes.func,
+  setIsChecked3: PropTypes.func,
+  setIsChecked4: PropTypes.func,
+  setIsChecked5: PropTypes.func,
+  setIsChecked6: PropTypes.func,
+  setIsChecked7: PropTypes.func,
+  temp: PropTypes.string,
+  pressure: PropTypes.string,
+  humidity: PropTypes.string,
+  clouds: PropTypes.string,
+  dewPoint: PropTypes.string,
+  precipitation: PropTypes.string,
+  wind: PropTypes.string,
+  setTemp: PropTypes.func,
+  setPressure: PropTypes.func,
+  setHumidity: PropTypes.func,
+  setClouds: PropTypes.func,
+  setDewPoint: PropTypes.func,
+  setPrecipitation: PropTypes.func,
+  setWind: PropTypes.func,
+  close: PropTypes.func,
 };
 
 export default CheckyBoxHistory;

@@ -1,9 +1,6 @@
-/* eslint-disable */
 import React from "react";
-
 import PropTypes from "prop-types";
 import Autocomplete, { usePlacesWidget } from "react-google-autocomplete";
-
 import placeMarker from "../utils/placeMarker";
 
 const AutoComplete = ({
@@ -88,6 +85,10 @@ AutoComplete.propTypes = {
   setIsDropDown: PropTypes.func,
   fixedLocation: PropTypes.string,
   setFixedLocation: PropTypes.object,
+  setIsAdded: PropTypes.func,
+  count: PropTypes.number,
+  setCount: PropTypes.func,
+  setErrorMap: PropTypes.func
 };
 
 export default AutoComplete;

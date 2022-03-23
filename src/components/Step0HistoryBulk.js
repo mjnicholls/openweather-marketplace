@@ -18,7 +18,7 @@ const Step0HistoryBulk = ({
   isChecked6,
   isChecked7,
   fileCheck,
-  fileCheck2,
+  fileCheck2
 }) => {
 
 
@@ -90,9 +90,21 @@ const Step0HistoryBulk = ({
 };
 
 Step0HistoryBulk.propTypes = {
-  year: PropTypes.string,
-  country: PropTypes.string,
-  price: PropTypes.number,
+  locations: PropTypes.array,
+  fileCheck: PropTypes.bool,
+  fileCheck2: PropTypes.bool,
+  isChecked: PropTypes.bool,
+  isChecked2: PropTypes.bool,
+  isChecked3: PropTypes.bool,
+  isChecked4: PropTypes.bool,
+  isChecked5: PropTypes.bool,
+  isChecked6: PropTypes.bool,
+  isChecked7: PropTypes.bool,
+  startDate: PropTypes.instanceOf(Date),
+  endDate: PropTypes.instanceOf(Date),
+  currency: PropTypes.number,
+  unitsValue: PropTypes.string,
+  downloadsValue: PropTypes.string,
 };
 
 export default Step0HistoryBulk;

@@ -4,6 +4,7 @@ import MapHistory from "../components/MapHistory";
 import placeMarker from "../utils/placeMarker";
 import LocationForecast from "../components/LocationsForecast";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 const selectCurrency = (state) => state.auth.currency;
 
@@ -48,9 +49,9 @@ const HistoryForecastBulk = () => {
 
   const [formatValue, setFormatValue] = useState("CSV");
 
-  const [startDate, setStartDate] = useState(null);
+  const [startDate, setStartDate] = useState(moment().toDate());
 
-  const [endDate, setEndDate] = useState(null);
+  const [endDate, setEndDate] = useState(moment().toDate());
 
   const [checked, setChecked] = useState([]);
 
@@ -79,17 +80,10 @@ const HistoryForecastBulk = () => {
   const [json, setJson] = useState("Off")
 
   const [count, setCount] = useState(0)
-
-  console.log('count', count)
   
   const [errorMap, setErrorMap] = useState(false)
 
   const [email, setEmail] = useState()
-
-  console.log('added', isAdded)
-
-  const [unitsChecked, setUnitsChecked] = useState('Metric');
-  const [isCheckedUnits, setIsCheckedUnits] = useState(true)
 
   useEffect(() => {
     setTempLocation({
@@ -151,12 +145,9 @@ const HistoryForecastBulk = () => {
 
   const handleClickOutsideSearchBox = (e) => {
     if (searchBoxRef.current.contains(e.target)) {
-      // inside click
       return;
     }
     setIsDropDown(false);
-    // outside click
-    // ... do whatever on click outside here ...
   };
 
   const handleChange = (key, value) => {
@@ -188,12 +179,6 @@ const HistoryForecastBulk = () => {
             isDropDown={isDropDown}
             setIsDropDown={setIsDropDown}
             setIsLocationNameEdited={setIsLocationNameEdited}
-            parameters={parameters}
-            setParameters={setParameters}
-            price={price}
-            setPrice={setPrice}
-            checkedWeather={checkedWeather}
-            setCheckedWeather={setCheckedWeather}
             fileValue={fileValue}
             setFileValue={setFileValue}
             unitsValue={unitsValue}
@@ -207,10 +192,6 @@ const HistoryForecastBulk = () => {
             setEndDate={setEndDate}
             endDate={endDate}
             currency={currency}
-            checked={checked}
-            setChecked={setChecked}
-            importPrice={importPrice}
-            setImportPrice={setImportPrice}
             temp={temp}
             setTemp={setTemp}
             pressure={pressure}
@@ -266,8 +247,6 @@ const HistoryForecastBulk = () => {
             setLocations={setLocations}
             setLocation={setLocationNameAware}
             onClickMap={onClickMap}
-            price={price}
-            setPrice={setPrice}
             errorMap={errorMap}
             setErrorMap={setErrorMap}
             count={count}

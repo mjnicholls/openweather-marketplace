@@ -1,17 +1,12 @@
 import React, { useState } from "react";
-import { Button, Col, Row } from "reactstrap";
+import { Button } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import CheckyBox from "./checkBox";
+import PropTypes from "prop-types";
 
 const WeatherParams = ({
-  on,
-  setOn,
-  checkedWeather,
-  setCheckedWeather,
   fileValue,
   setFileValue,
-  checked,
-  setChecked,
   temp,
   setTemp,
   tempMin,
@@ -67,8 +62,6 @@ const WeatherParams = ({
 }) => {
   const [alert, setAlert] = useState(null);
 
-  //const [fileValue, setFileValue] = useState([]);
-
   const hideAlert = () => {
     setAlert(null);
   };
@@ -85,14 +78,8 @@ const WeatherParams = ({
       >
    
             <CheckyBox
-              checkedWeather={checkedWeather}
-              setCheckedWeather={setCheckedWeather}
               fileValue={fileValue}
               setFileValue={setFileValue}
-              checked={checked}
-              setChecked={setChecked}
-              on={on}
-              setOn={setOn}
               temp={temp}
               setTemp={setTemp}
               tempMin={tempMin}
@@ -163,6 +150,49 @@ const WeatherParams = ({
       </Button>
     </>
   );
+};
+
+WeatherParams.propTypes = {
+  isChecked: PropTypes.bool,
+  isChecked2: PropTypes.bool,
+  isChecked3: PropTypes.bool,
+  isChecked4: PropTypes.bool,
+  isChecked5: PropTypes.bool,
+  isChecked6: PropTypes.bool,
+  isChecked7: PropTypes.bool,
+  setIsChecked: PropTypes.func,
+  setIsChecked2: PropTypes.func,
+  setIsChecked3: PropTypes.func,
+  setIsChecked4: PropTypes.func,
+  setIsChecked5: PropTypes.func,
+  setIsChecked6: PropTypes.func,
+  setIsChecked7: PropTypes.func,
+  temp: PropTypes.string,
+  setTemp: PropTypes.func,
+  tempMin: PropTypes.string,
+  setTempMin: PropTypes.func,
+  tempMax: PropTypes.string,
+  setTempMax: PropTypes.func,
+  pressure: PropTypes.string,
+  setPressure: PropTypes.func,
+  humidity: PropTypes.string,
+  setHumidity: PropTypes.func,
+  rain: PropTypes.string,
+  setRain: PropTypes.func,
+  snow: PropTypes.string,
+  setSnow: PropTypes.func,
+  weather: PropTypes.string,
+  setWeather: PropTypes.func,
+  clouds: PropTypes.string,
+  setClouds: PropTypes.func,
+  dewPoint: PropTypes.string,
+  setDewPoint: PropTypes.func,
+  visibility: PropTypes.string,
+  setVisibility: PropTypes.func,
+  wind: PropTypes.string,
+  setWind: PropTypes.func,
+  fileValue: PropTypes.bool,
+  setFileValue: PropTypes.func,
 };
 
 export default WeatherParams;

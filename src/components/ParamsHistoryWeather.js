@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { Button, Col, Label, Form, FormGroup, Input, Row } from "reactstrap";
-import { weathersHistory } from "../config";
+import { Button, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import CheckyBoxHistory from "./checkBoxHistory";
+import PropTypes from "prop-types";
 
 const WeatherHistoryParams = ({
-  checkedWeather,
-  setCheckedWeather,
   fileValue,
   setFileValue,
   checked,
@@ -61,8 +59,6 @@ const WeatherHistoryParams = ({
       >
         <Row className="text-start mt-4">
           <CheckyBoxHistory
-            checkedWeather={checkedWeather}
-            setCheckedWeather={setCheckedWeather}
             setFileValue={setFileValue}
             checked={checked}
             setChecked={setChecked}

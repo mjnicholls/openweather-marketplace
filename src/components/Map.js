@@ -14,8 +14,6 @@ const Map = ({
   onClickMap,
   locations,
   setLocations,
-  price,
-  setPrice,
   isButtonInfoWindow,
   isAdded,
   setIsAdded,
@@ -60,8 +58,6 @@ const Map = ({
           showButton={isButtonInfoWindow}
           locations={locations}
           setLocations={setLocations}
-          setPrice={setPrice}
-          price={price}
           onClick={onClickMap}
           errorMap={errorMap}
           setErrorMap={setErrorMap}
@@ -81,10 +77,14 @@ Map.propTypes = {
   onClickMap: PropTypes.func,
   isButtonInfoWindow: PropTypes.bool,
   isDraggable: PropTypes.bool,
-  price: PropTypes.number,
-  setPrice: PropTypes.func,
   locations: PropTypes.array,
   setLocations: PropTypes.func,
+  isAdded: PropTypes.bool,
+  setIsAdded: PropTypes.func,
+  errorMap: PropTypes.bool,
+  setErrorMap: PropTypes.func,
+  count: PropTypes.number,
+  setCount: PropTypes.func,
 };
 
 export default Map;

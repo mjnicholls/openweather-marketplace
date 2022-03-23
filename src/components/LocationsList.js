@@ -5,12 +5,11 @@ import { Col, Row, Button } from "reactstrap";
 import { Close } from "react-ikonate";
 import EditNameCard from "./EditNameCard";
 
-const LocationList = ({ locations, setLocations, price, setPrice }) => {
+const LocationList = ({ locations, setLocations }) => {
   const deleteLocation = (index) => {
     const locationsCopy = [...locations];
     locationsCopy.splice(index, 1);
     setLocations(locationsCopy);
-    setPrice(price - 7);
   };
 
   return (

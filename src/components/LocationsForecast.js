@@ -29,14 +29,6 @@ const LocationForecast = ({
   setStartDate,
   endDate,
   setEndDate,
-  price,
-  setPrice,
-  location,
-  setLocation,
-  year,
-  country,
-  checkedWeather,
-  setCheckedWeather,
   fileValue,
   setFileValue,
   unitsValue,
@@ -46,10 +38,6 @@ const LocationForecast = ({
   formatValue,
   setFormatValue,
   currency,
-  checked,
-  setChecked,
-  importPrice,
-  setImportPrice,
   temp,
   setTemp,
   pressure,
@@ -337,19 +325,13 @@ const LocationForecast = ({
         <InvoiceSettingsBulk
           close={hideAlert}
           locations={locations}
-          price={price}
           startDate={startDate}
           endDate={endDate}
-          checkedWeather={checkedWeather}
           fileValue={fileValue}
           unitsValue={unitsValue}
           downloadsValue={downloadsValue}
           formatValue={formatValue}
           currency={currency}
-          checked={checked}
-          setChecked={setChecked}
-          importPrice={importPrice}
-          setImportPrice={setImportPrice}
           temp={temp}
           setTemp={setTemp}
           pressure={pressure}
@@ -554,8 +536,6 @@ const LocationForecast = ({
       <ParametersForecast
         setParameters={setParameters}
         parameters={parameters}
-        checkedWeather={checkedWeather}
-        setCheckedWeather={setCheckedWeather}
         fileValue={fileValue}
         setFileValue={setFileValue}
         unitsValue={unitsValue}
@@ -564,8 +544,6 @@ const LocationForecast = ({
         setDownloadsValue={setDownloadsValue}
         formatValue={formatValue}
         setFormatValue={setFormatValue}
-        checked={checked}
-        setChecked={setChecked}
         temp={temp}
         setTemp={setTemp}
         pressure={pressure}
@@ -607,8 +585,6 @@ const LocationForecast = ({
       <LocationListHistory
         locations={locations}
         setLocations={setLocations}
-        price={price}
-        setPrice={setPrice}
       />
 
       {error.lat && <div className="invalid-feedback d-block">{error.lat}</div>}
@@ -662,13 +638,67 @@ LocationForecast.propTypes = {
   setLocation: PropTypes.func,
   tempLocation: PropTypes.object,
   setTempLocation: PropTypes.func,
+  count: PropTypes.number,
+  setCount: PropTypes.func,
+  email: PropTypes.string,
+  setEmail: PropTypes.func,
   error: PropTypes.object,
   setError: PropTypes.func,
+  setErrorMap: PropTypes.func,
+  setIsAdded: PropTypes.func,
   setIsName: PropTypes.func,
   searchBoxRef: PropTypes.object,
   isDropDown: PropTypes.bool,
   setIsDropDown: PropTypes.func,
-  setIsLocationNameEdited: PropTypes.func,
+  isChecked: PropTypes.bool,
+  isChecked2: PropTypes.bool,
+  isChecked3: PropTypes.bool,
+  isChecked4: PropTypes.bool,
+  isChecked5: PropTypes.bool,
+  isChecked6: PropTypes.bool,
+  isChecked7: PropTypes.bool,
+  setIsChecked: PropTypes.func,
+  setIsChecked2: PropTypes.func,
+  setIsChecked3: PropTypes.func,
+  setIsChecked4: PropTypes.func,
+  setIsChecked5: PropTypes.func,
+  setIsChecked6: PropTypes.func,
+  setIsChecked7: PropTypes.func,
+  temp: PropTypes.string,
+  setTemp: PropTypes.func,
+  pressure: PropTypes.string,
+  setPressure: PropTypes.func,
+  humidity: PropTypes.string,
+  setHumidity: PropTypes.func,
+  clouds: PropTypes.string,
+  setClouds: PropTypes.func,
+  dewPoint: PropTypes.string,
+  setDewPoint: PropTypes.func,
+  precipitation: PropTypes.string,
+  setPrecipitation: PropTypes.func,
+  wind: PropTypes.string,
+  setWind: PropTypes.func,
+  close: PropTypes.func,
+  startDate: PropTypes.instanceOf(Date),
+  setStartDate: PropTypes.func,
+  endDate: PropTypes.instanceOf(Date),
+  setEndDate: PropTypes.func,
+  fileCheck: PropTypes.bool,
+  fileCheck2: PropTypes.bool,
+  setFileCheck: PropTypes.func,
+  setFileCheck2: PropTypes.func,
+  csv: PropTypes.string,
+  setCSV: PropTypes.func,
+  json: PropTypes.string,
+  setJson: PropTypes.func,
+  fileValue: PropTypes.bool,
+  setFileValue: PropTypes.func,
+  unitsValue: PropTypes.string,
+  setUnitsValue: PropTypes.func,
+  downloadsValue: PropTypes.string,
+  setDownloadsValue: PropTypes.func,
+  formatValue: PropTypes.string,
+  setFormatValue: PropTypes.func,
 };
 
 export default LocationForecast;

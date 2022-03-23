@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Label, Form, FormGroup, Input, Row, Col } from "reactstrap";
+import PropTypes from "prop-types";
 
 const CheckyBox = ({
   temp,
@@ -88,7 +89,6 @@ const CheckyBox = ({
 
   const [unChecked, setUnchecked] = useState([]);
   const [error, setError] = useState(null)
-
 
   const handCheck = () => {
     if (tempStatus === "On") {
@@ -211,8 +211,6 @@ const CheckyBox = ({
 
   };
 
-  console.log('checked', unChecked)
-  console.log('errors', error)
   
 
   return (
@@ -870,6 +868,62 @@ const CheckyBox = ({
       </Row>
     </>
   );
+};
+
+CheckyBox.propTypes = {
+  isChecked: PropTypes.bool,
+  isChecked2: PropTypes.bool,
+  isChecked3: PropTypes.bool,
+  isChecked4: PropTypes.bool,
+  isChecked5: PropTypes.bool,
+  isChecked6: PropTypes.bool,
+  isChecked7: PropTypes.bool,
+  isChecked8: PropTypes.bool,
+  isChecked9: PropTypes.bool,
+  isChecked10: PropTypes.bool,
+  isChecked11: PropTypes.bool,
+  isChecked12: PropTypes.bool,
+  isChecked13: PropTypes.bool,
+  setIsChecked: PropTypes.func,
+  setIsChecked2: PropTypes.func,
+  setIsChecked3: PropTypes.func,
+  setIsChecked4: PropTypes.func,
+  setIsChecked5: PropTypes.func,
+  setIsChecked6: PropTypes.func,
+  setIsChecked7: PropTypes.func,
+  setIsChecked8: PropTypes.func,
+  setIsChecked9: PropTypes.func,
+  setIsChecked10: PropTypes.func,
+  setIsChecked11: PropTypes.func,
+  setIsChecked12: PropTypes.func,
+  setIsChecked13: PropTypes.func,
+  temp: PropTypes.string,
+  tempMin: PropTypes.string,
+  tempMax: PropTypes.string,
+  feelsLike: PropTypes.string,
+  pressure: PropTypes.string,
+  humidity: PropTypes.string,
+  clouds: PropTypes.string,
+  weather: PropTypes.string,
+  rain: PropTypes.string,
+  snow: PropTypes.string,
+  dewPoint: PropTypes.string,
+  visibility: PropTypes.string,
+  wind: PropTypes.string,
+  setTemp: PropTypes.func,
+  setTempMin: PropTypes.func,
+  setTempMax: PropTypes.func,
+  setFeelsLike: PropTypes.func,
+  setPressure: PropTypes.func,
+  setHumidity: PropTypes.func,
+  setClouds: PropTypes.func,
+  setWeather: PropTypes.func,
+  setRain: PropTypes.func,
+  setSnow: PropTypes.func,
+  setDewPoint: PropTypes.func,
+  setVisibility: PropTypes.func,
+  setWind: PropTypes.func,
+  close: PropTypes.func,
 };
 
 export default CheckyBox;

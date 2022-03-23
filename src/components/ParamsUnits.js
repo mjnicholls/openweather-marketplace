@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Label, Form, FormGroup, Input, Row, Col } from "reactstrap";
 import { units } from "../config";
 import ReactBSAlert from "react-bootstrap-sweetalert";
+import PropTypes from "prop-types";
 
 const UnitsParams = ({ unitsValue, setUnitsValue }) => {
   const [alert, setAlert] = useState(null);
@@ -38,53 +39,7 @@ const UnitsParams = ({ unitsValue, setUnitsValue }) => {
                 ))}
             </FormGroup>
           </Form>
-          </Col>
-               
-
-{/* <Form className="checkbox-radios ml-5">
-              <FormGroup check className="form-check-radio">
-                <Label check>
-                Metric (Celsius, hPa, meter/sec, mm/h)
-                  <Input
-                    name="file"
-                    onChange={() => {
-                    setUnitsValue("Metric")
-                  }}
-                    type="radio"
-                    checked={unitsValue === "Metric"}
-                  />
-                </Label>
-              </FormGroup>
-
-              <FormGroup check className="form-check-radio">
-                <Label check>
-                Imperial (Fahrenheit, hPa, miles/hour, mm/h)
-                  <Input
-                    name="file"
-                    onChange={() => {
-                    setUnitsValue("Imperial")
-                  }}
-                    type="radio"
-                    checked={unitsValue === "Imperial"}
-                  />
-                </Label>
-              </FormGroup>
-
-              <FormGroup check className="form-check-radio">
-                <Label check>
-                Standard (Kelvin, hPa, meter/sec, mm/h
-                  <Input
-                    name="file"
-                    onChange={() => {
-                    setUnitsValue("Standard")
-                  }}
-                    type="radio"
-                    checked={unitsValue === "Standard"}
-                  />
-                </Label>
-              </FormGroup>
-
-          </Form> */}
+          </Col>   
         </Row>
       </ReactBSAlert>
     );
@@ -102,6 +57,11 @@ const UnitsParams = ({ unitsValue, setUnitsValue }) => {
       </Button>
     </>
   );
+};
+
+UnitsParams.propTypes = {
+  unitsValue: PropTypes.string,
+  setunitsValue: PropTypes.func,
 };
 
 export default UnitsParams;

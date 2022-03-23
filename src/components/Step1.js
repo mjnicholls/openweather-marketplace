@@ -269,6 +269,7 @@ Step1.propTypes = {
   invoiceSettings: PropTypes.object,
   setInvoiceSettings: PropTypes.func,
   email: PropTypes.string,
+  setEmail: PropTypes.func
 };
 
 export default Step1;

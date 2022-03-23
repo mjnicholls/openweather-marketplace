@@ -5,12 +5,11 @@ import { Col, Row, Button } from "reactstrap";
 import { Close } from "react-ikonate";
 import EditNameCard from "./EditNameCard";
 
-const LocationListHistory = ({ locations, setLocations, price, setPrice }) => {
+const LocationListHistory = ({ locations, setLocations }) => {
   const deleteLocation = (index) => {
     const locationsCopy = [...locations];
     locationsCopy.splice(index, 1);
     setLocations(locationsCopy);
-    setPrice(price - 35);
   };
 
   return (
@@ -95,8 +94,6 @@ const LocationListHistory = ({ locations, setLocations, price, setPrice }) => {
 LocationListHistory.propTypes = {
   locations: PropTypes.array,
   setLocations: PropTypes.func,
-  price: PropTypes.number,
-  setPrice: PropTypes.func,
 };
 
 export default LocationListHistory;

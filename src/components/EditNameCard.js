@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import { Edit } from "react-ikonate";
 import { Button } from "reactstrap";
-
 import EditName from "./EditName";
 
 const EditNameCard = ({ location, index, locations, setLocations }) => {
@@ -58,9 +57,10 @@ const EditNameCard = ({ location, index, locations, setLocations }) => {
 };
 
 EditNameCard.propTypes = {
-  id: PropTypes.string,
-  status: PropTypes.string,
-  name: PropTypes.string,
+  locations: PropTypes.array,
+  location: PropTypes.object,
+  setLocations: PropTypes.func,
+  index: PropTypes.func,
 };
 
 export default EditNameCard;

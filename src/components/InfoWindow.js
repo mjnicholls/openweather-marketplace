@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "reactstrap";
 import PropTypes from "prop-types";
 
@@ -11,7 +11,6 @@ const InfoWindow = ({
   setErrorMap,
   count,
   setCount,
-  isAdded,
   setIsAdded
 }) => {
 
@@ -79,9 +78,15 @@ const InfoWindow = ({
 };
 
 InfoWindow.propTypes = {
-  location: PropTypes.object,
-  setLocation: PropTypes.func,
+  locations: PropTypes.array,
+  setLocations: PropTypes.func,
   showButton: PropTypes.bool,
+  location: PropTypes.object,
+  errorMap: PropTypes.bool,
+  setErrorMap: PropTypes.func,
+  count: PropTypes.number,
+  setCount: PropTypes.func,
+  setIsAdded: PropTypes.func
 };
 
 export default InfoWindow;

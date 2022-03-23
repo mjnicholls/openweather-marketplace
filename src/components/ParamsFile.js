@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Button, Col, Label, Form, FormGroup, Input, Row } from "reactstrap";
+import { Button, Col, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import CheckyBoxFile from "./checkBoxFile";
+import PropTypes from "prop-types";
 
 const FileParams = ({
   formatValue,
@@ -68,5 +69,19 @@ const FileParams = ({
     </>
   );
 };
+
+FileParams.propTypes = {
+  formatValue: PropTypes.string,
+  setFormatValue: PropTypes.func,
+  csv: PropTypes.string,
+  setCSV: PropTypes.func,
+  json: PropTypes.string,
+  setJson: PropTypes.func,
+  fileCheck: PropTypes.bool,
+  fileCheck2: PropTypes.bool,
+  setFileCheck: PropTypes.func,
+  setFileCheck2: PropTypes.func,
+};
+
 
 export default FileParams;

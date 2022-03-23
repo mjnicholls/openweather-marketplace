@@ -27,8 +27,6 @@ const Step0Bulk = ({
   fileCheck2,
 }) => {
 
-
-
   return (
     <div>
       <Row className="text-start step-bulk">
@@ -105,9 +103,27 @@ const Step0Bulk = ({
 };
 
 Step0Bulk.propTypes = {
-  year: PropTypes.string,
-  country: PropTypes.string,
-  price: PropTypes.number,
+  locations: PropTypes.array,
+  fileCheck: PropTypes.bool,
+  fileCheck2: PropTypes.bool,
+  isChecked: PropTypes.bool,
+  isChecked2: PropTypes.bool,
+  isChecked3: PropTypes.bool,
+  isChecked4: PropTypes.bool,
+  isChecked5: PropTypes.bool,
+  isChecked6: PropTypes.bool,
+  isChecked7: PropTypes.bool,
+  isChecked8: PropTypes.bool,
+  isChecked9: PropTypes.bool,
+  isChecked10: PropTypes.bool,
+  isChecked11: PropTypes.bool,
+  isChecked12: PropTypes.bool,
+  isChecked13: PropTypes.bool,
+  startDate: PropTypes.instanceOf(Date),
+  endDate: PropTypes.instanceOf(Date),
+  currency: PropTypes.number,
+  unitsValue: PropTypes.string,
+  downloadsValue: PropTypes.string,
 };
 
 export default Step0Bulk;

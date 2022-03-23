@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Label, Form, FormGroup, Input, Row } from "reactstrap";
 import { download } from "../config";
 import ReactBSAlert from "react-bootstrap-sweetalert";
+import PropTypes from "prop-types";
 
 const DownloadParams = ({ downloadsValue, setDownloadsValue }) => {
   const [alert, setAlert] = useState(null);
@@ -61,6 +62,11 @@ const DownloadParams = ({ downloadsValue, setDownloadsValue }) => {
       </Button>
     </>
   );
+};
+
+DownloadParams.propTypes = {
+  downloadsValue: PropTypes.string,
+  setDownloadsValue: PropTypes.func,
 };
 
 export default DownloadParams;

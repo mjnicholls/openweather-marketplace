@@ -6,6 +6,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import Stack from "@mui/material/Stack";
+import PropTypes from "prop-types";
 
 const DatePickerForecast = ({
   startDate,
@@ -15,8 +16,6 @@ const DatePickerForecast = ({
 }) => {
 
   const endDatePlusOne = new Date(startDate)
-
-  console.log("setValue", startDate);
 
   return (
     <>
@@ -30,7 +29,7 @@ const DatePickerForecast = ({
                 openTo="year"
                 views={["year", "month", "day"]}
                 minDate={new Date("2017")}
-                maxDate={endDate < startDate ? endDate === startDate + 1 : moment().toDate()}
+                maxDate={endDate >= startDate ? endDate : moment().toDate()}
                 value={startDate}
                 label={'From'}
                 onChange={(newValue) => {
@@ -53,9 +52,9 @@ const DatePickerForecast = ({
               style={{border: "none"}}
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={endDatePlusOne.setDate(endDatePlusOne.getDate() + 1)}
+                minDate={endDatePlusOne.setDate(endDatePlusOne.getDate())}
                 //minDate={new Date("2017")}
-                maxDate={moment().toDate()}
+                maxDate={endDate < startDate ? endDate === startDate + 1 : moment().toDate()}
                 value={endDate}
                 label={'To'}
                 InputProps={{ readOnly: true }}
@@ -72,6 +71,13 @@ const DatePickerForecast = ({
       </Col>
     </>
   );
+};
+
+DatePickerForecast.propTypes = {
+  startDate: PropTypes.instanceOf(Date),
+  setStartDate: PropTypes.func,
+  endDate: PropTypes.instanceOf(Date),
+  setEndDate: PropTypes.func,
 };
 
 export default DatePickerForecast;

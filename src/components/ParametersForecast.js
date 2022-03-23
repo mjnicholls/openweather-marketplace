@@ -7,10 +7,6 @@ import DownloadParams from "./ParamsDownload";
 import PropTypes from "prop-types";
 
 const ParametersForecast = ({
-  checkedWeather,
-  setCheckedWeather,
-  parametersUnits,
-  setParametersUnits,
   downloadsValue,
   setDownloadsValue,
   formatValue,
@@ -63,8 +59,6 @@ const ParametersForecast = ({
       <Row className="mt-3">
         <Col>
           <WeatherHistoryParams
-            checkedWeather={checkedWeather}
-            setCheckedWeather={setCheckedWeather}
             fileValue={fileValue}
             setFileValue={setFileValue}
             checked={checked}
@@ -100,8 +94,6 @@ const ParametersForecast = ({
           />
     
           <UnitsParams
-            parametersUnits={parametersUnits}
-            setParametersUnits={setParametersUnits}
             unitsValue={unitsValue}
             setUnitsValue={setUnitsValue}
           />
@@ -131,8 +123,50 @@ const ParametersForecast = ({
 };
 
 ParametersForecast.propTypes = {
-  parameters: PropTypes.object,
-  setParameters: PropTypes.func,
+    isChecked: PropTypes.bool,
+    isChecked2: PropTypes.bool,
+    isChecked3: PropTypes.bool,
+    isChecked4: PropTypes.bool,
+    isChecked5: PropTypes.bool,
+    isChecked6: PropTypes.bool,
+    isChecked7: PropTypes.bool,
+    setIsChecked: PropTypes.func,
+    setIsChecked2: PropTypes.func,
+    setIsChecked3: PropTypes.func,
+    setIsChecked4: PropTypes.func,
+    setIsChecked5: PropTypes.func,
+    setIsChecked6: PropTypes.func,
+    setIsChecked7: PropTypes.func,
+    temp: PropTypes.string,
+    setTemp: PropTypes.func,
+    pressure: PropTypes.string,
+    setPressure: PropTypes.func,
+    humidity: PropTypes.string,
+    setHumidity: PropTypes.func,
+    clouds: PropTypes.string,
+    setClouds: PropTypes.func,
+    dewPoint: PropTypes.string,
+    setDewPoint: PropTypes.func,
+    precipitation: PropTypes.string,
+    setPrecipitation: PropTypes.func,
+    wind: PropTypes.string,
+    setWind: PropTypes.func,
+    fileCheck: PropTypes.bool,
+    fileCheck2: PropTypes.bool,
+    setFileCheck: PropTypes.func,
+    setFileCheck2: PropTypes.func,
+    csv: PropTypes.string,
+    setCSV: PropTypes.func,
+    json: PropTypes.string,
+    setJson: PropTypes.func,
+    fileValue: PropTypes.bool,
+    setFileValue: PropTypes.func,
+    unitsValue: PropTypes.string,
+    setUnitsValue: PropTypes.func,
+    downloadsValue: PropTypes.string,
+    setDownloadsValue: PropTypes.func,
+    formatValue: PropTypes.string,
+    setFormatValue: PropTypes.func,
 };
 
 export default ParametersForecast;

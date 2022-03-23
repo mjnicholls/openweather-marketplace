@@ -29,12 +29,8 @@ const Location = ({
   setStartDate,
   endDate,
   setEndDate,
-  price,
-  setPrice,
   location,
   setLocation,
-  checkedWeather,
-  setCheckedWeather,
   fileValue,
   setFileValue,
   unitsValue,
@@ -44,14 +40,8 @@ const Location = ({
   formatValue,
   setFormatValue,
   currency,
-  checked,
-  setChecked,
   importPrice,
   setImportPrice,
-  body,
-  setBody,
-  on,
-  setOn,
   temp,
   setTemp,
   tempMin,
@@ -104,8 +94,6 @@ const Location = ({
   setIsChecked12,
   isChecked13,
   setIsChecked13,
-  isCheckedUnits,
-  setIsCheckedUnits,
   fileCheck,
   setFileCheck,
   fileCheck2,
@@ -336,7 +324,6 @@ const Location = ({
   const addLocations = (data) => {
     const newLocations = [...locations, ...data];
     setLocations(newLocations);
-    setPrice(price + 7);
   };
 
   const checkoutAlert = () => {
@@ -350,23 +337,15 @@ const Location = ({
         <InvoiceSettingsBulk
           close={hideAlert}
           locations={locations}
-          price={price}
           startDate={startDate}
           importPrice={importPrice}
           setImportPrice={setImportPrice}
           endDate={endDate}
-          checkedWeather={checkedWeather}
           fileValue={fileValue}
           unitsValue={unitsValue}
           downloadsValue={downloadsValue}
           formatValue={formatValue}
           currency={currency}
-          checked={checked}
-          setChecked={setChecked}
-          body={body}
-          setBody={setBody}
-          on={on}
-          setOn={setOn}
           temp={temp}
           setTemp={setTemp}
           tempMin={tempMin}
@@ -407,8 +386,6 @@ const Location = ({
           isChecked11={isChecked11}
           isChecked12={isChecked12}
           isChecked13={isChecked13}
-          isCheckedUnits={isCheckedUnits}
-          setIsCheckedUnits={setIsCheckedUnits}
           fileCheck={fileCheck}
           setFileCheck={setFileCheck}
           fileCheck2={fileCheck2}
@@ -592,10 +569,6 @@ const Location = ({
       </div>
 
       <Parameters
-        parameters={parameters}
-        setParameters={setParameters}
-        checkedWeather={checkedWeather}
-        setCheckedWeather={setCheckedWeather}
         fileValue={fileValue}
         setFileValue={setFileValue}
         unitsValue={unitsValue}
@@ -604,10 +577,6 @@ const Location = ({
         setDownloadsValue={setDownloadsValue}
         formatValue={formatValue}
         setFormatValue={setFormatValue}
-        checked={checked}
-        setChecked={setChecked}
-        on={on}
-        setOn={setOn}
         temp={temp}
         setTemp={setTemp}
         tempMin={tempMin}
@@ -673,8 +642,6 @@ const Location = ({
       <LocationList
         locations={locations}
         setLocations={setLocations}
-        price={price}
-        setPrice={setPrice}
         location={location}
         setLocation={setLocation}
       />
@@ -724,13 +691,89 @@ Location.propTypes = {
   setLocation: PropTypes.func,
   tempLocation: PropTypes.object,
   setTempLocation: PropTypes.func,
+  count: PropTypes.number,
+  setCount: PropTypes.func,
+  email: PropTypes.string,
+  setEmail: PropTypes.func,
   error: PropTypes.object,
   setError: PropTypes.func,
+  setErrorMap: PropTypes.func,
+  setIsAdded: PropTypes.func,
   setIsName: PropTypes.func,
   searchBoxRef: PropTypes.object,
   isDropDown: PropTypes.bool,
   setIsDropDown: PropTypes.func,
-  setIsLocationNameEdited: PropTypes.func,
+  isChecked: PropTypes.bool,
+  isChecked2: PropTypes.bool,
+  isChecked3: PropTypes.bool,
+  isChecked4: PropTypes.bool,
+  isChecked5: PropTypes.bool,
+  isChecked6: PropTypes.bool,
+  isChecked7: PropTypes.bool,
+  isChecked8: PropTypes.bool,
+  isChecked9: PropTypes.bool,
+  isChecked10: PropTypes.bool,
+  isChecked11: PropTypes.bool,
+  isChecked12: PropTypes.bool,
+  isChecked13: PropTypes.bool,
+  setIsChecked: PropTypes.func,
+  setIsChecked2: PropTypes.func,
+  setIsChecked3: PropTypes.func,
+  setIsChecked4: PropTypes.func,
+  setIsChecked5: PropTypes.func,
+  setIsChecked6: PropTypes.func,
+  setIsChecked7: PropTypes.func,
+  setIsChecked8: PropTypes.func,
+  setIsChecked9: PropTypes.func,
+  setIsChecked10: PropTypes.func,
+  setIsChecked11: PropTypes.func,
+  setIsChecked12: PropTypes.func,
+  setIsChecked13: PropTypes.func,
+  temp: PropTypes.string,
+  setTemp: PropTypes.func,
+  tempMin: PropTypes.string,
+  setTempMin: PropTypes.func,
+  tempMax: PropTypes.string,
+  setTempMax: PropTypes.func,
+  pressure: PropTypes.string,
+  setPressure: PropTypes.func,
+  humidity: PropTypes.string,
+  setHumidity: PropTypes.func,
+  rain: PropTypes.string,
+  setRain: PropTypes.func,
+  snow: PropTypes.string,
+  setSnow: PropTypes.func,
+  weather: PropTypes.string,
+  setWeather: PropTypes.func,
+  clouds: PropTypes.string,
+  setClouds: PropTypes.func,
+  dewPoint: PropTypes.string,
+  setDewPoint: PropTypes.func,
+  visibility: PropTypes.string,
+  setVisibility: PropTypes.func,
+  wind: PropTypes.string,
+  setWind: PropTypes.func,
+  close: PropTypes.func,
+  startDate: PropTypes.instanceOf(Date),
+  setStartDate: PropTypes.func,
+  endDate: PropTypes.instanceOf(Date),
+  setEndDate: PropTypes.func,
+  fileCheck: PropTypes.bool,
+  fileCheck2: PropTypes.bool,
+  setFileCheck: PropTypes.func,
+  setFileCheck2: PropTypes.func,
+  csv: PropTypes.string,
+  setCSV: PropTypes.func,
+  json: PropTypes.string,
+  setJson: PropTypes.func,
+  fileValue: PropTypes.bool,
+  setFileValue: PropTypes.func,
+  unitsValue: PropTypes.string,
+  setUnitsValue: PropTypes.func,
+  downloadsValue: PropTypes.string,
+  setDownloadsValue: PropTypes.func,
+  formatValue: PropTypes.string,
+  setFormatValue: PropTypes.func,
 };
 
 export default Location;

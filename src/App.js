@@ -7,11 +7,10 @@ import FooterMarket from "./components/Footer";
 import { Container } from "reactstrap";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomeMarket from "./pages/Home";
-import NewHistoryBulk from "./pages/NewHistoryBulk";
 import HistoryForecastBulk from "./pages/HistoryForecastBulk";
 import store from "./store";
 import DataUSState from "./pages/DataUSState";
-import NewHistoryBulkTest from './pages/NewHistoryBulkTest'
+import NewHistoryBulkTest from './pages/HistoryBulk'
 import MyOrders from "./pages/MyOrders";
 
 function App() {

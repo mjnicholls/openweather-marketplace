@@ -12,7 +12,6 @@ const months = [
   "Nov",
   "Dec",
 ];
-// const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 function leadingZero(val) {
   let s = String(val);
@@ -35,11 +34,7 @@ export const toDateShort = (ts) => {
 };
 
 export const getStartDateByTariff = (limit) => {
-  /** Get start date based on client's tariff
-   * depth = -1: unlimited
-   * depth = 1: 1 year
-   * depth = 0.5: 1/2 year
-   * */
+
   let newStartDate = null;
   if (limit.depth > 0) {
     newStartDate = new Date();
@@ -51,10 +46,7 @@ export const getStartDateByTariff = (limit) => {
 };
 
 export const getDateInPast = (nOfMonths) => {
-  /**
-   * Get data N month before now
-   */
-  // let now = new Date();
+
 
   let dateInPast = new Date();
   dateInPast.setMonth(dateInPast.getMonth() - nOfMonths);
@@ -62,7 +54,7 @@ export const getDateInPast = (nOfMonths) => {
   return dateInPast;
 };
 
-// date time with offset
+
 export function formatDateShort(dt, offset = 0) {
   let date = new Date((dt + offset) * 1000);
   return `${months[date.getUTCMonth()]} ${leadingZero(date.getUTCDate())}`;

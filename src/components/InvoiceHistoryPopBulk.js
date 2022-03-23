@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Col, Form, Label, Row } from "reactstrap";
 import { validatePhoneNumber, validateVat, validateEmail } from "../utils/validation";
@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import { noBlankErrorMessage } from "../config";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
-
 import Step0HistoryBulk from "./Step0HistoryBulk";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
@@ -19,17 +18,12 @@ const InvoiceSettingsBulk = ({
   endDate,
   country,
   year,
-  price,
-  checkedWeather,
   unitsValue,
   fileValue,
   formatValue,
   downloadsValue,
   locations,
   currency,
-  checked,
-  setChecked,
-  importPrice,
   temp,
   setTemp,
   pressure,
@@ -290,19 +284,14 @@ const InvoiceSettingsBulk = ({
         <Step0HistoryBulk
           year={year}
           country={country}
-          price={price}
           endDate={endDate}
           startDate={startDate}
-          checkedWeather={checkedWeather}
           fileValue={fileValue}
           unitsValue={unitsValue}
           downloadsValue={downloadsValue}
           formatValue={formatValue}
           locations={locations}
           currency={currency}
-          checked={checked}
-          setChecked={setChecked}
-          importPrice={importPrice}
           temp={temp}
           setTemp={setTemp}
           pressure={pressure}
@@ -434,7 +423,44 @@ const InvoiceSettingsBulk = ({
 InvoiceSettingsBulk.propTypes = {
   year: PropTypes.string,
   country: PropTypes.string,
-  price: PropTypes.number,
+  isChecked: PropTypes.bool,
+  isChecked2: PropTypes.bool,
+  isChecked3: PropTypes.bool,
+  isChecked4: PropTypes.bool,
+  isChecked5: PropTypes.bool,
+  isChecked6: PropTypes.bool,
+  isChecked7: PropTypes.bool,
+  temp: PropTypes.string,
+  pressure: PropTypes.string,
+  humidity: PropTypes.string,
+  clouds: PropTypes.string,
+  dewPoint: PropTypes.string,
+  precipitation: PropTypes.string,
+  wind: PropTypes.string,
+  setTemp: PropTypes.func,
+  setPressure: PropTypes.func,
+  setHumidity: PropTypes.func,
+  setClouds: PropTypes.func,
+  setDewPoint: PropTypes.func,
+  setPrecipitation: PropTypes.func,
+  setWind: PropTypes.func,
+  close: PropTypes.func,
+  fileCheck: PropTypes.bool,
+  fileCheck2: PropTypes.bool,
+  setFileCheck: PropTypes.func,
+  setFileCheck2: PropTypes.func,
+  csv: PropTypes.string,
+  setCSV: PropTypes.func,
+  json: PropTypes.string,
+  setJson: PropTypes.func,
+  unitsValue: PropTypes.string,
+  fileValue: PropTypes.bool,
+  formatValue: PropTypes.string,
+  downloadsValue: PropTypes.string,
+  startDate: PropTypes.instanceOf(Date),
+  endDate: PropTypes.instanceOf(Date),
+  locations: PropTypes.array,
+  currency: PropTypes.string
 };
 
 export default InvoiceSettingsBulk;

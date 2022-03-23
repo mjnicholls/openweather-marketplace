@@ -7,12 +7,6 @@ import DownloadParams from "./ParamsDownload";
 import PropTypes from "prop-types";
 
 const Parameters = ({
-  checkedWeather,
-  setCheckedWeather,
-  parametersUnits,
-  setParametersUnits,
-  parametersWeather,
-  setparametersWeather,
   downloadsValue,
   setDownloadsValue,
   formatValue,
@@ -21,10 +15,6 @@ const Parameters = ({
   setFileValue,
   unitsValue,
   setUnitsValue,
-  checked,
-  setChecked,
-  on,
-  setOn,
   temp,
   setTemp,
   tempMin,
@@ -84,23 +74,15 @@ const Parameters = ({
   csv,
   setCSV,
   json,
-  setJson,
+  setJson
 }) => {
   return (
     <>
       <Row className="mt-3">
    <Col className="text-start">
           <WeatherParams
-            checkedWeather={checkedWeather}
-            setCheckedWeather={setCheckedWeather}
-            parametersWeather={parametersWeather}
-            setparametersWeather={setparametersWeather}
             fileValue={fileValue}
             setFileValue={setFileValue}
-            checked={checked}
-            setChecked={setChecked}
-            on={on}
-            setOn={setOn}
             temp={temp}
             setTemp={setTemp}
             tempMin={tempMin}
@@ -156,8 +138,6 @@ const Parameters = ({
           />
 
           <UnitsParams
-            parametersUnits={parametersUnits}
-            setParametersUnits={setParametersUnits}
             unitsValue={unitsValue}
             setUnitsValue={setUnitsValue}
           />
@@ -186,8 +166,72 @@ const Parameters = ({
 };
 
 Parameters.propTypes = {
-  parameters: PropTypes.object,
-  setParameters: PropTypes.func,
+  isChecked: PropTypes.bool,
+  isChecked2: PropTypes.bool,
+  isChecked3: PropTypes.bool,
+  isChecked4: PropTypes.bool,
+  isChecked5: PropTypes.bool,
+  isChecked6: PropTypes.bool,
+  isChecked7: PropTypes.bool,
+  isChecked8: PropTypes.bool,
+  isChecked9: PropTypes.bool,
+  isChecked10: PropTypes.bool,
+  isChecked11: PropTypes.bool,
+  isChecked12: PropTypes.bool,
+  isChecked13: PropTypes.bool,
+  setIsChecked: PropTypes.func,
+  setIsChecked2: PropTypes.func,
+  setIsChecked3: PropTypes.func,
+  setIsChecked4: PropTypes.func,
+  setIsChecked5: PropTypes.func,
+  setIsChecked6: PropTypes.func,
+  setIsChecked7: PropTypes.func,
+  setIsChecked8: PropTypes.func,
+  setIsChecked9: PropTypes.func,
+  setIsChecked10: PropTypes.func,
+  setIsChecked11: PropTypes.func,
+  setIsChecked12: PropTypes.func,
+  setIsChecked13: PropTypes.func,
+  temp: PropTypes.string,
+  setTemp: PropTypes.func,
+  tempMin: PropTypes.string,
+  setTempMin: PropTypes.func,
+  tempMax: PropTypes.string,
+  setTempMax: PropTypes.func,
+  pressure: PropTypes.string,
+  setPressure: PropTypes.func,
+  humidity: PropTypes.string,
+  setHumidity: PropTypes.func,
+  rain: PropTypes.string,
+  setRain: PropTypes.func,
+  snow: PropTypes.string,
+  setSnow: PropTypes.func,
+  weather: PropTypes.string,
+  setWeather: PropTypes.func,
+  clouds: PropTypes.string,
+  setClouds: PropTypes.func,
+  dewPoint: PropTypes.string,
+  setDewPoint: PropTypes.func,
+  visibility: PropTypes.string,
+  setVisibility: PropTypes.func,
+  wind: PropTypes.string,
+  setWind: PropTypes.func,
+  fileCheck: PropTypes.bool,
+  fileCheck2: PropTypes.bool,
+  setFileCheck: PropTypes.func,
+  setFileCheck2: PropTypes.func,
+  csv: PropTypes.string,
+  setCSV: PropTypes.func,
+  json: PropTypes.string,
+  setJson: PropTypes.func,
+  fileValue: PropTypes.bool,
+  setFileValue: PropTypes.func,
+  unitsValue: PropTypes.string,
+  setUnitsValue: PropTypes.func,
+  downloadsValue: PropTypes.string,
+  setDownloadsValue: PropTypes.func,
+  formatValue: PropTypes.string,
+  setFormatValue: PropTypes.func,
 };
 
 export default Parameters;

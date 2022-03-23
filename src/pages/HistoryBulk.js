@@ -51,8 +51,6 @@ const NewHistoryBulkTest = () => {
 
   const [formatValue, setFormatValue] = useState("CSV");
 
-  const yesterday = new Date((new Date()).valueOf() - 1000*60*60*24)
-
   const [startDate, setStartDate] = useState(moment().toDate());
 
   const [endDate, setEndDate] = useState(moment().toDate());
@@ -65,8 +63,6 @@ const NewHistoryBulkTest = () => {
 
   const [email, setEmail] = useState("");
 
-  console.log("look", email);
-
   const [on, setOn] = useState({
     news: false,
     product: false,
@@ -74,8 +70,6 @@ const NewHistoryBulkTest = () => {
   });
 
   const [isAdded, setIsAdded] = useState(false);
-
-  console.log("added", isAdded);
 
   const [temp, setTemp] = useState("On");
   const [tempMin, setTempMin] = useState("On");
@@ -123,25 +117,23 @@ const NewHistoryBulkTest = () => {
       lon: location.lon,
     });
 
-    /*eslint-disable-next-line*/
   }, [location]);
 
 
   useEffect(() => {
     if (tempLocation.lat && tempLocation.lon) {
-      // eslint-disable-next-line
+
       const position = new google.maps.LatLng(
         tempLocation.lat,
         tempLocation.lon
       );
-      // eslint-disable-next-line
+
       placeMarker(position, mapRef.current.map_);
     }
 
   }, [tempLocation]);
 
   useEffect(() => {
-    // detect click outside location search box
     document.addEventListener("mousedown", handleClickOutsideSearchBox);
     return () => {
       document.removeEventListener("mousedown", handleClickOutsideSearchBox);

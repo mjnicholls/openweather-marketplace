@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import PropTypes from "prop-types";
 import { Col, Row, Input, Button } from "reactstrap";
 
@@ -63,9 +62,9 @@ const EditTrigger = ({ locations, setLocations, location, close }) => {
 };
 
 EditTrigger.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  status: PropTypes.string,
+  locations: PropTypes.array,
+  location: PropTypes.object,
+  setLocations: PropTypes.func,
   close: PropTypes.func,
 };
 

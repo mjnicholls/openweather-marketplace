@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button, Col, Form, Label, Row } from "reactstrap";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-import { confirmVatNumber, getAccountInfo } from "../api/personalAccountAPI";
 import PropTypes from "prop-types";
 import { noBlankErrorMessage } from "../config";
 import { validatePhoneNumber, validateVat } from "../utils/validation";
@@ -474,7 +473,6 @@ const InvoiceSettings = ({ country, year, price }) => {
 InvoiceSettings.propTypes = {
   year: PropTypes.string,
   country: PropTypes.string,
-  price: PropTypes.number,
 };
 
 export default InvoiceSettings;

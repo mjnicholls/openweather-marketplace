@@ -20,7 +20,6 @@ const InvoiceSettingsBulk = ({
   endDate,
   country,
   year,
-  price,
   importPrice,
   checkedWeather,
   unitsValue,
@@ -304,7 +303,6 @@ const InvoiceSettingsBulk = ({
         <Step0Bulk
           year={year}
           country={country}
-          price={price}
           importPrice={importPrice}
           endDate={endDate}
           startDate={startDate}
@@ -440,7 +438,51 @@ const InvoiceSettingsBulk = ({
 InvoiceSettingsBulk.propTypes = {
   year: PropTypes.string,
   country: PropTypes.string,
-  price: PropTypes.number,
+    isChecked: PropTypes.bool,
+    isChecked2: PropTypes.bool,
+    isChecked3: PropTypes.bool,
+    isChecked4: PropTypes.bool,
+    isChecked5: PropTypes.bool,
+    isChecked6: PropTypes.bool,
+    isChecked7: PropTypes.bool,
+    isChecked8: PropTypes.bool,
+    isChecked9: PropTypes.bool,
+    isChecked10: PropTypes.bool,
+    isChecked11: PropTypes.bool,
+    isChecked12: PropTypes.bool,
+    isChecked13: PropTypes.bool,
+    temp: PropTypes.string,
+    tempMin: PropTypes.string,
+    tempMax: PropTypes.string,
+    pressure: PropTypes.string,
+    humidity: PropTypes.string,
+    clouds: PropTypes.string,
+    rain: PropTypes.string,
+    snow: PropTypes.string,
+    weather: PropTypes.string,
+    clouds: PropTypes.string,
+    dewPoint: PropTypes.string,
+    visibility: PropTypes.string,
+    wind: PropTypes.string,
+    close: PropTypes.func,
+    fileCheck: PropTypes.bool,
+    fileCheck2: PropTypes.bool,
+    setFileCheck: PropTypes.func,
+    setFileCheck2: PropTypes.func,
+    csv: PropTypes.string,
+    setCSV: PropTypes.func,
+    json: PropTypes.string,
+    setJson: PropTypes.func,
+    unitsValue: PropTypes.string,
+    fileValue: PropTypes.bool,
+    formatValue: PropTypes.string,
+    downloadsValue: PropTypes.string,
+    startDate: PropTypes.instanceOf(Date),
+    endDate: PropTypes.instanceOf(Date),
+    locations: PropTypes.array,
+    currency: PropTypes.string
 };
+
+
 
 export default InvoiceSettingsBulk;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Col, Label, Form, FormGroup, Input, Row } from "reactstrap";
+import PropTypes from "prop-types";
 
 const CheckyBoxFile = ({
   fileCheck,
@@ -91,6 +92,18 @@ const CheckyBoxFile = ({
       </Row>
     </>
   );
+};
+
+CheckyBoxFile.propTypes = {
+  fileCheck: PropTypes.bool,
+  fileCheck2: PropTypes.bool,
+  setFileCheck: PropTypes.func,
+  setFileCheck2: PropTypes.func,
+  csv: PropTypes.string,
+  setCSV: PropTypes.func,
+  json: PropTypes.string,
+  setJson: PropTypes.func,
+  close: PropTypes.func,
 };
 
 export default CheckyBoxFile;

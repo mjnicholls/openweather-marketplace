@@ -1,32 +1,25 @@
 import React, { useState } from "react";
-
-import { useSelector } from "react-redux";
-
 import { Label, Col, Row, FormGroup, Button } from "reactstrap";
 import Select from "react-select";
 import { statesOfAmerica, years } from "../config";
-import InvoiceSettings from "../components/InvoicePop";
 import ReactBSAlert from "react-bootstrap-sweetalert";
+import { useSelector } from "react-redux";
 
-//const selectCurrency = (state) => state.auth.currency;
+const selectCurrency = (state) => state.auth.currency;
 
 const DataUSState = () => {
-  const currency = "USD";
+  const currency = useSelector(selectCurrency);
 
   const [price, setPrice] = useState(0);
   const [country, setCountry] = useState("");
-  const [zip, setZip] = useState("");
   const [year, setYear] = useState("");
 
   const handleChange = (e) => {
-    setZip(e.zip);
     setCountry(e.value);
     setPrice(e.price);
   };
 
   const [alert, setAlert] = React.useState(null);
-
-  const [email, setEmail] = useState();
 
   const hideAlert = () => {
     setAlert(null);
