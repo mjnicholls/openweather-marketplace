@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Row, Card, CardHeader, CardBody } from "reactstrap";
 import { getOrders } from "../api/personalAccountAPI";
+import axios from "axios";
+import ReactBSAlert from "react-bootstrap-sweetalert";
 
 const MyOrders = () => {
-  
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -15,6 +17,70 @@ const MyOrders = () => {
         console.log("error", err);
       });
   }, []);
+
+  const [set, setSet] = useState()
+
+  const test = data.map((row) => row.product_name)
+
+  if (test === "History Forecast Bulk"){
+    var forecast = "history_forecast_bulk"
+  }
+
+  if (test === "History Bulk"){
+    var forecast = "history_bulk"
+  }
+
+  if (test === "Zip Code Data"){
+    var forecast = "zip_code_data"
+  }
+
+  const [alert, setAlert] = useState(null);
+
+  const hideAlert = () => {
+    setAlert(null);
+  };
+
+  const retryAlert = () => {
+    setAlert(
+      <ReactBSAlert
+        title="Retry"
+        onConfirm={() => hideAlert()}
+        onCancel={() => hideAlert()}
+        showConfirm={false}
+        showCloseButton
+        customClass="bs-alerts"
+      >
+        <Row className="trigger-item">
+          <Col>Failed to recognise locations.</Col>
+        </Row>
+        <Row className="trigger-item">
+          <Col className="text-end">
+            <Button
+            className="button-neutral"
+            onClick={hideAlert}>
+              Close
+            </Button>
+          </Col>
+        </Row>
+      </ReactBSAlert>
+    );
+  };
+
+
+  // const retry = data.map((ind) => ind.hbs_response.map((hbs_response) => hbs_response.id))
+  // console.log('lll', retry)
+
+  // const retryButton = () => {
+  //   axios.get(`https://marketplace-weather.owm.io/${retryProduct}/${retryId}/retry`)
+  //   .then((res) => {
+  //     console.log('res',res)
+  //     retryAlert()
+  //   })
+  //   .catch((err) => {
+  //     console.log(`Error: ${err.message}`);
+  //   });
+
+  // }
 
   const [showResults, setShowResults] = useState(false);
 
@@ -28,6 +94,7 @@ const MyOrders = () => {
 
   return (
     <div className="container">
+      {alert}
       <Row className="mt-4 mb-4 text-start">
         <h1>My Orders</h1>
       </Row>
@@ -395,12 +462,35 @@ const MyOrders = () => {
                       {row.hbs_response.failed === true ? (
                         <>
                         <Col>Failed processing</Col>
+                        {row.product_name === "History Forecast Bulk" ? 
                         <Button
                         className="button-neutral"
-                        a href={`https://marketplace-weather.owm.io/${row.product_name}/${row.hbs_response.id}/retry`}
+                        a href={`${axios.get('http://marketplace-weather.owm.io' + `/history_forecast_bulk` + `/${row.hbs_response.id}` + `/retry`)}`}
+                        onClick={retryAlert}
                       >
                         Retry
                       </Button>
+                      :
+                      row.product_name === "History Bulk" ?
+                      <Button
+                      className="button-neutral"
+                      a href={`${axios.get('http://marketplace-weather.owm.io' + `/history_bulk` + `/${row.hbs_response.id}` + `/retry`)}`}
+                      onClick={retryAlert}
+                    >
+                      Retry
+                    </Button>
+                    :
+                    row.product_name === "Zip Code Data" ?
+                    <Button
+                    className="button-neutral"
+                    a href={`${axios.get('http://marketplace-weather.owm.io' + `/zip_code_data` + `/${row.hbs_response.id}` + `/retry`)}`}
+                    onClick={retryAlert}
+                  >
+                    Retry
+                  </Button>
+                  :
+                  null
+                      }
                       </>
                       ) :
                       null}
