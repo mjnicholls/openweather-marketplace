@@ -328,7 +328,7 @@ const MyOrders = () => {
 
                   {row.status === "done" ? (
                     <Col>
-                      {row.file_format === "json+csv" ? (
+                      {row.file_format === "json+csv" && row.hbs_response.failed === false ? (
                         <>
                           <Button
                             className="button-neutral"
@@ -353,7 +353,8 @@ const MyOrders = () => {
                         </>
                       ) : null}
                       {row.file_format === "csv" &&
-                      row.product_name !== "Zip Code Data" ? (
+                      row.product_name !== "Zip Code Data" &&
+                      row.hbs_response.failed === false ? (
                         <Button
                           className="button-neutral"
                           a
@@ -365,18 +366,20 @@ const MyOrders = () => {
                           Download CSV
                         </Button>
                       ) : null}
-                      {row.file_format === "json" ? (
+
+                      {row.file_format === "json" && row.hbs_response.failed === false ? (
                         <Button
                           className="button-neutral"
                           a
                           href={
                             row.hbs_response.file_server +
-                            row.hbs_response.file_path.json
+                            row.hbs_response.file_path
                           }
                         >
                           Download JSON
                         </Button>
                       ) : null}
+
                       {row.product_name === "Zip Code Data" ? (
                         <Button
                           className="button-neutral"
@@ -389,6 +392,19 @@ const MyOrders = () => {
                           Download
                         </Button>
                       ) : null}
+                      {row.hbs_response.failed === true ? (
+                        <>
+                        <Col>Failed processing</Col>
+                        <Button
+                        className="button-neutral"
+                        a href={`https://marketplace-weather.owm.io/${row.product_name}/${row.hbs_response.id}/retry`}
+                      >
+                        Retry
+                      </Button>
+                      </>
+                      ) :
+                      null}
+
                     </Col>
                   ) : (
                     <Col className="text-right" style={{ fontSize: "10pt" }}>
@@ -609,7 +625,7 @@ const MyOrders = () => {
                           a
                           href={
                             row.hbs_response.file_server +
-                            row.hbs_response.file_path.json
+                            row.hbs_response.file_path
                           }
                         >
                           Download JSON

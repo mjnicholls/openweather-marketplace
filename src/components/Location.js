@@ -648,9 +648,13 @@ const Location = ({
 
       <Row className="mt-4 flex-end price">
         <Col>
+        {locations.length >= 1 && startDate >= new Date('01/01/1979') && endDate >= startDate && endDate < new Date() ?
+        null 
+        :
           <p style={{ fontSize: "14pt" }}>
             <i>To proceed please fill in the required details</i>
-          </p>{" "}
+          </p>
+          }
         </Col>
         <Col>
           <p style={{ fontWeight: "bold", fontSize: "18pt" }}>
@@ -658,7 +662,7 @@ const Location = ({
           </p>
         </Col>
         <Col>
-          {locations.length >= 1 && startDate >= new Date('01/01/1979') && endDate > startDate && endDate < new Date() ? (
+          {locations.length >= 1 && startDate >= new Date('01/01/1979') && endDate >= startDate && endDate < new Date() ? (
             <Col>
               <Button
                 data-dismiss="modal"

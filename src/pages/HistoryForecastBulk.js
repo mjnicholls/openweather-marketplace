@@ -27,9 +27,7 @@ const HistoryForecastBulk = () => {
 
   const [isAdded, setIsAdded] = useState(false);
 
-  const [price, setPrice] = useState(0);
-
-  const [parameters, setParameters] = useState();
+  const yesterday = moment().subtract(1, 'days').toDate();
 
   const [locations, setLocations] = useState([]);
 
@@ -39,8 +37,6 @@ const HistoryForecastBulk = () => {
 
   const [tempLocation, setTempLocation] = useState({ ...location });
 
-  const [checkedWeather, setCheckedWeather] = useState([]);
-
   const [fileValue, setFileValue] = useState(false);
 
   const [unitsValue, setUnitsValue] = useState("Metric");
@@ -49,13 +45,9 @@ const HistoryForecastBulk = () => {
 
   const [formatValue, setFormatValue] = useState("CSV");
 
-  const [startDate, setStartDate] = useState(moment().toDate());
+  const [startDate, setStartDate] = useState(yesterday);
 
-  const [endDate, setEndDate] = useState(moment().toDate());
-
-  const [checked, setChecked] = useState([]);
-
-  const [importPrice, setImportPrice] = useState(0);
+  const [endDate, setEndDate] = useState(yesterday);
 
   const [temp, setTemp] = useState("On");
   const [pressure, setPressure] = useState("On");

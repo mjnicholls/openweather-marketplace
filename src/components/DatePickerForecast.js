@@ -15,7 +15,7 @@ const DatePickerForecast = ({
   setEndDate,
 }) => {
 
-  const endDatePlusOne = new Date(startDate)
+  const yesterday = moment().subtract(1, 'days').toDate();
 
   return (
     <>
@@ -29,7 +29,7 @@ const DatePickerForecast = ({
                 openTo="year"
                 views={["year", "month", "day"]}
                 minDate={new Date("2017")}
-                maxDate={endDate >= startDate ? endDate : moment().toDate()}
+                maxDate={yesterday}
                 value={startDate}
                 label={'From'}
                 onChange={(newValue) => {
@@ -52,12 +52,11 @@ const DatePickerForecast = ({
               style={{border: "none"}}
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={endDatePlusOne.setDate(endDatePlusOne.getDate())}
-                //minDate={new Date("2017")}
-                maxDate={endDate < startDate ? endDate === startDate + 1 : moment().toDate()}
+                minDate={startDate}
+                maxDate={endDate < startDate ? endDate === setEndDate(startDate) : endDate}
                 value={endDate}
                 label={'To'}
-                InputProps={{ readOnly: true }}
+                inputProps={{ readOnly: true }}
                 onChange={(newValue) => {
                   setEndDate(newValue);
                 }}

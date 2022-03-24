@@ -9,8 +9,8 @@ import Stack from "@mui/material/Stack";
 import PropTypes from "prop-types";
 
 const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
-  
-  const endDatePlusOne = new Date(startDate);
+
+  const yesterday = moment().subtract(1, 'days').toDate();
 
   return (
     <>
@@ -21,17 +21,18 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
             <Stack spacing={3}>
               <DatePicker
                 className="dateLabel"
+                inputProps={{ readOnly: true }}
                 openTo="year"
                 views={["year", "month", "day"]}
                 minDate={new Date("1979")}
-                maxDate={endDate >= startDate ? endDate : moment().toDate()}
+                maxDate={yesterday}
                 value={startDate}
                 label={"From"}
                 onChange={(newValue) => {
                   setStartDate(newValue);
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} helperText={null} placeholder="o" />
+                  <TextField {...params} helperText={null} />
                 )}
               />
             </Stack>
@@ -47,11 +48,11 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
                 style={{ border: "none" }}
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={endDatePlusOne.setDate(endDatePlusOne.getDate())}
-                maxDate={endDate < startDate ? endDate === startDate + 1 : moment().toDate()}
+                minDate={startDate}
+                maxDate={endDate < startDate ? endDate === setEndDate(startDate) : endDate}
                 value={endDate}
                 label={"To"}
-                InputProps={{ readOnly: true }}
+                inputProps={{ readOnly: true }}
                 onChange={(newValue) => {
                   setEndDate(newValue);
                 }}

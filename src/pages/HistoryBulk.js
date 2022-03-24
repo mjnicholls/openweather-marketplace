@@ -27,6 +27,8 @@ const NewHistoryBulkTest = () => {
     lon: "",
   });
 
+  const yesterday = moment().subtract(1, 'days').toDate();
+
   const [price, setPrice] = useState(0);
 
   const [importPrice, setImportPrice] = useState(0);
@@ -51,9 +53,9 @@ const NewHistoryBulkTest = () => {
 
   const [formatValue, setFormatValue] = useState("CSV");
 
-  const [startDate, setStartDate] = useState(moment().toDate());
+  const [startDate, setStartDate] = useState(yesterday);
 
-  const [endDate, setEndDate] = useState(moment().toDate());
+  const [endDate, setEndDate] = useState(yesterday);
 
   const [checked, setChecked] = useState([]);
 
