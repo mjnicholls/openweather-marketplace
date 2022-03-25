@@ -465,7 +465,7 @@ const MyOrders = () => {
                         {row.product_name === "History Forecast Bulk" ? 
                         <Button
                         className="button-neutral"
-                        a href={`${axios.get('https://marketplace-weather.owm.io' + `/history_forecast_bulk` + `/${row.hbs_response.id}` + `/retry`).then((response) => {
+                        a href={`${axios.get('http://marketplace-weather.owm.io' + `/history_forecast_bulk` + `/${row.hbs_response.id}` + `/retry`).then((response) => {
                           return response.json();
                       })}`}
                         onClick={retryAlert}
@@ -476,8 +476,10 @@ const MyOrders = () => {
                       row.product_name === "History Bulk" ?
                       <Button
                       className="button-neutral"
-                      a href={`${axios.get('https://marketplace-weather.owm.io' + `/history_bulk` + `/${row.hbs_response.id}` + `/retry`).then((response) => {
+                      a href={`${axios.get('http://marketplace-weather.owm.io' + `/history_bulk` + `/${row.hbs_response.id}` + `/retry`).then((response) => {
                         return response.json();
+                    }).catch((err) => {
+                      console.log(`Error: ${err.message}`);
                     })}`}
                       onClick={retryAlert}
                     >
@@ -487,7 +489,7 @@ const MyOrders = () => {
                     row.product_name === "Zip Code Data" ?
                     <Button
                     className="button-neutral"
-                    a href={`${axios.get('https://marketplace-weather.owm.io' + `/zip_code_data` + `/${row.hbs_response.id}` + `/retry`).then((response) => {
+                    a href={`${axios.get('http://marketplace-weather.owm.io' + `/zip_code_data` + `/${row.hbs_response.id}` + `/retry`).then((response) => {
                       return response.json();
                   })}`}
                     onClick={retryAlert}
