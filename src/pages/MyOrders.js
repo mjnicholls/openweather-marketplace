@@ -5,7 +5,6 @@ import axios from "axios";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 
 const MyOrders = () => {
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -17,32 +16,6 @@ const MyOrders = () => {
         console.log("error", err);
       });
   }, []);
-
-  const [set, setSet] = useState()
-
-  const test = data.map((row) => row.product_name)
-
-  if (test === "History Forecast Bulk"){
-    var forecast = "history_forecast_bulk"
-  }
-
-  if (test === "History Bulk"){
-    var forecast = "history_bulk"
-  }
-
-  if (test === "Zip Code Data"){
-    var forecast = "zip_code_data"
-  }
-
-  const retryRetry = axios.get
-
-//   const retryRetry = () => {
-//     axios.get('http://marketplace-weather.owm.io' + '/history_bulk' + `/${row.hbs_response.id}` + '/retry').then((response) => {
-//     return response.json();
-// }).catch((err) => {
-//   console.log(`Error: ${err.message}`);
-// })}
-
 
   const [alert, setAlert] = useState(null);
 
@@ -61,13 +34,11 @@ const MyOrders = () => {
         customClass="bs-alerts"
       >
         <Row className="trigger-item">
-          <Col>Failed to recognise locations.</Col>
+          <Col>Request sent.</Col>
         </Row>
         <Row className="trigger-item">
           <Col className="text-end">
-            <Button
-            className="button-neutral"
-            onClick={hideAlert}>
+            <Button className="button-neutral" onClick={hideAlert}>
               Close
             </Button>
           </Col>
@@ -76,21 +47,23 @@ const MyOrders = () => {
     );
   };
 
+  const retryProduct = data.map((row) => row.product_name);
+  const retryId = data.map((row) => row._id);
 
-  // const retry = data.map((ind) => ind.hbs_response.map((hbs_response) => hbs_response.id))
-  // console.log('lll', retry)
-
-  // const retryButton = () => {
-  //   axios.get(`https://marketplace-weather.owm.io/${retryProduct}/${retryId}/retry`)
-  //   .then((res) => {
-  //     console.log('res',res)
-  //     retryAlert()
-  //   })
-  //   .catch((err) => {
-  //     console.log(`Error: ${err.message}`);
-  //   });
-
-  // }
+  const retryButton = () => {
+    //  axios.get(`https://marketplace-weather.owm.io/${retryProduct}/${retryId}/retry`)
+    axios
+      .get(
+        `https://marketplace-weather.owm.io/history_bulk/60103857458a5f00449e693c/retry`
+      )
+      .then((res) => {
+        console.log("res", res);
+        retryAlert();
+      })
+      .catch((err) => {
+        console.log(`Error: ${err.message}`);
+      });
+  };
 
   const [showResults, setShowResults] = useState(false);
 
@@ -405,7 +378,8 @@ const MyOrders = () => {
 
                   {row.status === "done" ? (
                     <Col>
-                      {row.file_format === "json+csv" && row.hbs_response.failed === false ? (
+                      {row.file_format === "json+csv" &&
+                      row.hbs_response.failed === false ? (
                         <>
                           <Button
                             className="button-neutral"
@@ -444,7 +418,8 @@ const MyOrders = () => {
                         </Button>
                       ) : null}
 
-                      {row.file_format === "json" && row.hbs_response.failed === false ? (
+                      {row.file_format === "json" &&
+                      row.hbs_response.failed === false ? (
                         <Button
                           className="button-neutral"
                           a
@@ -471,43 +446,31 @@ const MyOrders = () => {
                       ) : null}
                       {row.hbs_response.failed === true ? (
                         <>
-                        <Col>Failed processing</Col>
-                        {row.product_name === "History Forecast Bulk" ? 
-                        <Button
-                        className="button-neutral"
-                        onClick={`${axios.get('http://marketplace-weather.owm.io' + `/history_forecast_bulk` + `/${row.hbs_response.id}` + `/retry`).then((response) => {
-                          return response.json();
-                      })}`}
-                        //onClick={retryAlert}
-                      >
-                        Retry
-                      </Button>
-                      :
-                      row.product_name === "History Bulk" ?
-                      <Button
-                      className="button-neutral"
-                      onClick={retryAlert}
-                    >
-                      Retry
-                    </Button>
-                    :
-                    row.product_name === "Zip Code Data" ?
-                    <Button
-                    className="button-neutral"
-                    a href={`${axios.get('http://marketplace-weather.owm.io' + `/zip_code_data` + `/${row.hbs_response.id}` + `/retry`).then((response) => {
-                      return response.json();
-                  })}`}
-                    onClick={retryAlert}
-                  >
-                    Retry
-                  </Button>
-                  :
-                  null
-                      }
-                      </>
-                      ) :
-                      null}
-
+                          <Col>Failed processing</Col>
+                          {row.product_name === "History Forecast Bulk" ? (
+                            <Button
+                              className="button-neutral"
+                              onClick={retryButton}
+                            >
+                              Retry
+                            </Button>
+                          ) : row.product_name === "History Bulk" ? (
+                            <Button
+                              className="button-neutral"
+                              onClick={retryButton}
+                            >
+                              Retry
+                            </Button>
+                          ) : row.product_name === "Zip Code Data" ? (
+                            <Button
+                              className="button-neutral"
+                              onClick={retryButton}
+                            >
+                              Retry
+                            </Button>
+                          ) : null}
+                        </>
+                      ) : null}
                     </Col>
                   ) : (
                     <Col className="text-right" style={{ fontSize: "10pt" }}>
@@ -722,7 +685,8 @@ const MyOrders = () => {
                 {row.status === "done" ? (
                   <Row className="mt-2">
                     <Col className="text-end">
-                      {row.file_format === "json" ? (
+                      {row.file_format === "json" &&
+                      row.hbs_response.failed === false ? (
                         <Button
                           className="button-neutral"
                           a
@@ -735,7 +699,8 @@ const MyOrders = () => {
                         </Button>
                       ) : null}
                       {row.file_format === "csv" &&
-                      row.product_name !== "Zip Code Data" ? (
+                      row.product_name !== "Zip Code Data" &&
+                      row.hbs_response.failed === false ? (
                         <Button
                           className="button-neutral"
                           a
@@ -748,7 +713,8 @@ const MyOrders = () => {
                         </Button>
                       ) : null}
 
-                      {row.product_name === "Zip Code Data" ? (
+                      {row.product_name === "Zip Code Data" &&
+                      row.hbs_response.failed === false ? (
                         <Button
                           className="button-neutral"
                           a
@@ -760,7 +726,8 @@ const MyOrders = () => {
                           Download
                         </Button>
                       ) : null}
-                      {row.file_format === "json+csv" ? (
+                      {row.file_format === "json+csv" &&
+                      row.hbs_response.failed === false ? (
                         <>
                           <Button
                             className="button-neutral"
@@ -782,6 +749,33 @@ const MyOrders = () => {
                           >
                             Download CSV
                           </Button>
+                        </>
+                      ) : null}
+                      {row.hbs_response.failed === true ? (
+                        <>
+                          <Col>Failed processing</Col>
+                          {row.product_name === "History Forecast Bulk" ? (
+                            <Button
+                              className="button-neutral"
+                              onClick={retryButton}
+                            >
+                              Retry
+                            </Button>
+                          ) : row.product_name === "History Bulk" ? (
+                            <Button
+                              className="button-neutral"
+                              onClick={retryButton}
+                            >
+                              Retry
+                            </Button>
+                          ) : row.product_name === "Zip Code Data" ? (
+                            <Button
+                              className="button-neutral"
+                              onClick={retryButton}
+                            >
+                              Retry
+                            </Button>
+                          ) : null}
                         </>
                       ) : null}
                     </Col>
