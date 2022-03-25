@@ -91,16 +91,22 @@ const Step1 = ({
                     type="text"
                     onChange={(e) => handleChange("first_name", e.target.value)}
                     value={invoiceSettings.first_name}
-                    className={error.first_name ? "danger-border" : ""}
+                    className={
+                      !invoiceSettings.first_name.length && error.first_name
+                        ? "danger-border"
+                        : ""
+                    }
                   />
+                  {!invoiceSettings.first_name.length ? (
+                    <div
+                      className={`invalid-feedback ${
+                        error.first_name ? "d-block" : ""
+                      }`}
+                    >
+                      {error.first_name}
+                    </div>
+                  ) : null}
                 </FormGroup>
-                <div
-                  className={`invalid-feedback ${
-                    error.first_name ? "d-block" : ""
-                  }`}
-                >
-                  {error.first_name}
-                </div>
               </Col>
               <Col>
                 <Label>Last Name *</Label>
@@ -109,8 +115,13 @@ const Step1 = ({
                     type="text"
                     onChange={(e) => handleChange("last_name", e.target.value)}
                     value={invoiceSettings.last_name}
-                    className={error.last_name ? "danger-border" : ""}
+                    className={
+                      !invoiceSettings.last_name.length && error.last_name
+                        ? "danger-border"
+                        : ""
+                    }
                   />
+                 {!invoiceSettings.last_name.length ? (
                   <div
                     className={`invalid-feedback ${
                       error.last_name ? "d-block" : ""
@@ -118,6 +129,9 @@ const Step1 = ({
                   >
                     {error.last_name}
                   </div>
+                 ) : (
+                 null 
+                 )}
                 </FormGroup>
               </Col>
             </Row>
@@ -179,8 +193,9 @@ const Step1 = ({
                       handleChange("organisation", e.target.value)
                     }
                     value={invoiceSettings.organisation}
-                    className={error.organisation ? "danger-border" : ""}
+                    className={!invoiceSettings.organisation.length && error.organisation ? "danger-border" : ""}
                   />
+                  {!invoiceSettings.organisation.length ?
                   <div
                     className={`invalid-feedback ${
                       error.organisation ? "d-block" : ""
@@ -188,6 +203,9 @@ const Step1 = ({
                   >
                     {error.organisation}
                   </div>
+                  :
+                  null
+                  }
                 </FormGroup>
               </Col>
               <Col>
@@ -243,8 +261,9 @@ const Step1 = ({
                       }
                       value={emailFromState !== null ? emailFromState : email}
                       disabled={emailFromState !== null}
-                      className={error.email ? "danger-border" : ""}
+                      className={!email.length && error.email ? "danger-border" : ""}
                     />
+                    {!email.length ?
                     <div
                       className={`invalid-feedback ${
                         error.email ? "d-block" : ""
@@ -252,6 +271,9 @@ const Step1 = ({
                     >
                       {error.email}
                     </div>
+                    :
+                    null
+                    }
                   </>
                 </FormGroup>
               </Col>
@@ -269,7 +291,7 @@ Step1.propTypes = {
   invoiceSettings: PropTypes.object,
   setInvoiceSettings: PropTypes.func,
   email: PropTypes.string,
-  setEmail: PropTypes.func
+  setEmail: PropTypes.func,
 };
 
 export default Step1;

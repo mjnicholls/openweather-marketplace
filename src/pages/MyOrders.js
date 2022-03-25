@@ -47,39 +47,24 @@ const MyOrders = () => {
     );
   };
 
-  const [retryProduct, setRetryProduct] = useState("");
-  const [retryProduct2, setRetryProduct2] = useState("");
-  //const retryProduct = data.map((row) => row.hbs_response);
-
-  const getFailed = data
+  const first = data
     .filter((x) => x.hbs_response !== null)
-    .map((row) => row.hbs_response.failed);
-
-  //const getget = getFailed.filter(x => x === "true").map((row) => row)
-
-  console.log("get", getFailed);
-
-  // console.log('yes', retryProduct)
-
-  const retryId = data.map((row) => row._id.$oid);
+    .map((row) => row.hbs_response.id);
+  const second = data
+    .filter((x) => x.hbs_response !== null)
+    .map((row) => row.product_name);
+  const [retryProduct, setRetryProduct] = useState(first);
+  const [retryProduct2, setRetryProduct2] = useState(second);
 
   const retryButton = () => {
     data
       .filter((x) => x.hbs_response !== null)
       .map((row) => {
-        if (row.hbs_response.failed === true) {
+        if (row.hbs_response.failed === true)
           setRetryProduct(row.hbs_response.id);
-          setRetryProduct2(row.product_name);
-
-          if (retryProduct2 === "History Bulk") {
-            setRetryProduct2("history_bulk");
-          }
-        } else setRetryProduct(row.hbs_response.id);
-        setRetryProduct2(row.product_name);
-
-        if (retryProduct2 === "History Bulk") {
-          setRetryProduct2("history_bulk");
-        }
+        setRetryProduct2(
+          row.product_name === "History Bulk" ? "history_bulk" : null
+        );
       });
 
     console.log("check", retryProduct);
