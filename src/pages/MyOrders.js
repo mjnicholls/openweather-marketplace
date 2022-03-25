@@ -47,14 +47,47 @@ const MyOrders = () => {
     );
   };
 
-  const retryProduct = data.map((row) => row.product_name);
-  const retryId = data.map((row) => row._id);
+  const [retryProduct, setRetryProduct] = useState("");
+  const [retryProduct2, setRetryProduct2] = useState("");
+  //const retryProduct = data.map((row) => row.hbs_response);
+
+  const getFailed = data
+    .filter((x) => x.hbs_response !== null)
+    .map((row) => row.hbs_response.failed);
+
+  //const getget = getFailed.filter(x => x === "true").map((row) => row)
+
+  console.log("get", getFailed);
+
+  // console.log('yes', retryProduct)
+
+  const retryId = data.map((row) => row._id.$oid);
 
   const retryButton = () => {
-    //  axios.get(`https://marketplace-weather.owm.io/${retryProduct}/${retryId}/retry`)
+    data
+      .filter((x) => x.hbs_response !== null)
+      .map((row) => {
+        if (row.hbs_response.failed === true) {
+          setRetryProduct(row.hbs_response.id);
+          setRetryProduct2(row.product_name);
+
+          if (retryProduct2 === "History Bulk") {
+            setRetryProduct2("history_bulk");
+          }
+        } else setRetryProduct(row.hbs_response.id);
+        setRetryProduct2(row.product_name);
+
+        if (retryProduct2 === "History Bulk") {
+          setRetryProduct2("history_bulk");
+        }
+      });
+
+    console.log("check", retryProduct);
+    console.log("check2", retryProduct2);
+
     axios
       .get(
-        `https://marketplace-weather.owm.io/history_bulk/60103857458a5f00449e693c/retry`
+        `https://marketplace-weather.owm.io/${retryProduct2}/${retryProduct}/retry`
       )
       .then((res) => {
         console.log("res", res);
