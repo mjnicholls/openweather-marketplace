@@ -34,6 +34,16 @@ const MyOrders = () => {
     var forecast = "zip_code_data"
   }
 
+  const retryRetry = axios.get
+
+//   const retryRetry = () => {
+//     axios.get('http://marketplace-weather.owm.io' + '/history_bulk' + `/${row.hbs_response.id}` + '/retry').then((response) => {
+//     return response.json();
+// }).catch((err) => {
+//   console.log(`Error: ${err.message}`);
+// })}
+
+
   const [alert, setAlert] = useState(null);
 
   const hideAlert = () => {
@@ -465,10 +475,10 @@ const MyOrders = () => {
                         {row.product_name === "History Forecast Bulk" ? 
                         <Button
                         className="button-neutral"
-                        a href={`${axios.get('http://marketplace-weather.owm.io' + `/history_forecast_bulk` + `/${row.hbs_response.id}` + `/retry`).then((response) => {
+                        onClick={`${axios.get('http://marketplace-weather.owm.io' + `/history_forecast_bulk` + `/${row.hbs_response.id}` + `/retry`).then((response) => {
                           return response.json();
                       })}`}
-                        onClick={retryAlert}
+                        //onClick={retryAlert}
                       >
                         Retry
                       </Button>
@@ -476,11 +486,6 @@ const MyOrders = () => {
                       row.product_name === "History Bulk" ?
                       <Button
                       className="button-neutral"
-                      a href={`${axios.get('http://marketplace-weather.owm.io' + `/history_bulk` + `/${row.hbs_response.id}` + `/retry`).then((response) => {
-                        return response.json();
-                    }).catch((err) => {
-                      console.log(`Error: ${err.message}`);
-                    })}`}
                       onClick={retryAlert}
                     >
                       Retry
