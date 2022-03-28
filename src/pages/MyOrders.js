@@ -8,6 +8,10 @@ const MyOrders = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    refreshData()
+  }, [])
+
+  const refreshData = () => {
     getOrders()
       .then((res) => {
         setData(res.data);
@@ -15,7 +19,7 @@ const MyOrders = () => {
       .catch((err) => {
         console.log("error", err);
       });
-  }, []);
+  }
 
   const [alert, setAlert] = useState(null);
 
@@ -61,9 +65,12 @@ const MyOrders = () => {
       .filter((x) => x.hbs_response !== null)
       .map((row) => {
         if (row.hbs_response.failed === true)
-          setRetryProduct(row.hbs_response.id);
+        setRetryProduct(row.hbs_response.id);
         setRetryProduct2(
-          row.product_name === "History Bulk" ? "history_bulk" : null
+          row.product_name === "History Bulk" ? "history_bulk" : 
+          row.product_name === "History Forecast Bulk" ? "history_forecast_bulk" : 
+          row.product_name === "Zip Code Data" ? "zip_code_data" : 
+          null
         );
       });
 
@@ -76,6 +83,7 @@ const MyOrders = () => {
       )
       .then((res) => {
         console.log("res", res);
+        refreshData()
         retryAlert();
       })
       .catch((err) => {
