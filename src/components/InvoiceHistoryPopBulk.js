@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Col, Form, Label, Row } from "reactstrap";
-import { validatePhoneNumber, validateVat, validateEmail } from "../utils/validation";
+import {
+  validatePhoneNumber,
+  validateVat,
+  validateEmail,
+} from "../utils/validation";
 import PropTypes from "prop-types";
 import { noBlankErrorMessage } from "../config";
 import axios from "axios";
@@ -53,7 +57,7 @@ const InvoiceSettingsBulk = ({
   csv,
   setCSV,
   json,
-  setJson
+  setJson,
 }) => {
   const [error, setError] = useState({});
   const [step, setStep] = useState(0);
@@ -67,31 +71,30 @@ const InvoiceSettingsBulk = ({
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice);
 
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState("");
 
   const confirmInvoice = () => {
-   
     setError({});
 
     const newError = {};
 
     const mandatoryFields = [
-      'address_line_1',
-      'city',
-      'country',
-      'postal_code'
-    ]
+      "address_line_1",
+      "city",
+      "country",
+      "postal_code",
+    ];
 
     for (let i = 0; i < mandatoryFields.length; i += 1) {
       if (!invoiceSettings[mandatoryFields[i]]) {
-        newError[mandatoryFields[i]] = noBlankErrorMessage
+        newError[mandatoryFields[i]] = noBlankErrorMessage;
       }
     }
 
     if (Object.keys(newError).length) {
       setError(newError);
       return;
-    } 
+    }
     const datas = {
       invoice_info: {
         ...invoiceSettings,
@@ -101,8 +104,8 @@ const InvoiceSettingsBulk = ({
       },
       history_forecast_bulk: {
         locations: locations,
-        from: startDate.toLocaleString(),
-        to: endDate.toLocaleString(),
+        from: startDate,
+        to: endDate,
         parameters: {
           temp: temp,
           pressure: pressure,
@@ -180,69 +183,66 @@ const InvoiceSettingsBulk = ({
   const incrementStep = () => {
     setError({});
 
-      if (step === 1) {
-
+    if (step === 1) {
       const newError = {};
-      setError({})
+      setError({});
 
-      const mandatoryFields = [
-        'phone',
-      ]
+      const mandatoryFields = ["phone"];
 
-      if (invoiceSettings.type === 'individual') {
-        mandatoryFields.push('first_name')
-        mandatoryFields.push('last_name')
+      if (invoiceSettings.type === "individual") {
+        mandatoryFields.push("first_name");
+        mandatoryFields.push("last_name");
       } else {
-        mandatoryFields.push('organisation')
+        mandatoryFields.push("organisation");
       }
       for (let i = 0; i < mandatoryFields.length; i += 1) {
         if (!invoiceSettings[mandatoryFields[i]]) {
-          newError[mandatoryFields[i]] = noBlankErrorMessage
+          newError[mandatoryFields[i]] = noBlankErrorMessage;
         }
       }
 
-  const newErrors = {};
+      const newErrors = {};
 
-  if (email === !emailFromState) {
-    if (!email) {
-      setError({
-        email: noBlankErrorMessage,
-      });
-      return;
-    }
-  }
-    setError(newErrors)
+      if (email === !emailFromState) {
+        if (!email) {
+          setError({
+            email: noBlankErrorMessage,
+          });
+          return;
+        }
+      }
+      setError(newErrors);
 
       if (email) {
-        const emailValidation = validateEmail(email)
-        if (emailValidation){
-          newError.email = emailValidation
+        const emailValidation = validateEmail(email);
+        if (emailValidation) {
+          newError.email = emailValidation;
         }
       }
-    
+
       if (invoiceSettings.phone) {
-        const phoneValidation = validatePhoneNumber(invoiceSettings.phone)
+        const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
         if (phoneValidation) {
-          newError.phone = phoneValidation
+          newError.phone = phoneValidation;
         }
-      }   
-      
-        if (invoiceSettings.vat_id) {
-          validateVat(invoiceSettings.vat_id)
-            .then(() => {
-              invoiceSettings.vat_id = invoiceSettings.vat_id;
-            })
-            .catch(() => {
-              newError.vat_id = "VAT ID is not valid";
-            })
-            .finally(() => {
-              if (Object.keys(newError).length) {
-                setError(newError);
-                return;
-              }
-            });
-        }
-      
+      }
+
+      if (invoiceSettings.vat_id) {
+        validateVat(invoiceSettings.vat_id)
+          .then(() => {
+            invoiceSettings.vat_id = invoiceSettings.vat_id;
+          })
+          .catch(() => {
+            newError.vat_id = "VAT ID is not valid";
+          })
+          .finally(() => {
+            if (Object.keys(newError).length) {
+              setError(newError);
+              return;
+            }
+          });
+      }
+
       if (Object.keys(newError).length) {
         setError(newError);
         return;
@@ -460,7 +460,7 @@ InvoiceSettingsBulk.propTypes = {
   startDate: PropTypes.instanceOf(Date),
   endDate: PropTypes.instanceOf(Date),
   locations: PropTypes.array,
-  currency: PropTypes.string
+  currency: PropTypes.string,
 };
 
 export default InvoiceSettingsBulk;

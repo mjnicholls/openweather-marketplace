@@ -2,16 +2,16 @@
 //@import 'assets/scss/typography.scss';
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
 $borderRadiusDefault: 8pt;
 $breakpointXXL: 1400px;
 $breakpointMD: 768px;
 
-$brand-orange: #EB6E4B;
-$brand-black: #48484A;
-$brand-turquoise: #78CBBF;
-$brand-grey: #F2F2F2;
+$brand-orange: #eb6e4b;
+$brand-black: #48484a;
+$brand-turquoise: #78cbbf;
+$brand-grey: #f2f2f2;
 
 $sub-color: #666;
 $secondary-light-grey: #f5f5f5;
@@ -42,8 +42,7 @@ $default-line-height: 20pt;
   h5,
   h6 {
     font-family: $highlight-font-family;
-    text-align: left
-    
+    text-align: left;
   }
 }
 
@@ -54,58 +53,49 @@ h1 {
 }
 
 .container {
-
   p {
     text-align: center;
     font-size: 17px;
     line-height: 1.2;
   }
 
-  
-
   .home-row {
     justify-content: center;
     padding-top: 20px;
     margin-left: 20px;
     margin-right: 20px;
-    
 
-.card {
-  border: none!important;
-  border-radius: 0px;
-  margin-right: 20px;
-  margin-bottom: 20px;
+    .card {
+      border: none !important;
+      border-radius: 0px;
+      margin-right: 20px;
+      margin-bottom: 20px;
 
+      .home {
+        text-align: left;
+        background-color: $brand-grey;
+        justify-content: center;
 
-  .home {
-    text-align: left;
-    background-color: $brand-grey;
-    justify-content: center;
+        h4 {
+          color: $brand-orange;
+          text-align: center;
+        }
 
-    
+        ul {
+          list-style: none;
+        }
 
-    h4 {
-      color: $brand-orange;
-      text-align: center
+        ul li:before {
+          content: "✓    ";
+        }
+
+        p {
+          text-align: center;
+          font-size: 17px;
+          line-height: 1.2;
+        }
+      }
     }
-
-    ul {
-  list-style: none;
-}
-
-ul li:before {
-  content: '✓    ';
-}
-
-    p {
-      text-align: center;
-      font-size: 17px;
-      line-height: 1.2;
-    }
-
-  
-  }
-}
   }
 }
 
@@ -130,7 +120,6 @@ ul li:before {
 
     li {
       padding: 0;
- 
 
       a {
         color: $brand-black;
@@ -147,10 +136,9 @@ ul li:before {
   }
 }
 
-// Header classes 
+// Header classes
 
 .page-header {
-
   background-color: $brand-black;
   font-size: $font-size-sm;
   z-index: 1;
@@ -173,14 +161,12 @@ ul li:before {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-
   }
 
   .break {
     flex-basis: 100%;
     height: 0;
   }
-
 
   .mobile-menu {
     display: flex;
@@ -203,7 +189,6 @@ ul li:before {
       flex-direction: row;
       justify-content: space-between;
     }
-
   }
 
   button {
@@ -248,7 +233,8 @@ ul li:before {
     li {
       padding: 0;
 
-      a, button {
+      a,
+      button {
         color: white;
         text-decoration: none;
         display: block;
@@ -317,7 +303,7 @@ ul li:before {
         z-index: 99;
 
         &:before {
-          content: '';
+          content: "";
           position: absolute;
           left: 48pt;
           top: -9px;
@@ -353,26 +339,22 @@ ul li:before {
   }
 }
 
-
-
 // Autocomplete form styles
 
 h2 {
   //font-family: $highlight-font-family;
   font-weight: bold;
   padding-top: 30px;
-  text-align: left
+  text-align: left;
 }
 
 p {
   font-family: $default-font-family;
 }
 
-
 // main div styles
 
 .container-main {
-  
   margin-bottom: 40px;
 
   .danger-border {
@@ -383,15 +365,13 @@ p {
     background-color: #fff;
     border-radius: 0.25rem;
     border: 0.5px solid red !important;
-}
+  }
 
   .form-group {
-
     .react-select__control.css-1s2u09g-control {
       padding-top: 4px;
       padding-bottom: 4px;
     }
-
   }
 
   // component styles
@@ -426,8 +406,6 @@ p {
     line-height: 1.5;
     background-color: #fff;
   }
-  
-
 }
 
 // tab styles
@@ -448,15 +426,13 @@ p {
   }
 }
 
-
-
 // view trigger page
 
 .trigger-card {
   h2,
   h3 {
     margin-bottom: 40px;
-    text-align: left
+    text-align: left;
   }
 
   .mapPop {
@@ -477,9 +453,7 @@ p {
   svg {
     color: black;
   }
-
 }
-
 
 .mapPop {
   width: 310px;
@@ -518,17 +492,9 @@ p {
       font-size: $small-font-size;
     }
   }
-
-
 }
 
-
-
-
 // classes for forecasted events page
-
-
-
 
 // buttons
 @mixin button-round {
@@ -538,7 +504,7 @@ p {
   white-space: nowrap;
   margin-left: 4pt;
   -webkit-appearance: button;
-  &:focus{
+  &:focus {
     outline: none;
   }
 }
@@ -552,7 +518,7 @@ p {
     background-color: rgba(72, 72, 74, 0.85);
     border-color: rgba(72, 72, 74, 0.85);
     color: #ffffff;
-  };
+  }
 }
 
 .button-neutral {
@@ -577,7 +543,7 @@ p {
   padding-top: 5pt;
   padding-bottom: 8pt;
   -webkit-appearance: button;
-  &:focus{
+  &:focus {
     outline: none;
   }
   border: 1px solid rgba(72, 72, 74, 0.4);
@@ -593,7 +559,7 @@ p {
 
 .button-turquoise {
   @include button-round;
-  background-color:  $brand-turquoise;
+  background-color: $brand-turquoise;
   color: #ffffff;
   font-size: 10pt;
   &:hover {
@@ -612,8 +578,6 @@ p {
     border-color: $brand-orange;
   }
 }
-
-
 
 .link-flat {
   color: $sub-color;
@@ -642,8 +606,6 @@ p {
     transform: rotate(180deg);
   }
 }
-
-
 
 .app {
   min-height: 100vh;
@@ -703,8 +665,10 @@ p {
   outline: none;
   box-shadow: none;
   -webkit-box-shadow: none;
-  -webkit-transition: border-color 0.15s ease-in-out,-webkit-box-shadow 0.15s ease-in-out;
-  transition: border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out,-webkit-box-shadow 0.15s ease-in-out;
+  -webkit-transition: border-color 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
   height: auto;
   //padding: .6rem 0 .4rem 0;
   padding: 8pt;
@@ -732,7 +696,8 @@ p {
   }
 }
 
-input.input-marketplace, input.marketplace-input__input {
+input.input-marketplace,
+input.marketplace-input__input {
   @include mp-input;
 }
 
@@ -770,7 +735,8 @@ input.input-marketplace, input.marketplace-input__input {
 
     .pac-icon {
       margin-right: 0.5rem;
-      background: url('https://openweathermap.org/themes/openweathermap/assets/img/owm_icons/geo_icon.png') no-repeat;
+      background: url("https://openweathermap.org/themes/openweathermap/assets/img/owm_icons/geo_icon.png")
+        no-repeat;
       background-size: 15px 17px;
     }
   }
@@ -792,7 +758,8 @@ input.input-marketplace, input.marketplace-input__input {
 }
 
 .section-link {
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: #000000;
   }
   &:last-child {
@@ -818,7 +785,9 @@ input.input-marketplace, input.marketplace-input__input {
   padding: 0;
   font: inherit;
   outline: inherit;
-  &:hover, &:focus, &:active {
+  &:hover,
+  &:focus,
+  &:active {
     color: inherit;
     background: none;
     border: none;
@@ -832,7 +801,6 @@ input.input-marketplace, input.marketplace-input__input {
 }
 
 .triggertest {
-
   margin-bottom: 20px;
 
   .triggers-bold {
@@ -846,8 +814,7 @@ input.input-marketplace, input.marketplace-input__input {
     padding-bottom: 8pt;
   }
 
-.triggers-new {
-
+  .triggers-new {
     padding-bottom: 15px;
     text-align: left;
     border-bottom-width: 1px !important;
@@ -857,17 +824,17 @@ input.input-marketplace, input.marketplace-input__input {
     padding-bottom: 8pt;
     &:hover {
       background-color: #f2f2f2;
+    }
+
+    div > div.col {
+      font-family: $default-font-family;
+      font-size: 16px;
+      vertical-align: top;
+      text-align: left;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+    }
   }
-  
-  div > div.col {
-    font-family: $default-font-family;
-    font-size: 16px;
-    vertical-align: top;
-    text-align: left;
-    font-size: 0.9rem;
-    white-space: pre-wrap;
-  }
-}
 }
 
 .owm-selector {
@@ -886,96 +853,95 @@ input.input-marketplace, input.marketplace-input__input {
   }
 }
 
+.alert {
+  border: 0;
+  color: $white;
 
-.alert{
-    border: 0;
+  .alert-link {
     color: $white;
+  }
 
-    .alert-link{
-      color: $white;
-    }
+  &.alert-success {
+    background-color: darken($success-green, 5%);
+  }
 
-    &.alert-success{
-      background-color: darken($success-green, 5%);
-    }
+  i.fa,
+  i.tim-icons {
+    font-size: 1rem;
+  }
 
-    i.fa,
-    i.tim-icons{
-        font-size: 1rem;
-    }
+  .close {
+    color: $white;
+    opacity: 0.9;
+    text-shadow: none;
+    line-height: 0;
+    outline: 0;
+  }
 
-    .close{
-        color: $white;
-        opacity: .9;
-        text-shadow: none;
-        line-height: 0;
-        outline: 0;
-    }
+  span[data-notify="icon"] {
+    font-size: 22px;
+    display: block;
+    left: 19px;
+    position: absolute;
+    top: 50%;
+    margin-top: -11px;
+  }
 
-    span[data-notify="icon"]{
-      font-size: 22px;
-      display: block;
-      left: 19px;
-      position: absolute;
-      top: 50%;
-      margin-top: -11px;
-    }
+  button.close {
+    @include remove-default-button-style;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    margin-top: -13px;
+    width: 25px;
+    height: 25px;
+    padding: 3px;
+  }
 
-    button.close{
-      @include remove-default-button-style;
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      margin-top: -13px;
-      width: 25px;
-      height: 25px;
-      padding: 3px;
-    }
+  .close ~ span {
+    display: block;
+    max-width: 89%;
+  }
 
-    .close ~ span{
-        display: block;
-        max-width: 89%;
-    }
-
-    &.alert-with-icon{
-        padding-left: 65px;
-    }
+  &.alert-with-icon {
+    padding-left: 65px;
+  }
 }
 
 .alert-dismissible {
-    .close {
-        top: 50%;
-        right: 1.25rem;
-        padding: 0;
-        transform: translateY(-50%);
-        color: rgba($white, .6);
-        opacity: 1;
+  .close {
+    top: 50%;
+    right: 1.25rem;
+    padding: 0;
+    transform: translateY(-50%);
+    color: rgba($white, 0.6);
+    opacity: 1;
 
-        &:hover,
-        &:focus {
-            color: rgba($white, .9);
-            opacity: 1 !important;
-        }
-
-        @include media-breakpoint-down(xs) {
-            top: 1rem;
-            right: .5rem;
-        }
-
-        &>span:not(.sr-only) {
-            font-size: 1.5rem;
-            background-color: transparent;
-            color: rgba($white, .6);
-        }
-
-        &:hover,
-        &:focus {
-            &>span:not(.sr-only) {
-                background-color: transparent;
-                color: rgba($white, .9);
-            }
-        }
+    &:hover,
+    &:focus {
+      color: rgba($white, 0.9);
+      opacity: 1 !important;
     }
+
+    @include media-breakpoint-down(xs) {
+      top: 1rem;
+      right: 0.5rem;
+    }
+
+    & > span:not(.sr-only) {
+      font-size: 1.5rem;
+      background-color: transparent;
+      color: rgba($white, 0.6);
+    }
+
+    &:hover,
+    &:focus {
+      & > span:not(.sr-only) {
+        background-color: transparent;
+        color: rgba($white, 0.9);
+      }
+    }
+  }
 }
 
 .navigation-link {
@@ -1013,7 +979,6 @@ input.input-marketplace, input.marketplace-input__input {
   }
 }
 
-
 .location {
   ul {
     margin-top: 20px;
@@ -1027,18 +992,15 @@ input.input-marketplace, input.marketplace-input__input {
     padding-bottom: 8pt;
     &:hover {
       background-color: #f2f2f2;
+    }
   }
-  
-}
 
-.bold {
-  font-weight: bold;
-}
-  
+  .bold {
+    font-weight: bold;
+  }
 }
 
 .checkbox-radio-columns {
-
   columns: 2 auto;
 
   input {
@@ -1052,7 +1014,6 @@ input.input-marketplace, input.marketplace-input__input {
 }
 
 .checkbox-radios {
-
   input {
     padding: 13px;
     margin-right: 10px;
@@ -1063,13 +1024,11 @@ input.input-marketplace, input.marketplace-input__input {
   }
 }
 
-
 .datepicker-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 }
-
 
 .agro-datepicker {
   color: #525f7f;
@@ -1078,7 +1037,7 @@ input.input-marketplace, input.marketplace-input__input {
       .rdtDay {
         color: #344675;
         &.rdtDisabled {
-          color: #9A9A9A;
+          color: #9a9a9a;
         }
       }
     }
@@ -1121,7 +1080,6 @@ input[type="file"] {
 
 .price {
   padding-top: 30px;
-
 }
 
 .button-neutral-square {
@@ -1149,18 +1107,14 @@ input[type="file"] {
   }
 }
 
-
-
 .US-list {
+  ul {
+    list-style: none;
+  }
 
-ul {
-  list-style: none;
-}
-
-ul li:before {
-  content: '✓    ';
-}
-
+  ul li:before {
+    content: "✓    ";
+  }
 }
 
 .us-header {
@@ -1193,7 +1147,6 @@ ul li:before {
 .small-text {
   font-size: 9pt;
 }
-
 
 .line-neutral {
   display: block;
@@ -1232,8 +1185,8 @@ ul li:before {
 
 .high2 {
   font-weight: bold;
-    padding-top: 0px;
-    text-align: left;
+  padding-top: 0px;
+  text-align: left;
 }
 
 .app {
@@ -1263,9 +1216,7 @@ ul li:before {
 }
 
 .step-bulk {
-
-    margin-bottom: 5px;
-  
+  margin-bottom: 5px;
 }
 
 .card.trigger-card {
@@ -1289,7 +1240,6 @@ Input:disabled {
 }
 
 .orders-table {
-
   border: 10pt black;
 
   .card-head {
@@ -1301,52 +1251,48 @@ Input:disabled {
   .locations {
     white-space: pre;
   }
-  
 }
 
 .seeMore {
-  background-color: white; 
-  border:white; 
+  background-color: white;
+  border: white;
   color: black;
   font-size: 15pt;
-  box-shadow: 0 0 0 0px!important;
-  &:hover{
-    background-color:white;
-    border:white;
+  box-shadow: 0 0 0 0px !important;
+  &:hover {
+    background-color: white;
+    border: white;
     color: black;
-    box-shadow: 0 0 0 0px!important;
-  };
-  &:focus{
-    background-color:white;
-    border:white;
+    box-shadow: 0 0 0 0px !important;
+  }
+  &:focus {
+    background-color: white;
+    border: white;
     color: black;
-    box-shadow: 0 0 0 0px!important;
-  };
+    box-shadow: 0 0 0 0px !important;
+  }
 }
-
 
 .MuiOutlinedInput-root.Mui-focused {
-  border-color:#F2F2F2!important;
+  border-color: #f2f2f2 !important;
 }
- .MuiOutlinedInput-notchedOutline {
-  border-color:#F2F2F2!important;
+.MuiOutlinedInput-notchedOutline {
+  border-color: #f2f2f2 !important;
 }
 
 .MuiOutlinedInput-root input {
-  /* 14.5px = 18.5px - 4px (note: 18.5px is the input's default padding top and bottom) */
   padding-top: 14.5px;
-  padding-bottom: 18px; 
+  padding-bottom: 18px;
 }
 
-button.MuiButtonBase-root.MuiPickersDay-root.Mui-selected.MuiPickersDay-dayWithMargin.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root{
-  background-color: #bdbdbd!important;
+button.MuiButtonBase-root.MuiPickersDay-root.Mui-selected.MuiPickersDay-dayWithMargin.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root {
+  background-color: #bdbdbd !important;
 }
 
-button.PrivatePickersYear-yearButton.Mui-selected.css-m1gykc{
-  background-color: #bdbdbd!important;
+button.PrivatePickersYear-yearButton.Mui-selected.css-m1gykc {
+  background-color: #bdbdbd !important;
 }
 
-
-button.MuiTypography-root.MuiTypography-h5.PrivatePickersMonth-root.Mui-selected.css-1yy0aak-MuiTypography-root{
-  background-color: #bdbdbd!important;
+button.MuiTypography-root.MuiTypography-h5.PrivatePickersMonth-root.Mui-selected.css-1yy0aak-MuiTypography-root {
+  background-color: #bdbdbd !important;
 }

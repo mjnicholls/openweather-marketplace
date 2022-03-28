@@ -116,8 +116,8 @@ const InvoiceSettingsBulk = ({
       },
       history_bulk: {
         locations: locations,
-        from: startDate.toLocaleString(),
-        to: endDate.toLocaleString(),
+        from: startDate,
+        to: endDate,
         parameters: {
           temp: temp,
           temp_min: tempMin,

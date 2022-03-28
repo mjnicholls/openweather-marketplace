@@ -25,7 +25,7 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
                 openTo="year"
                 views={["year", "month", "day"]}
                 minDate={new Date("1979")}
-                maxDate={yesterday}
+                maxDate={endDate !== null ? endDate : yesterday}
                 value={startDate}
                 label={"From"}
                 onChange={(newValue) => {
@@ -48,8 +48,9 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
                 style={{ border: "none" }}
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={startDate}
-                maxDate={endDate < startDate ? endDate === setEndDate(startDate) : endDate}
+                minDate={startDate !== null ? startDate : new Date("1979") }
+                maxDate={yesterday}
+               // maxDate={endDate < startDate ? endDate === setEndDate(startDate) : endDate}
                 value={endDate}
                 label={"To"}
                 inputProps={{ readOnly: true }}

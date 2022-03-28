@@ -595,7 +595,7 @@ const LocationForecast = ({
 
       <Row className="mt-4 flex-end price">
         <Col>
-        {locations.length >= 1 && startDate >= new Date('10/07/2017') && endDate >= startDate && endDate < new Date() ?
+        {locations.length >= 1 && startDate >= new Date('01/01/2017') && endDate >= startDate && endDate < new Date() ?
         null
         :
         <p style={{ fontSize: "14pt" }}>
@@ -609,7 +609,7 @@ const LocationForecast = ({
           </p>
         </Col>
         <Col>
-        {locations.length >= 1 && startDate >= new Date('10/07/2017') && endDate >= startDate && endDate < new Date() ? (
+        {locations.length >= 1 && startDate >= new Date('01/01/2017') && endDate >= startDate && endDate < new Date() ? (
             <Col>
               <Button
                 data-dismiss="modal"

@@ -21,6 +21,23 @@ const Step0HistoryBulk = ({
   fileCheck2
 }) => {
 
+  const check = isChecked === true ? "Temperature" : null;
+  const check2 = isChecked2 === true ? "Pressure" : null;
+  const check3 = isChecked3 === true ? "Humidity" : null;
+  const check4 = isChecked4 === true ? "Clouds" : null;
+  const check5 = isChecked5 === true ? "Dew Point" : null;
+  const check6 = isChecked6 === true ? "Precipitation" : null;
+  const check7 = isChecked7 === true ? "Wind (direction, speed)" : null;
+
+  const checks = [
+    check,
+    check2,
+    check3,
+    check4,
+    check5,
+    check6,
+    check7,
+  ];
 
   return (
     <div>
@@ -46,13 +63,10 @@ const Step0HistoryBulk = ({
       <Row className="text-start step-bulk">
         <Col className="bold">Weather Parameters:</Col>
         <Col>
-        {isChecked === true ? <Row style={{paddingLeft: "10px"}}>Temperature</Row> : <Row></Row>}
-          {isChecked2 === true ? <Row style={{paddingLeft: "10px"}}>Pressure</Row> : <Row></Row>}
-          {isChecked3 === true ? <Row style={{paddingLeft: "10px"}}>Humidity</Row> : <Row></Row>}
-          {isChecked4 === true ? <Row style={{paddingLeft: "10px"}}>Clouds</Row> : <Row></Row>}
-          {isChecked5 === true ? <Row style={{paddingLeft: "10px"}}>Dew Point</Row> : <Row></Row>}
-          {isChecked6 === true ? <Row style={{paddingLeft: "10px"}}>Precipitation</Row> : <Row></Row>}
-          {isChecked7 === true ? <Row style={{paddingLeft: "10px"}}>Wind (speed, direction, gust)</Row> : <Row></Row>}
+          {checks.map(
+              (p) => 
+              p 
+            ).filter(Boolean).join(", ")}
         </Col>
       </Row>
 

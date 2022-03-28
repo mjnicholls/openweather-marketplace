@@ -53,9 +53,9 @@ const NewHistoryBulkTest = () => {
 
   const [formatValue, setFormatValue] = useState("CSV");
 
-  const [startDate, setStartDate] = useState(yesterday);
+  const [startDate, setStartDate] = useState(null);
 
-  const [endDate, setEndDate] = useState(yesterday);
+  const [endDate, setEndDate] = useState(null);
 
   const [checked, setChecked] = useState([]);
 

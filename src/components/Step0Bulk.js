@@ -27,6 +27,37 @@ const Step0Bulk = ({
   fileCheck2,
 }) => {
 
+  const check = isChecked === true ? "Temperature" : null;
+  const check2 = isChecked2 === true ? "Min Temperature" : null;
+  const check3 = isChecked3 === true ? "Max Temperature" : null;
+  const check4 = isChecked4 === true ? "Feels Like" : null;
+  const check5 = isChecked5 === true ? "Pressure" : null;
+  const check6 = isChecked6 === true ? "Humidity" : null;
+  const check7 = isChecked7 === true ? "Clouds" : null;
+  const check8 = isChecked8 === true ? "Weather Conditions" : null;
+  const check9 = isChecked9 === true ? "Rain" : null;
+  const check10 = isChecked10 === true ? "Snow" : null;
+  const check11 = isChecked11 === true ? "Dew Point" : null;
+  const check12 = isChecked12 === true ? "Visibility" : null;
+  const check13 = isChecked13 === true ? "Wind (speed, direction, gust)" : null;
+
+  const checks = [
+    check,
+    check2,
+    check3,
+    check4,
+    check5,
+    check6,
+    check7,
+    check8,
+    check9,
+    check10,
+    check11,
+    check12,
+    check13,
+  ];
+
+
   return (
     <div>
       <Row className="text-start step-bulk">
@@ -50,30 +81,20 @@ const Step0Bulk = ({
 
       <Row className="text-start step-bulk">
         <Col className="bold">Weather Parameters:</Col>
-       <Col>
-  <>
-          {isChecked === true ? <Row style={{paddingLeft: "10px"}}>Temperature</Row> : <Row></Row>}
-          {isChecked2 === true ? <Row style={{paddingLeft: "10px"}}>Min Temperature</Row> : <Row></Row>}
-          {isChecked3 === true ? <Row style={{paddingLeft: "10px"}}>Max Temperature</Row> : <Row></Row>}
-          {isChecked4 === true ? <Row style={{paddingLeft: "10px"}}>Feels Like</Row> : <Row></Row>}
-          {isChecked5 === true ? <Row style={{paddingLeft: "10px"}}>Pressure</Row> : <Row></Row>}
-          {isChecked6 === true ? <Row style={{paddingLeft: "10px"}}>Humidity</Row> : <Row></Row>}
-          {isChecked7 === true ? <Row style={{paddingLeft: "10px"}}>Clouds</Row> : <Row></Row>}
-          {isChecked8 === true ? <Row style={{paddingLeft: "10px"}}>Weather Conditions</Row> : <Row></Row>}
-          {isChecked9 === true ? <Row style={{paddingLeft: "10px"}}>Rain</Row> : <Row></Row> }
-          {isChecked10 === true ? <Row style={{paddingLeft: "10px"}}>Snow</Row> : <Row></Row>}
-          {isChecked11 === true ? <Row style={{paddingLeft: "10px"}}>Dew Point</Row> : <Row></Row>}
-          {isChecked12 === true ? <Row style={{paddingLeft: "10px"}}>Visibility</Row> : <Row></Row>}
-          {isChecked13 === true ? <Row style={{paddingLeft: "10px"}}>Wind (speed, direction, gust)</Row> : <Row></Row>}
-     </>
-     </Col>
+        <Col>
+          {checks.map(
+              (p) => 
+              p 
+            ).filter(Boolean).join(", ")}
+        </Col>
       </Row>
 
       <Row className="text-start step-bulk">
         <Col className="bold">File Formats:</Col>
-        <Col>{fileCheck === true && fileCheck2 === false ? "CSV" : ""}{" "}
-        {fileCheck2 === true && fileCheck === false ? "JSON" : ""}{" "}
-        {fileCheck2 === true && fileCheck === true ? "CSV, JSON" : ""}{" "}
+        <Col>
+          {fileCheck === true && fileCheck2 === false ? "CSV" : ""}{" "}
+          {fileCheck2 === true && fileCheck === false ? "JSON" : ""}{" "}
+          {fileCheck2 === true && fileCheck === true ? "CSV, JSON" : ""}{" "}
         </Col>
       </Row>
 
@@ -94,7 +115,7 @@ const Step0Bulk = ({
         </Col>
         <Col>
           <h3>
-         {locations.length * 7} {currency}
+            {locations.length * 7} {currency}
           </h3>
         </Col>
       </Row>
