@@ -57,6 +57,7 @@ const MyOrders = () => {
   const second = data
     .filter((x) => x.hbs_response !== null)
     .map((row) => row.product_name);
+    
   const [retryProduct, setRetryProduct] = useState(first);
   const [retryProduct2, setRetryProduct2] = useState(second);
 
@@ -65,7 +66,7 @@ const MyOrders = () => {
       .filter((x) => x.hbs_response !== null)
       .map((row) => {
         if (row.hbs_response.failed === true)
-        setRetryProduct(row.hbs_response.id);
+          setRetryProduct(row.hbs_response.id);
         setRetryProduct2(
           row.product_name === "History Bulk" ? "history_bulk" : 
           row.product_name === "History Forecast Bulk" ? "history_forecast_bulk" : 
@@ -459,6 +460,7 @@ const MyOrders = () => {
                       ) : null}
 
                       {row.product_name === "Zip Code Data" ? (
+                        <Col className="text-center" style={{ paddingRight:"60px" }}>
                         <Button
                           className="button-neutral"
                           a
@@ -469,24 +471,29 @@ const MyOrders = () => {
                         >
                           Download
                         </Button>
+                        </Col>
                       ) : null}
                       {row.hbs_response.failed === true ? (
                         <>
-                          <Col>Failed processing</Col>
+                          <Col className="mb-2">Failed processing</Col>
                           {row.product_name === "History Forecast Bulk" ? (
+                            <Col className="text-center">
                             <Button
                               className="button-neutral"
                               onClick={retryButton}
                             >
                               Retry
                             </Button>
+                            </Col>
                           ) : row.product_name === "History Bulk" ? (
+                            <Col className="px-4">
                             <Button
                               className="button-neutral"
                               onClick={retryButton}
                             >
                               Retry
                             </Button>
+                            </Col>
                           ) : row.product_name === "Zip Code Data" ? (
                             <Button
                               className="button-neutral"
@@ -499,7 +506,7 @@ const MyOrders = () => {
                       ) : null}
                     </Col>
                   ) : (
-                    <Col className="text-right" style={{ fontSize: "10pt" }}>
+                    <Col className="text-center" style={{ fontSize: "10pt", paddingRight:"40px" }}>
                       Not available
                     </Col>
                   )}

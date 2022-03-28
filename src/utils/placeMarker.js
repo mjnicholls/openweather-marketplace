@@ -15,7 +15,11 @@ const MarkerSingleton = (() => {
         instance = new MarkerClass(position, map);
         instance.constructor = null;
       } else {
-        instance.setPosition(position);
+        //instance.setPosition(position);
+        instance.setMap(map);
+        if (position) {
+          instance.setPosition(position);
+        }
       }
       return instance;
     },

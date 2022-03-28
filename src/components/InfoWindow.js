@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "reactstrap";
 import PropTypes from "prop-types";
+import placeMarker from "../utils/placeMarker";
 
 const InfoWindow = ({
   location,
@@ -35,6 +36,7 @@ const InfoWindow = ({
     setLocations([...locations, location]);
     e.stopPropagation();
     setIsAdded(true)
+    placeMarker(null, null)
   }
 
 };
