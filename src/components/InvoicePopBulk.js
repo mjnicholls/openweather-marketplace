@@ -84,6 +84,16 @@ const InvoiceSettingsBulk = ({
 
   const [email, setEmail] = useState('')
 
+  const convertDate = (inputFormat) => {
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    var d = new Date(inputFormat)
+    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-')
+  }
+  
+  const startDateFormatted = convertDate(startDate)
+  const endDateFormatted = convertDate(endDate)
+
+
   const confirmInvoice = () => {
     setError({});
 
@@ -116,8 +126,8 @@ const InvoiceSettingsBulk = ({
       },
       history_bulk: {
         locations: locations,
-        from: startDate,
-        to: endDate,
+        from: startDateFormatted,
+        to: endDateFormatted,
         parameters: {
           temp: temp,
           temp_min: tempMin,
