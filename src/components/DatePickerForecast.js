@@ -35,7 +35,7 @@ const DatePickerForecast = ({
                 onChange={(newValue) => {
                   setStartDate(newValue);
                 }}
-                format="dd/MM/yyyy"
+                inputFormat="dd-MM-yyyy"
                 renderInput={(startDate) => (
                   <TextField {...startDate} helperText={null} />
                 )}
@@ -61,7 +61,7 @@ const DatePickerForecast = ({
                 onChange={(newValue) => {
                   setEndDate(newValue);
                 }}
-                format="dd/MM/yyyy"
+                inputFormat="dd-MM-yyyy"
                 renderInput={(params) => (
                   <TextField {...params} helperText={null} />
                 )}

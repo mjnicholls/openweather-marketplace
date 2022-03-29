@@ -57,6 +57,15 @@ const Step0Bulk = ({
     check13,
   ];
 
+  const convertDate = (inputFormat) => {
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    var d = new Date(inputFormat)
+    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-')
+  }
+  
+  const startDateFormatted = convertDate(startDate)
+  const endDateFormatted = convertDate(endDate)
+
 
   return (
     <div>
@@ -69,8 +78,8 @@ const Step0Bulk = ({
       <Row className="text-start step-bulk">
         <Col className="bold">From - To:</Col>
         <Col>
-          {new Date(startDate).toISOString().split("T")[0]} -{" "}
-          {new Date(endDate).toISOString().split("T")[0]}{" "}
+        {startDateFormatted} -{" "}
+         {endDateFormatted}{" "}
         </Col>
       </Row>
 

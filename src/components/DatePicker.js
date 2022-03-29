@@ -22,6 +22,7 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
               <DatePicker
                 className="dateLabel"
                 inputProps={{ readOnly: true }}
+                inputFormat="dd-MM-yyyy"
                 openTo="year"
                 views={["year", "month", "day"]}
                 minDate={new Date("1979")}
@@ -31,9 +32,8 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
                 onChange={(newValue) => {
                   setStartDate(newValue);
                 }}
-                format="DD-MM-YYYY"
-                renderInput={(startDate) => (
-                  <TextField {...startDate} helperText={null} />
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
                 )}
               />
             </Stack>
@@ -58,7 +58,7 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
                 onChange={(newValue) => {
                   setEndDate(newValue);
                 }}
-                format="DD-MM-YYYY"
+                inputFormat="dd-MM-yyyy"
                 renderInput={(params) => (
                   <TextField {...params} helperText={null} />
                 )}
