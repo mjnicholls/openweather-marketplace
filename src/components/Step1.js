@@ -121,17 +121,15 @@ const Step1 = ({
                         : ""
                     }
                   />
-                 {!invoiceSettings.last_name.length ? (
-                  <div
-                    className={`invalid-feedback ${
-                      error.last_name ? "d-block" : ""
-                    }`}
-                  >
-                    {error.last_name}
-                  </div>
-                 ) : (
-                 null 
-                 )}
+                  {!invoiceSettings.last_name.length ? (
+                    <div
+                      className={`invalid-feedback ${
+                        error.last_name ? "d-block" : ""
+                      }`}
+                    >
+                      {error.last_name}
+                    </div>
+                  ) : null}
                 </FormGroup>
               </Col>
             </Row>
@@ -193,19 +191,21 @@ const Step1 = ({
                       handleChange("organisation", e.target.value)
                     }
                     value={invoiceSettings.organisation}
-                    className={!invoiceSettings.organisation.length && error.organisation ? "danger-border" : ""}
+                    className={
+                      !invoiceSettings.organisation.length && error.organisation
+                        ? "danger-border"
+                        : ""
+                    }
                   />
-                  {!invoiceSettings.organisation.length ?
-                  <div
-                    className={`invalid-feedback ${
-                      error.organisation ? "d-block" : ""
-                    }`}
-                  >
-                    {error.organisation}
-                  </div>
-                  :
-                  null
-                  }
+                  {!invoiceSettings.organisation.length ? (
+                    <div
+                      className={`invalid-feedback ${
+                        error.organisation ? "d-block" : ""
+                      }`}
+                    >
+                      {error.organisation}
+                    </div>
+                  ) : null}
                 </FormGroup>
               </Col>
               <Col>
@@ -261,19 +261,19 @@ const Step1 = ({
                       }
                       value={emailFromState !== null ? emailFromState : email}
                       disabled={emailFromState !== null}
-                      className={!email.length && error.email ? "danger-border" : ""}
+                      className={
+                        !email.length && error.email ? "danger-border" : ""
+                      }
                     />
-                    {!email.length ?
-                    <div
-                      className={`invalid-feedback ${
-                        error.email ? "d-block" : ""
-                      }`}
-                    >
-                      {error.email}
-                    </div>
-                    :
-                    null
-                    }
+                    {!email.length ? (
+                      <div
+                        className={`invalid-feedback ${
+                          error.email ? "d-block" : ""
+                        }`}
+                      >
+                        {error.email}
+                      </div>
+                    ) : null}
                   </>
                 </FormGroup>
               </Col>

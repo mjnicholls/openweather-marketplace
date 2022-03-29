@@ -149,9 +149,11 @@ const DataUSState = () => {
 
       <Row className="us-header flex-end price">
         <Col>
-          <p style={{ fontSize: "14pt" }}>
-            <i>To proceed please fill in the required details</i>
-          </p>{" "}
+          {country && year ? null : (
+            <p style={{ fontSize: "14pt" }}>
+              <i>To proceed please fill in the required details</i>
+            </p>
+          )}
         </Col>
         <Col>
           <p style={{ fontWeight: "bold", fontSize: "18pt" }}>
