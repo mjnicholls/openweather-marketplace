@@ -31,8 +31,9 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
                 onChange={(newValue) => {
                   setStartDate(newValue);
                 }}
-                renderInput={(params) => (
-                  <TextField {...params} helperText={null} />
+                format="DD-MM-YYYY"
+                renderInput={(startDate) => (
+                  <TextField {...startDate} helperText={null} />
                 )}
               />
             </Stack>
@@ -57,6 +58,7 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
                 onChange={(newValue) => {
                   setEndDate(newValue);
                 }}
+                format="DD-MM-YYYY"
                 renderInput={(params) => (
                   <TextField {...params} helperText={null} />
                 )}

@@ -34,36 +34,9 @@ const HeaderMarket = () => {
             />
           </button>
 
-          <div className="break d-xxl-none"></div>
-
+      
           <ul className={`mobile-menu ${isMenuOpen ? "open" : ""}`}>
-            <li className="d-xxl-none">
-              <div className="input-group search ms-auto">
-                <div className="input-group-append">
-                  <button className="btn btn-secondary" type="button">
-                    <img
-                      src="https://home.openweathermap.org/assets/icon_search.svg"
-                      alt="search bar logo"
-                    />
-                  </button>
-                </div>
-                <form
-                  className="input"
-                  action="https://openweathermap.org/find"
-                  acceptCharset="UTF-8"
-                  method="get"
-                >
-                  <input name="utf8" type="hidden" value="&#x2713;" />
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Weather in your city"
-                    name="q"
-                  />
-                  <input style={{ display: "none" }} type="submit" />
-                </form>
-              </div>
-            </li>
+        
             <li>
               <a href="/history_bulks/new">History Bulk</a>
             </li>
