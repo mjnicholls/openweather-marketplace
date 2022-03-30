@@ -21,6 +21,11 @@ const Map = ({
   setErrorMap,
   count, 
   setCount,
+  duplicate,
+  duplicates,
+  setDuplicate,
+  tempLocation,
+  setTempLocation,
   isDraggable = true,
 }) => {
 
@@ -63,6 +68,11 @@ const Map = ({
           setErrorMap={setErrorMap}
           count={count}
           setCount={setCount}
+          duplicate={duplicate}
+          setDuplicate={setDuplicate}
+          duplictes={duplicates}
+          tempLocation={tempLocation}
+          setTempLocation={setTempLocation}
         /> 
         :null}
       </GoogleMapReact>

@@ -21,6 +21,10 @@ const MapHistory = ({
   setCount,
   isAdded,
   setIsAdded,
+  tempLocation,
+  duplicate,
+  setDuplicate,
+  duplicates,
   isDraggable = true,
 }) => {
   const defaultCenter = {
@@ -58,6 +62,10 @@ const MapHistory = ({
           setCount={setCount}
           isAdded={isAdded}
           setIsAdded={setIsAdded}
+          tempLocation={tempLocation}
+          duplicate={duplicate}
+          setDuplicate={setDuplicate}
+          duplictes={duplicates}
         />
         : null}
       </GoogleMapReact>

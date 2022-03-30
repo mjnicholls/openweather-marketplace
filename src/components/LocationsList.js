@@ -11,6 +11,19 @@ const LocationList = ({ locations, setLocations }) => {
     locationsCopy.splice(index, 1);
     setLocations(locationsCopy);
   };
+  
+  // const latShow = duplicate.map((ind) => ind.lat)
+  // const lonShow = duplicate.map((ind) => ind.lon)
+
+  // const locShow = locations.map((ind) => ind.lat)
+
+  // const intersection = duplicate.filter(element => locations.includes(element));
+
+  // console.log('test', intersection)
+
+  // console.log('showLat', latShow)
+  // console.log('showLoc', locShow)
+  
 
   return (
     <div className="my-3">
@@ -54,7 +67,7 @@ const LocationList = ({ locations, setLocations }) => {
 
                 <Col md="3">{location.name}</Col>
                 <Col></Col>
-
+                
                 <Col md="3">{parseFloat(location.lat).toFixed(6)}</Col>
                 <Col md="3">{parseFloat(location.lon).toFixed(6)}</Col>
                 <Col className="d-lg-flex d-none">

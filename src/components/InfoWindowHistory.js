@@ -10,36 +10,40 @@ const InfoWindowHistory = ({
   locations,
   errorMap,
   setErrorMap,
-  count,
-  setCount,
-  setIsAdded
+  setIsAdded,
+  duplicate,
+  setDuplicate,
+  tempLocation,
 }) => {
+
+  const latCheck = tempLocation.lat;
+  const lonCheck = tempLocation.lon;
+
+  const check = locations.map((ind) => ind.lat);
+  const checkTwo = locations.map((ind) => ind.lon);
+
+  if (check.includes(latCheck) && checkTwo.includes(lonCheck)) {
+    setDuplicate(true);
+  }
+
+  else setDuplicate(false)
 
   const onSetLocationClick = (e) => {
 
-  const toFindDuplicates = (locations) => 
-  locations.filter((item, index) => 
-  locations.indexOf(item) !== index + 1)
+    if (duplicate === true) {
+      e.stopPropagation();
+      setErrorMap(true);
+    } 
+    
+    if (duplicate === false) {
+      setLocations([...locations, location]);
+      e.stopPropagation();
+      setErrorMap(false);
+      setIsAdded(true);
+      placeMarker(null, null);
+    }
 
-  const duplicateElements = toFindDuplicates(locations);
-
-  if (duplicateElements) {
-    setCount(counter => counter + 1)
-  }
-
-  if (count === 1) {
-    setErrorMap(true)
-  }
-
-  if (count === 0) {
-    setErrorMap(false)
-    setLocations([...locations, location]);
-    e.stopPropagation();
-    setIsAdded(true)
-    placeMarker(null, null)
-  }
-
-};
+  };
 
   return location.lat && location.lon ? (
     <div className="mapPop text-start">

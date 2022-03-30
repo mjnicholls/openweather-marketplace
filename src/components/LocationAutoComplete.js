@@ -41,6 +41,7 @@ const AutoComplete = ({
       if (count === 0) {
         setErrorMap(false);
       }
+
       setIsAdded(false)
     }
   };

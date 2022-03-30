@@ -183,6 +183,17 @@ const NewHistoryBulkTest = () => {
     newLocation[key] = value;
     setLocation(newLocation);
   };
+  
+  const latCheck = tempLocation.lat
+  const lonCheck = tempLocation.lon
+
+  const check = locations.map((ind) => ind.lat)
+  const checkTwo = locations.map((ind) => ind.lon)
+
+  const [duplicate, setDuplicate] = useState(false)
+
+  const duplicates = check.includes(latCheck) && checkTwo.includes(lonCheck)
+
 
   return (
     <div className="container">
@@ -304,6 +315,9 @@ const NewHistoryBulkTest = () => {
             setEmail={setEmail}
             setIsAdded={setIsAdded}
             setErrorMap={setErrorMap}
+            duplicate={duplicate}
+            setDuplicate={setDuplicate}
+            duplicates={duplicates}
           />
         </Col>
 
@@ -323,6 +337,11 @@ const NewHistoryBulkTest = () => {
             setErrorMap={setErrorMap}
             count={count}
             setCount={setCount}
+            duplicate={duplicate}
+            setDuplicate={setDuplicate}
+            duplicates={duplicates}
+            tempLocation={tempLocation}
+            setTempLocation={setTempLocation}
             isButtonInfoWindow={
               location.lat !== tempLocation.lat ||
               location.lon !== tempLocation.lon

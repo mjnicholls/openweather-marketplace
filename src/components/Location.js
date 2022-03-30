@@ -23,8 +23,6 @@ const Location = ({
   setIsDropDown,
   locations,
   setLocations,
-  parameters,
-  setParameters,
   startDate,
   setStartDate,
   endDate,
@@ -107,7 +105,9 @@ const Location = ({
   setIsAdded, 
   count,
   setCount,
-  setErrorMap
+  setErrorMap,
+  duplicate,
+  setDuplicate
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true);
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
@@ -138,6 +138,8 @@ const Location = ({
     setIsAdded(false)
   };
 
+  console.log('count', count)
+
   const canSetCoordinates = () =>
     tempLocation.lat !== coordsTempLocation.lat ||
     tempLocation.lon !== coordsTempLocation.lon;
@@ -156,9 +158,6 @@ const Location = ({
     setIsSearchByName(false);
     setIsImport(false);
   };
-
-  const d = new Date()
-
 
   const getJson = (e) => {
     hideAlert()
@@ -324,6 +323,8 @@ const Location = ({
   const addLocations = (data) => {
     const newLocations = [...locations, ...data];
     setLocations(newLocations);
+
+    if (locations.indexOf(value) === -1) locations.push(value)
   };
 
   const checkoutAlert = () => {
@@ -424,6 +425,7 @@ const Location = ({
                   count={count}
                   setCount={setCount}
                   setErrorMap={setErrorMap}
+                  duplicate={duplicate}
                 />
               </>
             ) : (
