@@ -25,7 +25,7 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
                 inputFormat="dd-MM-yyyy"
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={new Date("1979")}
+                minDate={new Date("01-01-1979")}
                 maxDate={endDate !== null ? endDate : yesterday}
                 value={startDate}
                 label={"From"}
