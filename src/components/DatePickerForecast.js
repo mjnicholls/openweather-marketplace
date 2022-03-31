@@ -28,7 +28,7 @@ const DatePickerForecast = ({
               className="dateLabel"
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={new Date("2017")}
+                minDate={new Date("10-07-2017")}
                 maxDate={endDate !== null ? endDate : yesterday}
                 value={startDate}
                 label={'From'}
@@ -53,7 +53,7 @@ const DatePickerForecast = ({
               style={{border: "none"}}
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={startDate !== null ? startDate : new Date("2017") }
+                minDate={startDate !== null ? startDate : new Date("07-10-2017") }
                 maxDate={yesterday}
                 value={endDate}
                 label={'To'}

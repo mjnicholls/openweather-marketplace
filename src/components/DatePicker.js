@@ -50,7 +50,7 @@ const DatePickerMarket = ({ startDate, setStartDate, endDate, setEndDate }) => {
                 disableHighlightToday={true}
                 openTo="year"
                 views={["year", "month", "day"]}
-                minDate={startDate !== null ? startDate : new Date("1979")}
+                minDate={startDate !== null ? startDate : new Date("01-01-1979")}
                 maxDate={yesterday}
                 // maxDate={endDate < startDate ? endDate === setEndDate(startDate) : endDate}
                 value={endDate}
