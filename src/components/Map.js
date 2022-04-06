@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from 'react'
 
-import GoogleMapReact from "google-map-react";
-import PropTypes from "prop-types";
+import GoogleMapReact from 'google-map-react'
+import PropTypes from 'prop-types'
 
-import { mapStyles } from "../assets/mapStyles";
-import { mapStyle } from "../utils/styles";
-import InfoWindow from "./InfoWindow";
+import { mapStyles } from '../assets/mapStyles'
+import { mapStyle } from '../utils/styles'
+import InfoWindow from './InfoWindow'
 
 const Map = ({
   mapRef,
@@ -19,7 +19,7 @@ const Map = ({
   setIsAdded,
   errorMap,
   setErrorMap,
-  count, 
+  count,
   setCount,
   duplicate,
   duplicates,
@@ -28,14 +28,10 @@ const Map = ({
   setTempLocation,
   isDraggable = true,
 }) => {
-
-
-
   const defaultCenter = {
     lat: 51.509865,
     lng: -0.118092,
-  };
-
+  }
 
   return (
     <div id="map" style={mapStyle}>
@@ -54,31 +50,31 @@ const Map = ({
         }}
         onClick={onClickMap}
       >
-        {isAdded === false ? 
-        <InfoWindow
-        isAdded={isAdded}
-        setIsAdded={setIsAdded}
-          location={mapLocation}
-          setLocation={setLocation}
-          showButton={isButtonInfoWindow}
-          locations={locations}
-          setLocations={setLocations}
-          onClick={onClickMap}
-          errorMap={errorMap}
-          setErrorMap={setErrorMap}
-          count={count}
-          setCount={setCount}
-          duplicate={duplicate}
-          setDuplicate={setDuplicate}
-          duplictes={duplicates}
-          tempLocation={tempLocation}
-          setTempLocation={setTempLocation}
-        /> 
-        :null}
+        {isAdded === false ? (
+          <InfoWindow
+            isAdded={isAdded}
+            setIsAdded={setIsAdded}
+            location={mapLocation}
+            setLocation={setLocation}
+            showButton={isButtonInfoWindow}
+            locations={locations}
+            setLocations={setLocations}
+            onClick={onClickMap}
+            errorMap={errorMap}
+            setErrorMap={setErrorMap}
+            count={count}
+            setCount={setCount}
+            duplicate={duplicate}
+            setDuplicate={setDuplicate}
+            duplictes={duplicates}
+            tempLocation={tempLocation}
+            setTempLocation={setTempLocation}
+          />
+        ) : null}
       </GoogleMapReact>
     </div>
-  );
-};
+  )
+}
 
 Map.propTypes = {
   mapRef: PropTypes.object,
@@ -95,6 +91,11 @@ Map.propTypes = {
   setErrorMap: PropTypes.func,
   count: PropTypes.number,
   setCount: PropTypes.func,
-};
+  duplicate: PropTypes.bool,
+  duplicates: PropTypes.bool,
+  setDuplicate: PropTypes.func,
+  setTempLocation: PropTypes.func,
+  tempLocation: PropTypes.object,
+}
 
-export default Map;
+export default Map

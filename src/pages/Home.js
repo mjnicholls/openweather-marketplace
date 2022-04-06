@@ -1,13 +1,12 @@
-import React from "react";
+import React from 'react'
 
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux'
+import { Button, Card, CardBody, Col, Row } from 'reactstrap'
 
-import { Button, Card, CardBody, Col, Row } from "reactstrap";
-
-const selectCurrency = (state) => state.auth.currency;
+const selectCurrency = (state) => state.auth.currency
 
 const HomeMarket = () => {
-  const currency = useSelector(selectCurrency);
+  const currency = useSelector(selectCurrency)
 
   return (
     <div className="container">
@@ -15,7 +14,7 @@ const HomeMarket = () => {
         <h1>Custom Weather Products</h1>
         <Col md="7" className="mt-2 mb-2">
           <p>
-            {" "}
+            {' '}
             OpenWeatherMap provides access to 40-year historical weather data
             for any location. Get various weather parameters, such as
             temperature, precipitation, wind and many more.
@@ -293,7 +292,7 @@ const HomeMarket = () => {
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
-export default HomeMarket;
+export default HomeMarket

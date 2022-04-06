@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Button, Label, Form, FormGroup, Input, Row, Col } from "reactstrap";
-import PropTypes from "prop-types";
+import React, { useState } from 'react'
+
+import PropTypes from 'prop-types'
+import { Button, Label, Form, FormGroup, Input, Row, Col } from 'reactstrap'
 
 const CheckyBox = ({
   temp,
@@ -58,160 +59,154 @@ const CheckyBox = ({
   setIsChecked13,
   close,
 }) => {
+  const [tempIsChecked, setTempIsChecked] = useState(isChecked)
+  const [tempIsChecked2, setTempIsChecked2] = useState(isChecked2)
+  const [tempIsChecked3, setTempIsChecked3] = useState(isChecked3)
+  const [tempIsChecked4, setTempIsChecked4] = useState(isChecked4)
+  const [tempIsChecked5, setTempIsChecked5] = useState(isChecked5)
+  const [tempIsChecked6, setTempIsChecked6] = useState(isChecked6)
+  const [tempIsChecked7, setTempIsChecked7] = useState(isChecked7)
+  const [tempIsChecked8, setTempIsChecked8] = useState(isChecked8)
+  const [tempIsChecked9, setTempIsChecked9] = useState(isChecked9)
+  const [tempIsChecked10, setTempIsChecked10] = useState(isChecked10)
+  const [tempIsChecked11, setTempIsChecked11] = useState(isChecked11)
+  const [tempIsChecked12, setTempIsChecked12] = useState(isChecked12)
+  const [tempIsChecked13, setTempIsChecked13] = useState(isChecked13)
 
-  const [tempIsChecked, setTempIsChecked] = useState(isChecked);
-  const [tempIsChecked2, setTempIsChecked2] = useState(isChecked2);
-  const [tempIsChecked3, setTempIsChecked3] = useState(isChecked3);
-  const [tempIsChecked4, setTempIsChecked4] = useState(isChecked4);
-  const [tempIsChecked5, setTempIsChecked5] = useState(isChecked5);
-  const [tempIsChecked6, setTempIsChecked6] = useState(isChecked6);
-  const [tempIsChecked7, setTempIsChecked7] = useState(isChecked7);
-  const [tempIsChecked8, setTempIsChecked8] = useState(isChecked8);
-  const [tempIsChecked9, setTempIsChecked9] = useState(isChecked9);
-  const [tempIsChecked10, setTempIsChecked10] = useState(isChecked10);
-  const [tempIsChecked11, setTempIsChecked11] = useState(isChecked11);
-  const [tempIsChecked12, setTempIsChecked12] = useState(isChecked12);
-  const [tempIsChecked13, setTempIsChecked13] = useState(isChecked13);
+  const [tempStatus, setTempStatus] = useState(temp)
+  const [tempStatus2, setTempStatus2] = useState(tempMin)
+  const [tempStatus3, setTempStatus3] = useState(tempMax)
+  const [tempStatus4, setTempStatus4] = useState(feelsLike)
+  const [tempStatus5, setTempStatus5] = useState(pressure)
+  const [tempStatus6, setTempStatus6] = useState(humidity)
+  const [tempStatus7, setTempStatus7] = useState(clouds)
+  const [tempStatus8, setTempStatus8] = useState(weather)
+  const [tempStatus9, setTempStatus9] = useState(rain)
+  const [tempStatus10, setTempStatus10] = useState(snow)
+  const [tempStatus11, setTempStatus11] = useState(dewPoint)
+  const [tempStatus12, setTempStatus12] = useState(visibility)
+  const [tempStatus13, setTempStatus13] = useState(wind)
 
-  const [tempStatus, setTempStatus] = useState(temp);
-  const [tempStatus2, setTempStatus2] = useState(tempMin);
-  const [tempStatus3, setTempStatus3] = useState(tempMax);
-  const [tempStatus4, setTempStatus4] = useState(feelsLike);
-  const [tempStatus5, setTempStatus5] = useState(pressure);
-  const [tempStatus6, setTempStatus6] = useState(humidity);
-  const [tempStatus7, setTempStatus7] = useState(clouds);
-  const [tempStatus8, setTempStatus8] = useState(weather);
-  const [tempStatus9, setTempStatus9] = useState(rain);
-  const [tempStatus10, setTempStatus10] = useState(snow);
-  const [tempStatus11, setTempStatus11] = useState(dewPoint);
-  const [tempStatus12, setTempStatus12] = useState(visibility);
-  const [tempStatus13, setTempStatus13] = useState(wind);
-
-  const [unChecked, setUnchecked] = useState([]);
   const [error, setError] = useState(null)
 
   const handCheck = () => {
-    if (tempStatus === "On") {
-      setTemp("On");
+    if (tempStatus === 'On') {
+      setTemp('On')
     } else {
-      setTemp("Off")
+      setTemp('Off')
     }
 
     if (tempIsChecked === true) {
-      setIsChecked(true);
+      setIsChecked(true)
     } else {
       setIsChecked(false)
     }
 
-    if (tempStatus2 === "On") {
-      setTempMin("On");
+    if (tempStatus2 === 'On') {
+      setTempMin('On')
     } else {
-      setTempMin("Off")
-    };
-
-    if (tempIsChecked2 === true) {
-      setIsChecked2(true);
-    } else {
-    setIsChecked2(false)
+      setTempMin('Off')
     }
 
-    if (tempStatus3 === "On") {
-      setTempMax("On");
-    } else setTempMax("Off");
+    if (tempIsChecked2 === true) {
+      setIsChecked2(true)
+    } else {
+      setIsChecked2(false)
+    }
+
+    if (tempStatus3 === 'On') {
+      setTempMax('On')
+    } else setTempMax('Off')
 
     if (tempIsChecked3 === true) {
-      setIsChecked3(true);
-    } else setIsChecked3(false);
+      setIsChecked3(true)
+    } else setIsChecked3(false)
 
-    if (tempStatus4 === "On") {
-      setFeelsLike("On");
-    } else setFeelsLike("Off");
+    if (tempStatus4 === 'On') {
+      setFeelsLike('On')
+    } else setFeelsLike('Off')
 
     if (tempIsChecked4 === true) {
-      setIsChecked4(true);
-    } else setIsChecked4(false);
+      setIsChecked4(true)
+    } else setIsChecked4(false)
 
-    if (tempStatus5 === "On") {
-      setPressure("On");
-    } else setPressure("Off");
+    if (tempStatus5 === 'On') {
+      setPressure('On')
+    } else setPressure('Off')
 
     if (tempIsChecked5 === true) {
-      setIsChecked5(true);
-    } else setIsChecked5(false);
+      setIsChecked5(true)
+    } else setIsChecked5(false)
 
-    if (tempStatus6 === "On") {
-      setHumidity("On");
-    } else setHumidity("Off");
+    if (tempStatus6 === 'On') {
+      setHumidity('On')
+    } else setHumidity('Off')
 
     if (tempIsChecked6 === true) {
-      setIsChecked6(true);
-    } else setIsChecked6(false);
+      setIsChecked6(true)
+    } else setIsChecked6(false)
 
-    if (tempStatus7 === "On") {
-      setClouds("On");
-    } else setClouds("Off");
+    if (tempStatus7 === 'On') {
+      setClouds('On')
+    } else setClouds('Off')
 
     if (tempIsChecked7 === true) {
-      setIsChecked7(true);
-    } else setIsChecked7(false);
+      setIsChecked7(true)
+    } else setIsChecked7(false)
 
-    if (tempStatus8 === "On") {
-      setWeather("On");
-    } else setWeather("Off");
+    if (tempStatus8 === 'On') {
+      setWeather('On')
+    } else setWeather('Off')
 
     if (tempIsChecked8 === true) {
-      setIsChecked8(true);
-    } else setIsChecked8(false);
+      setIsChecked8(true)
+    } else setIsChecked8(false)
 
-    if (tempStatus9 === "On") {
-      setRain("On");
-    } else setRain("Off");
+    if (tempStatus9 === 'On') {
+      setRain('On')
+    } else setRain('Off')
 
     if (tempIsChecked9 === true) {
-      setIsChecked9(true);
-    } else setIsChecked9(false);
+      setIsChecked9(true)
+    } else setIsChecked9(false)
 
-    if (tempStatus10 === "On") {
-      setSnow("On");
-    } else setSnow("Off");
+    if (tempStatus10 === 'On') {
+      setSnow('On')
+    } else setSnow('Off')
 
     if (tempIsChecked10 === true) {
-      setIsChecked10(true);
-    } else setIsChecked10(false);
+      setIsChecked10(true)
+    } else setIsChecked10(false)
 
-    if (tempStatus11 === "On") {
-      setDewPoint("On");
-    } else setDewPoint("Off");
+    if (tempStatus11 === 'On') {
+      setDewPoint('On')
+    } else setDewPoint('Off')
 
     if (tempIsChecked11 === true) {
-      setIsChecked11(true);
-    } else setIsChecked11(false);
+      setIsChecked11(true)
+    } else setIsChecked11(false)
 
-    if (tempStatus12 === "On") {
-      setVisibility("On");
-    } else setVisibility("Off");
+    if (tempStatus12 === 'On') {
+      setVisibility('On')
+    } else setVisibility('Off')
 
     if (tempIsChecked12 === true) {
-      setIsChecked12(true);
-    } else setIsChecked12(false);
+      setIsChecked12(true)
+    } else setIsChecked12(false)
 
-    if (tempStatus13 === "On") {
-      setWind("On");
-    } else setWind("Off");
+    if (tempStatus13 === 'On') {
+      setWind('On')
+    } else setWind('Off')
 
     if (tempIsChecked13 === true) {
-      setIsChecked13(true);
-    } 
-    else setIsChecked13(false);
+      setIsChecked13(true)
+    } else setIsChecked13(false)
 
     setError(null)
 
-    close();
-    setFileValue(true);
-
-  };
-
-  
+    close()
+    setFileValue(true)
+  }
 
   return (
     <>
@@ -224,25 +219,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked}
                 onChange={() => {
-                  setTempStatus(tempStatus === "On" ? "Off" : "On");
-                  setTempIsChecked(tempStatus === "On" ? false : true);
+                  setTempStatus(tempStatus === 'On' ? 'Off' : 'On')
+                  setTempIsChecked(tempStatus !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === true &&
-                  tempIsChecked2 === false &&
-                  tempIsChecked3 === false &&
-                  tempIsChecked4 === false &&
-                  tempIsChecked5 === false &&
-                  tempIsChecked6 === false &&
-                  tempIsChecked7 === false &&
-                  tempIsChecked8 === false &&
-                  tempIsChecked9 === false &&
-                  tempIsChecked10 === false &&
-                  tempIsChecked11 === false &&
-                  tempIsChecked12 === false &&
-                  tempIsChecked13 === false ?
-                  true : false                
+                  !!(
+                    tempIsChecked === true &&
+                    tempIsChecked2 === false &&
+                    tempIsChecked3 === false &&
+                    tempIsChecked4 === false &&
+                    tempIsChecked5 === false &&
+                    tempIsChecked6 === false &&
+                    tempIsChecked7 === false &&
+                    tempIsChecked8 === false &&
+                    tempIsChecked9 === false &&
+                    tempIsChecked10 === false &&
+                    tempIsChecked11 === false &&
+                    tempIsChecked12 === false &&
+                    tempIsChecked13 === false
+                  )
                 }
               />
             </Label>
@@ -255,25 +251,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked2}
                 onChange={() => {
-                  setTempStatus2(tempStatus2 === "On" ? "Off" : "On");
-                  setTempIsChecked2(tempStatus2 === "On" ? false : true);
+                  setTempStatus2(tempStatus2 === 'On' ? 'Off' : 'On')
+                  setTempIsChecked2(tempStatus2 !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === false &&
-                  tempIsChecked2 === true &&
-                  tempIsChecked3 === false &&
-                  tempIsChecked4 === false &&
-                  tempIsChecked5 === false &&
-                  tempIsChecked6 === false &&
-                  tempIsChecked7 === false &&
-                  tempIsChecked8 === false &&
-                  tempIsChecked9 === false &&
-                  tempIsChecked10 === false &&
-                  tempIsChecked11 === false &&
-                  tempIsChecked12 === false &&
-                  tempIsChecked13 === false ?
-                  true : false                
+                  !!(
+                    tempIsChecked === false &&
+                    tempIsChecked2 === true &&
+                    tempIsChecked3 === false &&
+                    tempIsChecked4 === false &&
+                    tempIsChecked5 === false &&
+                    tempIsChecked6 === false &&
+                    tempIsChecked7 === false &&
+                    tempIsChecked8 === false &&
+                    tempIsChecked9 === false &&
+                    tempIsChecked10 === false &&
+                    tempIsChecked11 === false &&
+                    tempIsChecked12 === false &&
+                    tempIsChecked13 === false
+                  )
                 }
               />
             </Label>
@@ -286,25 +283,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked3}
                 onChange={() => {
-                  setTempStatus3(tempStatus3 === "On" ? "Off" : "On");
-                  setTempIsChecked3(tempStatus3 === "On" ? false : true);
+                  setTempStatus3(tempStatus3 === 'On' ? 'Off' : 'On')
+                  setTempIsChecked3(tempStatus3 !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === false &&
-                  tempIsChecked2 === false &&
-                  tempIsChecked3 === true &&
-                  tempIsChecked4 === false &&
-                  tempIsChecked5 === false &&
-                  tempIsChecked6 === false &&
-                  tempIsChecked7 === false &&
-                  tempIsChecked8 === false &&
-                  tempIsChecked9 === false &&
-                  tempIsChecked10 === false &&
-                  tempIsChecked11 === false &&
-                  tempIsChecked12 === false &&
-                  tempIsChecked13 === false ?
-                  true : false                
+                  !!(
+                    tempIsChecked === false &&
+                    tempIsChecked2 === false &&
+                    tempIsChecked3 === true &&
+                    tempIsChecked4 === false &&
+                    tempIsChecked5 === false &&
+                    tempIsChecked6 === false &&
+                    tempIsChecked7 === false &&
+                    tempIsChecked8 === false &&
+                    tempIsChecked9 === false &&
+                    tempIsChecked10 === false &&
+                    tempIsChecked11 === false &&
+                    tempIsChecked12 === false &&
+                    tempIsChecked13 === false
+                  )
                 }
               />
             </Label>
@@ -317,25 +315,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked4}
                 onChange={() => {
-                  setTempStatus4(tempStatus4 === "On" ? "Off" : "On");
-                  setTempIsChecked4(tempStatus4 === "On" ? false : true);
+                  setTempStatus4(tempStatus4 === 'On' ? 'Off' : 'On')
+                  setTempIsChecked4(tempStatus4 !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === false &&
-                  tempIsChecked2 === false &&
-                  tempIsChecked3 === false &&
-                  tempIsChecked4 === true &&
-                  tempIsChecked5 === false &&
-                  tempIsChecked6 === false &&
-                  tempIsChecked7 === false &&
-                  tempIsChecked8 === false &&
-                  tempIsChecked9 === false &&
-                  tempIsChecked10 === false &&
-                  tempIsChecked11 === false &&
-                  tempIsChecked12 === false &&
-                  tempIsChecked13 === false ?
-                  true : false                
+                  !!(
+                    tempIsChecked === false &&
+                    tempIsChecked2 === false &&
+                    tempIsChecked3 === false &&
+                    tempIsChecked4 === true &&
+                    tempIsChecked5 === false &&
+                    tempIsChecked6 === false &&
+                    tempIsChecked7 === false &&
+                    tempIsChecked8 === false &&
+                    tempIsChecked9 === false &&
+                    tempIsChecked10 === false &&
+                    tempIsChecked11 === false &&
+                    tempIsChecked12 === false &&
+                    tempIsChecked13 === false
+                  )
                 }
               />
             </Label>
@@ -348,25 +347,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked5}
                 onChange={() => {
-                  setTempStatus5(tempStatus5 === "On" ? "Off" : "On");
-                  setTempIsChecked5(tempStatus5 === "On" ? false : true);
+                  setTempStatus5(tempStatus5 === 'On' ? 'Off' : 'On')
+                  setTempIsChecked5(tempStatus5 !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === false &&
-                  tempIsChecked2 === false &&
-                  tempIsChecked3 === false &&
-                  tempIsChecked4 === false &&
-                  tempIsChecked5 === true &&
-                  tempIsChecked6 === false &&
-                  tempIsChecked7 === false &&
-                  tempIsChecked8 === false &&
-                  tempIsChecked9 === false &&
-                  tempIsChecked10 === false &&
-                  tempIsChecked11 === false &&
-                  tempIsChecked12 === false &&
-                  tempIsChecked13 === false ?
-                  true : false                
+                  !!(
+                    tempIsChecked === false &&
+                    tempIsChecked2 === false &&
+                    tempIsChecked3 === false &&
+                    tempIsChecked4 === false &&
+                    tempIsChecked5 === true &&
+                    tempIsChecked6 === false &&
+                    tempIsChecked7 === false &&
+                    tempIsChecked8 === false &&
+                    tempIsChecked9 === false &&
+                    tempIsChecked10 === false &&
+                    tempIsChecked11 === false &&
+                    tempIsChecked12 === false &&
+                    tempIsChecked13 === false
+                  )
                 }
               />
             </Label>
@@ -379,25 +379,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked6}
                 onChange={() => {
-                  setTempStatus6(tempStatus6 === "On" ? "Off" : "On");
-                  setTempIsChecked6(tempStatus6 === "On" ? false : true);
+                  setTempStatus6(tempStatus6 === 'On' ? 'Off' : 'On')
+                  setTempIsChecked6(tempStatus6 !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === false &&
-                  tempIsChecked2 === false &&
-                  tempIsChecked3 === false &&
-                  tempIsChecked4 === false &&
-                  tempIsChecked5 === false &&
-                  tempIsChecked6 === true &&
-                  tempIsChecked7 === false &&
-                  tempIsChecked8 === false &&
-                  tempIsChecked9 === false &&
-                  tempIsChecked10 === false &&
-                  tempIsChecked11 === false &&
-                  tempIsChecked12 === false &&
-                  tempIsChecked13 === false ?
-                  true : false                
+                  !!(
+                    tempIsChecked === false &&
+                    tempIsChecked2 === false &&
+                    tempIsChecked3 === false &&
+                    tempIsChecked4 === false &&
+                    tempIsChecked5 === false &&
+                    tempIsChecked6 === true &&
+                    tempIsChecked7 === false &&
+                    tempIsChecked8 === false &&
+                    tempIsChecked9 === false &&
+                    tempIsChecked10 === false &&
+                    tempIsChecked11 === false &&
+                    tempIsChecked12 === false &&
+                    tempIsChecked13 === false
+                  )
                 }
               />
             </Label>
@@ -410,25 +411,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked7}
                 onChange={() => {
-                  setTempStatus7(tempStatus7 === "On" ? "Off" : "On");
-                  setTempIsChecked7(tempStatus7 === "On" ? false : true);
+                  setTempStatus7(tempStatus7 === 'On' ? 'Off' : 'On')
+                  setTempIsChecked7(tempStatus7 !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === false &&
-                  tempIsChecked2 === false &&
-                  tempIsChecked3 === false &&
-                  tempIsChecked4 === false &&
-                  tempIsChecked5 === false &&
-                  tempIsChecked6 === false &&
-                  tempIsChecked7 === true &&
-                  tempIsChecked8 === false &&
-                  tempIsChecked9 === false &&
-                  tempIsChecked10 === false &&
-                  tempIsChecked11 === false &&
-                  tempIsChecked12 === false &&
-                  tempIsChecked13 === false ?
-                  true : false                
+                  !!(
+                    tempIsChecked === false &&
+                    tempIsChecked2 === false &&
+                    tempIsChecked3 === false &&
+                    tempIsChecked4 === false &&
+                    tempIsChecked5 === false &&
+                    tempIsChecked6 === false &&
+                    tempIsChecked7 === true &&
+                    tempIsChecked8 === false &&
+                    tempIsChecked9 === false &&
+                    tempIsChecked10 === false &&
+                    tempIsChecked11 === false &&
+                    tempIsChecked12 === false &&
+                    tempIsChecked13 === false
+                  )
                 }
               />
             </Label>
@@ -441,25 +443,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked8}
                 onChange={() => {
-                  setTempStatus8(tempStatus8 === "On" ? "Off" : "On");
-                  setTempIsChecked8(tempStatus8 === "On" ? false : true);
+                  setTempStatus8(tempStatus8 === 'On' ? 'Off' : 'On')
+                  setTempIsChecked8(tempStatus8 !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === false &&
-                  tempIsChecked2 === false &&
-                  tempIsChecked3 === false &&
-                  tempIsChecked4 === false &&
-                  tempIsChecked5 === false &&
-                  tempIsChecked6 === false &&
-                  tempIsChecked7 === false &&
-                  tempIsChecked8 === true &&
-                  tempIsChecked9 === false &&
-                  tempIsChecked10 === false &&
-                  tempIsChecked11 === false &&
-                  tempIsChecked12 === false &&
-                  tempIsChecked13 === false ?
-                  true : false                
+                  !!(
+                    tempIsChecked === false &&
+                    tempIsChecked2 === false &&
+                    tempIsChecked3 === false &&
+                    tempIsChecked4 === false &&
+                    tempIsChecked5 === false &&
+                    tempIsChecked6 === false &&
+                    tempIsChecked7 === false &&
+                    tempIsChecked8 === true &&
+                    tempIsChecked9 === false &&
+                    tempIsChecked10 === false &&
+                    tempIsChecked11 === false &&
+                    tempIsChecked12 === false &&
+                    tempIsChecked13 === false
+                  )
                 }
               />
             </Label>
@@ -472,25 +475,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked9}
                 onChange={() => {
-                  setTempStatus9(tempStatus9 === "On" ? "Off" : "On");
-                  setTempIsChecked9(tempStatus9 === "On" ? false : true);
+                  setTempStatus9(tempStatus9 === 'On' ? 'Off' : 'On')
+                  setTempIsChecked9(tempStatus9 !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === false &&
-                  tempIsChecked2 === false &&
-                  tempIsChecked3 === false &&
-                  tempIsChecked4 === false &&
-                  tempIsChecked5 === false &&
-                  tempIsChecked6 === false &&
-                  tempIsChecked7 === false &&
-                  tempIsChecked8 === false &&
-                  tempIsChecked9 === true &&
-                  tempIsChecked10 === false &&
-                  tempIsChecked11 === false &&
-                  tempIsChecked12 === false &&
-                  tempIsChecked13 === false ?
-                  true : false                
+                  !!(
+                    tempIsChecked === false &&
+                    tempIsChecked2 === false &&
+                    tempIsChecked3 === false &&
+                    tempIsChecked4 === false &&
+                    tempIsChecked5 === false &&
+                    tempIsChecked6 === false &&
+                    tempIsChecked7 === false &&
+                    tempIsChecked8 === false &&
+                    tempIsChecked9 === true &&
+                    tempIsChecked10 === false &&
+                    tempIsChecked11 === false &&
+                    tempIsChecked12 === false &&
+                    tempIsChecked13 === false
+                  )
                 }
               />
             </Label>
@@ -503,25 +507,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked10}
                 onChange={() => {
-                  setTempStatus10(tempStatus10 === "On" ? "Off" : "On");
-                  setTempIsChecked10(tempStatus10 === "On" ? false : true);
+                  setTempStatus10(tempStatus10 === 'On' ? 'Off' : 'On')
+                  setTempIsChecked10(tempStatus10 !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === false &&
-                  tempIsChecked2 === false &&
-                  tempIsChecked3 === false &&
-                  tempIsChecked4 === false &&
-                  tempIsChecked5 === false &&
-                  tempIsChecked6 === false &&
-                  tempIsChecked7 === false &&
-                  tempIsChecked8 === false &&
-                  tempIsChecked9 === false &&
-                  tempIsChecked10 === true &&
-                  tempIsChecked11 === false &&
-                  tempIsChecked12 === false &&
-                  tempIsChecked13 === false ?
-                  true : false                
+                  !!(
+                    tempIsChecked === false &&
+                    tempIsChecked2 === false &&
+                    tempIsChecked3 === false &&
+                    tempIsChecked4 === false &&
+                    tempIsChecked5 === false &&
+                    tempIsChecked6 === false &&
+                    tempIsChecked7 === false &&
+                    tempIsChecked8 === false &&
+                    tempIsChecked9 === false &&
+                    tempIsChecked10 === true &&
+                    tempIsChecked11 === false &&
+                    tempIsChecked12 === false &&
+                    tempIsChecked13 === false
+                  )
                 }
               />
             </Label>
@@ -534,25 +539,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked11}
                 onChange={() => {
-                  setTempStatus11(tempStatus11 === "On" ? "Off" : "On");
-                  setTempIsChecked11(tempStatus11 === "On" ? false : true);
+                  setTempStatus11(tempStatus11 === 'On' ? 'Off' : 'On')
+                  setTempIsChecked11(tempStatus11 !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === false &&
-                  tempIsChecked2 === false &&
-                  tempIsChecked3 === false &&
-                  tempIsChecked4 === false &&
-                  tempIsChecked5 === false &&
-                  tempIsChecked6 === false &&
-                  tempIsChecked7 === false &&
-                  tempIsChecked8 === false &&
-                  tempIsChecked9 === false &&
-                  tempIsChecked10 === false &&
-                  tempIsChecked11 === true &&
-                  tempIsChecked12 === false &&
-                  tempIsChecked13 === false ?
-                  true : false                
+                  !!(
+                    tempIsChecked === false &&
+                    tempIsChecked2 === false &&
+                    tempIsChecked3 === false &&
+                    tempIsChecked4 === false &&
+                    tempIsChecked5 === false &&
+                    tempIsChecked6 === false &&
+                    tempIsChecked7 === false &&
+                    tempIsChecked8 === false &&
+                    tempIsChecked9 === false &&
+                    tempIsChecked10 === false &&
+                    tempIsChecked11 === true &&
+                    tempIsChecked12 === false &&
+                    tempIsChecked13 === false
+                  )
                 }
               />
             </Label>
@@ -565,25 +571,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked12}
                 onChange={() => {
-                  setTempStatus12(tempStatus12 === "On" ? "Off" : "On");
-                  setTempIsChecked12(tempStatus12 === "On" ? false : true);
+                  setTempStatus12(tempStatus12 === 'On' ? 'Off' : 'On')
+                  setTempIsChecked12(tempStatus12 !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === false &&
-                  tempIsChecked2 === false &&
-                  tempIsChecked3 === false &&
-                  tempIsChecked4 === false &&
-                  tempIsChecked5 === false &&
-                  tempIsChecked6 === false &&
-                  tempIsChecked7 === false &&
-                  tempIsChecked8 === false &&
-                  tempIsChecked9 === false &&
-                  tempIsChecked10 === false &&
-                  tempIsChecked11 === false &&
-                  tempIsChecked12 === true &&
-                  tempIsChecked13 === false ?
-                  true : false                
+                  !!(
+                    tempIsChecked === false &&
+                    tempIsChecked2 === false &&
+                    tempIsChecked3 === false &&
+                    tempIsChecked4 === false &&
+                    tempIsChecked5 === false &&
+                    tempIsChecked6 === false &&
+                    tempIsChecked7 === false &&
+                    tempIsChecked8 === false &&
+                    tempIsChecked9 === false &&
+                    tempIsChecked10 === false &&
+                    tempIsChecked11 === false &&
+                    tempIsChecked12 === true &&
+                    tempIsChecked13 === false
+                  )
                 }
               />
             </Label>
@@ -596,25 +603,26 @@ const CheckyBox = ({
                 type="checkbox"
                 checked={tempIsChecked13}
                 onChange={() => {
-                  setTempStatus13(tempStatus13 === "On" ? "Off" : "On");
-                  setTempIsChecked13(tempStatus13 === "On" ? false : true);
+                  setTempStatus13(tempStatus13 === 'On' ? 'Off' : 'On')
+                  setTempIsChecked13(tempStatus13 !== 'On')
                 }}
                 className="text-right"
                 disabled={
-                  tempIsChecked === false &&
-                  tempIsChecked2 === false &&
-                  tempIsChecked3 === false &&
-                  tempIsChecked4 === false &&
-                  tempIsChecked5 === false &&
-                  tempIsChecked6 === false &&
-                  tempIsChecked7 === false &&
-                  tempIsChecked8 === false &&
-                  tempIsChecked9 === false &&
-                  tempIsChecked10 === false &&
-                  tempIsChecked11 === false &&
-                  tempIsChecked12 === false &&
-                  tempIsChecked13 === true ?
-                  true : false                
+                  !!(
+                    tempIsChecked === false &&
+                    tempIsChecked2 === false &&
+                    tempIsChecked3 === false &&
+                    tempIsChecked4 === false &&
+                    tempIsChecked5 === false &&
+                    tempIsChecked6 === false &&
+                    tempIsChecked7 === false &&
+                    tempIsChecked8 === false &&
+                    tempIsChecked9 === false &&
+                    tempIsChecked10 === false &&
+                    tempIsChecked11 === false &&
+                    tempIsChecked12 === false &&
+                    tempIsChecked13 === true
+                  )
                 }
               />
             </Label>
@@ -622,253 +630,264 @@ const CheckyBox = ({
         </Form>
       </Row>
       <Row>
-      <div>
-      {
-        tempIsChecked === true &&
-        tempIsChecked2 === false &&
-        tempIsChecked3 === false &&
-        tempIsChecked4 === false &&
-        tempIsChecked5 === false &&
-        tempIsChecked6 === false &&
-        tempIsChecked7 === false &&
-        tempIsChecked8 === false &&
-        tempIsChecked9 === false &&
-        tempIsChecked10 === false &&
-        tempIsChecked11 === false &&
-        tempIsChecked12 === false &&
-        tempIsChecked13 === false ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+        <div>
+          {tempIsChecked === true &&
+          tempIsChecked2 === false &&
+          tempIsChecked3 === false &&
+          tempIsChecked4 === false &&
+          tempIsChecked5 === false &&
+          tempIsChecked6 === false &&
+          tempIsChecked7 === false &&
+          tempIsChecked8 === false &&
+          tempIsChecked9 === false &&
+          tempIsChecked10 === false &&
+          tempIsChecked11 === false &&
+          tempIsChecked12 === false &&
+          tempIsChecked13 === false ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
         <div>
-      {
-        tempIsChecked === false &&
-        tempIsChecked2 === true &&
-        tempIsChecked3 === false &&
-        tempIsChecked4 === false &&
-        tempIsChecked5 === false &&
-        tempIsChecked6 === false &&
-        tempIsChecked7 === false &&
-        tempIsChecked8 === false &&
-        tempIsChecked9 === false &&
-        tempIsChecked10 === false &&
-        tempIsChecked11 === false &&
-        tempIsChecked12 === false &&
-        tempIsChecked13 === false ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+          {tempIsChecked === false &&
+          tempIsChecked2 === true &&
+          tempIsChecked3 === false &&
+          tempIsChecked4 === false &&
+          tempIsChecked5 === false &&
+          tempIsChecked6 === false &&
+          tempIsChecked7 === false &&
+          tempIsChecked8 === false &&
+          tempIsChecked9 === false &&
+          tempIsChecked10 === false &&
+          tempIsChecked11 === false &&
+          tempIsChecked12 === false &&
+          tempIsChecked13 === false ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
         <div>
-      {
-        tempIsChecked === false &&
-        tempIsChecked2 === false &&
-        tempIsChecked3 === true &&
-        tempIsChecked4 === false &&
-        tempIsChecked5 === false &&
-        tempIsChecked6 === false &&
-        tempIsChecked7 === false &&
-        tempIsChecked8 === false &&
-        tempIsChecked9 === false &&
-        tempIsChecked10 === false &&
-        tempIsChecked11 === false &&
-        tempIsChecked12 === false &&
-        tempIsChecked13 === false ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+          {tempIsChecked === false &&
+          tempIsChecked2 === false &&
+          tempIsChecked3 === true &&
+          tempIsChecked4 === false &&
+          tempIsChecked5 === false &&
+          tempIsChecked6 === false &&
+          tempIsChecked7 === false &&
+          tempIsChecked8 === false &&
+          tempIsChecked9 === false &&
+          tempIsChecked10 === false &&
+          tempIsChecked11 === false &&
+          tempIsChecked12 === false &&
+          tempIsChecked13 === false ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
         <div>
-      {
-        tempIsChecked === false &&
-        tempIsChecked2 === false &&
-        tempIsChecked3 === false &&
-        tempIsChecked4 === true &&
-        tempIsChecked5 === false &&
-        tempIsChecked6 === false &&
-        tempIsChecked7 === false &&
-        tempIsChecked8 === false &&
-        tempIsChecked9 === false &&
-        tempIsChecked10 === false &&
-        tempIsChecked11 === false &&
-        tempIsChecked12 === false &&
-        tempIsChecked13 === false ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+          {tempIsChecked === false &&
+          tempIsChecked2 === false &&
+          tempIsChecked3 === false &&
+          tempIsChecked4 === true &&
+          tempIsChecked5 === false &&
+          tempIsChecked6 === false &&
+          tempIsChecked7 === false &&
+          tempIsChecked8 === false &&
+          tempIsChecked9 === false &&
+          tempIsChecked10 === false &&
+          tempIsChecked11 === false &&
+          tempIsChecked12 === false &&
+          tempIsChecked13 === false ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
         <div>
-      {
-        tempIsChecked === false &&
-        tempIsChecked2 === false &&
-        tempIsChecked3 === false &&
-        tempIsChecked4 === false &&
-        tempIsChecked5 === true &&
-        tempIsChecked6 === false &&
-        tempIsChecked7 === false &&
-        tempIsChecked8 === false &&
-        tempIsChecked9 === false &&
-        tempIsChecked10 === false &&
-        tempIsChecked11 === false &&
-        tempIsChecked12 === false &&
-        tempIsChecked13 === false ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+          {tempIsChecked === false &&
+          tempIsChecked2 === false &&
+          tempIsChecked3 === false &&
+          tempIsChecked4 === false &&
+          tempIsChecked5 === true &&
+          tempIsChecked6 === false &&
+          tempIsChecked7 === false &&
+          tempIsChecked8 === false &&
+          tempIsChecked9 === false &&
+          tempIsChecked10 === false &&
+          tempIsChecked11 === false &&
+          tempIsChecked12 === false &&
+          tempIsChecked13 === false ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
         <div>
-      {
-        tempIsChecked === false &&
-        tempIsChecked2 === false &&
-        tempIsChecked3 === false &&
-        tempIsChecked4 === false &&
-        tempIsChecked5 === false &&
-        tempIsChecked6 === true &&
-        tempIsChecked7 === false &&
-        tempIsChecked8 === false &&
-        tempIsChecked9 === false &&
-        tempIsChecked10 === false &&
-        tempIsChecked11 === false &&
-        tempIsChecked12 === false &&
-        tempIsChecked13 === false ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+          {tempIsChecked === false &&
+          tempIsChecked2 === false &&
+          tempIsChecked3 === false &&
+          tempIsChecked4 === false &&
+          tempIsChecked5 === false &&
+          tempIsChecked6 === true &&
+          tempIsChecked7 === false &&
+          tempIsChecked8 === false &&
+          tempIsChecked9 === false &&
+          tempIsChecked10 === false &&
+          tempIsChecked11 === false &&
+          tempIsChecked12 === false &&
+          tempIsChecked13 === false ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
         <div>
-      {
-        tempIsChecked === false &&
-        tempIsChecked2 === false &&
-        tempIsChecked3 === false &&
-        tempIsChecked4 === false &&
-        tempIsChecked5 === false &&
-        tempIsChecked6 === false &&
-        tempIsChecked7 === true &&
-        tempIsChecked8 === false &&
-        tempIsChecked9 === false &&
-        tempIsChecked10 === false &&
-        tempIsChecked11 === false &&
-        tempIsChecked12 === false &&
-        tempIsChecked13 === false ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+          {tempIsChecked === false &&
+          tempIsChecked2 === false &&
+          tempIsChecked3 === false &&
+          tempIsChecked4 === false &&
+          tempIsChecked5 === false &&
+          tempIsChecked6 === false &&
+          tempIsChecked7 === true &&
+          tempIsChecked8 === false &&
+          tempIsChecked9 === false &&
+          tempIsChecked10 === false &&
+          tempIsChecked11 === false &&
+          tempIsChecked12 === false &&
+          tempIsChecked13 === false ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
         <div>
-      {
-        tempIsChecked === false &&
-        tempIsChecked2 === false &&
-        tempIsChecked3 === false &&
-        tempIsChecked4 === false &&
-        tempIsChecked5 === false &&
-        tempIsChecked6 === false &&
-        tempIsChecked7 === false &&
-        tempIsChecked8 === true &&
-        tempIsChecked9 === false &&
-        tempIsChecked10 === false &&
-        tempIsChecked11 === false &&
-        tempIsChecked12 === false &&
-        tempIsChecked13 === false ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+          {tempIsChecked === false &&
+          tempIsChecked2 === false &&
+          tempIsChecked3 === false &&
+          tempIsChecked4 === false &&
+          tempIsChecked5 === false &&
+          tempIsChecked6 === false &&
+          tempIsChecked7 === false &&
+          tempIsChecked8 === true &&
+          tempIsChecked9 === false &&
+          tempIsChecked10 === false &&
+          tempIsChecked11 === false &&
+          tempIsChecked12 === false &&
+          tempIsChecked13 === false ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
         <div>
-      {
-        tempIsChecked === false &&
-        tempIsChecked2 === false &&
-        tempIsChecked3 === false &&
-        tempIsChecked4 === false &&
-        tempIsChecked5 === false &&
-        tempIsChecked6 === false &&
-        tempIsChecked7 === false &&
-        tempIsChecked8 === false &&
-        tempIsChecked9 === true &&
-        tempIsChecked10 === false &&
-        tempIsChecked11 === false &&
-        tempIsChecked12 === false &&
-        tempIsChecked13 === false ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+          {tempIsChecked === false &&
+          tempIsChecked2 === false &&
+          tempIsChecked3 === false &&
+          tempIsChecked4 === false &&
+          tempIsChecked5 === false &&
+          tempIsChecked6 === false &&
+          tempIsChecked7 === false &&
+          tempIsChecked8 === false &&
+          tempIsChecked9 === true &&
+          tempIsChecked10 === false &&
+          tempIsChecked11 === false &&
+          tempIsChecked12 === false &&
+          tempIsChecked13 === false ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
         <div>
-      {
-        tempIsChecked === false &&
-        tempIsChecked2 === false &&
-        tempIsChecked3 === false &&
-        tempIsChecked4 === false &&
-        tempIsChecked5 === false &&
-        tempIsChecked6 === false &&
-        tempIsChecked7 === false &&
-        tempIsChecked8 === false &&
-        tempIsChecked9 === false &&
-        tempIsChecked10 === true &&
-        tempIsChecked11 === false &&
-        tempIsChecked12 === false &&
-        tempIsChecked13 === false ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+          {tempIsChecked === false &&
+          tempIsChecked2 === false &&
+          tempIsChecked3 === false &&
+          tempIsChecked4 === false &&
+          tempIsChecked5 === false &&
+          tempIsChecked6 === false &&
+          tempIsChecked7 === false &&
+          tempIsChecked8 === false &&
+          tempIsChecked9 === false &&
+          tempIsChecked10 === true &&
+          tempIsChecked11 === false &&
+          tempIsChecked12 === false &&
+          tempIsChecked13 === false ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
         <div>
-      {
-        tempIsChecked === false &&
-        tempIsChecked2 === false &&
-        tempIsChecked3 === false &&
-        tempIsChecked4 === false &&
-        tempIsChecked5 === false &&
-        tempIsChecked6 === false &&
-        tempIsChecked7 === false &&
-        tempIsChecked8 === false &&
-        tempIsChecked9 === false &&
-        tempIsChecked10 === false &&
-        tempIsChecked11 === true &&
-        tempIsChecked12 === false &&
-        tempIsChecked13 === false ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+          {tempIsChecked === false &&
+          tempIsChecked2 === false &&
+          tempIsChecked3 === false &&
+          tempIsChecked4 === false &&
+          tempIsChecked5 === false &&
+          tempIsChecked6 === false &&
+          tempIsChecked7 === false &&
+          tempIsChecked8 === false &&
+          tempIsChecked9 === false &&
+          tempIsChecked10 === false &&
+          tempIsChecked11 === true &&
+          tempIsChecked12 === false &&
+          tempIsChecked13 === false ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
         <div>
-      {
-        tempIsChecked === false &&
-        tempIsChecked2 === false &&
-        tempIsChecked3 === false &&
-        tempIsChecked4 === false &&
-        tempIsChecked5 === false &&
-        tempIsChecked6 === false &&
-        tempIsChecked7 === false &&
-        tempIsChecked8 === false &&
-        tempIsChecked9 === false &&
-        tempIsChecked10 === false &&
-        tempIsChecked11 === false &&
-        tempIsChecked12 === true &&
-        tempIsChecked13 === false ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+          {tempIsChecked === false &&
+          tempIsChecked2 === false &&
+          tempIsChecked3 === false &&
+          tempIsChecked4 === false &&
+          tempIsChecked5 === false &&
+          tempIsChecked6 === false &&
+          tempIsChecked7 === false &&
+          tempIsChecked8 === false &&
+          tempIsChecked9 === false &&
+          tempIsChecked10 === false &&
+          tempIsChecked11 === false &&
+          tempIsChecked12 === true &&
+          tempIsChecked13 === false ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
         <div>
-      {
-        tempIsChecked === false &&
-        tempIsChecked2 === false &&
-        tempIsChecked3 === false &&
-        tempIsChecked4 === false &&
-        tempIsChecked5 === false &&
-        tempIsChecked6 === false &&
-        tempIsChecked7 === false &&
-        tempIsChecked8 === false &&
-        tempIsChecked9 === false &&
-        tempIsChecked10 === false &&
-        tempIsChecked11 === false &&
-        tempIsChecked12 === false &&
-        tempIsChecked13 === true ?
-        <p className="text-center" style={{color:"red"}}>Minimum of one value must be selected</p> : null                
-      }
+          {tempIsChecked === false &&
+          tempIsChecked2 === false &&
+          tempIsChecked3 === false &&
+          tempIsChecked4 === false &&
+          tempIsChecked5 === false &&
+          tempIsChecked6 === false &&
+          tempIsChecked7 === false &&
+          tempIsChecked8 === false &&
+          tempIsChecked9 === false &&
+          tempIsChecked10 === false &&
+          tempIsChecked11 === false &&
+          tempIsChecked12 === false &&
+          tempIsChecked13 === true ? (
+            <p className="text-center" style={{ color: 'red' }}>
+              Minimum of one value must be selected
+            </p>
+          ) : null}
         </div>
       </Row>
       <Row>
         <Col className="text-end">
-          <Button onClick={handCheck} 
-          className="button-active"
-          >
+          <Button onClick={handCheck} className="button-active">
             Save
           </Button>
         </Col>
       </Row>
     </>
-  );
-};
+  )
+}
 
 CheckyBox.propTypes = {
   isChecked: PropTypes.bool,
@@ -924,6 +943,7 @@ CheckyBox.propTypes = {
   setVisibility: PropTypes.func,
   setWind: PropTypes.func,
   close: PropTypes.func,
-};
+  setFileValue: PropTypes.func,
+}
 
-export default CheckyBox;
+export default CheckyBox

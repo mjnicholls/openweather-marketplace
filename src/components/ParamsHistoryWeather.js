@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { Button, Row } from "reactstrap";
-import ReactBSAlert from "react-bootstrap-sweetalert";
-import CheckyBoxHistory from "./checkBoxHistory";
-import PropTypes from "prop-types";
+import React, { useState } from 'react'
+
+import PropTypes from 'prop-types'
+import ReactBSAlert from 'react-bootstrap-sweetalert'
+import { Button, Row } from 'reactstrap'
+
+import CheckyBoxHistory from './checkBoxHistory'
 
 const WeatherHistoryParams = ({
   fileValue,
@@ -38,14 +40,13 @@ const WeatherHistoryParams = ({
   isChecked7,
   setIsChecked7,
 }) => {
+  const [alert, setAlert] = useState(null)
 
-  const [alert, setAlert] = useState(null);
-
-  //const [fileValue, setFileValue] = useState();
+  // const [fileValue, setFileValue] = useState();
 
   const hideAlert = () => {
-    setAlert(null);
-  };
+    setAlert(null)
+  }
 
   const weatherAlert = () => {
     setAlert(
@@ -93,22 +94,61 @@ const WeatherHistoryParams = ({
             close={hideAlert}
           />
         </Row>
-      </ReactBSAlert>
-    );
-  };
+      </ReactBSAlert>,
+    )
+  }
 
   return (
     <>
       {alert}
-      <Button className="button-neutral" onClick={weatherAlert} style={{fontSize: "11pt"}}>
-        Parameters: {fileValue ? "Custom" : "All"}{" "}
+      <Button
+        className="button-neutral"
+        onClick={weatherAlert}
+        style={{ fontSize: '11pt' }}
+      >
+        Parameters: {fileValue ? 'Custom' : 'All'}{' '}
         <img
           src="https://home.openweathermap.org/assets/icon_down_black.svg"
           alt="icon down"
         />
       </Button>
     </>
-  );
-};
+  )
+}
 
-export default WeatherHistoryParams;
+WeatherHistoryParams.propTypes = {
+  isChecked: PropTypes.bool,
+  isChecked2: PropTypes.bool,
+  isChecked3: PropTypes.bool,
+  isChecked4: PropTypes.bool,
+  isChecked5: PropTypes.bool,
+  isChecked6: PropTypes.bool,
+  isChecked7: PropTypes.bool,
+  setIsChecked: PropTypes.func,
+  setIsChecked2: PropTypes.func,
+  setIsChecked3: PropTypes.func,
+  setIsChecked4: PropTypes.func,
+  setIsChecked5: PropTypes.func,
+  setIsChecked6: PropTypes.func,
+  setIsChecked7: PropTypes.func,
+  temp: PropTypes.string,
+  setTemp: PropTypes.func,
+  checked: PropTypes.bool,
+  setChecked: PropTypes.func,
+  pressure: PropTypes.string,
+  setPressure: PropTypes.func,
+  humidity: PropTypes.string,
+  setHumidity: PropTypes.func,
+  clouds: PropTypes.string,
+  setClouds: PropTypes.func,
+  dewPoint: PropTypes.string,
+  setDewPoint: PropTypes.func,
+  precipitation: PropTypes.string,
+  setPrecipitation: PropTypes.func,
+  wind: PropTypes.string,
+  setWind: PropTypes.func,
+  fileValue: PropTypes.bool,
+  setFileValue: PropTypes.func,
+}
+
+export default WeatherHistoryParams

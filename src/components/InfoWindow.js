@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { Button } from "reactstrap";
-import PropTypes from "prop-types";
-import placeMarker from "../utils/placeMarker";
+import React from 'react'
+
+import PropTypes from 'prop-types'
+import { Button } from 'reactstrap'
+
+import placeMarker from '../utils/placeMarker'
 
 const InfoWindow = ({
   location,
@@ -15,35 +17,30 @@ const InfoWindow = ({
   setDuplicate,
   tempLocation,
 }) => {
+  const latCheck = tempLocation.lat
+  const lonCheck = tempLocation.lon
 
-  const latCheck = tempLocation.lat;
-  const lonCheck = tempLocation.lon;
-
-  const check = locations.map((ind) => ind.lat);
-  const checkTwo = locations.map((ind) => ind.lon);
+  const check = locations.map((ind) => ind.lat)
+  const checkTwo = locations.map((ind) => ind.lon)
 
   if (check.includes(latCheck) && checkTwo.includes(lonCheck)) {
-    setDuplicate(true);
-  }
-
-  else setDuplicate(false)
+    setDuplicate(true)
+  } else setDuplicate(false)
 
   const onSetLocationClick = (e) => {
-
     if (duplicate === true) {
-      e.stopPropagation();
-      setErrorMap(true);
-    } 
-    
-    if (duplicate === false) {
-      setLocations([...locations, location]);
-      e.stopPropagation();
-      setErrorMap(false);
-      setIsAdded(true);
-      placeMarker(null, null);
+      e.stopPropagation()
+      setErrorMap(true)
     }
 
-  };
+    if (duplicate === false) {
+      setLocations([...locations, location])
+      e.stopPropagation()
+      setErrorMap(false)
+      setIsAdded(true)
+      placeMarker(null, null)
+    }
+  }
 
   return location.lat && location.lon ? (
     <div className="mapPop text-start">
@@ -51,14 +48,14 @@ const InfoWindow = ({
       <hr />
       <div className="main text-start">
         <div>
-          <p style={{ marginBottom: "10px" }}>
-            <b style={{ color: "red" }}>
-              {errorMap === true ? "Location has already been added." : null}
+          <p style={{ marginBottom: '10px' }}>
+            <b style={{ color: 'red' }}>
+              {errorMap === true ? 'Location has already been added.' : null}
             </b>
           </p>
           <p>
             <b>Latitude: </b>
-            {location.lat.toFixed(6)}{" "}
+            {location.lat.toFixed(6)}{' '}
           </p>
           <p>
             <b>Longitude: </b>
@@ -80,8 +77,8 @@ const InfoWindow = ({
         </div>
       </div>
     </div>
-  ) : null;
-};
+  ) : null
+}
 
 InfoWindow.propTypes = {
   locations: PropTypes.array,
@@ -90,9 +87,10 @@ InfoWindow.propTypes = {
   location: PropTypes.object,
   errorMap: PropTypes.bool,
   setErrorMap: PropTypes.func,
-  count: PropTypes.number,
-  setCount: PropTypes.func,
   setIsAdded: PropTypes.func,
-};
+  duplicate: PropTypes.bool,
+  setDuplicate: PropTypes.func,
+  tempLocation: PropTypes.object,
+}
 
-export default InfoWindow;
+export default InfoWindow

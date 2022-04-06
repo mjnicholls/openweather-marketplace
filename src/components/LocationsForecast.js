@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { coordinatesError } from "../utils/validation";
-import AutoCompleteForm from "./LocationAutoComplete";
-import CoordinatesSearch from "./LocationCoordinates";
-import { Button, Col, Row, Label } from "reactstrap";
-import Papa from "papaparse";
-import ParametersForecast from "./ParametersForecast";
-import ReactBSAlert from "react-bootstrap-sweetalert";
-import DatePickerForecast from "./DatePickerForecast";
-import LocationListHistory from "./LocationsListHistory";
-import { locationConstructor } from "../utils/locationConstructor";
-import InvoiceSettingsBulk from "./InvoiceHistoryPopBulk";
+import React, { useState } from 'react'
+
+import Papa from 'papaparse'
+import PropTypes from 'prop-types'
+import ReactBSAlert from 'react-bootstrap-sweetalert'
+import { Button, Col, Row, Label } from 'reactstrap'
+
+import { locationConstructor } from '../utils/locationConstructor'
+import { coordinatesError } from '../utils/validation'
+import DatePickerForecast from './DatePickerForecast'
+import InvoiceSettingsBulk from './InvoiceHistoryPopBulk'
+import AutoCompleteForm from './LocationAutoComplete'
+import CoordinatesSearch from './LocationCoordinates'
+import LocationListHistory from './LocationsListHistory'
+import ParametersForecast from './ParametersForecast'
 
 const LocationForecast = ({
   mapRef,
@@ -76,155 +78,142 @@ const LocationForecast = ({
   setJson,
   email,
   setEmail,
-  setIsAdded, 
+  setIsAdded,
   count,
   setCount,
-  setErrorMap
+  setErrorMap,
 }) => {
-  const [isSearchByName, setIsSearchByName] = useState(true);
-  const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
-  const [isImport, setIsImport] = useState(false);
-
+  const [isSearchByName, setIsSearchByName] = useState(true)
+  const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation)
+  const [isImport, setIsImport] = useState(false)
 
   const setCoordinates = () => {
-    setError({});
+    setError({})
     const coordsError = coordinatesError(
       coordsTempLocation.lat,
-      coordsTempLocation.lon
-    );
+      coordsTempLocation.lon,
+    )
     if (coordsError) {
-      setError(coordsError);
-      setIsDropDown(false);
-      return;
+      setError(coordsError)
+      setIsDropDown(false)
+      return
     }
     setTempLocation({
       ...coordsTempLocation,
-      name: "Custom location",
-    });
-    setIsDropDown(false);
+      name: 'Custom location',
+    })
+    setIsDropDown(false)
 
-    setCount(0);
-      
+    setCount(0)
+
     if (count === 0) {
-      setErrorMap(false);
+      setErrorMap(false)
     }
     setIsAdded(false)
-  };
+  }
 
   const canSetCoordinates = () =>
     tempLocation.lat !== coordsTempLocation.lat ||
-    tempLocation.lon !== coordsTempLocation.lon;
+    tempLocation.lon !== coordsTempLocation.lon
 
   const setSearchandImportImport = () => {
-    setIsSearchByName(true);
-    setIsImport(true);
-  };
+    setIsSearchByName(true)
+    setIsImport(true)
+  }
 
   const setSearchandImport = () => {
-    setIsSearchByName(true);
-    setIsImport(false);
-  };
+    setIsSearchByName(true)
+    setIsImport(false)
+  }
 
   const setSearchNameandImport = () => {
-    setIsSearchByName(false);
-    setIsImport(false);
-  };
-
-  const setPricetoZero = () => {
-    setImportPrice(0);
-    hideAlert();
-  };
+    setIsSearchByName(false)
+    setIsImport(false)
+  }
 
   const getJson = (e) => {
     hideAlert()
-    const files = e.target.files;
+    const { files } = e.target
     if (files) {
       Papa.parse(files[0], {
         skipEmptyLines: true,
-        complete: function (results) {
-          let importedLocations = [];
-          let errors = [];
+        complete(results) {
+          const importedLocations = []
+          const errors = []
 
-          for (let i = 0; i < results.data.length; i++) {
-            const row = results.data[i];
+          for (let i = 0; i < results.data.length; i += 1) {
+            const row = results.data[i]
 
-            const tmp = locationConstructor(row[0], row[1], row[2]);
-            let error = {};
+            const tmp = locationConstructor(row[0], row[1], row[2])
+            /* eslint-disable-next-line */
+            let error = {}
 
             if (tmp.error) {
-              let keys = Object.keys(tmp.error);
+              const keys = Object.keys(tmp.error)
               error = {
                 line: i + 1,
                 comment: tmp.error[keys[0]],
                 value: tmp.error.errorVal,
-              };
+              }
             } else {
-              for (let j = 0; j < importedLocations.length; j++) {
+              for (let j = 0; j < importedLocations.length; j += 1) {
                 if (
                   importedLocations[j].lat === tmp.location.lat &&
                   importedLocations[j].lon === tmp.location.lon
                 ) {
                   error = {
                     line: i + 1,
-                    comment: "Duplicated value.",
-                    value: row[1] + ", " + row[2],
-                  };
+                    comment: 'Duplicated value.',
+                    value: `${row[1]}, ${row[2]}`,
+                  }
 
-                  break;
+                  break
                 }
               }
 
-              let check = checkCoordinates(tmp.location.lat, tmp.location.lon);
+              const check = checkCoordinates(tmp.location.lat, tmp.location.lon)
               if (!check) {
                 error = {
                   line: i + 1,
-                  comment: "Duplicated value.",
-                  value: row[1] + ", " + row[2],
-                };
+                  comment: 'Duplicated value.',
+                  value: `${row[1]}, ${row[2]}`,
+                }
               }
             }
 
             if (Object.keys(error).length) {
-              errors.push(error);
+              errors.push(error)
             } else if (tmp.location) {
-              importedLocations.push(tmp.location);
+              importedLocations.push(tmp.location)
             }
-
-            // if (errors.length > 0) {
-            //   setImportPrice(
-            //     (importPrice = (results.data.length * 35) / errors.length - 35)
-            //   );
-            // } else {
-            //   setImportPrice((importPrice = results.data.length * 35 - 35));
-            // }
           }
 
           if (errors.length) {
-            jsonAlert(errors, importedLocations);
-            return;
+            jsonAlert(errors, importedLocations)
+            return
           }
 
           if (importedLocations.length) {
-            addLocations(importedLocations);
+            addLocations(importedLocations)
           }
-          setIsImport(false);
+          setIsImport(false)
         },
-      });
+      })
     }
-  };
+  }
 
-  const [alert, setAlert] = React.useState(null);
+  const [alert, setAlert] = React.useState(null)
 
   const hideAlert = () => {
-    setAlert(null);
-  };
-
+    setAlert(null)
+  }
+  /* eslint-disable-next-line */
   const jsonAlert = (importErrors, locations) => {
     setAlert(
       <ReactBSAlert
         title="Import"
-        onConfirm={setPricetoZero}
-        onCancel={setPricetoZero}
+        onConfirm={hideAlert}
+        onCancel={hideAlert}
         showConfirm={false}
         showCloseButton
         customClass="bs-alerts"
@@ -237,12 +226,12 @@ const LocationForecast = ({
           <Col>Error</Col>
           <Col>Value</Col>
         </Row>
-        {importErrors.map((error) => (
+        {importErrors.map((errors) => (
           <>
             <Row className="trigger-item">
-              <Col md="1">{error.line}</Col>
-              <Col>{error.comment}</Col>
-              <Col>{error.value}</Col>
+              <Col md="1">{errors.line}</Col>
+              <Col>{errors.comment}</Col>
+              <Col>{errors.value}</Col>
             </Row>
           </>
         ))}
@@ -257,10 +246,10 @@ const LocationForecast = ({
           <Col>Latitide</Col>
           <Col>Longitude</Col>
         </Row>
-        {locations.map((location, index) => (
+        {locations.map((location, ind) => (
           <>
-            <Row className="trigger-item" key={index}>
-              <Col md="1">{index + 1}</Col>
+            <Row className="trigger-item" index={ind}>
+              <Col md="1">{ind + 1}</Col>
               <Col>{location.name}</Col>
               <Col>{location.lat}</Col>
               <Col>{location.lon}</Col>
@@ -270,11 +259,15 @@ const LocationForecast = ({
         <br />
         <Row className="trigger-item">
           <Col className="text-end">
-
-          <label onClick={() => {
-                addLocations(locations);
-                hideAlert();
-              }} className="button-neutral">
+            {/* eslint-disable-next-line */}
+            <label
+              htmlFor="text"
+              onClick={() => {
+                addLocations(locations)
+                hideAlert()
+              }}
+              className="button-neutral"
+            >
               Upload Recognised Locations
             </label>
 
@@ -287,7 +280,7 @@ const LocationForecast = ({
               onChange={getJson}
               id="file-upload"
             />
-            {/*}
+            {/* }
             <Button className="button-neutral" 
             onClick={setPricetoZero}>
               Upload New File
@@ -295,24 +288,23 @@ const LocationForecast = ({
             */}
           </Col>
         </Row>
-      </ReactBSAlert>
-    );
-  };
+      </ReactBSAlert>,
+    )
+  }
 
   const checkCoordinates = (lat, lon) => {
-    for (let i = 0; i < locations.length; i++) {
+    for (let i = 0; i < locations.length; i += 1) {
       if (locations[i].lat === lat && locations[i].lon === lon) {
-        return false;
+        return false
       }
     }
-    return true;
-  };
+    return true
+  }
 
   const addLocations = (data) => {
-    const newLocations = [...locations, ...data];
-    setLocations(newLocations);
-    setPrice(price + 35);
-  };
+    const newLocations = [...locations, ...data]
+    setLocations(newLocations)
+  }
 
   const checkoutAlert = () => {
     setAlert(
@@ -321,6 +313,7 @@ const LocationForecast = ({
         onConfirm={() => hideAlert()}
         onCancel={() => hideAlert()}
         showConfirm={false}
+        title=""
       >
         <InvoiceSettingsBulk
           close={hideAlert}
@@ -371,47 +364,47 @@ const LocationForecast = ({
           email={email}
           setEmail={setEmail}
         />
-      </ReactBSAlert>
-    );
-  };
+      </ReactBSAlert>,
+    )
+  }
 
   return (
     <div className="location">
       {alert}
       <div
         className="flex-grow-1"
-        style={{ position: "relative" }}
+        style={{ position: 'relative' }}
         ref={searchBoxRef}
       >
         <Row>
           <Col md="6" className="dateLabel">
-          {isSearchByName ? (
+            {isSearchByName ? (
               <>
                 <Label>Search Location</Label>
-              <AutoCompleteForm
-                mapRef={mapRef}
-                setTempLocation={setTempLocation}
-                error={error}
-                setError={setError}
-                setIsDropDown={setIsDropDown}
-                count={count}
-                setCount={setCount}
-                setIsAdded={setIsAdded}
-                setErrorMap={setErrorMap}
-              />
+                <AutoCompleteForm
+                  mapRef={mapRef}
+                  setTempLocation={setTempLocation}
+                  error={error}
+                  setError={setError}
+                  setIsDropDown={setIsDropDown}
+                  count={count}
+                  setCount={setCount}
+                  setIsAdded={setIsAdded}
+                  setErrorMap={setErrorMap}
+                />
               </>
             ) : (
               <>
-              <Label>Search Coordinates</Label>
-              <CoordinatesSearch
-                mapRef={mapRef}
-                coordsLocation={coordsTempLocation}
-                setCoordsLocation={setCoordsTempLocation}
-                setIsDropDown={setIsDropDown}
-                setCoordinates={setCoordinates}
-                error={error}
-                setError={setError}
-              />
+                <Label>Search Coordinates</Label>
+                <CoordinatesSearch
+                  mapRef={mapRef}
+                  coordsLocation={coordsTempLocation}
+                  setCoordsLocation={setCoordsTempLocation}
+                  setIsDropDown={setIsDropDown}
+                  setCoordinates={setCoordinates}
+                  error={error}
+                  setError={setError}
+                />
               </>
             )}
           </Col>
@@ -429,7 +422,7 @@ const LocationForecast = ({
               <Button
                 type="button"
                 className={`padded-button ${
-                  isSearchByName && !isImport ? "padded-button-active" : ""
+                  isSearchByName && !isImport ? 'padded-button-active' : ''
                 }`}
                 onClick={() => setSearchandImport()}
                 aria-pressed="true"
@@ -439,7 +432,7 @@ const LocationForecast = ({
               <Button
                 type="button"
                 className={`padded-button ${
-                  !isSearchByName ? "padded-button-active" : ""
+                  !isSearchByName ? 'padded-button-active' : ''
                 }`}
                 onClick={() => setSearchNameandImport()}
                 aria-pressed="true"
@@ -449,7 +442,7 @@ const LocationForecast = ({
               <Button
                 type="button"
                 className={`padded-button ${
-                  isImport ? "padded-button-active" : ""
+                  isImport ? 'padded-button-active' : ''
                 }`}
                 onClick={() => setSearchandImportImport()}
                 aria-pressed="true"
@@ -478,7 +471,7 @@ const LocationForecast = ({
                       Coordinates will be rounded to the 6th decimal place.
                     </li>
                     <li>
-                      Please refer to the example below.{" "}
+                      Please refer to the example below.{' '}
                       <a href="https://openweathermap.org/docs/owm_import_samle.csv">
                         Download sample file
                       </a>
@@ -520,7 +513,7 @@ const LocationForecast = ({
               <button
                 type="button"
                 className={`padded-button ${
-                  canSetCoordinates() ? "padded-button-active" : ""
+                  canSetCoordinates() ? 'padded-button-active' : ''
                 }`}
                 onClick={setCoordinates}
                 aria-pressed="true"
@@ -582,10 +575,7 @@ const LocationForecast = ({
         setJson={setJson}
       />
 
-      <LocationListHistory
-        locations={locations}
-        setLocations={setLocations}
-      />
+      <LocationListHistory locations={locations} setLocations={setLocations} />
 
       {error.lat && <div className="invalid-feedback d-block">{error.lat}</div>}
       {error.lon && <div className="invalid-feedback d-block">{error.lon}</div>}
@@ -595,28 +585,32 @@ const LocationForecast = ({
 
       <Row className="mt-4 flex-end price">
         <Col>
-        {locations.length >= 1 && startDate >= new Date('01/01/2017') && endDate >= startDate && endDate < new Date() ?
-        null
-        :
-        <p style={{ fontSize: "14pt" }}>
-        <i>To proceed please fill in the required details</i>
-      </p>
-        }
+          {locations.length >= 1 &&
+          startDate >= new Date('01/01/2017') &&
+          endDate >= startDate &&
+          endDate < new Date() ? null : (
+            <p style={{ fontSize: '14pt' }}>
+              <i>To proceed please fill in the required details</i>
+            </p>
+          )}
         </Col>
         <Col>
-          <p style={{ fontWeight: "bold", fontSize: "18pt" }}>
-          Total {locations.length * 35} {currency}
+          <p style={{ fontWeight: 'bold', fontSize: '18pt' }}>
+            Total {locations.length * 35} {currency}
           </p>
         </Col>
         <Col>
-        {locations.length >= 1 && startDate >= new Date('01/01/2017') && endDate >= startDate && endDate < new Date() ? (
+          {locations.length >= 1 &&
+          startDate >= new Date('01/01/2017') &&
+          endDate >= startDate &&
+          endDate < new Date() ? (
             <Col>
               <Button
                 data-dismiss="modal"
                 type="button"
                 onClick={(e) => {
-                  checkoutAlert(false);
-                  e.stopPropagation();
+                  checkoutAlert(false)
+                  e.stopPropagation()
                 }}
                 className="button-orange-square"
               >
@@ -633,13 +627,12 @@ const LocationForecast = ({
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
 LocationForecast.propTypes = {
   mapRef: PropTypes.object,
   location: PropTypes.object,
-  setLocation: PropTypes.func,
   tempLocation: PropTypes.object,
   setTempLocation: PropTypes.func,
   count: PropTypes.number,
@@ -650,7 +643,6 @@ LocationForecast.propTypes = {
   setError: PropTypes.func,
   setErrorMap: PropTypes.func,
   setIsAdded: PropTypes.func,
-  setIsName: PropTypes.func,
   searchBoxRef: PropTypes.object,
   isDropDown: PropTypes.bool,
   setIsDropDown: PropTypes.func,
@@ -682,7 +674,6 @@ LocationForecast.propTypes = {
   setPrecipitation: PropTypes.func,
   wind: PropTypes.string,
   setWind: PropTypes.func,
-  close: PropTypes.func,
   startDate: PropTypes.instanceOf(Date),
   setStartDate: PropTypes.func,
   endDate: PropTypes.instanceOf(Date),
@@ -703,6 +694,11 @@ LocationForecast.propTypes = {
   setDownloadsValue: PropTypes.func,
   formatValue: PropTypes.string,
   setFormatValue: PropTypes.func,
-};
+  locations: PropTypes.array,
+  setLocations: PropTypes.func,
+  parameters: PropTypes.string,
+  setParameters: PropTypes.func,
+  currency: PropTypes.string,
+}
 
-export default LocationForecast;
+export default LocationForecast

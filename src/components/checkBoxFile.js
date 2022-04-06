@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Button, Col, Label, Form, FormGroup, Input, Row } from "reactstrap";
-import PropTypes from "prop-types";
+import React, { useState } from 'react'
+
+import PropTypes from 'prop-types'
+import { Button, Col, Label, Form, FormGroup, Input, Row } from 'reactstrap'
 
 const CheckyBoxFile = ({
   fileCheck,
@@ -13,36 +14,37 @@ const CheckyBoxFile = ({
   setJson,
   close,
 }) => {
-  const [tempIsChecked, setTempIsChecked] = useState(fileCheck);
-  const [tempIsChecked2, setTempIsChecked2] = useState(fileCheck2);
+  const [tempIsChecked, setTempIsChecked] = useState(fileCheck)
+  const [tempIsChecked2, setTempIsChecked2] = useState(fileCheck2)
 
-  const [tempCSV, setTempCSV] = useState(csv);
-  const [tempJson, setTempJson] = useState(json);
+  const [tempCSV, setTempCSV] = useState(csv)
+  const [tempJson, setTempJson] = useState(json)
+
+  const [error, setError] = useState({})
 
   const handCheck = () => {
-
-    if (tempCSV === "On") {
-      setCSV("On");
-    } else setCSV("Off");
+    if (tempCSV === 'On') {
+      setCSV('On')
+    } else setCSV('Off')
 
     if (tempIsChecked === true) {
-      setFileCheck(true);
-    } else setFileCheck(false);
+      setFileCheck(true)
+    } else setFileCheck(false)
 
-    if (tempJson === "On") {
-      setJson("On");
-    } else setJson("Off");
+    if (tempJson === 'On') {
+      setJson('On')
+    } else setJson('Off')
 
     if (tempIsChecked2 === true) {
-      setFileCheck2(true);
-    } else setFileCheck2(false);
+      setFileCheck2(true)
+    } else setFileCheck2(false)
 
-    if (tempCSV === "Off" && tempJson === "Off") {
-      setError("You must select at least one option");
+    if (tempCSV === 'Off' && tempJson === 'Off') {
+      setError('You must select at least one option')
     }
 
-    close();
-  };
+    close()
+  }
 
   return (
     <>
@@ -55,8 +57,8 @@ const CheckyBoxFile = ({
                 type="checkbox"
                 checked={tempIsChecked}
                 onChange={() => {
-                  setTempCSV(tempCSV === "On" ? "Off" : "On");
-                  setTempIsChecked(tempCSV === "On" ? false : true);
+                  setTempCSV(tempCSV === 'On' ? 'Off' : 'On')
+                  setTempIsChecked(tempCSV !== 'On')
                 }}
                 className="text-right"
               />
@@ -70,8 +72,8 @@ const CheckyBoxFile = ({
                 type="checkbox"
                 checked={tempIsChecked2}
                 onChange={() => {
-                  setTempJson(tempJson === "On" ? "Off" : "On");
-                  setTempIsChecked2(tempJson === "On" ? false : true);
+                  setTempJson(tempJson === 'On' ? 'Off' : 'On')
+                  setTempIsChecked2(tempJson !== 'On')
                 }}
                 className="text-right"
               />
@@ -84,15 +86,15 @@ const CheckyBoxFile = ({
           <Button
             onClick={handCheck}
             className="button-active"
-            disabled={tempCSV === "Off" && tempJson === "Off" ? true : false}
+            disabled={!!(tempCSV === 'Off' && tempJson === 'Off')}
           >
             Save
           </Button>
         </Col>
       </Row>
     </>
-  );
-};
+  )
+}
 
 CheckyBoxFile.propTypes = {
   fileCheck: PropTypes.bool,
@@ -104,6 +106,6 @@ CheckyBoxFile.propTypes = {
   json: PropTypes.string,
   setJson: PropTypes.func,
   close: PropTypes.func,
-};
+}
 
-export default CheckyBoxFile;
+export default CheckyBoxFile

@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux'
+import { Dropdown, DropdownToggle, DropdownMenu } from 'reactstrap'
 
-const selectUserName = (state) => state.auth.userName;
+const selectUserName = (state) => state.auth.userName
 
 const HeaderMarket = () => {
-  const userName = useSelector(selectUserName);
-  const [isDropDown, setIsDropDown] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const userName = useSelector(selectUserName)
+  const [isDropDown, setIsDropDown] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <nav className={`page-header ${isMenuOpen ? "open" : ""}`}>
+    <nav className={`page-header ${isMenuOpen ? 'open' : ''}`}>
       <div className="container-xxl">
         <div className="page-header-content">
           <a href="https://openweathermap.org/">
@@ -34,9 +34,7 @@ const HeaderMarket = () => {
             />
           </button>
 
-      
-          <ul className={`mobile-menu ${isMenuOpen ? "open" : ""}`}>
-        
+          <ul className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
             <li>
               <a href="/history_bulks/new">History Bulk</a>
             </li>
@@ -128,7 +126,7 @@ const HeaderMarket = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default HeaderMarket;
+export default HeaderMarket

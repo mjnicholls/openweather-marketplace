@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
-import "../App.scss";
-import FooterSection from "./FooterSection";
+import '../App.scss'
+import FooterSection from './FooterSection'
 
 const FooterMarket = () => (
   <footer className="page-footer p-4">
@@ -172,6 +172,6 @@ const FooterMarket = () => (
       </div>
     </div>
   </footer>
-);
+)
 
-export default FooterMarket;
+export default FooterMarket

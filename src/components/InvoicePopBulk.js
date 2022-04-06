@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Button, Col, Form, Label, Row } from "reactstrap";
+import React, { useState } from 'react'
 
-import PropTypes from "prop-types";
-import axios from "axios";
-import { loadStripe } from "@stripe/stripe-js";
-import { validatePhoneNumber, validateVat, validateEmail } from "../utils/validation";
-import { noBlankErrorMessage } from "../config";
+import { loadStripe } from '@stripe/stripe-js'
+import axios from 'axios'
+import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
+import { Button, Col, Form, Label, Row } from 'reactstrap'
 
-import Step0Bulk from "./Step0Bulk";
-import Step1 from "./Step1";
-import Step2 from "./Step2";
+import { noBlankErrorMessage } from '../config'
+import {
+  validatePhoneNumber,
+  validateVat,
+  validateEmail,
+} from '../utils/validation'
+import Step0Bulk from './Step0Bulk'
+import Step1 from './Step1'
+import Step2 from './Step2'
 
-const selectInvoice = (state) => state.auth.invoiceInfo;
-const selectEmail = (state) => state.auth.email;
+const selectInvoice = (state) => state.auth.invoiceInfo
+const selectEmail = (state) => state.auth.email
 
 const InvoiceSettingsBulk = ({
   startDate,
   endDate,
   country,
   year,
-  importPrice,
-  checkedWeather,
   unitsValue,
   fileValue,
   formatValue,
@@ -64,47 +66,39 @@ const InvoiceSettingsBulk = ({
   json,
   setJson,
 }) => {
-  const [error, setError] = useState({});
-  const [step, setStep] = useState(0);
+  const [error, setError] = useState({})
+  const [step, setStep] = useState(0)
 
-  const [isEmailActive, setIsEmailActive] = useState(false);
+  const [isEmailActive, setIsEmailActive] = useState(false)
 
-  const [isNew, setIsNew] = useState(true);
+  const [isNew, setIsNew] = useState(true)
 
-  const invoice = useSelector(selectInvoice);
-  const emailFromState = useSelector(selectEmail);
+  const invoice = useSelector(selectInvoice)
+  const emailFromState = useSelector(selectEmail)
 
-  const [alert, setAlert] = React.useState(null);
+  const [alert, setAlert] = React.useState(null)
 
-  const hideAlert = () => {
-    setAlert(null);
-  };
-
-  const [invoiceSettings, setInvoiceSettings] = useState(invoice);
+  const [invoiceSettings, setInvoiceSettings] = useState(invoice)
 
   const [email, setEmail] = useState('')
 
   const convertDate = (inputFormat) => {
-    function pad(s) { return (s < 10) ? '0' + s : s; }
-    var d = new Date(inputFormat)
-    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-')
+    function pad(s) {
+      return s < 10 ? `0${s}` : s
+    }
+    const d = new Date(inputFormat)
+    return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('-')
   }
-  
+
   const startDateFormatted = convertDate(startDate)
   const endDateFormatted = convertDate(endDate)
 
-
   const confirmInvoice = () => {
-    setError({});
+    setError({})
 
-    const newError = {};
+    const newError = {}
 
-    const mandatoryFields = [
-      'address_line_1',
-      'city',
-      'country',
-      'postal_code'
-    ]
+    const mandatoryFields = ['address_line_1', 'city', 'country', 'postal_code']
 
     for (let i = 0; i < mandatoryFields.length; i += 1) {
       if (!invoiceSettings[mandatoryFields[i]]) {
@@ -113,109 +107,103 @@ const InvoiceSettingsBulk = ({
     }
 
     if (Object.keys(newError).length) {
-      setError(newError);
-      return;
-    } 
+      setError(newError)
+      return
+    }
 
     const datas = {
       invoice_info: {
         ...invoiceSettings,
       },
       account: {
-        email: email,
+        email,
       },
       history_bulk: {
-        locations: locations,
+        locations,
         from: startDateFormatted,
         to: endDateFormatted,
         parameters: {
-          temp: temp,
+          temp,
           temp_min: tempMin,
           temp_max: tempMax,
           feels_like: feelsLike,
-          pressure: pressure,
-          humidity: humidity,
-          clouds: clouds,
-          weather: weather,
-          rain: rain,
-          snow: snow,
+          pressure,
+          humidity,
+          clouds,
+          weather,
+          rain,
+          snow,
           dew_point: dewPoint,
-          visibility: visibility,
-          wind: wind,
+          visibility,
+          wind,
         },
         units: unitsValue,
         file_format: {
-          csv: csv,
-          json: json,
+          csv,
+          json,
         },
         saving_mode: downloadsValue,
       },
-    };
-
-    const invoiceDetails = { ...datas };
-
-    console.log("everything", invoiceDetails);
-
-    if (invoiceDetails.type === "individual") {
-      delete invoiceDetails.organisation;
-      delete invoiceDetails.vat_id;
-    } else {
-      delete invoiceDetails.title;
-      delete invoiceDetails.first_name;
-      delete invoiceDetails.last_name;
     }
-    invoiceDetails.legal_form = invoiceDetails.type;
-    delete invoiceDetails.type;
+
+    const invoiceDetails = { ...datas }
+
+    console.log('everything', invoiceDetails)
+
+    if (invoiceDetails.type === 'individual') {
+      delete invoiceDetails.organisation
+      delete invoiceDetails.vat_id
+    } else {
+      delete invoiceDetails.title
+      delete invoiceDetails.first_name
+      delete invoiceDetails.last_name
+    }
+    invoiceDetails.legal_form = invoiceDetails.type
+    delete invoiceDetails.type
 
     axios
-      .post("https://marketplace-weather.owm.io/api/history_bulks", datas, {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+      .post('https://marketplace-weather.owm.io/api/history_bulks', datas, {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       })
       .then((res) => {
         loadStripe(res.data.stripe_publishable_key).then((stripe) => {
           stripe.redirectToCheckout({
             sessionId: res.data.stripe_session_id,
-          });
-        });
+          })
+        })
       })
       .catch((err) => {
-        console.log(`Error: ${err.message}`);
-      });
-  };
-
-  console.log("vat", invoiceSettings.vat_id);
+        console.log(`Error: ${err.message}`)
+      })
+  }
 
   const decrementStep = () => {
     if (step === 2) {
-      setStep(1);
+      setStep(1)
     } else {
-      console.log("decrement-error-2");
+      console.log('decrement-error-2')
     }
-  };
+  }
 
   const decrementStepOne = () => {
     if (step === 1) {
-      setStep(0);
+      setStep(0)
     } else {
-      console.log("decrement-error-1");
+      console.log('decrement-error-1')
     }
-  };
+  }
 
   const firstStep = () => {
-    setStep(1);
-  };
+    setStep(1)
+  }
 
   const incrementStep = () => {
-
     if (step === 1) {
-
-      const newError = {};
+      const newError = {}
       setError({})
 
-      const mandatoryFields = [
-        'phone',
-      ]
+      const mandatoryFields = ['phone']
 
       if (invoiceSettings.type === 'individual') {
         mandatoryFields.push('first_name')
@@ -229,75 +217,73 @@ const InvoiceSettingsBulk = ({
         }
       }
 
-  const newErrors = {};
+      const newErrors = {}
 
-  if (email === !emailFromState) {
-    if (!email) {
-      setError({
-        email: noBlankErrorMessage,
-      });
-      return;
-    }
-  }
-    setError(newErrors)
+      if (email === !emailFromState) {
+        if (!email) {
+          setError({
+            email: noBlankErrorMessage,
+          })
+          return
+        }
+      }
+      setError(newErrors)
 
       if (email) {
         const emailValidation = validateEmail(email)
-        if (emailValidation){
+        if (emailValidation) {
           newError.email = emailValidation
         }
       }
-    
 
       if (invoiceSettings.phone) {
         const phoneValidation = validatePhoneNumber(invoiceSettings.phone)
         if (phoneValidation) {
           newError.phone = phoneValidation
         }
-      }   
-      
-        if (invoiceSettings.vat_id) {
-          validateVat(invoiceSettings.vat_id)
-            .then(() => {
-              invoiceSettings.vat_id = invoiceSettings.vat_id;
-            })
-            .catch(() => {
-              newError.vat_id = "VAT ID is not valid";
-            })
-            .finally(() => {
-              if (Object.keys(newError).length) {
-                setError(newError);
-                return;
-              }
-            });
-        }
-      
+      }
+
+      if (invoiceSettings.vat_id) {
+        validateVat(invoiceSettings.vat_id)
+          .then(() => {
+            /* eslint-disable-next-line */
+            invoiceSettings.vat_id = invoiceSettings.vat_id
+          })
+          .catch(() => {
+            newError.vat_id = 'VAT ID is not valid'
+          })
+          .finally(() => {
+            if (Object.keys(newError).length) {
+              setError(newError)
+            }
+          })
+      }
+
       if (Object.keys(newError).length) {
-        setError(newError);
-        return;
+        setError(newError)
       } else {
-        setStep(2);
+        setStep(2)
       }
     }
-  };
+  }
 
   return (
     <div>
       {alert}
       <Row>
-        <Col className={step === 0 ? "step-header" : "step-header-neutral"}>
+        <Col className={step === 0 ? 'step-header' : 'step-header-neutral'}>
           1
         </Col>
         <Col>
-          <hr className={step >= 1 ? "line-active" : "line-neutral"} />
+          <hr className={step >= 1 ? 'line-active' : 'line-neutral'} />
         </Col>
-        <Col className={step === 1 ? "step-header" : "step-header-neutral"}>
+        <Col className={step === 1 ? 'step-header' : 'step-header-neutral'}>
           2
         </Col>
         <Col>
-          <hr className={step === 2 ? "line-active" : "line-neutral"} />
+          <hr className={step === 2 ? 'line-active' : 'line-neutral'} />
         </Col>
-        <Col className={step === 2 ? "step-header" : "step-header-neutral"}>
+        <Col className={step === 2 ? 'step-header' : 'step-header-neutral'}>
           3
         </Col>
       </Row>
@@ -313,10 +299,8 @@ const InvoiceSettingsBulk = ({
         <Step0Bulk
           year={year}
           country={country}
-          importPrice={importPrice}
           endDate={endDate}
           startDate={startDate}
-          checkedWeather={checkedWeather}
           fileValue={fileValue}
           unitsValue={unitsValue}
           downloadsValue={downloadsValue}
@@ -379,7 +363,7 @@ const InvoiceSettingsBulk = ({
                 type="button"
                 onClick={() => firstStep()}
                 style={{
-                  float: "right",
+                  float: 'right',
                 }}
               >
                 Next
@@ -394,7 +378,7 @@ const InvoiceSettingsBulk = ({
                   type="button"
                   onClick={decrementStepOne}
                   style={{
-                    float: "left",
+                    float: 'left',
                   }}
                 >
                   Back
@@ -404,7 +388,7 @@ const InvoiceSettingsBulk = ({
                   type="button"
                   onClick={incrementStep}
                   style={{
-                    float: "right",
+                    float: 'right',
                   }}
                 >
                   Next
@@ -420,7 +404,7 @@ const InvoiceSettingsBulk = ({
                   type="button"
                   onClick={decrementStep}
                   style={{
-                    float: "left",
+                    float: 'left',
                   }}
                 >
                   Back
@@ -431,7 +415,7 @@ const InvoiceSettingsBulk = ({
                   type="button"
                   onClick={confirmInvoice}
                   style={{
-                    float: "right",
+                    float: 'right',
                   }}
                 >
                   Continue with Stripe
@@ -442,57 +426,55 @@ const InvoiceSettingsBulk = ({
         </Row>
       </Form>
     </div>
-  );
-};
+  )
+}
 
 InvoiceSettingsBulk.propTypes = {
   year: PropTypes.string,
   country: PropTypes.string,
-    isChecked: PropTypes.bool,
-    isChecked2: PropTypes.bool,
-    isChecked3: PropTypes.bool,
-    isChecked4: PropTypes.bool,
-    isChecked5: PropTypes.bool,
-    isChecked6: PropTypes.bool,
-    isChecked7: PropTypes.bool,
-    isChecked8: PropTypes.bool,
-    isChecked9: PropTypes.bool,
-    isChecked10: PropTypes.bool,
-    isChecked11: PropTypes.bool,
-    isChecked12: PropTypes.bool,
-    isChecked13: PropTypes.bool,
-    temp: PropTypes.string,
-    tempMin: PropTypes.string,
-    tempMax: PropTypes.string,
-    pressure: PropTypes.string,
-    humidity: PropTypes.string,
-    clouds: PropTypes.string,
-    rain: PropTypes.string,
-    snow: PropTypes.string,
-    weather: PropTypes.string,
-    clouds: PropTypes.string,
-    dewPoint: PropTypes.string,
-    visibility: PropTypes.string,
-    wind: PropTypes.string,
-    close: PropTypes.func,
-    fileCheck: PropTypes.bool,
-    fileCheck2: PropTypes.bool,
-    setFileCheck: PropTypes.func,
-    setFileCheck2: PropTypes.func,
-    csv: PropTypes.string,
-    setCSV: PropTypes.func,
-    json: PropTypes.string,
-    setJson: PropTypes.func,
-    unitsValue: PropTypes.string,
-    fileValue: PropTypes.bool,
-    formatValue: PropTypes.string,
-    downloadsValue: PropTypes.string,
-    startDate: PropTypes.instanceOf(Date),
-    endDate: PropTypes.instanceOf(Date),
-    locations: PropTypes.array,
-    currency: PropTypes.string
-};
+  isChecked: PropTypes.bool,
+  isChecked2: PropTypes.bool,
+  isChecked3: PropTypes.bool,
+  isChecked4: PropTypes.bool,
+  isChecked5: PropTypes.bool,
+  isChecked6: PropTypes.bool,
+  isChecked7: PropTypes.bool,
+  isChecked8: PropTypes.bool,
+  isChecked9: PropTypes.bool,
+  isChecked10: PropTypes.bool,
+  isChecked11: PropTypes.bool,
+  isChecked12: PropTypes.bool,
+  isChecked13: PropTypes.bool,
+  temp: PropTypes.string,
+  tempMin: PropTypes.string,
+  tempMax: PropTypes.string,
+  pressure: PropTypes.string,
+  humidity: PropTypes.string,
+  rain: PropTypes.string,
+  snow: PropTypes.string,
+  weather: PropTypes.string,
+  clouds: PropTypes.string,
+  feelsLike: PropTypes.string,
+  dewPoint: PropTypes.string,
+  visibility: PropTypes.string,
+  wind: PropTypes.string,
+  setIsChecked: PropTypes.func,
+  fileCheck: PropTypes.bool,
+  fileCheck2: PropTypes.bool,
+  setFileCheck: PropTypes.func,
+  setFileCheck2: PropTypes.func,
+  csv: PropTypes.string,
+  setCSV: PropTypes.func,
+  json: PropTypes.string,
+  setJson: PropTypes.func,
+  unitsValue: PropTypes.string,
+  fileValue: PropTypes.bool,
+  formatValue: PropTypes.string,
+  downloadsValue: PropTypes.string,
+  startDate: PropTypes.instanceOf(Date),
+  endDate: PropTypes.instanceOf(Date),
+  locations: PropTypes.array,
+  currency: PropTypes.string,
+}
 
-
-
-export default InvoiceSettingsBulk;
+export default InvoiceSettingsBulk

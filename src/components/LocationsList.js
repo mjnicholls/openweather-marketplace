@@ -107,8 +107,6 @@ const LocationList = ({ locations, setLocations }) => {
 LocationList.propTypes = {
   locations: PropTypes.array,
   setLocations: PropTypes.func,
-  price: PropTypes.number,
-  setPrice: PropTypes.func,
 };
 
 export default LocationList;

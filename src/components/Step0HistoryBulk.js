@@ -1,7 +1,7 @@
-import React from "react";
-import { Col, Row } from "reactstrap";
+import React from 'react'
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
+import { Col, Row } from 'reactstrap'
 
 const Step0HistoryBulk = ({
   startDate,
@@ -18,33 +18,26 @@ const Step0HistoryBulk = ({
   isChecked6,
   isChecked7,
   fileCheck,
-  fileCheck2
+  fileCheck2,
 }) => {
+  const check = isChecked === true ? 'Temperature' : null
+  const check2 = isChecked2 === true ? 'Pressure' : null
+  const check3 = isChecked3 === true ? 'Humidity' : null
+  const check4 = isChecked4 === true ? 'Clouds' : null
+  const check5 = isChecked5 === true ? 'Dew Point' : null
+  const check6 = isChecked6 === true ? 'Precipitation' : null
+  const check7 = isChecked7 === true ? 'Wind (direction, speed)' : null
 
-  const check = isChecked === true ? "Temperature" : null;
-  const check2 = isChecked2 === true ? "Pressure" : null;
-  const check3 = isChecked3 === true ? "Humidity" : null;
-  const check4 = isChecked4 === true ? "Clouds" : null;
-  const check5 = isChecked5 === true ? "Dew Point" : null;
-  const check6 = isChecked6 === true ? "Precipitation" : null;
-  const check7 = isChecked7 === true ? "Wind (direction, speed)" : null;
-
-  const checks = [
-    check,
-    check2,
-    check3,
-    check4,
-    check5,
-    check6,
-    check7,
-  ];
+  const checks = [check, check2, check3, check4, check5, check6, check7]
 
   const convertDate = (inputFormat) => {
-    function pad(s) { return (s < 10) ? '0' + s : s; }
-    var d = new Date(inputFormat)
-    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-')
+    function pad(s) {
+      return s < 10 ? `0${s}` : s
+    }
+    const d = new Date(inputFormat)
+    return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('-')
   }
-  
+
   const startDateFormatted = convertDate(startDate)
   const endDateFormatted = convertDate(endDate)
 
@@ -59,8 +52,7 @@ const Step0HistoryBulk = ({
       <Row className="text-start step-bulk">
         <Col className="bold">From - To:</Col>
         <Col>
-        {startDateFormatted} -{" "}
-         {endDateFormatted}{" "}
+          {startDateFormatted} - {endDateFormatted}{' '}
         </Col>
       </Row>
 
@@ -72,29 +64,30 @@ const Step0HistoryBulk = ({
       <Row className="text-start step-bulk">
         <Col className="bold">Weather Parameters:</Col>
         <Col>
-          {checks.map(
-              (p) => 
-              p 
-            ).filter(Boolean).join(", ")}
+          {checks
+            .map((p) => p)
+            .filter(Boolean)
+            .join(', ')}
         </Col>
       </Row>
 
       <Row className="text-start step-bulk">
         <Col className="bold">File Formats:</Col>
-        <Col>{fileCheck === true && fileCheck2 === false ? "CSV" : ""}{" "}
-        {fileCheck2 === true && fileCheck === false ? "JSON" : ""}{" "}
-        {fileCheck2 === true && fileCheck === true ? "CSV, JSON" : ""}{" "}
+        <Col>
+          {fileCheck === true && fileCheck2 === false ? 'CSV' : ''}{' '}
+          {fileCheck2 === true && fileCheck === false ? 'JSON' : ''}{' '}
+          {fileCheck2 === true && fileCheck === true ? 'CSV, JSON' : ''}{' '}
         </Col>
       </Row>
 
       <Row className="text-start step-bulk">
         <Col className="bold">Units:</Col>
-        <Col>{unitsValue ? unitsValue : "Metric"}</Col>
+        <Col>{unitsValue || 'Metric'}</Col>
       </Row>
 
       <Row className="text-start step-bulk">
         <Col className="bold">Download:</Col>
-        <Col>{downloadsValue ? downloadsValue : "All locations"}</Col>
+        <Col>{downloadsValue || 'All locations'}</Col>
       </Row>
 
       <hr />
@@ -104,13 +97,13 @@ const Step0HistoryBulk = ({
         </Col>
         <Col>
           <h3>
-         {locations.length * 35} {currency}
+            {locations.length * 35} {currency}
           </h3>
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
 Step0HistoryBulk.propTypes = {
   locations: PropTypes.array,
@@ -125,9 +118,9 @@ Step0HistoryBulk.propTypes = {
   isChecked7: PropTypes.bool,
   startDate: PropTypes.instanceOf(Date),
   endDate: PropTypes.instanceOf(Date),
-  currency: PropTypes.number,
+  currency: PropTypes.string,
   unitsValue: PropTypes.string,
   downloadsValue: PropTypes.string,
-};
+}
 
-export default Step0HistoryBulk;
+export default Step0HistoryBulk

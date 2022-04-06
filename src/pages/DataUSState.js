@@ -1,29 +1,31 @@
-import React, { useState } from "react";
-import { Label, Col, Row, FormGroup, Button } from "reactstrap";
-import Select from "react-select";
-import { statesOfAmerica, years } from "../config";
-import ReactBSAlert from "react-bootstrap-sweetalert";
-import { useSelector } from "react-redux";
+import React, { useState } from 'react'
 
-const selectCurrency = (state) => state.auth.currency;
+import ReactBSAlert from 'react-bootstrap-sweetalert'
+import { useSelector } from 'react-redux'
+import Select from 'react-select'
+import { Label, Col, Row, FormGroup, Button } from 'reactstrap'
+
+import { statesOfAmerica, years } from '../config'
+
+const selectCurrency = (state) => state.auth.currency
 
 const DataUSState = () => {
-  const currency = useSelector(selectCurrency);
+  const currency = useSelector(selectCurrency)
 
-  const [price, setPrice] = useState(0);
-  const [country, setCountry] = useState("");
-  const [year, setYear] = useState("");
+  const [price, setPrice] = useState(0)
+  const [country, setCountry] = useState('')
+  const [year, setYear] = useState('')
 
   const handleChange = (e) => {
-    setCountry(e.value);
-    setPrice(e.price);
-  };
+    setCountry(e.value)
+    setPrice(e.price)
+  }
 
-  const [alert, setAlert] = React.useState(null);
+  const [alert, setAlert] = React.useState(null)
 
   const hideAlert = () => {
-    setAlert(null);
-  };
+    setAlert(null)
+  }
 
   const htmlAlert = () => {
     setAlert(
@@ -65,16 +67,16 @@ const DataUSState = () => {
           email={email}
           setEmail={setEmail}
         /> */}
-      </ReactBSAlert>
-    );
-  };
+      </ReactBSAlert>,
+    )
+  }
 
   return (
     <div className="container">
       {alert}
       <Row>
         <Col md="7" className="page-padding text-start">
-          <div style={{ marginBottom: "50px" }}>
+          <div style={{ marginBottom: '50px' }}>
             <h3>Historical Weather Data by State</h3>
             <h6>for all ZIP codes in the US</h6>
           </div>
@@ -101,7 +103,7 @@ const DataUSState = () => {
               classNamePrefix="react-select"
               options={years}
               onChange={(e) => setYear(e.value)}
-              //value={year}
+              // value={year}
             />
           </FormGroup>
         </Col>
@@ -150,13 +152,13 @@ const DataUSState = () => {
       <Row className="us-header flex-end price">
         <Col>
           {country && year ? null : (
-            <p style={{ fontSize: "14pt" }}>
+            <p style={{ fontSize: '14pt' }}>
               <i>To proceed please fill in the required details</i>
             </p>
           )}
         </Col>
         <Col>
-          <p style={{ fontWeight: "bold", fontSize: "18pt" }}>
+          <p style={{ fontWeight: 'bold', fontSize: '18pt' }}>
             Total {price} {currency}
           </p>
         </Col>
@@ -166,8 +168,8 @@ const DataUSState = () => {
               data-dismiss="modal"
               type="button"
               onClick={(e) => {
-                htmlAlert(false);
-                e.stopPropagation();
+                htmlAlert(false)
+                e.stopPropagation()
               }}
               className="button-orange-square"
             >
@@ -183,7 +185,7 @@ const DataUSState = () => {
         )}
       </Row>
     </div>
-  );
-};
+  )
+}
 
-export default DataUSState;
+export default DataUSState

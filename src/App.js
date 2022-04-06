@@ -1,17 +1,18 @@
-import React from "react";
+import React from 'react'
 
-import "./App.css";
-import { Provider } from "react-redux";
-import HeaderMarket from "./components/Header";
-import FooterMarket from "./components/Footer";
-import { Container } from "reactstrap";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import HomeMarket from "./pages/Home";
-import HistoryForecastBulk from "./pages/HistoryForecastBulk";
-import store from "./store";
-import DataUSState from "./pages/DataUSState";
+import './App.css'
+import { Provider } from 'react-redux'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Container } from 'reactstrap'
+
+import FooterMarket from './components/Footer'
+import HeaderMarket from './components/Header'
+import DataUSState from './pages/DataUSState'
 import NewHistoryBulkTest from './pages/HistoryBulk'
-import MyOrders from "./pages/MyOrders";
+import HistoryForecastBulk from './pages/HistoryForecastBulk'
+import HomeMarket from './pages/Home'
+import MyOrders from './pages/MyOrders'
+import store from './store'
 
 function App() {
   return (
@@ -27,10 +28,7 @@ function App() {
                 path="/history_forecast_bulks/new"
                 component={HistoryForecastBulk}
               />
-                <Route
-                path="/my_orders"
-                component={MyOrders}
-              />
+              <Route path="/my_orders" component={MyOrders} />
               <Route path="/zip_code_data/new" component={DataUSState} />
             </Switch>
           </BrowserRouter>
@@ -38,7 +36,7 @@ function App() {
         <FooterMarket />
       </div>
     </Provider>
-  );
+  )
 }
 
-export default App;
+export default App

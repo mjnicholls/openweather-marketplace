@@ -1,10 +1,12 @@
-import React from "react";
-import { Col, Row } from "reactstrap";
-import WeatherParams from "./ParamsWeather";
-import UnitsParams from "./ParamsUnits";
-import FileParams from "./ParamsFile";
-import DownloadParams from "./ParamsDownload";
-import PropTypes from "prop-types";
+import React from 'react'
+
+import PropTypes from 'prop-types'
+import { Col, Row } from 'reactstrap'
+
+import DownloadParams from './ParamsDownload'
+import FileParams from './ParamsFile'
+import UnitsParams from './ParamsUnits'
+import WeatherParams from './ParamsWeather'
 
 const Parameters = ({
   downloadsValue,
@@ -74,96 +76,91 @@ const Parameters = ({
   csv,
   setCSV,
   json,
-  setJson
-}) => {
-  return (
-    <>
-      <Row className="mt-3">
-   <Col className="text-start">
-          <WeatherParams
-            fileValue={fileValue}
-            setFileValue={setFileValue}
-            temp={temp}
-            setTemp={setTemp}
-            tempMin={tempMin}
-            setTempMin={setTempMin}
-            tempMax={tempMax}
-            setTempMax={setTempMax}
-            feelsLike={feelsLike}
-            setFeelsLike={setFeelsLike}
-            pressure={pressure}
-            setPressure={setPressure}
-            humidity={humidity}
-            setHumidity={setHumidity}
-            clouds={clouds}
-            setClouds={setClouds}
-            weather={weather}
-            setWeather={setWeather}
-            rain={rain}
-            setRain={setRain}
-            snow={snow}
-            setSnow={setSnow}
-            dewPoint={dewPoint}
-            setDewPoint={setDewPoint}
-            visibility={visibility}
-            setVisibility={setVisibility}
-            wind={wind}
-            setWind={setWind}
-            isChecked={isChecked}
-            setIsChecked={setIsChecked}
-            isChecked2={isChecked2}
-            setIsChecked2={setIsChecked2}
-            isChecked3={isChecked3}
-            setIsChecked3={setIsChecked3}
-            isChecked4={isChecked4}
-            setIsChecked4={setIsChecked4}
-            isChecked5={isChecked5}
-            setIsChecked5={setIsChecked5}
-            isChecked6={isChecked6}
-            setIsChecked6={setIsChecked6}
-            isChecked7={isChecked7}
-            setIsChecked7={setIsChecked7}
-            isChecked8={isChecked8}
-            setIsChecked8={setIsChecked8}
-            isChecked9={isChecked9}
-            setIsChecked9={setIsChecked9}
-            isChecked10={isChecked10}
-            setIsChecked10={setIsChecked10}
-            isChecked11={isChecked11}
-            setIsChecked11={setIsChecked11}
-            isChecked12={isChecked12}
-            setIsChecked12={setIsChecked12}
-            isChecked13={isChecked13}
-            setIsChecked13={setIsChecked13}
-          />
+  setJson,
+}) => (
+  <>
+    <Row className="mt-3">
+      <Col className="text-start">
+        <WeatherParams
+          fileValue={fileValue}
+          setFileValue={setFileValue}
+          temp={temp}
+          setTemp={setTemp}
+          tempMin={tempMin}
+          setTempMin={setTempMin}
+          tempMax={tempMax}
+          setTempMax={setTempMax}
+          feelsLike={feelsLike}
+          setFeelsLike={setFeelsLike}
+          pressure={pressure}
+          setPressure={setPressure}
+          humidity={humidity}
+          setHumidity={setHumidity}
+          clouds={clouds}
+          setClouds={setClouds}
+          weather={weather}
+          setWeather={setWeather}
+          rain={rain}
+          setRain={setRain}
+          snow={snow}
+          setSnow={setSnow}
+          dewPoint={dewPoint}
+          setDewPoint={setDewPoint}
+          visibility={visibility}
+          setVisibility={setVisibility}
+          wind={wind}
+          setWind={setWind}
+          isChecked={isChecked}
+          setIsChecked={setIsChecked}
+          isChecked2={isChecked2}
+          setIsChecked2={setIsChecked2}
+          isChecked3={isChecked3}
+          setIsChecked3={setIsChecked3}
+          isChecked4={isChecked4}
+          setIsChecked4={setIsChecked4}
+          isChecked5={isChecked5}
+          setIsChecked5={setIsChecked5}
+          isChecked6={isChecked6}
+          setIsChecked6={setIsChecked6}
+          isChecked7={isChecked7}
+          setIsChecked7={setIsChecked7}
+          isChecked8={isChecked8}
+          setIsChecked8={setIsChecked8}
+          isChecked9={isChecked9}
+          setIsChecked9={setIsChecked9}
+          isChecked10={isChecked10}
+          setIsChecked10={setIsChecked10}
+          isChecked11={isChecked11}
+          setIsChecked11={setIsChecked11}
+          isChecked12={isChecked12}
+          setIsChecked12={setIsChecked12}
+          isChecked13={isChecked13}
+          setIsChecked13={setIsChecked13}
+        />
 
-          <UnitsParams
-            unitsValue={unitsValue}
-            setUnitsValue={setUnitsValue}
-          />
+        <UnitsParams unitsValue={unitsValue} setUnitsValue={setUnitsValue} />
 
-          <FileParams
-            formatValue={formatValue}
-            setFormatValue={setFormatValue}
-            fileCheck={fileCheck}
-            setFileCheck={setFileCheck}
-            fileCheck2={fileCheck2}
-            setFileCheck2={setFileCheck2}
-            csv={csv}
-            setCSV={setCSV}
-            json={json}
-            setJson={setJson}
-          />
+        <FileParams
+          formatValue={formatValue}
+          setFormatValue={setFormatValue}
+          fileCheck={fileCheck}
+          setFileCheck={setFileCheck}
+          fileCheck2={fileCheck2}
+          setFileCheck2={setFileCheck2}
+          csv={csv}
+          setCSV={setCSV}
+          json={json}
+          setJson={setJson}
+        />
 
-          <DownloadParams
-            downloadsValue={downloadsValue}
-            setDownloadsValue={setDownloadsValue}
-          />
-   </Col>
-      </Row>
-    </>
-  );
-};
+        <DownloadParams
+          downloadsValue={downloadsValue}
+          setDownloadsValue={setDownloadsValue}
+        />
+      </Col>
+    </Row>
+  </>
+)
 
 Parameters.propTypes = {
   isChecked: PropTypes.bool,
@@ -202,6 +199,8 @@ Parameters.propTypes = {
   setPressure: PropTypes.func,
   humidity: PropTypes.string,
   setHumidity: PropTypes.func,
+  feelsLike: PropTypes.string,
+  setFeelsLike: PropTypes.func,
   rain: PropTypes.string,
   setRain: PropTypes.func,
   snow: PropTypes.string,
@@ -232,6 +231,6 @@ Parameters.propTypes = {
   setDownloadsValue: PropTypes.func,
   formatValue: PropTypes.string,
   setFormatValue: PropTypes.func,
-};
+}
 
-export default Parameters;
+export default Parameters

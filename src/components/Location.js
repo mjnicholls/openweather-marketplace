@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { coordinatesError } from "../utils/validation";
-import AutoCompleteForm from "./LocationAutoComplete";
-import CoordinatesSearch from "./LocationCoordinates";
-import { Button, Col, Row, Label } from "reactstrap";
-import Papa from "papaparse";
-import Parameters from "./Parameters";
-import ReactBSAlert from "react-bootstrap-sweetalert";
-import DatePickerMarket from "./DatePicker";
-import LocationList from "./LocationsList";
-import { locationConstructor } from "../utils/locationConstructor";
-import InvoiceSettingsBulk from "./InvoicePopBulk";
+import React, { useState } from 'react'
+
+import Papa from 'papaparse'
+import PropTypes from 'prop-types'
+import ReactBSAlert from 'react-bootstrap-sweetalert'
+import { Button, Col, Row, Label } from 'reactstrap'
+
+import { locationConstructor } from '../utils/locationConstructor'
+import { coordinatesError } from '../utils/validation'
+import DatePickerMarket from './DatePicker'
+import InvoiceSettingsBulk from './InvoicePopBulk'
+import AutoCompleteForm from './LocationAutoComplete'
+import CoordinatesSearch from './LocationCoordinates'
+import LocationList from './LocationsList'
+import Parameters from './Parameters'
 
 const Location = ({
   mapRef,
@@ -38,8 +40,6 @@ const Location = ({
   formatValue,
   setFormatValue,
   currency,
-  importPrice,
-  setImportPrice,
   temp,
   setTemp,
   tempMin,
@@ -102,141 +102,139 @@ const Location = ({
   setJson,
   email,
   setEmail,
-  setIsAdded, 
+  setIsAdded,
   count,
   setCount,
   setErrorMap,
   duplicate,
-  setDuplicate
+  setDuplicate,
 }) => {
-  const [isSearchByName, setIsSearchByName] = useState(true);
-  const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation);
-  const [isImport, setIsImport] = useState(false);
+  const [isSearchByName, setIsSearchByName] = useState(true)
+  const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation)
+  const [isImport, setIsImport] = useState(false)
 
   const setCoordinates = () => {
-    setError({});
+    setError({})
     const coordsError = coordinatesError(
       coordsTempLocation.lat,
-      coordsTempLocation.lon
-    );
+      coordsTempLocation.lon,
+    )
     if (coordsError) {
-      setError(coordsError);
-      setIsDropDown(false);
-      return;
+      setError(coordsError)
+      setIsDropDown(false)
+      return
     }
     setTempLocation({
       ...coordsTempLocation,
-      name: "Custom location",
-    });
-    setIsDropDown(false);
+      name: 'Custom location',
+    })
+    setIsDropDown(false)
 
-    setCount(0);
-      
+    setCount(0)
+
     if (count === 0) {
-      setErrorMap(false);
+      setErrorMap(false)
     }
     setIsAdded(false)
-  };
-
-  console.log('count', count)
+  }
 
   const canSetCoordinates = () =>
     tempLocation.lat !== coordsTempLocation.lat ||
-    tempLocation.lon !== coordsTempLocation.lon;
+    tempLocation.lon !== coordsTempLocation.lon
 
   const setSearchandImportImport = () => {
-    setIsSearchByName(true);
-    setIsImport(true);
-  };
+    setIsSearchByName(true)
+    setIsImport(true)
+  }
 
   const setSearchandImport = () => {
-    setIsSearchByName(true);
-    setIsImport(false);
-  };
+    setIsSearchByName(true)
+    setIsImport(false)
+  }
 
   const setSearchNameandImport = () => {
-    setIsSearchByName(false);
-    setIsImport(false);
-  };
+    setIsSearchByName(false)
+    setIsImport(false)
+  }
 
   const getJson = (e) => {
     hideAlert()
-    const files = e.target.files;
+    const { files } = e.target
     if (files) {
-      console.log(files[0]);
+      console.log(files[0])
       Papa.parse(files[0], {
         skipEmptyLines: true,
-        complete: function (results) {
-          let importedLocations = [];
-          let errors = [];
+        complete(results) {
+          const importedLocations = []
+          const errors = []
 
-          for (let i = 0; i < results.data.length; i++) {
-            const row = results.data[i];
+          for (let i = 0; i < results.data.length; i += 1) {
+            const row = results.data[i]
 
-            const tmp = locationConstructor(row[0], row[1], row[2]);
-            let error = {};
+            const tmp = locationConstructor(row[0], row[1], row[2])
+            /* eslint-disable-next-line */
+            let error = {}
 
             if (tmp.error) {
-              let keys = Object.keys(tmp.error);
+              const keys = Object.keys(tmp.error)
               error = {
                 line: i + 1,
                 comment: tmp.error[keys[0]],
                 value: tmp.error.errorVal,
-              };
+              }
             } else {
-              for (let j = 0; j < importedLocations.length; j++) {
+              for (let j = 0; j < importedLocations.length; j += 1) {
                 if (
                   importedLocations[j].lat === tmp.location.lat &&
                   importedLocations[j].lon === tmp.location.lon
                 ) {
                   error = {
                     line: i + 1,
-                    comment: "Duplicated value.",
-                    value: row[1] + ", " + row[2],
-                  };
+                    comment: 'Duplicated value.',
+                    value: `${row[1]}, ${row[2]}`,
+                  }
 
-                  break;
+                  break
                 }
               }
 
-              let check = checkCoordinates(tmp.location.lat, tmp.location.lon);
+              const check = checkCoordinates(tmp.location.lat, tmp.location.lon)
               if (!check) {
                 error = {
                   line: i + 1,
-                  comment: "Duplicated value.",
-                  value: row[1] + ", " + row[2],
-                };
+                  comment: 'Duplicated value.',
+                  value: `${row[1]}, ${row[2]}`,
+                }
               }
             }
 
             if (Object.keys(error).length) {
-              errors.push(error);
+              errors.push(error)
             } else if (tmp.location) {
-              importedLocations.push(tmp.location);
+              importedLocations.push(tmp.location)
             }
           }
 
           if (errors.length) {
-            jsonAlert(errors, importedLocations);
-            return;
+            jsonAlert(errors, importedLocations)
+            return
           }
 
           if (importedLocations.length) {
-            addLocations(importedLocations);
+            addLocations(importedLocations)
           }
-          setIsImport(false);
+          setIsImport(false)
         },
-      });
+      })
     }
-  };
+  }
 
-
-  const [alert, setAlert] = React.useState(null);
+  const [alert, setAlert] = React.useState(null)
 
   const hideAlert = () => {
-    setAlert(null);
-  };
-
+    setAlert(null)
+  }
+  /* eslint-disable-next-line */
   const jsonAlert = (importErrors, locations) => {
     setAlert(
       <ReactBSAlert
@@ -255,12 +253,12 @@ const Location = ({
           <Col>Error</Col>
           <Col>Value</Col>
         </Row>
-        {importErrors.map((error, index) => (
-          <React.Fragment key={index}>
+        {importErrors.map((adderror) => (
+          <React.Fragment key="two">
             <Row className="trigger-item">
-              <Col md="1">{error.line}</Col>
-              <Col>{error.comment}</Col>
-              <Col>{error.value}</Col>
+              <Col md="1">{adderror.line}</Col>
+              <Col>{adderror.comment}</Col>
+              <Col>{adderror.value}</Col>
             </Row>
           </React.Fragment>
         ))}
@@ -275,23 +273,28 @@ const Location = ({
           <Col>Latitide</Col>
           <Col>Longitude</Col>
         </Row>
-        {locations.map((location, index) => (
-              <React.Fragment key={index}>
-            <Row className="trigger-item" key={index}>
+        {locations.map((addlocation, index) => (
+          <React.Fragment key="one">
+            <Row className="trigger-item">
               <Col md="1">{index + 1}</Col>
-              <Col>{location.name}</Col>
-              <Col>{location.lat}</Col>
-              <Col>{location.lon}</Col>
+              <Col>{addlocation.name}</Col>
+              <Col>{addlocation.lat}</Col>
+              <Col>{addlocation.lon}</Col>
             </Row>
           </React.Fragment>
         ))}
         <br />
         <Row className="trigger-item">
           <Col className="text-end">
-          <label onClick={() => {
-                addLocations(locations);
-                hideAlert();
-              }} className="button-neutral">
+            {/* eslint-disable-next-line */}
+            <label
+              htmlFor="text"
+              onClick={() => {
+                addLocations(locations)
+                hideAlert()
+              }}
+              className="button-neutral"
+            >
               Upload Recognised Locations
             </label>
 
@@ -306,26 +309,23 @@ const Location = ({
             />
           </Col>
         </Row>
-      </ReactBSAlert>
-    );
-  };
-
+      </ReactBSAlert>,
+    )
+  }
 
   const checkCoordinates = (lat, lon) => {
-    for (let i = 0; i < locations.length; i++) {
+    for (let i = 0; i < locations.length; i += 1) {
       if (locations[i].lat === lat && locations[i].lon === lon) {
-        return false;
+        return false
       }
     }
-    return true;
-  };
+    return true
+  }
 
   const addLocations = (data) => {
-    const newLocations = [...locations, ...data];
-    setLocations(newLocations);
-
-    if (locations.indexOf(value) === -1) locations.push(value)
-  };
+    const newLocations = [...locations, ...data]
+    setLocations(newLocations)
+  }
 
   const checkoutAlert = () => {
     setAlert(
@@ -334,13 +334,12 @@ const Location = ({
         onConfirm={() => hideAlert()}
         onCancel={() => hideAlert()}
         showConfirm={false}
+        title=""
       >
         <InvoiceSettingsBulk
           close={hideAlert}
           locations={locations}
           startDate={startDate}
-          importPrice={importPrice}
-          setImportPrice={setImportPrice}
           endDate={endDate}
           fileValue={fileValue}
           unitsValue={unitsValue}
@@ -398,16 +397,16 @@ const Location = ({
           email={email}
           setEmail={setEmail}
         />
-      </ReactBSAlert>
-    );
-  };
+      </ReactBSAlert>,
+    )
+  }
 
   return (
     <div className="location">
       {alert}
       <div
         className="flex-grow-1"
-        style={{ position: "relative" }}
+        style={{ position: 'relative' }}
         ref={searchBoxRef}
       >
         <Row>
@@ -466,7 +465,7 @@ const Location = ({
               <Button
                 type="button"
                 className={`padded-button ${
-                  isSearchByName && !isImport ? "padded-button-active" : ""
+                  isSearchByName && !isImport ? 'padded-button-active' : ''
                 }`}
                 onClick={() => setSearchandImport()}
                 aria-pressed="true"
@@ -476,7 +475,7 @@ const Location = ({
               <Button
                 type="button"
                 className={`padded-button ${
-                  !isSearchByName ? "padded-button-active" : ""
+                  !isSearchByName ? 'padded-button-active' : ''
                 }`}
                 onClick={() => setSearchNameandImport()}
                 aria-pressed="true"
@@ -486,7 +485,7 @@ const Location = ({
               <Button
                 type="button"
                 className={`padded-button ${
-                  isImport ? "padded-button-active" : ""
+                  isImport ? 'padded-button-active' : ''
                 }`}
                 onClick={() => setSearchandImportImport()}
                 aria-pressed="true"
@@ -515,7 +514,7 @@ const Location = ({
                       Coordinates will be rounded to the 6th decimal place.
                     </li>
                     <li>
-                      Please refer to the example below.{" "}
+                      Please refer to the example below.{' '}
                       <a href="https://openweathermap.org/docs/owm_import_samle.csv">
                         Download sample file
                       </a>
@@ -557,7 +556,7 @@ const Location = ({
               <button
                 type="button"
                 className={`padded-button ${
-                  canSetCoordinates() ? "padded-button-active" : ""
+                  canSetCoordinates() ? 'padded-button-active' : ''
                 }`}
                 onClick={setCoordinates}
                 aria-pressed="true"
@@ -650,28 +649,32 @@ const Location = ({
 
       <Row className="mt-4 flex-end price">
         <Col>
-        {locations.length >= 1 && startDate >= new Date('01/01/1979') && endDate >= startDate && endDate < new Date() ?
-        null 
-        :
-          <p style={{ fontSize: "14pt" }}>
-            <i>To proceed please fill in the required details</i>
-          </p>
-          }
+          {locations.length >= 1 &&
+          startDate >= new Date('01/01/1979') &&
+          endDate >= startDate &&
+          endDate < new Date() ? null : (
+            <p style={{ fontSize: '14pt' }}>
+              <i>To proceed please fill in the required details</i>
+            </p>
+          )}
         </Col>
         <Col>
-          <p style={{ fontWeight: "bold", fontSize: "18pt" }}>
+          <p style={{ fontWeight: 'bold', fontSize: '18pt' }}>
             Total {locations.length * 7} {currency}
           </p>
         </Col>
         <Col>
-          {locations.length >= 1 && startDate >= new Date('01/01/1979') && endDate >= startDate && endDate < new Date() ? (
+          {locations.length >= 1 &&
+          startDate >= new Date('01/01/1979') &&
+          endDate >= startDate &&
+          endDate < new Date() ? (
             <Col>
               <Button
                 data-dismiss="modal"
                 type="button"
                 onClick={(e) => {
-                  checkoutAlert(false);
-                  e.stopPropagation();
+                  checkoutAlert(false)
+                  e.stopPropagation()
                 }}
                 className="button-orange-square"
               >
@@ -688,8 +691,8 @@ const Location = ({
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
 Location.propTypes = {
   mapRef: PropTypes.object,
@@ -705,7 +708,6 @@ Location.propTypes = {
   setError: PropTypes.func,
   setErrorMap: PropTypes.func,
   setIsAdded: PropTypes.func,
-  setIsName: PropTypes.func,
   searchBoxRef: PropTypes.object,
   isDropDown: PropTypes.bool,
   setIsDropDown: PropTypes.func,
@@ -759,7 +761,6 @@ Location.propTypes = {
   setVisibility: PropTypes.func,
   wind: PropTypes.string,
   setWind: PropTypes.func,
-  close: PropTypes.func,
   startDate: PropTypes.instanceOf(Date),
   setStartDate: PropTypes.func,
   endDate: PropTypes.instanceOf(Date),
@@ -780,6 +781,6 @@ Location.propTypes = {
   setDownloadsValue: PropTypes.func,
   formatValue: PropTypes.string,
   setFormatValue: PropTypes.func,
-};
+}
 
-export default Location;
+export default Location

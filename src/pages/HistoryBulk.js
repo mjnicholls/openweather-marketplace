@@ -1,189 +1,182 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Col, Row } from "reactstrap";
-import Map from "../components/Map";
-import placeMarker from "../utils/placeMarker";
-import Location from "../components/Location";
-import { useSelector } from "react-redux";
-import moment from "moment";
+import React, { useState, useEffect, useRef } from 'react'
 
-const selectCurrency = (state) => state.auth.currency;
-const selectInvoice = (state) => state.auth.invoiceInfo;
+import moment from 'moment'
+import { useSelector } from 'react-redux'
+import { Col, Row } from 'reactstrap'
+
+import Location from '../components/Location'
+import Map from '../components/Map'
+import placeMarker from '../utils/placeMarker'
+
+const selectCurrency = (state) => state.auth.currency
+const selectInvoice = (state) => state.auth.invoiceInfo
 
 const NewHistoryBulkTest = () => {
-  const currency = useSelector(selectCurrency);
-  const mapRef = useRef(null);
+  const currency = useSelector(selectCurrency)
+  const mapRef = useRef(null)
 
-  const searchBoxRef = useRef();
-  const invoice = useSelector(selectInvoice);
+  const searchBoxRef = useRef()
+  const invoice = useSelector(selectInvoice)
 
-  const [error, setError] = useState({});
+  const [error, setError] = useState({})
 
-  /*eslint-disable-next-line*/
+  /* eslint-disable-next-line */
   const [name, setName] = useState("");
 
   const [location, setLocation] = useState({
-    name: "",
-    lat: "",
-    lon: "",
-  });
+    name: '',
+    lat: '',
+    lon: '',
+  })
 
-  const yesterday = moment().subtract(1, "days").toDate();
+  const yesterday = moment().subtract(1, 'days').toDate()
 
-  const [price, setPrice] = useState(0);
+  const [parameters, setParameters] = useState()
 
-  const [importPrice, setImportPrice] = useState(0);
+  const [locations, setLocations] = useState([])
 
-  const [parameters, setParameters] = useState();
+  const [isDropDown, setIsDropDown] = useState(false)
 
-  const [locations, setLocations] = useState([]);
+  const [isLocationNameEdited, setIsLocationNameEdited] = useState(false)
 
-  const [isDropDown, setIsDropDown] = useState(false);
+  const [tempLocation, setTempLocation] = useState({ ...location })
 
-  const [isLocationNameEdited, setIsLocationNameEdited] = useState(false);
+  const [fileValue, setFileValue] = useState(false)
 
-  const [tempLocation, setTempLocation] = useState({ ...location });
+  const [unitsValue, setUnitsValue] = useState('Metric')
 
-  const [checkedWeather, setCheckedWeather] = useState([]);
+  const [downloadsValue, setDownloadsValue] = useState('All locations')
 
-  const [fileValue, setFileValue] = useState(false);
+  const [formatValue, setFormatValue] = useState('CSV')
 
-  const [unitsValue, setUnitsValue] = useState("Metric");
+  const [startDate, setStartDate] = useState(new Date('01-01-1979'))
 
-  const [downloadsValue, setDownloadsValue] = useState("All locations");
+  const [endDate, setEndDate] = useState(yesterday)
 
-  const [formatValue, setFormatValue] = useState("CSV");
+  const [checked, setChecked] = useState([])
 
-  const [startDate, setStartDate] = useState(new Date("01-01-1979"));
+  const [errorMap, setErrorMap] = useState(false)
 
-  const [endDate, setEndDate] = useState(yesterday);
+  const [invoiceSettings, setInvoiceSettings] = useState(invoice)
 
-  const [checked, setChecked] = useState([]);
-
-  const [errorMap, setErrorMap] = useState(false);
-
-  const [invoiceSettings, setInvoiceSettings] = useState(invoice);
-
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('')
 
   const [on, setOn] = useState({
     news: false,
     product: false,
     system: false,
-  });
+  })
 
-  const [isAdded, setIsAdded] = useState(false);
+  const [isAdded, setIsAdded] = useState(false)
 
-  const [temp, setTemp] = useState("On");
-  const [tempMin, setTempMin] = useState("On");
-  const [tempMax, setTempMax] = useState("On");
-  const [feelsLike, setFeelsLike] = useState("On");
-  const [pressure, setPressure] = useState("On");
-  const [humidity, setHumidity] = useState("On");
-  const [clouds, setClouds] = useState("On");
-  const [weather, setWeather] = useState("On");
-  const [rain, setRain] = useState("On");
-  const [snow, setSnow] = useState("On");
-  const [dewPoint, setDewPoint] = useState("On");
-  const [visibility, setVisibility] = useState("On");
-  const [wind, setWind] = useState("On");
+  const [temp, setTemp] = useState('On')
+  const [tempMin, setTempMin] = useState('On')
+  const [tempMax, setTempMax] = useState('On')
+  const [feelsLike, setFeelsLike] = useState('On')
+  const [pressure, setPressure] = useState('On')
+  const [humidity, setHumidity] = useState('On')
+  const [clouds, setClouds] = useState('On')
+  const [weather, setWeather] = useState('On')
+  const [rain, setRain] = useState('On')
+  const [snow, setSnow] = useState('On')
+  const [dewPoint, setDewPoint] = useState('On')
+  const [visibility, setVisibility] = useState('On')
+  const [wind, setWind] = useState('On')
 
-  const [isChecked, setIsChecked] = useState(true);
-  const [isChecked2, setIsChecked2] = useState(true);
-  const [isChecked3, setIsChecked3] = useState(true);
-  const [isChecked4, setIsChecked4] = useState(true);
-  const [isChecked5, setIsChecked5] = useState(true);
-  const [isChecked6, setIsChecked6] = useState(true);
-  const [isChecked7, setIsChecked7] = useState(true);
-  const [isChecked8, setIsChecked8] = useState(true);
-  const [isChecked9, setIsChecked9] = useState(true);
-  const [isChecked10, setIsChecked10] = useState(true);
-  const [isChecked11, setIsChecked11] = useState(true);
-  const [isChecked12, setIsChecked12] = useState(true);
-  const [isChecked13, setIsChecked13] = useState(true);
+  const [isChecked, setIsChecked] = useState(true)
+  const [isChecked2, setIsChecked2] = useState(true)
+  const [isChecked3, setIsChecked3] = useState(true)
+  const [isChecked4, setIsChecked4] = useState(true)
+  const [isChecked5, setIsChecked5] = useState(true)
+  const [isChecked6, setIsChecked6] = useState(true)
+  const [isChecked7, setIsChecked7] = useState(true)
+  const [isChecked8, setIsChecked8] = useState(true)
+  const [isChecked9, setIsChecked9] = useState(true)
+  const [isChecked10, setIsChecked10] = useState(true)
+  const [isChecked11, setIsChecked11] = useState(true)
+  const [isChecked12, setIsChecked12] = useState(true)
+  const [isChecked13, setIsChecked13] = useState(true)
 
-  const [fileCheck, setFileCheck] = useState(true);
-  const [fileCheck2, setFileCheck2] = useState(false);
+  const [fileCheck, setFileCheck] = useState(true)
+  const [fileCheck2, setFileCheck2] = useState(false)
 
-  const [csv, setCSV] = useState("On");
-  const [json, setJson] = useState("Off");
+  const [csv, setCSV] = useState('On')
+  const [json, setJson] = useState('Off')
 
-  const [unitsChecked, setUnitsChecked] = useState("Metric");
-  const [isCheckedUnits, setIsCheckedUnits] = useState(true);
+  const [unitsChecked, setUnitsChecked] = useState('Metric')
+  const [isCheckedUnits, setIsCheckedUnits] = useState(true)
 
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
 
   useEffect(() => {
     setTempLocation({
       ...tempLocation,
       lat: location.lat,
       lon: location.lon,
-    });
-
-  }, [location]);
-
+    })
+  }, [location])
 
   useEffect(() => {
     if (tempLocation.lat && tempLocation.lon) {
-
+      // eslint-disable-next-line
       const position = new google.maps.LatLng(
         tempLocation.lat,
-        tempLocation.lon
-      );
-
-      placeMarker(position, mapRef.current.map_);
+        tempLocation.lon,
+      )
+      // eslint-disable-next-line
+      placeMarker(position, mapRef.current.map_)
     }
-
-  }, [tempLocation]);
+  }, [tempLocation])
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutsideSearchBox);
+    document.addEventListener('mousedown', handleClickOutsideSearchBox)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutsideSearchBox);
-    };
-  }, []);
+      document.removeEventListener('mousedown', handleClickOutsideSearchBox)
+    }
+  }, [])
 
   const setLocationNameAware = (val) => {
     setError({
       ...error,
       location: null,
-    });
+    })
     setLocation({
       ...val,
       name: isLocationNameEdited
         ? location.name
         : `${val.name} (${val.lat.toFixed(2)}, ${val.lat.toFixed(2)})`,
-    });
-  };
+    })
+  }
 
   const onClickMap = ({ lat, lng }) => {
     setTempLocation({
       lat,
       lon: lng,
-      name: "Custom location",
-    });
+      name: 'Custom location',
+    })
 
-    setCount(0);
+    setCount(0)
 
     if (count === 0) {
-      setErrorMap(false);
+      setErrorMap(false)
     }
 
-    setIsAdded(false);
-  };
+    setIsAdded(false)
+  }
 
   const handleClickOutsideSearchBox = (e) => {
     if (searchBoxRef.current.contains(e.target)) {
-      return;
+      return
     }
-    setIsDropDown(false);
-  };
+    setIsDropDown(false)
+  }
 
   const handleChange = (key, value) => {
-    const newLocation = { ...location };
-    newLocation[key] = value;
-    setLocation(newLocation);
-  };
-  
+    const newLocation = { ...location }
+    newLocation[key] = value
+    setLocation(newLocation)
+  }
+
   const latCheck = tempLocation.lat
   const lonCheck = tempLocation.lon
 
@@ -194,12 +187,11 @@ const NewHistoryBulkTest = () => {
 
   const duplicates = check.includes(latCheck) && checkTwo.includes(lonCheck)
 
-
   return (
     <div className="container">
       <Row>
         <Col md="7" className="page-padding text-start">
-          <div style={{ marginBottom: "100px" }}>
+          <div style={{ marginBottom: '100px' }}>
             <h3>Create New History Bulk</h3>
           </div>
           <Location
@@ -210,7 +202,7 @@ const NewHistoryBulkTest = () => {
             locations={locations}
             setLocations={setLocations}
             setTempLocation={setTempLocation}
-            onChange={(e) => handleChange("location", e.target.value)}
+            onChange={(e) => handleChange('location', e.target.value)}
             error={error}
             setError={setError}
             name={name}
@@ -220,10 +212,6 @@ const NewHistoryBulkTest = () => {
             setIsLocationNameEdited={setIsLocationNameEdited}
             parameters={parameters}
             setParameters={setParameters}
-            price={price}
-            setPrice={setPrice}
-            checkedWeather={checkedWeather}
-            setCheckedWeather={setCheckedWeather}
             fileValue={fileValue}
             setFileValue={setFileValue}
             unitsValue={unitsValue}
@@ -239,8 +227,6 @@ const NewHistoryBulkTest = () => {
             currency={currency}
             checked={checked}
             setChecked={setChecked}
-            importPrice={importPrice}
-            setImportPrice={setImportPrice}
             setInvoiceSettings={setInvoiceSettings}
             invoiceSettings={invoiceSettings}
             on={on}
@@ -331,8 +317,6 @@ const NewHistoryBulkTest = () => {
             setLocations={setLocations}
             setLocation={setLocationNameAware}
             onClickMap={onClickMap}
-            price={price}
-            setPrice={setPrice}
             errorMap={errorMap}
             setErrorMap={setErrorMap}
             count={count}
@@ -350,7 +334,7 @@ const NewHistoryBulkTest = () => {
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
-export default NewHistoryBulkTest;
+export default NewHistoryBulkTest

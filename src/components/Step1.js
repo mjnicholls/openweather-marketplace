@@ -1,11 +1,13 @@
-import React from "react";
-import { Col, Form, Label, FormGroup, Input, Row } from "reactstrap";
-import Select from "react-select";
-import { useSelector } from "react-redux";
-import { titles } from "../config";
-import PropTypes from "prop-types";
+import React from 'react'
 
-const selectEmail = (state) => state.auth.email;
+import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
+import Select from 'react-select'
+import { Col, Form, Label, FormGroup, Input, Row } from 'reactstrap'
+
+import { titles } from '../config'
+
+const selectEmail = (state) => state.auth.email
 
 const Step1 = ({
   invoiceSettings,
@@ -15,14 +17,14 @@ const Step1 = ({
   isNew,
   setEmail,
 }) => {
-  const emailFromState = useSelector(selectEmail);
+  const emailFromState = useSelector(selectEmail)
 
   const handleChange = (key, value) => {
     // eslint-disable-next-line
     let newObj = Object.assign({}, invoiceSettings);
-    newObj[key] = value;
-    setInvoiceSettings(newObj);
-  };
+    newObj[key] = value
+    setInvoiceSettings(newObj)
+  }
 
   return (
     <div>
@@ -32,15 +34,15 @@ const Step1 = ({
       <Form className="text-start">
         <Label>Legal form: </Label>
         <FormGroup className="mr-4">
-          <Label style={{ paddingRight: "20px" }} check>
+          <Label style={{ paddingRight: '20px' }} check>
             <input
               defaultChecked
               id="organisationRadioButton"
               name="legalForm"
               type="radio"
-              //checked={invoiceSettings.type === "organisation"}
-              onChange={() => handleChange("type", "organisation")}
-              disabled={!isNew && invoiceSettings.type === "individual"}
+              // checked={invoiceSettings.type === "organisation"}
+              onChange={() => handleChange('type', 'organisation')}
+              disabled={!isNew && invoiceSettings.type === 'individual'}
             />
             <span className="form-check-sign" /> Organisation
           </Label>
@@ -49,9 +51,9 @@ const Step1 = ({
               id="individualRadioButton"
               name="legalForm"
               type="radio"
-              checked={invoiceSettings.type === "individual"}
-              onChange={() => handleChange("type", "individual")}
-              disabled={!isNew && invoiceSettings.type === "organisation"}
+              checked={invoiceSettings.type === 'individual'}
+              onChange={() => handleChange('type', 'individual')}
+              disabled={!isNew && invoiceSettings.type === 'organisation'}
             />
             <span className="form-check-sign" /> Individual
           </Label>
@@ -59,7 +61,7 @@ const Step1 = ({
       </Form>
 
       <Form className="form-horizontal text-start">
-        {invoiceSettings.type === "individual" ? (
+        {invoiceSettings.type === 'individual' ? (
           <>
             <Row>
               <Col>
@@ -69,7 +71,7 @@ const Step1 = ({
                     className="react-select info mb-3"
                     classNamePrefix="react-select"
                     onChange={(title) => {
-                      handleChange("title", title.code);
+                      handleChange('title', title.code)
                     }}
                     options={titles}
                     getOptionLabel={(option) => option.name}
@@ -77,9 +79,9 @@ const Step1 = ({
                     placeholder={
                       invoiceSettings.title
                         ? titles.find(
-                            (obj) => obj.code === invoiceSettings.title
+                            (obj) => obj.code === invoiceSettings.title,
                           ).name
-                        : ""
+                        : ''
                     }
                   />
                 </FormGroup>
@@ -89,18 +91,18 @@ const Step1 = ({
                 <FormGroup>
                   <Input
                     type="text"
-                    onChange={(e) => handleChange("first_name", e.target.value)}
+                    onChange={(e) => handleChange('first_name', e.target.value)}
                     value={invoiceSettings.first_name}
                     className={
                       !invoiceSettings.first_name.length && error.first_name
-                        ? "danger-border"
-                        : ""
+                        ? 'danger-border'
+                        : ''
                     }
                   />
                   {!invoiceSettings.first_name.length ? (
                     <div
                       className={`invalid-feedback ${
-                        error.first_name ? "d-block" : ""
+                        error.first_name ? 'd-block' : ''
                       }`}
                     >
                       {error.first_name}
@@ -113,18 +115,18 @@ const Step1 = ({
                 <FormGroup>
                   <Input
                     type="text"
-                    onChange={(e) => handleChange("last_name", e.target.value)}
+                    onChange={(e) => handleChange('last_name', e.target.value)}
                     value={invoiceSettings.last_name}
                     className={
                       !invoiceSettings.last_name.length && error.last_name
-                        ? "danger-border"
-                        : ""
+                        ? 'danger-border'
+                        : ''
                     }
                   />
                   {!invoiceSettings.last_name.length ? (
                     <div
                       className={`invalid-feedback ${
-                        error.last_name ? "d-block" : ""
+                        error.last_name ? 'd-block' : ''
                       }`}
                     >
                       {error.last_name}
@@ -139,13 +141,13 @@ const Step1 = ({
                 <FormGroup>
                   <Input
                     type="text"
-                    onChange={(e) => handleChange("phone", e.target.value)}
+                    onChange={(e) => handleChange('phone', e.target.value)}
                     value={invoiceSettings.phone}
-                    className={error.phone ? "danger-border" : ""}
+                    className={error.phone ? 'danger-border' : ''}
                   />
                   <div
                     className={`invalid-feedback ${
-                      error.phone ? "d-block" : ""
+                      error.phone ? 'd-block' : ''
                     }`}
                   >
                     {error.phone}
@@ -165,11 +167,11 @@ const Step1 = ({
                       }
                       value={emailFromState !== null ? emailFromState : email}
                       disabled={emailFromState !== null}
-                      className={error.email ? "danger-border" : ""}
+                      className={error.email ? 'danger-border' : ''}
                     />
                     <div
                       className={`invalid-feedback ${
-                        error.email ? "d-block" : ""
+                        error.email ? 'd-block' : ''
                       }`}
                     >
                       {error.email}
@@ -188,19 +190,19 @@ const Step1 = ({
                   <Input
                     type="text"
                     onChange={(e) =>
-                      handleChange("organisation", e.target.value)
+                      handleChange('organisation', e.target.value)
                     }
                     value={invoiceSettings.organisation}
                     className={
                       !invoiceSettings.organisation.length && error.organisation
-                        ? "danger-border"
-                        : ""
+                        ? 'danger-border'
+                        : ''
                     }
                   />
                   {!invoiceSettings.organisation.length ? (
                     <div
                       className={`invalid-feedback ${
-                        error.organisation ? "d-block" : ""
+                        error.organisation ? 'd-block' : ''
                       }`}
                     >
                       {error.organisation}
@@ -214,14 +216,14 @@ const Step1 = ({
                   <Input
                     type="text"
                     onChange={(e) => {
-                      handleChange("vat_id", e.target.value);
+                      handleChange('vat_id', e.target.value)
                     }}
                     value={invoiceSettings.vat_id}
-                    className={error.vat_id ? "danger-border" : ""}
+                    className={error.vat_id ? 'danger-border' : ''}
                   />
                   <div
                     className={`invalid-feedback ${
-                      error.vat_id ? "d-block" : ""
+                      error.vat_id ? 'd-block' : ''
                     }`}
                   >
                     {error.vat_id}
@@ -235,13 +237,13 @@ const Step1 = ({
                 <FormGroup>
                   <Input
                     type="text"
-                    onChange={(e) => handleChange("phone", e.target.value)}
+                    onChange={(e) => handleChange('phone', e.target.value)}
                     value={invoiceSettings.phone}
-                    className={error.phone ? "danger-border" : ""}
+                    className={error.phone ? 'danger-border' : ''}
                   />
                   <div
                     className={`invalid-feedback ${
-                      error.phone ? "d-block" : ""
+                      error.phone ? 'd-block' : ''
                     }`}
                   >
                     {error.phone}
@@ -262,13 +264,13 @@ const Step1 = ({
                       value={emailFromState !== null ? emailFromState : email}
                       disabled={emailFromState !== null}
                       className={
-                        !email.length && error.email ? "danger-border" : ""
+                        !email.length && error.email ? 'danger-border' : ''
                       }
                     />
                     {!email.length ? (
                       <div
                         className={`invalid-feedback ${
-                          error.email ? "d-block" : ""
+                          error.email ? 'd-block' : ''
                         }`}
                       >
                         {error.email}
@@ -282,8 +284,8 @@ const Step1 = ({
         )}
       </Form>
     </div>
-  );
-};
+  )
+}
 
 Step1.propTypes = {
   error: PropTypes.object,
@@ -292,6 +294,6 @@ Step1.propTypes = {
   setInvoiceSettings: PropTypes.func,
   email: PropTypes.string,
   setEmail: PropTypes.func,
-};
+}
 
-export default Step1;
+export default Step1

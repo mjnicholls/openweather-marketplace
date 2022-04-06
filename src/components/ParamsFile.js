@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { Button, Col, Row } from "reactstrap";
-import ReactBSAlert from "react-bootstrap-sweetalert";
-import CheckyBoxFile from "./checkBoxFile";
-import PropTypes from "prop-types";
+import React, { useState } from 'react'
+
+import PropTypes from 'prop-types'
+import ReactBSAlert from 'react-bootstrap-sweetalert'
+import { Button, Col, Row } from 'reactstrap'
+
+import CheckyBoxFile from './checkBoxFile'
 
 const FileParams = ({
   formatValue,
@@ -16,12 +18,11 @@ const FileParams = ({
   json,
   setJson,
 }) => {
-
-  const [alert, setAlert] = useState(null);
+  const [alert, setAlert] = useState(null)
 
   const hideAlert = () => {
-    setAlert(null);
-  };
+    setAlert(null)
+  }
 
   const fileAlert = () => {
     setAlert(
@@ -33,42 +34,46 @@ const FileParams = ({
         showCloseButton
         customClass="bs-alerts"
       >
-          <Row className="text-start mt-4">
+        <Row className="text-start mt-4">
           <Col>
             <CheckyBoxFile
-               formatValue={formatValue}
-               setFormatValue={setFormatValue}
-               fileCheck={fileCheck}
-               setFileCheck={setFileCheck}
-               fileCheck2={fileCheck2}
-               setFileCheck2={setFileCheck2}
-               csv={csv}
-               setCSV={setCSV}
-               json={json}
-               setJson={setJson}
+              formatValue={formatValue}
+              setFormatValue={setFormatValue}
+              fileCheck={fileCheck}
+              setFileCheck={setFileCheck}
+              fileCheck2={fileCheck2}
+              setFileCheck2={setFileCheck2}
+              csv={csv}
+              setCSV={setCSV}
+              json={json}
+              setJson={setJson}
               close={hideAlert}
             />
-            </Col>
-            </Row>
-      </ReactBSAlert>
-    );
-  };
+          </Col>
+        </Row>
+      </ReactBSAlert>,
+    )
+  }
 
   return (
     <>
       {alert}
-      <Button className="button-neutral" onClick={fileAlert} style={{fontSize: "11pt"}}>
-        File: {csv === "On" && json === "Off" ? "CSV" : ""}{" "} 
-        {json === "On" & csv === "Off" ? "JSON" : ""}{" "}
-        {json === "On" && csv === "On" ? "CSV, JSON" : ""}{" "}
+      <Button
+        className="button-neutral"
+        onClick={fileAlert}
+        style={{ fontSize: '11pt' }}
+      >
+        File: {csv === 'On' && json === 'Off' ? 'CSV' : ''}{' '}
+        {json === 'On' && csv === 'Off' ? 'JSON' : ''}{' '}
+        {json === 'On' && csv === 'On' ? 'CSV, JSON' : ''}{' '}
         <img
           src="https://home.openweathermap.org/assets/icon_down_black.svg"
           alt="icon down"
         />
       </Button>
     </>
-  );
-};
+  )
+}
 
 FileParams.propTypes = {
   formatValue: PropTypes.string,
@@ -81,7 +86,6 @@ FileParams.propTypes = {
   fileCheck2: PropTypes.bool,
   setFileCheck: PropTypes.func,
   setFileCheck2: PropTypes.func,
-};
+}
 
-
-export default FileParams;
+export default FileParams

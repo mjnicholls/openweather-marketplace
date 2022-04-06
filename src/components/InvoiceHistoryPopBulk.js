@@ -1,21 +1,23 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Button, Col, Form, Label, Row } from "reactstrap";
+import React, { useState } from 'react'
+
+import { loadStripe } from '@stripe/stripe-js'
+import axios from 'axios'
+import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
+import { Button, Col, Form, Label, Row } from 'reactstrap'
+
+import { noBlankErrorMessage } from '../config'
 import {
   validatePhoneNumber,
   validateVat,
   validateEmail,
-} from "../utils/validation";
-import PropTypes from "prop-types";
-import { noBlankErrorMessage } from "../config";
-import axios from "axios";
-import { loadStripe } from "@stripe/stripe-js";
-import Step0HistoryBulk from "./Step0HistoryBulk";
-import Step1 from "./Step1";
-import Step2 from "./Step2";
+} from '../utils/validation'
+import Step0HistoryBulk from './Step0HistoryBulk'
+import Step1 from './Step1'
+import Step2 from './Step2'
 
-const selectEmail = (state) => state.auth.email;
-const selectInvoice = (state) => state.auth.invoiceInfo;
+const selectEmail = (state) => state.auth.email
+const selectInvoice = (state) => state.auth.invoiceInfo
 
 const InvoiceSettingsBulk = ({
   startDate,
@@ -59,227 +61,219 @@ const InvoiceSettingsBulk = ({
   json,
   setJson,
 }) => {
-  const [error, setError] = useState({});
-  const [step, setStep] = useState(0);
+  const [error, setError] = useState({})
+  const [step, setStep] = useState(0)
 
-  const [isNew, setIsNew] = useState(true);
+  const [isNew, setIsNew] = useState(true)
 
-  const invoice = useSelector(selectInvoice);
-  const emailFromState = useSelector(selectEmail);
+  const invoice = useSelector(selectInvoice)
+  const emailFromState = useSelector(selectEmail)
 
-  const [alert, setAlert] = React.useState(null);
+  const [alert, setAlert] = React.useState(null)
 
-  const [invoiceSettings, setInvoiceSettings] = useState(invoice);
+  const [invoiceSettings, setInvoiceSettings] = useState(invoice)
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('')
 
   const convertDate = (inputFormat) => {
     function pad(s) {
-      return s < 10 ? "0" + s : s;
+      return s < 10 ? `0${s}` : s
     }
-    var d = new Date(inputFormat);
-    return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join("-");
-  };
+    const d = new Date(inputFormat)
+    return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('-')
+  }
 
-  const startDateFormatted = convertDate(startDate);
-  const endDateFormatted = convertDate(endDate);
+  const startDateFormatted = convertDate(startDate)
+  const endDateFormatted = convertDate(endDate)
 
   const confirmInvoice = () => {
-    setError({});
+    setError({})
 
-    const newError = {};
+    const newError = {}
 
-    const mandatoryFields = [
-      "address_line_1",
-      "city",
-      "country",
-      "postal_code",
-    ];
+    const mandatoryFields = ['address_line_1', 'city', 'country', 'postal_code']
 
     for (let i = 0; i < mandatoryFields.length; i += 1) {
       if (!invoiceSettings[mandatoryFields[i]]) {
-        newError[mandatoryFields[i]] = noBlankErrorMessage;
+        newError[mandatoryFields[i]] = noBlankErrorMessage
       }
     }
 
     if (Object.keys(newError).length) {
-      setError(newError);
-      return;
+      setError(newError)
+      return
     }
     const datas = {
       invoice_info: {
         ...invoiceSettings,
       },
       account: {
-        email: email,
+        email,
       },
       history_forecast_bulk: {
-        locations: locations,
+        locations,
         from: startDateFormatted,
         to: endDateFormatted,
         parameters: {
-          temp: temp,
-          pressure: pressure,
-          humidity: humidity,
-          clouds: clouds,
+          temp,
+          pressure,
+          humidity,
+          clouds,
           dew_point: dewPoint,
-          precipitation: precipitation,
-          wind: wind,
+          precipitation,
+          wind,
         },
         units: unitsValue,
         file_format: {
-          csv: csv,
-          json: json,
+          csv,
+          json,
         },
         saving_mode: downloadsValue,
       },
-    };
-
-    const invoiceDetails = { ...datas };
-
-    console.log("everything", invoiceDetails);
-
-    if (invoiceDetails.type === "individual") {
-      delete invoiceDetails.organisation;
-      delete invoiceDetails.vat_id;
-    } else {
-      delete invoiceDetails.title;
-      delete invoiceDetails.first_name;
-      delete invoiceDetails.last_name;
     }
-    invoiceDetails.legal_form = invoiceDetails.type;
-    delete invoiceDetails.type;
+
+    const invoiceDetails = { ...datas }
+
+    if (invoiceDetails.type === 'individual') {
+      delete invoiceDetails.organisation
+      delete invoiceDetails.vat_id
+    } else {
+      delete invoiceDetails.title
+      delete invoiceDetails.first_name
+      delete invoiceDetails.last_name
+    }
+    invoiceDetails.legal_form = invoiceDetails.type
+    delete invoiceDetails.type
 
     axios
       .post(
-        "https://marketplace-weather.owm.io/api/history_forecast_bulks",
+        'https://marketplace-weather.owm.io/api/history_forecast_bulks',
         datas,
         {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        }
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
       )
       .then((res) => {
         loadStripe(res.data.stripe_publishable_key).then((stripe) => {
           stripe.redirectToCheckout({
             sessionId: res.data.stripe_session_id,
-          });
-        });
+          })
+        })
       })
       .catch((err) => {
-        console.log(`Error: ${err.message}`);
-      });
-  };
+        console.log(`Error: ${err.message}`)
+      })
+  }
 
   const decrementStep = () => {
     if (step === 2) {
-      setStep(1);
+      setStep(1)
     } else {
-      console.log("decrement-error-2");
+      console.log('decrement-error-2')
     }
-  };
+  }
 
   const decrementStepOne = () => {
     if (step === 1) {
-      setStep(0);
+      setStep(0)
     } else {
-      console.log("decrement-error-1");
+      console.log('decrement-error-1')
     }
-  };
+  }
 
   const firstStep = () => {
-    setStep(1);
-  };
+    setStep(1)
+  }
 
   const incrementStep = () => {
-    setError({});
+    setError({})
 
     if (step === 1) {
-      const newError = {};
-      setError({});
+      const newError = {}
+      setError({})
 
-      const mandatoryFields = ["phone"];
+      const mandatoryFields = ['phone']
 
-      if (invoiceSettings.type === "individual") {
-        mandatoryFields.push("first_name");
-        mandatoryFields.push("last_name");
+      if (invoiceSettings.type === 'individual') {
+        mandatoryFields.push('first_name')
+        mandatoryFields.push('last_name')
       } else {
-        mandatoryFields.push("organisation");
+        mandatoryFields.push('organisation')
       }
       for (let i = 0; i < mandatoryFields.length; i += 1) {
         if (!invoiceSettings[mandatoryFields[i]]) {
-          newError[mandatoryFields[i]] = noBlankErrorMessage;
+          newError[mandatoryFields[i]] = noBlankErrorMessage
         }
       }
 
-      const newErrors = {};
+      const newErrors = {}
 
       if (email === !emailFromState) {
         if (!email) {
           setError({
             email: noBlankErrorMessage,
-          });
-          return;
+          })
+          return
         }
       }
-      setError(newErrors);
+      setError(newErrors)
 
       if (email) {
-        const emailValidation = validateEmail(email);
+        const emailValidation = validateEmail(email)
         if (emailValidation) {
-          newError.email = emailValidation;
+          newError.email = emailValidation
         }
       }
 
       if (invoiceSettings.phone) {
-        const phoneValidation = validatePhoneNumber(invoiceSettings.phone);
+        const phoneValidation = validatePhoneNumber(invoiceSettings.phone)
         if (phoneValidation) {
-          newError.phone = phoneValidation;
+          newError.phone = phoneValidation
         }
       }
 
       if (invoiceSettings.vat_id) {
         validateVat(invoiceSettings.vat_id)
           .then(() => {
-            invoiceSettings.vat_id = invoiceSettings.vat_id;
+            /* eslint-disable-next-line */
+            invoiceSettings.vat_id = invoiceSettings.vat_id
           })
           .catch(() => {
-            newError.vat_id = "VAT ID is not valid";
+            newError.vat_id = 'VAT ID is not valid'
           })
           .finally(() => {
             if (Object.keys(newError).length) {
-              setError(newError);
-              return;
+              setError(newError)
             }
-          });
+          })
       }
 
       if (Object.keys(newError).length) {
-        setError(newError);
-        return;
+        setError(newError)
       } else {
-        setStep(2);
+        setStep(2)
       }
     }
-  };
+  }
 
   return (
     <div>
       {alert}
       <Row>
-        <Col className={step === 0 ? "step-header" : "step-header-neutral"}>
+        <Col className={step === 0 ? 'step-header' : 'step-header-neutral'}>
           1
         </Col>
         <Col>
-          <hr className={step >= 1 ? "line-active" : "line-neutral"} />
+          <hr className={step >= 1 ? 'line-active' : 'line-neutral'} />
         </Col>
-        <Col className={step === 1 ? "step-header" : "step-header-neutral"}>
+        <Col className={step === 1 ? 'step-header' : 'step-header-neutral'}>
           2
         </Col>
         <Col>
-          <hr className={step === 2 ? "line-active" : "line-neutral"} />
+          <hr className={step === 2 ? 'line-active' : 'line-neutral'} />
         </Col>
-        <Col className={step === 2 ? "step-header" : "step-header-neutral"}>
+        <Col className={step === 2 ? 'step-header' : 'step-header-neutral'}>
           3
         </Col>
       </Row>
@@ -365,7 +359,7 @@ const InvoiceSettingsBulk = ({
                 type="button"
                 onClick={() => firstStep()}
                 style={{
-                  float: "right",
+                  float: 'right',
                 }}
               >
                 Next
@@ -380,7 +374,7 @@ const InvoiceSettingsBulk = ({
                   type="button"
                   onClick={decrementStepOne}
                   style={{
-                    float: "left",
+                    float: 'left',
                   }}
                 >
                   Back
@@ -390,7 +384,7 @@ const InvoiceSettingsBulk = ({
                   type="button"
                   onClick={incrementStep}
                   style={{
-                    float: "right",
+                    float: 'right',
                   }}
                 >
                   Next
@@ -406,7 +400,7 @@ const InvoiceSettingsBulk = ({
                   type="button"
                   onClick={decrementStep}
                   style={{
-                    float: "left",
+                    float: 'left',
                   }}
                 >
                   Back
@@ -417,7 +411,7 @@ const InvoiceSettingsBulk = ({
                   type="button"
                   onClick={confirmInvoice}
                   style={{
-                    float: "right",
+                    float: 'right',
                   }}
                 >
                   Continue with Stripe
@@ -428,12 +422,13 @@ const InvoiceSettingsBulk = ({
         </Row>
       </Form>
     </div>
-  );
-};
+  )
+}
 
 InvoiceSettingsBulk.propTypes = {
   year: PropTypes.string,
   country: PropTypes.string,
+  setIsChecked: PropTypes.func,
   isChecked: PropTypes.bool,
   isChecked2: PropTypes.bool,
   isChecked3: PropTypes.bool,
@@ -455,7 +450,6 @@ InvoiceSettingsBulk.propTypes = {
   setDewPoint: PropTypes.func,
   setPrecipitation: PropTypes.func,
   setWind: PropTypes.func,
-  close: PropTypes.func,
   fileCheck: PropTypes.bool,
   fileCheck2: PropTypes.bool,
   setFileCheck: PropTypes.func,
@@ -472,6 +466,6 @@ InvoiceSettingsBulk.propTypes = {
   endDate: PropTypes.instanceOf(Date),
   locations: PropTypes.array,
   currency: PropTypes.string,
-};
+}
 
-export default InvoiceSettingsBulk;
+export default InvoiceSettingsBulk

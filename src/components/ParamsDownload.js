@@ -1,15 +1,17 @@
-import React, { useState } from "react";
-import { Button, Label, Form, FormGroup, Input, Row } from "reactstrap";
-import { download } from "../config";
-import ReactBSAlert from "react-bootstrap-sweetalert";
-import PropTypes from "prop-types";
+import React, { useState } from 'react'
+
+import PropTypes from 'prop-types'
+import ReactBSAlert from 'react-bootstrap-sweetalert'
+import { Button, Label, Form, FormGroup, Input, Row } from 'reactstrap'
+
+import { download } from '../config'
 
 const DownloadParams = ({ downloadsValue, setDownloadsValue }) => {
-  const [alert, setAlert] = useState(null);
+  const [alert, setAlert] = useState(null)
 
   const hideAlert = () => {
-    setAlert(null);
-  };
+    setAlert(null)
+  }
 
   const downloadAlert = () => {
     setAlert(
@@ -23,13 +25,13 @@ const DownloadParams = ({ downloadsValue, setDownloadsValue }) => {
       >
         <Row className="text-start mt-4">
           <Form className="checkbox-radios ml-5">
-            {download.map((option, index) => (
+            {download.map((option, ind) => (
               <FormGroup
                 check
-                key={index}
+                index={ind}
                 className="form-check-radio"
                 onChange={(e) => {
-                  setDownloadsValue(e.target.value);
+                  setDownloadsValue(e.target.value)
                 }}
               >
                 <Label check>
@@ -46,27 +48,31 @@ const DownloadParams = ({ downloadsValue, setDownloadsValue }) => {
             ))}
           </Form>
         </Row>
-      </ReactBSAlert>
-    );
-  };
+      </ReactBSAlert>,
+    )
+  }
 
   return (
     <>
       {alert}
-      <Button className="button-neutral" onClick={downloadAlert} style={{fontSize: "11pt"}}>
-        Downloads: {downloadsValue ? downloadsValue : "All locations"}{" "}
+      <Button
+        className="button-neutral"
+        onClick={downloadAlert}
+        style={{ fontSize: '11pt' }}
+      >
+        Downloads: {downloadsValue || 'All locations'}{' '}
         <img
           src="https://home.openweathermap.org/assets/icon_down_black.svg"
           alt="icon down"
         />
       </Button>
     </>
-  );
-};
+  )
+}
 
 DownloadParams.propTypes = {
   downloadsValue: PropTypes.string,
   setDownloadsValue: PropTypes.func,
-};
+}
 
-export default DownloadParams;
+export default DownloadParams

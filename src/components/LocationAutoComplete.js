@@ -1,7 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Autocomplete, { usePlacesWidget } from "react-google-autocomplete";
-import placeMarker from "../utils/placeMarker";
+import React from 'react'
+
+import PropTypes from 'prop-types'
+import Autocomplete, { usePlacesWidget } from 'react-google-autocomplete'
+
+import placeMarker from '../utils/placeMarker'
 
 const AutoComplete = ({
   mapRef,
@@ -14,7 +16,7 @@ const AutoComplete = ({
   setIsAdded,
   count,
   setCount,
-  setErrorMap
+  setErrorMap,
 }) => {
   const onPlaceSelected = (place) => {
     if (
@@ -28,46 +30,46 @@ const AutoComplete = ({
         name: place.formatted_address,
         lat: place.geometry.location.lat(),
         lon: place.geometry.location.lng(),
-      });
+      })
 
       placeMarker(
         place.geometry.location,
         // eslint-disable-next-line
         mapRef.current.map_
-      );
+      )
 
-      setCount(0);
-      
+      setCount(0)
+
       if (count === 0) {
-        setErrorMap(false);
+        setErrorMap(false)
       }
 
       setIsAdded(false)
     }
-  };
+  }
 
   const onStartTyping = () => {
     setError({
       ...error,
       location: null,
-    });
-    //setIsAdded(false)
-  };
+    })
+    // setIsAdded(false)
+  }
 
   const onFocus = () => {
-    setIsDropDown(true);
-  };
+    setIsDropDown(true)
+  }
 
   const { ref } = usePlacesWidget({
     apiKey: process.env.REACT_APP_GOOGLE_MAP_KEY,
     onPlaceSelected: (place) => onPlaceSelected(place),
-  });
+  })
 
   return (
     <Autocomplete
-      className={`owm-selector w-100 ${error.location ? "danger-border" : ""}`}
+      className={`owm-selector w-100 ${error.location ? 'danger-border' : ''}`}
       onPlaceSelected={(place) => {
-        onPlaceSelected(place);
+        onPlaceSelected(place)
       }}
       onFocus={onFocus}
       onChange={onStartTyping}
@@ -75,8 +77,8 @@ const AutoComplete = ({
       fixedlocation={fixedLocation}
       setfixedlocation={setFixedLocation}
     />
-  );
-};
+  )
+}
 
 AutoComplete.propTypes = {
   setTempLocation: PropTypes.func,
@@ -89,7 +91,7 @@ AutoComplete.propTypes = {
   setIsAdded: PropTypes.func,
   count: PropTypes.number,
   setCount: PropTypes.func,
-  setErrorMap: PropTypes.func
-};
+  setErrorMap: PropTypes.func,
+}
 
-export default AutoComplete;
+export default AutoComplete

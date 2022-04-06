@@ -1,34 +1,33 @@
 const MarkerSingleton = (() => {
-  let instance;
+  let instance
 
   function MarkerClass(position, map) {
     // eslint-disable-next-line
     return new google.maps.Marker({
       position,
       map,
-    });
+    })
   }
 
   return {
     getInstance: (position, map) => {
       if (!instance) {
-        instance = new MarkerClass(position, map);
-        instance.constructor = null;
+        instance = new MarkerClass(position, map)
+        instance.constructor = null
       } else {
-        //instance.setPosition(position);
-        instance.setMap(map);
+        // instance.setPosition(position);
+        instance.setMap(map)
         if (position) {
-          instance.setPosition(position);
+          instance.setPosition(position)
         }
       }
-      return instance;
+      return instance
     },
-  };
-})();
+  }
+})()
 
 const placeMarker = (position, map) => {
-  MarkerSingleton.getInstance(position, map);
-  map.panTo(position);
-};
+  MarkerSingleton.getInstance(position, map)
+}
 
-export default placeMarker;
+export default placeMarker
