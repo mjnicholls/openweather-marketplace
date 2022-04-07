@@ -144,6 +144,9 @@ const InvoiceSettingsBulk = ({
       },
     }
 
+    /* eslint-disable-next-line */
+    console.log('everything', invoiceDetails)
+
     const invoiceDetails = { ...datas }
 
     if (invoiceDetails.type === 'individual') {
@@ -169,7 +172,10 @@ const InvoiceSettingsBulk = ({
           })
         })
       })
-      .catch(() => {})
+      .catch((err) => {
+        /* eslint-disable-next-line */
+        console.log('err', err)
+      })
   }
 
   const decrementStep = () => {
