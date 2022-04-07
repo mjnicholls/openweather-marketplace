@@ -18,7 +18,10 @@ const MyOrders = () => {
       .then((res) => {
         setData(res.data)
       })
-      .catch(() => {})
+      .catch((err) => {
+        /* eslint-disable-next-line */
+        console.log('err',err)
+      })
   }
 
   const [alert, setAlert] = useState(null)
