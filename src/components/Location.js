@@ -107,7 +107,6 @@ const Location = ({
   setCount,
   setErrorMap,
   duplicate,
-  setDuplicate,
 }) => {
   const [isSearchByName, setIsSearchByName] = useState(true)
   const [coordsTempLocation, setCoordsTempLocation] = useState(tempLocation)
@@ -161,7 +160,6 @@ const Location = ({
     hideAlert()
     const { files } = e.target
     if (files) {
-      console.log(files[0])
       Papa.parse(files[0], {
         skipEmptyLines: true,
         complete(results) {
@@ -172,7 +170,6 @@ const Location = ({
             const row = results.data[i]
 
             const tmp = locationConstructor(row[0], row[1], row[2])
-            /* eslint-disable-next-line */
             let error = {}
 
             if (tmp.error) {
@@ -234,7 +231,7 @@ const Location = ({
   const hideAlert = () => {
     setAlert(null)
   }
-  /* eslint-disable-next-line */
+
   const jsonAlert = (importErrors, locations) => {
     setAlert(
       <ReactBSAlert
@@ -273,21 +270,20 @@ const Location = ({
           <Col>Latitide</Col>
           <Col>Longitude</Col>
         </Row>
-        {locations.map((addlocation, index) => (
+        {locations.map((addLocation, index) => (
           <React.Fragment key="one">
             <Row className="trigger-item">
               <Col md="1">{index + 1}</Col>
-              <Col>{addlocation.name}</Col>
-              <Col>{addlocation.lat}</Col>
-              <Col>{addlocation.lon}</Col>
+              <Col>{addLocation.name}</Col>
+              <Col>{addLocation.lat}</Col>
+              <Col>{addLocation.lon}</Col>
             </Row>
           </React.Fragment>
         ))}
         <br />
         <Row className="trigger-item">
           <Col className="text-end">
-            {/* eslint-disable-next-line */}
-            <label
+            <Label
               htmlFor="text"
               onClick={() => {
                 addLocations(locations)
@@ -296,7 +292,7 @@ const Location = ({
               className="button-neutral"
             >
               Upload Recognised Locations
-            </label>
+            </Label>
 
             <label htmlFor="file-upload" className="button-active">
               Upload New File
@@ -697,6 +693,11 @@ const Location = ({
 Location.propTypes = {
   mapRef: PropTypes.object,
   location: PropTypes.object,
+  locations: PropTypes.array,
+  setLocations: PropTypes.func,
+  currency: PropTypes.string,
+  feelsLike: PropTypes.string,
+  setFeelsLike: PropTypes.func,
   setLocation: PropTypes.func,
   tempLocation: PropTypes.object,
   setTempLocation: PropTypes.func,
@@ -781,6 +782,11 @@ Location.propTypes = {
   setDownloadsValue: PropTypes.func,
   formatValue: PropTypes.string,
   setFormatValue: PropTypes.func,
+  duplicate: PropTypes.bool,
+  map: PropTypes.func,
+  length: PropTypes.func,
+  lat: PropTypes.func,
+  lon: PropTypes.func,
 }
 
 export default Location

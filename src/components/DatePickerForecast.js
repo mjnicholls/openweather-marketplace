@@ -37,7 +37,6 @@ const DatePickerForecast = ({
                   setStartDate(newValue)
                 }}
                 inputFormat="dd-MM-yyyy"
-                /* eslint-disable-next-line */
                 renderInput={(startDate) => (
                   <TextField {...startDate} helperText={null} />
                 )}

@@ -145,7 +145,6 @@ const LocationForecast = ({
             const row = results.data[i]
 
             const tmp = locationConstructor(row[0], row[1], row[2])
-            /* eslint-disable-next-line */
             let error = {}
 
             if (tmp.error) {
@@ -207,7 +206,7 @@ const LocationForecast = ({
   const hideAlert = () => {
     setAlert(null)
   }
-  /* eslint-disable-next-line */
+
   const jsonAlert = (importErrors, locations) => {
     setAlert(
       <ReactBSAlert
@@ -259,8 +258,7 @@ const LocationForecast = ({
         <br />
         <Row className="trigger-item">
           <Col className="text-end">
-            {/* eslint-disable-next-line */}
-            <label
+            <Label
               htmlFor="text"
               onClick={() => {
                 addLocations(locations)
@@ -269,7 +267,7 @@ const LocationForecast = ({
               className="button-neutral"
             >
               Upload Recognised Locations
-            </label>
+            </Label>
 
             <label htmlFor="file-upload" className="button-active">
               Upload New File

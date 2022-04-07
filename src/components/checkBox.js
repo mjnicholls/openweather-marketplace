@@ -87,8 +87,6 @@ const CheckyBox = ({
   const [tempStatus12, setTempStatus12] = useState(visibility)
   const [tempStatus13, setTempStatus13] = useState(wind)
 
-  const [error, setError] = useState(null)
-
   const handCheck = () => {
     if (tempStatus === 'On') {
       setTemp('On')
@@ -201,8 +199,6 @@ const CheckyBox = ({
     if (tempIsChecked13 === true) {
       setIsChecked13(true)
     } else setIsChecked13(false)
-
-    setError(null)
 
     close()
     setFileValue(true)

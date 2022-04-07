@@ -71,12 +71,10 @@ const InvoiceSettingsBulk = ({
 
   const [isEmailActive, setIsEmailActive] = useState(false)
 
-  const [isNew, setIsNew] = useState(true)
+  const isNew = true
 
   const invoice = useSelector(selectInvoice)
   const emailFromState = useSelector(selectEmail)
-
-  const [alert, setAlert] = React.useState(null)
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice)
 
@@ -148,8 +146,6 @@ const InvoiceSettingsBulk = ({
 
     const invoiceDetails = { ...datas }
 
-    console.log('everything', invoiceDetails)
-
     if (invoiceDetails.type === 'individual') {
       delete invoiceDetails.organisation
       delete invoiceDetails.vat_id
@@ -173,24 +169,18 @@ const InvoiceSettingsBulk = ({
           })
         })
       })
-      .catch((err) => {
-        console.log(`Error: ${err.message}`)
-      })
+      .catch(() => {})
   }
 
   const decrementStep = () => {
     if (step === 2) {
       setStep(1)
-    } else {
-      console.log('decrement-error-2')
     }
   }
 
   const decrementStepOne = () => {
     if (step === 1) {
       setStep(0)
-    } else {
-      console.log('decrement-error-1')
     }
   }
 
@@ -246,7 +236,6 @@ const InvoiceSettingsBulk = ({
       if (invoiceSettings.vat_id) {
         validateVat(invoiceSettings.vat_id)
           .then(() => {
-            /* eslint-disable-next-line */
             invoiceSettings.vat_id = invoiceSettings.vat_id
           })
           .catch(() => {
@@ -269,7 +258,6 @@ const InvoiceSettingsBulk = ({
 
   return (
     <div>
-      {alert}
       <Row>
         <Col className={step === 0 ? 'step-header' : 'step-header-neutral'}>
           1

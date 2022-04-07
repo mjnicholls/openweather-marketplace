@@ -1,7 +1,7 @@
 import React from 'react'
 
 import PropTypes from 'prop-types'
-import Autocomplete, { usePlacesWidget } from 'react-google-autocomplete'
+import Autocomplete from 'react-google-autocomplete'
 
 import placeMarker from '../utils/placeMarker'
 
@@ -34,8 +34,8 @@ const AutoComplete = ({
 
       placeMarker(
         place.geometry.location,
-        // eslint-disable-next-line
-        mapRef.current.map_
+
+        mapRef.current.map_,
       )
 
       setCount(0)
@@ -60,10 +60,10 @@ const AutoComplete = ({
     setIsDropDown(true)
   }
 
-  const { ref } = usePlacesWidget({
-    apiKey: process.env.REACT_APP_GOOGLE_MAP_KEY,
-    onPlaceSelected: (place) => onPlaceSelected(place),
-  })
+  // const { ref } = usePlacesWidget({
+  //   apiKey: process.env.REACT_APP_GOOGLE_MAP_KEY,
+  //   onPlaceSelected: (place) => onPlaceSelected(place),
+  // })
 
   return (
     <Autocomplete

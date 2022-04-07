@@ -18,9 +18,7 @@ const MyOrders = () => {
       .then((res) => {
         setData(res.data)
       })
-      .catch((err) => {
-        console.log('error', err)
-      })
+      .catch(() => {})
   }
 
   const [alert, setAlert] = useState(null)
@@ -66,7 +64,6 @@ const MyOrders = () => {
   const retryButton = () => {
     data
       .filter((x) => x.hbs_response !== null)
-      // eslint-disable-next-line
       .map((row) => {
         if (row.hbs_response.failed === true)
           setRetryProduct(row.hbs_response.id)
@@ -79,20 +76,18 @@ const MyOrders = () => {
             ? 'zip_code_data'
             : null,
         )
+        return row
       })
 
     axios
       .get(
         `https://marketplace-weather.owm.io/${retryProduct2}/${retryProduct}/retry`,
       )
-      .then((res) => {
-        console.log('res', res)
+      .then(() => {
         refreshData()
         retryAlert()
       })
-      .catch((err) => {
-        console.log(`Error: ${err.message}`)
-      })
+      .catch(() => {})
   }
 
   const [showResults, setShowResults] = useState(false)

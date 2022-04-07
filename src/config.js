@@ -31,24 +31,6 @@ export const units = [
   { value: 'Standard', label: 'Standard (Kelvin, hPa, meter/sec, mm/h)' },
 ]
 
-/*
-export const weathers = [
-  { value: "Temperature", label: "Temperature" },
-  { value: "Max Temp", label: "Max Temperature" },
-  { value: "Pressure", label: "Pressure" },
-  { value: "Clouds", label: "Clouds" },
-  { value: "Rain", label: "Rain" },
-  { value: "Dew Point", label: "Dew Point" },
-  { value: "Wind", label: "Wind (speed, direction, gust)" },
-  { value: "Min Temp", label: "Min Temperature" },
-  { value: "Feels Like", label: "Feels like" },
-  { value: "Humidity", label: "Humidity" },
-  { value: "Conditions", label: "Weather Conditions" },
-  { value: "Snow", label: "Snow" },
-  { value: "Visibility", label: "Visibility" },
-];
-*/
-
 export const weathers = [
   'Temperature',
   'Max Temperature',
@@ -74,18 +56,6 @@ export const weathersHistory = [
   'Humidity',
   'Precipitation',
 ]
-
-/*
-export const weathersHistory = [
-  { value: "Temperature", label: "Temperature" },
-  { value: "Pressure", label: "Pressure" },
-  { value: "Clouds", label: "Clouds" },
-  { value: "Dew Pt", label: "Dew Point" },
-  { value: "Wind", label: "Wind (speed, direction)" },
-  { value: "Humidity", label: "Humidity" },
-  { value: "Precipitation", label: "Precipitation" },
-];
-*/
 
 export const statesOfAmerica = [
   {

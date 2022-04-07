@@ -2,7 +2,11 @@
     "extends": ["@imaginary-cloud/react"],
   
     "rules": {
+      "no-shadow": 0,
+      "no-self-assign": 0,
       "no-nested-ternary": 0,
+      "no-param-reassign": 0,
+      "no-underscore-dangle": 0,
       "import/no-named-as-default": 1,
       "react/react-in-jsx-scope": 1,
       "no-unused-vars": 1,

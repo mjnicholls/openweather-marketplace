@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
@@ -11,20 +11,14 @@ import { countriesDefault } from '../config'
 const selectInvoice = (state) => state.auth.invoiceInfo.country
 
 const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
-  const [countries, setCountries] = useState(countriesDefault)
-
   const invoice = useSelector(selectInvoice)
 
   const handleChange = (key, value) => {
-    // eslint-disable-next-line
-    let newObj = Object.assign({}, invoiceSettings);
+    const newObj = { ...invoiceSettings }
     newObj[key] = value
     setInvoiceSettings(newObj)
-
-    console.log('set', setCountries)
   }
 
-  console.log('invooce', invoice.length)
   return (
     <div>
       <Col className="bold text-start">
@@ -87,7 +81,7 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
                   onChange={(country) => {
                     handleChange('country', country.code)
                   }}
-                  options={countries}
+                  options={countriesDefault}
                   placeholder={invoice}
                   // disabled={invoice.length > 1 ? true : false}
                   getOptionLabel={(option) => option.name}

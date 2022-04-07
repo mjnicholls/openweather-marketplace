@@ -20,8 +20,6 @@ const CheckyBoxFile = ({
   const [tempCSV, setTempCSV] = useState(csv)
   const [tempJson, setTempJson] = useState(json)
 
-  const [error, setError] = useState({})
-
   const handCheck = () => {
     if (tempCSV === 'On') {
       setCSV('On')
@@ -38,10 +36,6 @@ const CheckyBoxFile = ({
     if (tempIsChecked2 === true) {
       setFileCheck2(true)
     } else setFileCheck2(false)
-
-    if (tempCSV === 'Off' && tempJson === 'Off') {
-      setError('You must select at least one option')
-    }
 
     close()
   }

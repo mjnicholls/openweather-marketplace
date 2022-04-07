@@ -20,8 +20,7 @@ const Step1 = ({
   const emailFromState = useSelector(selectEmail)
 
   const handleChange = (key, value) => {
-    // eslint-disable-next-line
-    let newObj = Object.assign({}, invoiceSettings);
+    const newObj = { ...invoiceSettings }
     newObj[key] = value
     setInvoiceSettings(newObj)
   }

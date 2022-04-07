@@ -18,8 +18,7 @@ const HistoryForecastBulk = () => {
 
   const [error, setError] = useState({})
 
-  /* eslint-disable-next-line */
-  const [name, setName] = useState("");
+  const name = ''
 
   const [location, setLocation] = useState({
     name: '',
@@ -85,8 +84,7 @@ const HistoryForecastBulk = () => {
       lat: location.lat,
       lon: location.lon,
     })
-    /* eslint-disable-next-line */
-  }, [location]);
+  }, [location])
 
   useEffect(() => {
     if (tempLocation.lat && tempLocation.lon) {
@@ -95,8 +93,8 @@ const HistoryForecastBulk = () => {
         tempLocation.lat,
         tempLocation.lon,
       )
-      // eslint-disable-next-line
-      placeMarker(position, mapRef.current.map_);
+
+      placeMarker(position, mapRef.current.map_)
     }
   }, [tempLocation])
 

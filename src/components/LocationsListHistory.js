@@ -1,16 +1,17 @@
-/* eslint-disable */
-import React from "react";
-import PropTypes from "prop-types";
-import { Col, Row, Button } from "reactstrap";
-import { Close } from "react-ikonate";
-import EditNameCard from "./EditNameCard";
+import React from 'react'
+
+import PropTypes from 'prop-types'
+import { Close } from 'react-ikonate'
+import { Col, Row, Button } from 'reactstrap'
+
+import EditNameCard from './EditNameCard'
 
 const LocationListHistory = ({ locations, setLocations }) => {
   const deleteLocation = (index) => {
-    const locationsCopy = [...locations];
-    locationsCopy.splice(index, 1);
-    setLocations(locationsCopy);
-  };
+    const locationsCopy = [...locations]
+    locationsCopy.splice(index, 1)
+    setLocations(locationsCopy)
+  }
 
   return (
     <div className="my-3">
@@ -28,23 +29,23 @@ const LocationListHistory = ({ locations, setLocations }) => {
 
           {locations.length ? (
             locations.map((location, index) => (
-              <Row className="trigger-item" key={index}>
+              <Row className="trigger-item" index={index}>
                 <Col md="1">{index + 1}</Col>
 
                 <Col className="d-md-flex d-lg-none text-end">
                   <Button
                     style={{
-                      backgroundColor: "transparent",
-                      border: "none",
-                      padding: "0px",
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      padding: '0px',
                     }}
                     title="Update"
                     className="text-end shadow-none"
                     onClick={() => deleteLocation(index)}
                   >
-                    <Close style={{ color: "black" }}></Close>
+                    <Close style={{ color: 'black' }}></Close>
                   </Button>
-                  {"  "}
+                  {'  '}
                   <EditNameCard
                     locations={locations}
                     setLocations={setLocations}
@@ -60,15 +61,15 @@ const LocationListHistory = ({ locations, setLocations }) => {
                 <Col className="d-lg-flex d-none">
                   <Button
                     style={{
-                      backgroundColor: "transparent",
-                      border: "none",
-                      padding: "0px",
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      padding: '0px',
                     }}
                     title="Update"
                     className="text-end shadow-none"
                     onClick={() => deleteLocation(index)}
                   >
-                    <Close style={{ color: "black" }}></Close>
+                    <Close style={{ color: 'black' }}></Close>
                   </Button>
                 </Col>
                 <Col className="d-lg-flex d-none">
@@ -88,12 +89,12 @@ const LocationListHistory = ({ locations, setLocations }) => {
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
 LocationListHistory.propTypes = {
   locations: PropTypes.array,
   setLocations: PropTypes.func,
-};
+}
 
-export default LocationListHistory;
+export default LocationListHistory

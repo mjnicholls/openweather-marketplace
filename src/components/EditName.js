@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: ["error", { "props": false }] */
 import React, { useState } from 'react'
 
 import PropTypes from 'prop-types'
@@ -15,7 +16,6 @@ const EditTrigger = ({ locations, setLocations, location, close }) => {
     }
 
     if (location.name !== tempName) {
-      /* eslint-disable-next-line */
       location.name = tempName
     }
 

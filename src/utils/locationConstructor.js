@@ -1,19 +1,17 @@
-/* eslint-disable */
-
 export const locationConstructor = (name, lat, lon) => {
   let newError = {}
 
   const coordPrecision = 6
+
   name = name || 'Custom location'
 
-  // validate Latitude
   if (!lat) {
     newError = {
       lat: 'No value was found for latitude.',
       errorVal: lat,
     }
   }
-  if (isNaN(parseFloat(lat))) {
+  if (Number.isNaN(parseFloat(lat))) {
     newError = {
       lat: 'Latitude value should be a number.',
       errorVal: lat,
@@ -38,7 +36,7 @@ export const locationConstructor = (name, lat, lon) => {
       errorVal: lon,
     }
   }
-  if (isNaN(parseFloat(lon))) {
+  if (Number.isNaN(parseFloat(lon))) {
     newError = {
       error: 'Longitude value should be a number.',
       errorVal: lon,
