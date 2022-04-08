@@ -146,7 +146,7 @@ const InvoiceSettingsBulk = ({
 
     const invoiceDetails = { ...datas }
 
-    // console.log('everything', invoiceDetails)
+    console.log('everything', invoiceDetails)
 
     if (invoiceDetails.type === 'individual') {
       delete invoiceDetails.organisation
