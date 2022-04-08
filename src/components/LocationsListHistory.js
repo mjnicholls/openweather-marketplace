@@ -29,7 +29,7 @@ const LocationListHistory = ({ locations, setLocations }) => {
 
           {locations.length ? (
             locations.map((location, index) => (
-              <Row className="trigger-item" index={index}>
+              <Row className="trigger-item" key="loc">
                 <Col md="1">{index + 1}</Col>
 
                 <Col className="d-md-flex d-lg-none text-end">

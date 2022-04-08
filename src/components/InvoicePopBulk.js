@@ -240,7 +240,6 @@ const InvoiceSettingsBulk = ({
       if (invoiceSettings.vat_id) {
         validateVat(invoiceSettings.vat_id)
           .then(() => {
-            /* eslint-disable-next-line */
             invoiceSettings.vat_id = invoiceSettings.vat_id
           })
           .catch(() => {

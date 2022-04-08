@@ -19,8 +19,7 @@ const MyOrders = () => {
         setData(res.data)
       })
       .catch((err) => {
-        /* eslint-disable-next-line */
-        console.log('err',err)
+        console.log('err', err)
       })
   }
 
