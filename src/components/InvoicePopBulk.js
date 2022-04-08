@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState } from 'react'
 
 import { loadStripe } from '@stripe/stripe-js'
@@ -72,12 +71,10 @@ const InvoiceSettingsBulk = ({
 
   const [isEmailActive, setIsEmailActive] = useState(false)
 
-  const [isNew, setIsNew] = useState(true)
+  const isNew = true
 
   const invoice = useSelector(selectInvoice)
   const emailFromState = useSelector(selectEmail)
-
-  const [alert, setAlert] = React.useState(null)
 
   const [invoiceSettings, setInvoiceSettings] = useState(invoice)
 
@@ -149,7 +146,7 @@ const InvoiceSettingsBulk = ({
 
     const invoiceDetails = { ...datas }
 
-    console.log('everything', invoiceDetails)
+    // console.log('everything', invoiceDetails)
 
     if (invoiceDetails.type === 'individual') {
       delete invoiceDetails.organisation
@@ -182,13 +179,13 @@ const InvoiceSettingsBulk = ({
   const decrementStep = () => {
     if (step === 2) {
       setStep(1)
-    } 
+    }
   }
 
   const decrementStepOne = () => {
     if (step === 1) {
       setStep(0)
-    } 
+    }
   }
 
   const firstStep = () => {
@@ -266,7 +263,6 @@ const InvoiceSettingsBulk = ({
 
   return (
     <div>
-      {alert}
       <Row>
         <Col className={step === 0 ? 'step-header' : 'step-header-neutral'}>
           1
