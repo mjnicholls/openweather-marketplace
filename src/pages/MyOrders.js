@@ -90,7 +90,9 @@ const MyOrders = () => {
         refreshData()
         retryAlert()
       })
-      .catch(() => {})
+      .catch((err) => {
+        console.log('err', err)
+      })
   }
 
   const [showResults, setShowResults] = useState(false)

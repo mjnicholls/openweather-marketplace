@@ -20,9 +20,7 @@ const Step1 = ({
   const emailFromState = useSelector(selectEmail)
 
   const handleChange = (key, value) => {
-    // const newObj = { ...invoiceSettings }
-    // eslint-disable-next-line
-    let newObj = Object.assign({}, invoiceSettings);
+    const newObj = { ...invoiceSettings }
     newObj[key] = value
     setInvoiceSettings(newObj)
   }
@@ -41,7 +39,6 @@ const Step1 = ({
               id="organisationRadioButton"
               name="legalForm"
               type="radio"
-              // checked={invoiceSettings.type === "organisation"}
               onChange={() => handleChange('type', 'organisation')}
               disabled={!isNew && invoiceSettings.type === 'individual'}
             />

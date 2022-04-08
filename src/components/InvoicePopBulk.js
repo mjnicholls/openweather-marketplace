@@ -182,17 +182,13 @@ const InvoiceSettingsBulk = ({
   const decrementStep = () => {
     if (step === 2) {
       setStep(1)
-    } else {
-      console.log('decrement-error-2')
-    }
+    } 
   }
 
   const decrementStepOne = () => {
     if (step === 1) {
       setStep(0)
-    } else {
-      console.log('decrement-error-1')
-    }
+    } 
   }
 
   const firstStep = () => {
