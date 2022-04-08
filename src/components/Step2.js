@@ -14,7 +14,9 @@ const Step2 = ({ invoiceSettings, setInvoiceSettings, error }) => {
   const invoice = useSelector(selectInvoice)
 
   const handleChange = (key, value) => {
-    const newObj = { ...invoiceSettings }
+    // const newObj = { ...invoiceSettings }
+    // eslint-disable-next-line
+    let newObj = Object.assign({}, invoiceSettings);
     newObj[key] = value
     setInvoiceSettings(newObj)
   }
