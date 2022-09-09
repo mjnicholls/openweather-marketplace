@@ -12,7 +12,7 @@ Order customised weather data for any number of selected locations.
 │   ├───auth
 ├───pages
 └───utils</pre>
-<h2>Components</h2>
+<h2>Pages</h2>
 <hr>
 <code>DataUSState.js</code>
 <p>Historical Weather Data by State page, currently inactive, no imported components.</p>
@@ -117,18 +117,18 @@ Your app is ready to be deployed!</p>
 <p>Runs Prettier to fix problematic formatting in your code.</p>
 <h2>Deploy to Test Server</h2>
 <hr>
-<code>https://dashboard-weather.owm.io/forecasted-events</code>
+<code>http://openweathermap.stage.owm.io/marketplace/</code>
 <p>Test server URL</p>
 <code>git push</code>
 <p>1. Push the changes on your branch.</p>
 <p>2. Make sure pipelines have passed. You can see it in gitlab in either Repository/Commits section.</p>
-<code>(https://gitlab.openweathermap.org/frontend/owm-account/-/commits/your_branch)</code>
-<p><code>(https://gitlab.openweathermap.org/frontend/owm-account/-/pipelines)</code> CI/CD Pipelines</p>
+<code>(https://gitlab.openweathermap.org/frontend/marketplace-react/-/commits/your_branch)</code>
+<p><code>(https://gitlab.openweathermap.org/frontend/marketplace-react/-/pipelines)</code> CI/CD Pipelines</p>
 </br>
 <p>3. Update the container on the server:</p>
 <code>ssh YOURNAME@phase.owm.io</code>
 <p>log in to the server</p>
-<code>cd /opt/containers/weather-dashboard</code>
+<code>cd /opt/containers/marketplace</code>
 <p>move to your project folder</p>
 <code>./update.sh --branch name-- </code>
 <p>call update on the branch you are pushing, in this case <code>./update.sh your_branch</code>)</p> 
