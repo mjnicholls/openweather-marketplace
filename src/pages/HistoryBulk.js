@@ -162,6 +162,7 @@ const NewHistoryBulkTest = () => {
 
     setIsAdded(false)
   }
+  
 
   const handleClickOutsideSearchBox = (e) => {
     if (searchBoxRef.current.contains(e.target)) {
