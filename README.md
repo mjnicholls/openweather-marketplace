@@ -47,7 +47,7 @@ Order customised weather data for any number of selected locations.
 <code>InfoWindow.js</code>
 <p>Displays a window on the map when clicked or when location / coordinates are selected in form for Create New History Bulk.</p>
 <code>InfoWindowHistory.js</code>
-<p>Component for checkout modal, a three-part form with validation, plus .</p>
+<p>Displays a window on the map when clicked or when location / coordinates are selected in form for Create New History Forecast Bulk.</p>
 <code>InvoiceHistoryPopBulk.js</code>
 <p>Component for checkout modal, a three-part form with validation, plus post request and redirect to Stripe, for Create New History Forecast Bulk.</p>
 <code>InvoicePopBulk.js</code>
