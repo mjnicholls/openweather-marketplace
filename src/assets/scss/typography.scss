@@ -5,3 +5,36 @@ $default-font-size: 16px;
 $font-size-sm: 14px;
 $font-size-nav: 11.3227px;
 $default-line-height: 20pt; 
+
+
+// example of media queries
+// simple named mixins that do specific jobs
+
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+// or
+
+// plain CSS
+@media (min-width: 768px) {
+  
+}
+
+// SCSS variables to store breakpoints
+$breakpoint-tablet: 768px;
+@media (min-width: $breakpoint-tablet) {
+  
+}
+
